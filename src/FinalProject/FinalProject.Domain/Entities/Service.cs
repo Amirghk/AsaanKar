@@ -8,11 +8,16 @@ public class Service
     public int Id { get; set; }
     public string Name { get; set; } = null!;
     public string Description { get; set; } = null!;
-    public OrderState OrderState { get; set; }
+    public bool IsAvailable { get; set; }
     #endregion
 
     #region NavigationalProperties
     public int? ParentServiceId { get; set; }
-    public Service? ParentService { get; set; }
+    public virtual Service? ParentService { get; set; }
+    public int? FileInfoId { get; set; }
+    public virtual FileInfo? FileInfo { get; set; }
+    public virtual ICollection<SubService> SubServices { get; set; } = null!;
+    public virtual ICollection<ServiceExperts> ServiceExperts { get; set; } = null!;
+
     #endregion
 }

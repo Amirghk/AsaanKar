@@ -1,5 +1,3 @@
-using System.Data;
-using System.Net;
 
 namespace FinalProject.Domain.Entities;
 
@@ -11,7 +9,7 @@ public class City
     public bool IsSupported { get; set; }
     #endregion
     #region Navigational Property
-    public int StateId { get; set; }
+    public int ProvinceId { get; set; }
     public Province Province { get; set; } = null!;
     #endregion
 }

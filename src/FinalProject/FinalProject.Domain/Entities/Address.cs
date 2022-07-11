@@ -1,23 +1,24 @@
-using System.Runtime.CompilerServices;
 using FinalProject.Domain.Enums;
 
 namespace FinalProject.Domain.Entities;
 
-public class FileInfo
+public class Address
 {
     #region Properties
     public int Id { get; set; }
-    public string FileName { get; set; } = null!;
-    public long FileSize { get; set; }
-    public FileCategory FileCategory { get; set; }
+    public string Direction { get; set; } = null!;
+    public int Zip { get; set; }
+    public AddressCategory AddressCategory { get; set; }
     #endregion
+
     #region Navigational Properties
-    public int? CommentId { get; set; }
-    public Comment? Comment { get; set; }
     public int? CustomerId { get; set; }
     public Customer? Customer { get; set; }
     public int? ExpertId { get; set; }
     public Expert? Expert { get; set; }
+    public int CityId { get; set; }
+    public City City { get; set; } = null!;
+    public int ProvinceId { get; set; }
+    public Province Province { get; set; } = null!;
     #endregion
-
 }
