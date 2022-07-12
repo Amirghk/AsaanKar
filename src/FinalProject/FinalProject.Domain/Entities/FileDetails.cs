@@ -3,7 +3,7 @@ using FinalProject.Domain.Enums;
 
 namespace FinalProject.Domain.Entities;
 
-public class FileInfo
+public class FileDetails
 {
     #region Properties
     public int Id { get; set; }
@@ -12,7 +12,6 @@ public class FileInfo
     public FileCategory FileCategory { get; set; }
     #endregion
     #region Navigational Properties
-    public int? CommentId { get; set; }
     public Comment? Comment { get; set; }
     public int? CustomerId { get; set; }
     public Customer? Customer { get; set; }

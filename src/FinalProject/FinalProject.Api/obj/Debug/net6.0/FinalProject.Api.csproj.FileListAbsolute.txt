@@ -33,3 +33,12 @@ G:\FinalProject\src\FinalProject\FinalProject.Api\bin\Debug\net6.0\FinalProject.
 G:\FinalProject\src\FinalProject\FinalProject.Api\bin\Debug\net6.0\FinalProject.Application.pdb
 G:\FinalProject\src\FinalProject\FinalProject.Api\bin\Debug\net6.0\FinalProject.Infrastructure.pdb
 G:\FinalProject\src\FinalProject\FinalProject.Api\bin\Debug\net6.0\FinalProject.Domain.pdb
+G:\FinalProject\src\FinalProject\FinalProject.Api\bin\Debug\net6.0\Microsoft.AspNetCore.Cryptography.Internal.dll
+G:\FinalProject\src\FinalProject\FinalProject.Api\bin\Debug\net6.0\Microsoft.AspNetCore.Cryptography.KeyDerivation.dll
+G:\FinalProject\src\FinalProject\FinalProject.Api\bin\Debug\net6.0\Microsoft.AspNetCore.Identity.EntityFrameworkCore.dll
+G:\FinalProject\src\FinalProject\FinalProject.Api\bin\Debug\net6.0\Microsoft.EntityFrameworkCore.dll
+G:\FinalProject\src\FinalProject\FinalProject.Api\bin\Debug\net6.0\Microsoft.EntityFrameworkCore.Abstractions.dll
+G:\FinalProject\src\FinalProject\FinalProject.Api\bin\Debug\net6.0\Microsoft.EntityFrameworkCore.Relational.dll
+G:\FinalProject\src\FinalProject\FinalProject.Api\bin\Debug\net6.0\Microsoft.Extensions.Caching.Memory.dll
+G:\FinalProject\src\FinalProject\FinalProject.Api\bin\Debug\net6.0\Microsoft.Extensions.Identity.Core.dll
+G:\FinalProject\src\FinalProject\FinalProject.Api\bin\Debug\net6.0\Microsoft.Extensions.Identity.Stores.dll

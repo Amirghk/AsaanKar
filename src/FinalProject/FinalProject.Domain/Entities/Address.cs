@@ -6,7 +6,7 @@ public class Address
 {
     #region Properties
     public int Id { get; set; }
-    public string Direction { get; set; } = null!;
+    public string Content { get; set; } = null!;
     public int Zip { get; set; }
     public AddressCategory AddressCategory { get; set; }
     #endregion
@@ -18,7 +18,5 @@ public class Address
     public Expert? Expert { get; set; }
     public int CityId { get; set; }
     public City City { get; set; } = null!;
-    public int ProvinceId { get; set; }
-    public Province Province { get; set; } = null!;
     #endregion
 }

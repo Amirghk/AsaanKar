@@ -18,8 +18,9 @@ public class Expert
     public virtual Guid ExpertId { get; set; }
     public virtual Address Address { get; set; } = null!;
     public int? ProfilePictureId { get; set; }
-    public virtual ICollection<ServiceExperts> ServiceExperts { get; set; } = null!;
+    public virtual ICollection<Service>? Services { get; set; }
+    public virtual ICollection<ServiceExpert>? ServiceExperts { get; set; }
     public virtual ICollection<Comment>? Comments { get; set; }
-    public virtual ICollection<FileInfo>? Pictures { get; set; }
+    public virtual ICollection<FileDetails>? Pictures { get; set; }
     #endregion
 }

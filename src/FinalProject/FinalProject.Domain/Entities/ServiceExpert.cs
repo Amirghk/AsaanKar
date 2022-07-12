@@ -1,6 +1,6 @@
 namespace FinalProject.Domain.Entities;
 
-public class ServiceExperts
+public class ServiceExpert
 {
     #region Properties
     #endregion

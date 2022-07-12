@@ -22,7 +22,4 @@ public class Order
     public int ExpertId { get; set; }
     public Expert Expert { get; set; } = null!;
     #endregion
-
-
-
 }

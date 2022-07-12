@@ -12,7 +12,7 @@ public class Comment
     public virtual Customer Customer { get; set; } = null!;
     public int ExpertId { get; set; }
     public virtual Expert Expert { get; set; } = null!;
-    public int? FileInfoId { get; set; }
-    public FileInfo? Image { get; set; }
+    public int? ImageId { get; set; }
+    public FileDetails? Image { get; set; }
     #endregion
 }

@@ -8,6 +8,6 @@ public class Province
     public bool IsSupported { get; set; }
     #endregion
     #region Navigational Property
-    public City Cities { get; set; } = null!;
+    public virtual ICollection<City>? Cities { get; set; }
     #endregion
 }

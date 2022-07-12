@@ -10,6 +10,7 @@ public class City
     #endregion
     #region Navigational Property
     public int ProvinceId { get; set; }
-    public Province Province { get; set; } = null!;
+    public virtual Province Province { get; set; } = null!;
+    public virtual ICollection<Address>? Addresses { get; set; }
     #endregion
 }
