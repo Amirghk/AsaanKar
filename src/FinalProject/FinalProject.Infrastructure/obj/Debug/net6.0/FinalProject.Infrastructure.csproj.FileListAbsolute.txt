@@ -15,3 +15,5 @@ G:\FinalProject\src\FinalProject\FinalProject.Infrastructure\bin\Debug\net6.0\Fi
 G:\FinalProject\src\FinalProject\FinalProject.Infrastructure\bin\Debug\net6.0\FinalProject.Application.pdb
 G:\FinalProject\src\FinalProject\FinalProject.Infrastructure\bin\Debug\net6.0\FinalProject.Domain.pdb
 G:\FinalProject\src\FinalProject\FinalProject.Infrastructure\obj\Debug\net6.0\FinalProject.Infrastructure.csproj.CopyComplete
+G:\FinalProject\src\FinalProject\FinalProject.Infrastructure\bin\Debug\net6.0\FinalProject.Infrastructure.runtimeconfig.json
+G:\FinalProject\src\FinalProject\FinalProject.Infrastructure\obj\Debug\net6.0\FinalProject.Infrastructure.genruntimeconfig.cache

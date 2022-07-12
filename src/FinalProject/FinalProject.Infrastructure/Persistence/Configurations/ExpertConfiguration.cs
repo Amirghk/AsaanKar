@@ -14,6 +14,10 @@ public class ExpertConfiguration : IEntityTypeConfiguration<Expert>
             .Property(x => x.Bio)
             .HasMaxLength(4000);
         builder
+            .HasMany(e => e.Pictures)
+            .WithOne(f => f.Expert)
+            .HasForeignKey(f => f.ExpertId);
+        builder
             .HasMany(e => e.Services)
             .WithMany(s => s.Experts)
             .UsingEntity<ServiceExpert>(

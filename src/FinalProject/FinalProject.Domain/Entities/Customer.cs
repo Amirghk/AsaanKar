@@ -14,5 +14,6 @@ public class Customer
     public int? FileInfoId { get; set; }
     public virtual FileDetails? ProfilePicture { get; set; }
     public virtual ICollection<Comment>? Comments { get; set; }
+    public virtual ICollection<Order>? Orders { get; set; }
     #endregion
 }

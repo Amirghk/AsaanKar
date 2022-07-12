@@ -1,4 +1,5 @@
 using FinalProject.Infrastructure.Identity;
+using FinalProject.Infrastructure.Persistence.Configurations;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
@@ -11,11 +12,25 @@ public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     {
     }
 
+    protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+    {
+        base.OnConfiguring(optionsBuilder);
+        optionsBuilder.UseSqlServer(@"Server=(LocalDb)\MSSQLLOCALDB;Database=FinalProject;Trusted_Connection=True;");
+    }
+
     protected override void OnModelCreating(ModelBuilder builder)
     {
         base.OnModelCreating(builder);
-        // Customize the ASP.NET Identity model and override the defaults if needed.
-        // For example, you can rename the ASP.NET Identity table names and more.
-        // Add your customizations after calling base.OnModelCreating(builder);
+        builder.ApplyConfiguration(new AddressConfiguration());
+        builder.ApplyConfiguration(new CityConfiguration());
+        builder.ApplyConfiguration(new CustomerConfiguration());
+        builder.ApplyConfiguration(new ExpertConfiguration());
+        builder.ApplyConfiguration(new CommentConfiguration());
+        builder.ApplyConfiguration(new FileDetailsConfiguration());
+        builder.ApplyConfiguration(new OrderConfiguration());
+        builder.ApplyConfiguration(new ProvinceConfiguration());
+        builder.ApplyConfiguration(new ServiceConfiguration());
+        builder.ApplyConfiguration(new ServiceExpertConfiguration());
+        builder.ApplyConfiguration(new SubServiceConfiguration());
     }
 }

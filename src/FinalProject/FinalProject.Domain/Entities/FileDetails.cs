@@ -12,11 +12,13 @@ public class FileDetails
     public FileCategory FileCategory { get; set; }
     #endregion
     #region Navigational Properties
-    public Comment? Comment { get; set; }
+    public virtual Comment? Comment { get; set; }
     public int? CustomerId { get; set; }
-    public Customer? Customer { get; set; }
+    public virtual Customer? Customer { get; set; }
     public int? ExpertId { get; set; }
-    public Expert? Expert { get; set; }
+    public virtual Expert? Expert { get; set; }
+    public int? ServiceId { get; set; }
+    public virtual Service? Service { get; set; }
     #endregion
 
 }

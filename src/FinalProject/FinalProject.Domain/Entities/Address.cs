@@ -13,10 +13,11 @@ public class Address
 
     #region Navigational Properties
     public int? CustomerId { get; set; }
-    public Customer? Customer { get; set; }
+    public virtual Customer? Customer { get; set; }
     public int? ExpertId { get; set; }
-    public Expert? Expert { get; set; }
+    public virtual Expert? Expert { get; set; }
     public int CityId { get; set; }
-    public City City { get; set; } = null!;
+    public virtual City City { get; set; } = null!;
+    public virtual ICollection<Order>? Orders { get; set; }
     #endregion
 }
