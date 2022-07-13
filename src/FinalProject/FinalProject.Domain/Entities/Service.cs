@@ -15,7 +15,7 @@ public class Service
     public int? ParentServiceId { get; set; }
     public virtual Service? ParentService { get; set; }
     public virtual ICollection<Service>? Services { get; set; }
-    public virtual FileDetails? FileDetails { get; set; }
+    public virtual FileDetail? FileDetails { get; set; }
     public virtual ICollection<SubService> SubServices { get; set; } = null!;
     public virtual ICollection<Expert>? Experts { get; set; }
     public virtual ICollection<ServiceExpert> ServiceExperts { get; set; } = null!;

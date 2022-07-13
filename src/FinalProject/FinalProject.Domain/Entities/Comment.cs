@@ -1,6 +1,7 @@
+using FinalProject.Domain.Interfaces;
 namespace FinalProject.Domain.Entities;
 
-public class Comment
+public class Comment : IAuditableEntity
 {
     #region Properties
     public int Id { get; set; }
@@ -13,6 +14,6 @@ public class Comment
     public int ExpertId { get; set; }
     public virtual Expert Expert { get; set; } = null!;
     public int? ImageId { get; set; }
-    public FileDetails? Image { get; set; }
+    public FileDetail? Image { get; set; }
     #endregion
 }

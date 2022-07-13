@@ -1,6 +1,8 @@
+using FinalProject.Domain.Interfaces;
+
 namespace FinalProject.Domain.Entities;
 
-public class ServiceExpert
+public class ServiceExpert : IAuditableEntity
 {
     #region Properties
     #endregion

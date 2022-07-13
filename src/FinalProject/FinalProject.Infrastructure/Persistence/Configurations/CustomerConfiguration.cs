@@ -13,6 +13,6 @@ public class CustomerConfiguration : IEntityTypeConfiguration<Customer>
         builder
             .HasOne(c => c.ProfilePicture)
             .WithOne(f => f.Customer)
-            .HasForeignKey<FileDetails>(f => f.CustomerId);
+            .HasForeignKey<FileDetail>(f => f.CustomerId);
     }
 }

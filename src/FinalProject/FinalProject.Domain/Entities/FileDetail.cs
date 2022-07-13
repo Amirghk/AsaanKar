@@ -1,9 +1,10 @@
 using System.Runtime.CompilerServices;
 using FinalProject.Domain.Enums;
+using FinalProject.Domain.Interfaces;
 
 namespace FinalProject.Domain.Entities;
 
-public class FileDetails
+public class FileDetail : IAuditableEntity
 {
     #region Properties
     public int Id { get; set; }

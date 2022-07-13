@@ -4,9 +4,9 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace FinalProject.Infrastructure.Persistence.Configurations;
 
-public class FileDetailsConfiguration : IEntityTypeConfiguration<FileDetails>
+public class FileDetailsConfiguration : IEntityTypeConfiguration<FileDetail>
 {
-    public void Configure(EntityTypeBuilder<FileDetails> builder)
+    public void Configure(EntityTypeBuilder<FileDetail> builder)
     {
         builder
             .HasKey(f => f.Id);

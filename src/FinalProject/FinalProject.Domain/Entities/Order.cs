@@ -1,8 +1,9 @@
 using FinalProject.Domain.Enums;
+using FinalProject.Domain.Interfaces;
 
 namespace FinalProject.Domain.Entities;
 
-public class Order
+public class Order : IAuditableEntity
 {
     #region Properties
     public int Id { get; set; }

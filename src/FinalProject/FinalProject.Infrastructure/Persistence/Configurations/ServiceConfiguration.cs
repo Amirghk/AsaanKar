@@ -26,7 +26,7 @@ public class ServiceConfiguration : IEntityTypeConfiguration<Service>
         builder
             .HasOne(s => s.FileDetails)
             .WithOne(f => f.Service)
-            .HasForeignKey<FileDetails>(f => f.ServiceId);
+            .HasForeignKey<FileDetail>(f => f.ServiceId);
         builder
             .HasMany(s => s.SubServices)
             .WithOne(ss => ss.Service)

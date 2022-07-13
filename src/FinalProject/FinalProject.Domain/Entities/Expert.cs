@@ -21,7 +21,7 @@ public class Expert
     public virtual ICollection<Service>? Services { get; set; }
     public virtual ICollection<ServiceExpert>? ServiceExperts { get; set; }
     public virtual ICollection<Comment>? Comments { get; set; }
-    public virtual ICollection<FileDetails>? Pictures { get; set; }
+    public virtual ICollection<FileDetail>? Pictures { get; set; }
     public virtual ICollection<Order>? Orders { get; set; }
     #endregion
 }
