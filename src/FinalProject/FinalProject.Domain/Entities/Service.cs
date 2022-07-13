@@ -1,8 +1,9 @@
 using FinalProject.Domain.Enums;
+using FinalProject.Domain.Interfaces;
 
 namespace FinalProject.Domain.Entities;
 
-public class Service
+public class Service : IBaseEntity
 {
     #region Properties
     public int Id { get; set; }

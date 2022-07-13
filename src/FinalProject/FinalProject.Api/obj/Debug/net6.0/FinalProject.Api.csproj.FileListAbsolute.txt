@@ -70,3 +70,4 @@ G:\FinalProject\src\FinalProject\FinalProject.Api\bin\Debug\net6.0\runtimes\win\
 G:\FinalProject\src\FinalProject\FinalProject.Api\bin\Debug\net6.0\runtimes\win\lib\netstandard2.0\System.Runtime.Caching.dll
 G:\FinalProject\src\FinalProject\FinalProject.Api\bin\Debug\net6.0\runtimes\win\lib\netstandard2.0\System.Security.Cryptography.ProtectedData.dll
 G:\FinalProject\src\FinalProject\FinalProject.Api\bin\Debug\net6.0\runtimes\win\lib\netcoreapp3.0\System.Windows.Extensions.dll
+G:\FinalProject\src\FinalProject\FinalProject.Api\bin\Debug\net6.0\Microsoft.Extensions.Configuration.dll

@@ -4,7 +4,7 @@ using FinalProject.Domain.Interfaces;
 
 namespace FinalProject.Domain.Entities;
 
-public class FileDetail : IAuditableEntity
+public class FileDetail : IAuditableEntity, IBaseEntity
 {
     #region Properties
     public int Id { get; set; }

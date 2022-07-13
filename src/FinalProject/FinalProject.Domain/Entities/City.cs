@@ -1,7 +1,9 @@
 
+using FinalProject.Domain.Interfaces;
+
 namespace FinalProject.Domain.Entities;
 
-public class City
+public class City : IBaseEntity
 {
     #region Property
     public int Id { get; set; }

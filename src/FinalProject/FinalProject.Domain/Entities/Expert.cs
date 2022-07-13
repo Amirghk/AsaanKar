@@ -1,9 +1,10 @@
 using System.ComponentModel.Design;
 using System.Runtime.CompilerServices;
+using FinalProject.Domain.Interfaces;
 
 namespace FinalProject.Domain.Entities;
 
-public class Expert
+public class Expert : IBaseEntity
 {
     #region Properties
     public int Id { get; set; }

@@ -1,6 +1,8 @@
+using FinalProject.Domain.Interfaces;
+
 namespace FinalProject.Domain.Entities;
 
-public class Province
+public class Province : IBaseEntity
 {
     #region Property
     public int Id { get; set; }

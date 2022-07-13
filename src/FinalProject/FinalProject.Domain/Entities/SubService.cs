@@ -1,6 +1,8 @@
+using FinalProject.Domain.Interfaces;
+
 namespace FinalProject.Domain.Entities;
 
-public class SubService
+public class SubService : IBaseEntity
 {
     #region Properties
     public int Id { get; set; }

@@ -1,0 +1,8 @@
+G:\FinalProject\src\FinalProject\FinalProject.Endpoint\obj\Debug\net6.0\FinalProject.Endpoint.csproj.AssemblyReference.cache
+G:\FinalProject\src\FinalProject\FinalProject.Endpoint\obj\Debug\net6.0\FinalProject.Endpoint.GeneratedMSBuildEditorConfig.editorconfig
+G:\FinalProject\src\FinalProject\FinalProject.Endpoint\obj\Debug\net6.0\FinalProject.Endpoint.AssemblyInfoInputs.cache
+G:\FinalProject\src\FinalProject\FinalProject.Endpoint\obj\Debug\net6.0\FinalProject.Endpoint.AssemblyInfo.cs
+G:\FinalProject\src\FinalProject\FinalProject.Endpoint\obj\Debug\net6.0\FinalProject.Endpoint.csproj.CoreCompileInputs.cache
+G:\FinalProject\src\FinalProject\FinalProject.Endpoint\obj\Debug\net6.0\FinalProject.Endpoint.MvcApplicationPartsAssemblyInfo.cache
+G:\FinalProject\src\FinalProject\FinalProject.Endpoint\obj\Debug\net6.0\FinalProject.Endpoint.RazorAssemblyInfo.cache
+G:\FinalProject\src\FinalProject\FinalProject.Endpoint\obj\Debug\net6.0\FinalProject.Endpoint.RazorAssemblyInfo.cs

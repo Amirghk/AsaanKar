@@ -1,7 +1,7 @@
 using FinalProject.Domain.Interfaces;
 namespace FinalProject.Domain.Entities;
 
-public class Comment : IAuditableEntity
+public class Comment : IAuditableEntity, IBaseEntity
 {
     #region Properties
     public int Id { get; set; }

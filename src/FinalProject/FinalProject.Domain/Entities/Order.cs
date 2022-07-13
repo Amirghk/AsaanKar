@@ -3,7 +3,7 @@ using FinalProject.Domain.Interfaces;
 
 namespace FinalProject.Domain.Entities;
 
-public class Order : IAuditableEntity
+public class Order : IAuditableEntity, IBaseEntity
 {
     #region Properties
     public int Id { get; set; }
