@@ -865,16 +865,6 @@
           "bin/placeholder/FinalProject.Application.dll": {}
         }
       },
-      "FinalProject.Contracts/1.0.0": {
-        "type": "project",
-        "framework": ".NETCoreApp,Version=v6.0",
-        "compile": {
-          "bin/placeholder/FinalProject.Contracts.dll": {}
-        },
-        "runtime": {
-          "bin/placeholder/FinalProject.Contracts.dll": {}
-        }
-      },
       "FinalProject.Domain/1.0.0": {
         "type": "project",
         "framework": ".NETCoreApp,Version=v6.0",
@@ -2450,11 +2440,6 @@
       "path": "../FinalProject.Application/FinalProject.Application.csproj",
       "msbuildProject": "../FinalProject.Application/FinalProject.Application.csproj"
     },
-    "FinalProject.Contracts/1.0.0": {
-      "type": "project",
-      "path": "../FinalProject.Contracts/FinalProject.Contracts.csproj",
-      "msbuildProject": "../FinalProject.Contracts/FinalProject.Contracts.csproj"
-    },
     "FinalProject.Domain/1.0.0": {
       "type": "project",
       "path": "../FinalProject.Domain/FinalProject.Domain.csproj",
@@ -2469,7 +2454,6 @@
   "projectFileDependencyGroups": {
     "net6.0": [
       "FinalProject.Application >= 1.0.0",
-      "FinalProject.Contracts >= 1.0.0",
       "FinalProject.Infrastructure >= 1.0.0",
       "Swashbuckle.AspNetCore >= 6.2.3"
     ]
@@ -2503,9 +2487,6 @@
           "projectReferences": {
             "G:\\FinalProject\\src\\FinalProject\\FinalProject.Application\\FinalProject.Application.csproj": {
               "projectPath": "G:\\FinalProject\\src\\FinalProject\\FinalProject.Application\\FinalProject.Application.csproj"
-            },
-            "G:\\FinalProject\\src\\FinalProject\\FinalProject.Contracts\\FinalProject.Contracts.csproj": {
-              "projectPath": "G:\\FinalProject\\src\\FinalProject\\FinalProject.Contracts\\FinalProject.Contracts.csproj"
             },
             "G:\\FinalProject\\src\\FinalProject\\FinalProject.Infrastructure\\FinalProject.Infrastructure.csproj": {
               "projectPath": "G:\\FinalProject\\src\\FinalProject\\FinalProject.Infrastructure\\FinalProject.Infrastructure.csproj"
