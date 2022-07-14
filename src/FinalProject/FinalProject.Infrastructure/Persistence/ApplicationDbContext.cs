@@ -15,22 +15,24 @@ public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     {
     }
 
-    public DbSet<Address> Addresses { get; set; }
-    public DbSet<City> Cities { get; set; }
-    public DbSet<Comment> Comments { get; set; }
-    public DbSet<Customer> Customers { get; set; }
-    public DbSet<Expert> Experts { get; set; }
-    public DbSet<FileDetail> FileDetails { get; set; }
-    public DbSet<Order> Orders { get; set; }
-    public DbSet<Province> Provinces { get; set; }
-    public DbSet<ServiceExpert> ServiceExperts { get; set; }
-    public DbSet<Service> Services { get; set; }
-    public DbSet<SubService> SubServices { get; set; }
+    public DbSet<Address> Addresses { get; set; } = null!;
+    public DbSet<City> Cities { get; set; } = null!;
+    public DbSet<Comment> Comments { get; set; } = null!;
+    public DbSet<Customer> Customers { get; set; } = null!;
+    public DbSet<Expert> Experts { get; set; } = null!;
+    public DbSet<FileDetail> FileDetails { get; set; } = null!;
+    public DbSet<Order> Orders { get; set; } = null!;
+    public DbSet<Province> Provinces { get; set; } = null!;
+    public DbSet<ServiceExpert> ServiceExperts { get; set; } = null!;
+    public DbSet<Service> Services { get; set; } = null!;
+    public DbSet<SubService> SubServices { get; set; } = null!;
 
 
     protected override void OnModelCreating(ModelBuilder builder)
     {
         builder.AddAuditableShadowProperties();
+
+
         base.OnModelCreating(builder);
         builder.ApplyConfiguration(new AddressConfiguration());
         builder.ApplyConfiguration(new CityConfiguration());

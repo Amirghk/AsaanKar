@@ -1,9 +1,10 @@
 using System.Diagnostics.Contracts;
 using System.Security.Cryptography.X509Certificates;
+using FinalProject.Domain.Interfaces;
 
 namespace FinalProject.Domain.Entities;
 
-public class Customer
+public class Customer : IBaseEntity
 {
     #region Properties
     public int Id { get; set; }

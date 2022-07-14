@@ -25,12 +25,12 @@ namespace FinalProject.Infrastructure.Repositories
 
         public async Task<IEnumerable<Province>> GetAll()
         {
-            return await _context.Provinces.ToListAsync();
+            return await _context.Provinces.AsNoTracking().ToListAsync();
         }
 
         public async Task<Province> GetById(int id)
         {
-            var record = await _context.Provinces.FindAsync(id);
+            var record = await _context.Provinces.AsNoTracking().SingleOrDefaultAsync(x => x.Id == id);
             if (record == null)
             {
                 throw new NotFoundException(nameof(Province), id);

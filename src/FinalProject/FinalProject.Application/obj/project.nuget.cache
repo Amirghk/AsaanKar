@@ -1,8 +1,14 @@
 {
   "version": 2,
-  "dgSpecHash": "04UzghpzLuM+v6vohAxiHKvcsSJ6r+PAbKLkwsP/QEuCj+V2d3bEOu+WgMHsWjBEdjkPNT0H2x2daLubaJVERg==",
+  "dgSpecHash": "OH88cMW9EzL+TBnVT3Y6sqwow7vPgjpcsribM4v+MByh8gtJot6inUd1Cw75EoJ/Is5kl2jW9W9LR0EuyAfuBQ==",
   "success": true,
   "projectFilePath": "G:\\FinalProject\\src\\FinalProject\\FinalProject.Application\\FinalProject.Application.csproj",
-  "expectedPackageFiles": [],
+  "expectedPackageFiles": [
+    "C:\\Users\\Lion\\.nuget\\packages\\automapper\\11.0.1\\automapper.11.0.1.nupkg.sha512",
+    "C:\\Users\\Lion\\.nuget\\packages\\microsoft.csharp\\4.7.0\\microsoft.csharp.4.7.0.nupkg.sha512",
+    "C:\\Users\\Lion\\.nuget\\packages\\microsoft.extensions.dependencyinjection\\6.0.0\\microsoft.extensions.dependencyinjection.6.0.0.nupkg.sha512",
+    "C:\\Users\\Lion\\.nuget\\packages\\microsoft.extensions.dependencyinjection.abstractions\\6.0.0\\microsoft.extensions.dependencyinjection.abstractions.6.0.0.nupkg.sha512",
+    "C:\\Users\\Lion\\.nuget\\packages\\system.runtime.compilerservices.unsafe\\6.0.0\\system.runtime.compilerservices.unsafe.6.0.0.nupkg.sha512"
+  ],
   "logs": []
 }

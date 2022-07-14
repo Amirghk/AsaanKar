@@ -25,12 +25,12 @@ namespace FinalProject.Infrastructure.Repositories
 
         public async Task<IEnumerable<Expert>> GetAll()
         {
-            return await _context.Experts.ToListAsync();
+            return await _context.Experts.AsNoTracking().ToListAsync();
         }
 
         public async Task<Expert> GetById(int id)
         {
-            var record = await _context.Experts.FindAsync(id);
+            var record = await _context.Experts.AsNoTracking().SingleOrDefaultAsync(x => x.Id == id);
             if (record == null)
             {
                 throw new NotFoundException(nameof(Expert), id);

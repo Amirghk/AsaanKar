@@ -25,12 +25,12 @@ namespace FinalProject.Infrastructure.Repositories
 
         public async Task<IEnumerable<Service>> GetAll()
         {
-            return await _context.Services.ToListAsync();
+            return await _context.Services.AsNoTracking().ToListAsync();
         }
 
         public async Task<Service> GetById(int id)
         {
-            var record = await _context.Services.FindAsync(id);
+            var record = await _context.Services.AsNoTracking().SingleOrDefaultAsync(x => x.Id == id);
             if (record == null)
             {
                 throw new NotFoundException(nameof(Service), id);

@@ -25,12 +25,12 @@ namespace FinalProject.Infrastructure.Repositories
 
         public async Task<IEnumerable<FileDetail>> GetAll()
         {
-            return await _context.FileDetails.ToListAsync();
+            return await _context.FileDetails.AsNoTracking().ToListAsync();
         }
 
         public async Task<FileDetail> GetById(int id)
         {
-            var record = await _context.FileDetails.FindAsync(id);
+            var record = await _context.FileDetails.AsNoTracking().SingleOrDefaultAsync(x => x.Id == id);
             if (record == null)
             {
                 throw new NotFoundException(nameof(FileDetail), id);

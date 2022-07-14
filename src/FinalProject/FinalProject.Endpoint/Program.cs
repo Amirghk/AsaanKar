@@ -1,9 +1,21 @@
+using AutoMapper;
+using FinalProject.Application;
+using FinalProject.Application.Common.Mappings;
+using FinalProject.Infrastructure;
 using FinalProject.Infrastructure.Identity;
 using FinalProject.Infrastructure.Persistence;
 
 
 var builder = WebApplication.CreateBuilder(args);
 
+// var config = new MapperConfiguration(cfg =>
+// {
+//     cfg.AddProfile<MappingProfile>();
+// });
+
+builder.Services.AddAutoMapper(typeof(MappingProfile).Assembly);
+builder.Services.AddInfrastructure(builder.Configuration);
+builder.Services.AddApplication();
 
 // Add services to the container.
 builder.Services.AddDefaultIdentity<ApplicationUser>(options =>

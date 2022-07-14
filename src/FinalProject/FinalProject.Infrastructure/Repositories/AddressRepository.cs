@@ -24,12 +24,12 @@ namespace FinalProject.Infrastructure.Repositories
 
         public async Task<IEnumerable<Address>> GetAll()
         {
-            return await _context.Addresses.ToListAsync();
+            return await _context.Addresses.AsNoTracking().ToListAsync();
         }
 
         public async Task<Address> GetById(int id)
         {
-            var record = await _context.Addresses.FindAsync(id);
+            var record = await _context.Addresses.AsNoTracking().SingleOrDefaultAsync(x => x.Id == id);
             if (record == null)
             {
                 throw new NotFoundException(nameof(Address), id);

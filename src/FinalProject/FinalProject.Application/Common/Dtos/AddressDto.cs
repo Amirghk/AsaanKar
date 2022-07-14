@@ -11,5 +11,4 @@ public record AddressDto
     public int? CustomerId { get; init; }
     public int? ExpertId { get; init; }
     public int CityId { get; init; }
-    public int ProvinceId { get; init; }
 }

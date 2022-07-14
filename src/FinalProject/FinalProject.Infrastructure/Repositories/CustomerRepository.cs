@@ -25,12 +25,12 @@ namespace FinalProject.Infrastructure.Repositories
 
         public async Task<IEnumerable<Customer>> GetAll()
         {
-            return await _context.Customers.ToListAsync();
+            return await _context.Customers.AsNoTracking().ToListAsync();
         }
 
         public async Task<Customer> GetById(int id)
         {
-            var record = await _context.Customers.FindAsync(id);
+            var record = await _context.Customers.AsNoTracking().SingleOrDefaultAsync(x => x.Id == id);
             if (record == null)
             {
                 throw new NotFoundException(nameof(Customer), id);

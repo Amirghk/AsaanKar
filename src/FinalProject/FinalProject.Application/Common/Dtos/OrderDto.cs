@@ -12,5 +12,5 @@ public record OrderDto
     public int AddressId { get; init; }
     public int ServiceId { get; init; }
     public int CustomerId { get; init; }
-    public int ExpertId { get; init; }
+    public int? ExpertId { get; init; }
 }

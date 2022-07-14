@@ -25,12 +25,12 @@ namespace FinalProject.Infrastructure.Repositories
 
         public async Task<IEnumerable<Comment>> GetAll()
         {
-            return await _context.Comments.ToListAsync();
+            return await _context.Comments.AsNoTracking().ToListAsync();
         }
 
         public async Task<Comment> GetById(int id)
         {
-            var record = await _context.Comments.FindAsync(id);
+            var record = await _context.Comments.AsNoTracking().SingleOrDefaultAsync(x => x.Id == id);
             if (record == null)
             {
                 throw new NotFoundException(nameof(Comment), id);
