@@ -2,15 +2,15 @@ using FinalProject.Domain.Enums;
 
 namespace FinalProject.Application.Common.Dtos;
 
-public class OrderDto
+public record OrderDto
 {
-    public int Id { get; set; }
-    public DateTimeOffset DateAdded { get; set; }
-    public DateTimeOffset? DateCompleted { get; set; }
-    public string? Description { get; set; }
-    public OrderState State { get; set; }
-    public int AddressId { get; set; }
-    public int ServiceId { get; set; }
-    public int CustomerId { get; set; }
-    public int ExpertId { get; set; }
+    public int Id { get; init; }
+    public DateTimeOffset DateAdded { get; init; }
+    public DateTimeOffset? DateCompleted { get; init; }
+    public string? Description { get; init; }
+    public OrderState State { get; init; }
+    public int AddressId { get; init; }
+    public int ServiceId { get; init; }
+    public int CustomerId { get; init; }
+    public int ExpertId { get; init; }
 }

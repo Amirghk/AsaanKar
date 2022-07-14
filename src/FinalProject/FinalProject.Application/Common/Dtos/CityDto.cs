@@ -1,9 +1,9 @@
 namespace FinalProject.Application.Common.Dtos;
 
-public class CityDto
+public record CityDto
 {
-    public int Id { get; set; }
-    public string Name { get; set; } = null!;
-    public bool IsSupported { get; set; }
-    public int ProvinceId { get; set; }
+    public int Id { get; init; }
+    public string Name { get; init; } = null!;
+    public bool IsSupported { get; init; }
+    public int ProvinceId { get; init; }
 }

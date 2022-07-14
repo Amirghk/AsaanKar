@@ -1,11 +1,11 @@
 namespace FinalProject.Application.Common.Dtos;
 
-public class ServiceDto
+public record ServiceDto
 {
-    public int Id { get; set; }
-    public string Name { get; set; } = null!;
-    public string Description { get; set; } = null!;
-    public bool IsAvailable { get; set; }
-    public int? ParentServiceId { get; set; }
-    public int? FileInfoId { get; set; }
+    public int Id { get; init; }
+    public string Name { get; init; } = null!;
+    public string Description { get; init; } = null!;
+    public bool IsAvailable { get; init; }
+    public int? ParentServiceId { get; init; }
+    public int? FileInfoId { get; init; }
 }
