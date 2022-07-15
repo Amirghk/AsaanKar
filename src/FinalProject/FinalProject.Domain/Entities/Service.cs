@@ -3,13 +3,14 @@ using FinalProject.Domain.Interfaces;
 
 namespace FinalProject.Domain.Entities;
 
-public class Service : IBaseEntity
+public class Service : IBaseEntity, ISoftDeletable
 {
     #region Properties
     public int Id { get; set; }
     public string Name { get; set; } = null!;
     public string Description { get; set; } = null!;
     public bool IsAvailable { get; set; }
+    public bool IsDeleted { get; set; }
     #endregion
 
     #region NavigationalProperties

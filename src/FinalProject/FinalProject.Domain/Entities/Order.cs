@@ -3,7 +3,7 @@ using FinalProject.Domain.Interfaces;
 
 namespace FinalProject.Domain.Entities;
 
-public class Order : IAuditableEntity, IBaseEntity
+public class Order : IAuditableEntity, IBaseEntity, ISoftDeletable
 {
     #region Properties
     public int Id { get; set; }
@@ -11,6 +11,7 @@ public class Order : IAuditableEntity, IBaseEntity
     public DateTimeOffset? DateCompleted { get; set; }
     public string? Description { get; set; }
     public OrderState State { get; set; }
+    public bool IsDeleted { get; set; }
     #endregion
 
     #region Navigational Properties
