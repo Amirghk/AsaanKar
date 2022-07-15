@@ -9,14 +9,13 @@ public class ExpertConfiguration : IEntityTypeConfiguration<Expert>
     public void Configure(EntityTypeBuilder<Expert> builder)
     {
         builder
-            .HasKey(x => x.Id);
-        builder
             .Property(x => x.Bio)
             .HasMaxLength(4000);
         builder
             .HasMany(e => e.Pictures)
             .WithOne(f => f.Expert)
-            .HasForeignKey(f => f.ExpertId);
+            .HasForeignKey(f => f.ExpertId)
+            .OnDelete(DeleteBehavior.Cascade);
         builder
             .HasMany(e => e.Services)
             .WithMany(s => s.Experts)
@@ -30,5 +29,15 @@ public class ExpertConfiguration : IEntityTypeConfiguration<Expert>
             .WithMany(e => e.ServiceExperts)
             .HasForeignKey(se => se.ExpertId)
             );
+        builder
+            .HasMany(e => e.Comments)
+            .WithOne(c => c.Expert)
+            .HasForeignKey(c => c.ExpertId)
+            .OnDelete(DeleteBehavior.Cascade);
+        builder
+            .HasMany(e => e.Orders)
+            .WithOne(o => o.Expert)
+            .HasForeignKey(o => o.ExpertId)
+            .OnDelete(DeleteBehavior.NoAction);
     }
 }

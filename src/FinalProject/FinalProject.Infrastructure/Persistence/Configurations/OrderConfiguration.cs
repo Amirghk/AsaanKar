@@ -9,26 +9,28 @@ public class OrderConfiguration : IEntityTypeConfiguration<Order>
     public void Configure(EntityTypeBuilder<Order> builder)
     {
         builder
-            .HasKey(f => f.Id);
-        builder
             .Property(x => x.Description)
             .IsRequired(false)
             .HasMaxLength(4000);
         builder
             .HasOne(o => o.ReceiverAddress)
             .WithMany(a => a.Orders)
-            .HasForeignKey(o => o.AddressId);
+            .HasForeignKey(o => o.AddressId)
+            .OnDelete(DeleteBehavior.NoAction);
         builder
             .HasOne(o => o.Customer)
             .WithMany(c => c.Orders)
-            .HasForeignKey(o => o.CustomerId);
+            .HasForeignKey(o => o.CustomerId)
+            .OnDelete(DeleteBehavior.NoAction);
         builder
             .HasOne(o => o.Expert)
             .WithMany(e => e.Orders)
-            .HasForeignKey(o => o.ExpertId);
+            .HasForeignKey(o => o.ExpertId)
+            .OnDelete(DeleteBehavior.NoAction);
         builder
             .HasOne(o => o.Service)
             .WithMany(s => s.Orders)
-            .HasForeignKey(o => o.ServiceId);
+            .HasForeignKey(o => o.ServiceId)
+            .OnDelete(DeleteBehavior.NoAction);
     }
 }

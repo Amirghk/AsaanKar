@@ -8,12 +8,17 @@ public class CityConfiguration : IEntityTypeConfiguration<City>
 {
     public void Configure(EntityTypeBuilder<City> builder)
     {
-        builder.HasKey(x => x.Id);
         builder.Property(x => x.Name)
             .IsRequired()
             .HasMaxLength(256);
         builder.HasOne(c => c.Province)
             .WithMany(p => p.Cities)
-            .HasForeignKey(c => c.ProvinceId);
+            .HasForeignKey(c => c.ProvinceId)
+            .OnDelete(DeleteBehavior.NoAction);
+        builder
+            .HasMany(x => x.Addresses)
+            .WithOne(x => x.City)
+            .HasForeignKey(x => x.CityId)
+            .OnDelete(DeleteBehavior.NoAction);
     }
 }

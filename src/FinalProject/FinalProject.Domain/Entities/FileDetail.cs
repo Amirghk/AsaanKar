@@ -4,6 +4,7 @@ using FinalProject.Domain.Interfaces;
 
 namespace FinalProject.Domain.Entities;
 
+// TODO : Uploads
 public class FileDetail : IAuditableEntity, IBaseEntity
 {
     #region Properties
@@ -13,6 +14,7 @@ public class FileDetail : IAuditableEntity, IBaseEntity
     public FileCategory FileCategory { get; set; }
     #endregion
     #region Navigational Properties
+    public int? CommentId { get; set; }
     public virtual Comment? Comment { get; set; }
     public int? CustomerId { get; set; }
     public virtual Customer? Customer { get; set; }

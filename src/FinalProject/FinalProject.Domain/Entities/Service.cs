@@ -18,10 +18,10 @@ public class Service : IBaseEntity, ISoftDeletable
     public virtual Service? ParentService { get; set; }
     public virtual ICollection<Service>? Services { get; set; }
     public virtual FileDetail? FileDetails { get; set; }
-    public virtual ICollection<SubService> SubServices { get; set; } = null!;
-    public virtual ICollection<Expert>? Experts { get; set; }
-    public virtual ICollection<ServiceExpert> ServiceExperts { get; set; } = null!;
-    public virtual ICollection<Order>? Orders { get; set; }
+    public virtual ICollection<SubService> SubServices { get; set; } = new HashSet<SubService>();
+    public virtual ICollection<Expert> Experts { get; set; } = new HashSet<Expert>();
+    public virtual ICollection<ServiceExpert> ServiceExperts { get; set; } = new HashSet<ServiceExpert>();
+    public virtual ICollection<Order> Orders { get; set; } = new HashSet<Order>();
 
     #endregion
 }

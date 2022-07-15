@@ -13,16 +13,15 @@ public class Expert : IBaseEntity
     public string? Bio { get; set; }
     public bool IsActive { get; set; }
 
-
     #endregion
     #region Navigational Properties
     public virtual Guid ExpertId { get; set; }
     public virtual Address Address { get; set; } = null!;
     public int? ProfilePictureId { get; set; }
-    public virtual ICollection<Service>? Services { get; set; }
-    public virtual ICollection<ServiceExpert>? ServiceExperts { get; set; }
-    public virtual ICollection<Comment>? Comments { get; set; }
-    public virtual ICollection<FileDetail>? Pictures { get; set; }
-    public virtual ICollection<Order>? Orders { get; set; }
+    public virtual ICollection<Service> Services { get; set; } = new HashSet<Service>();
+    public virtual ICollection<ServiceExpert> ServiceExperts { get; set; } = new HashSet<ServiceExpert>();
+    public virtual ICollection<Comment> Comments { get; set; } = new HashSet<Comment>();
+    public virtual ICollection<FileDetail> Pictures { get; set; } = new HashSet<FileDetail>();
+    public virtual ICollection<Order> Orders { get; set; } = new HashSet<Order>();
     #endregion
 }

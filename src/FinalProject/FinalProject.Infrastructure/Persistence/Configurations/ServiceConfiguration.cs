@@ -8,7 +8,6 @@ public class ServiceConfiguration : IEntityTypeConfiguration<Service>
 {
     public void Configure(EntityTypeBuilder<Service> builder)
     {
-        builder.HasKey(x => x.Id);
         builder
             .Property(x => x.Name)
             .IsRequired()
@@ -26,7 +25,8 @@ public class ServiceConfiguration : IEntityTypeConfiguration<Service>
         builder
             .HasOne(s => s.FileDetails)
             .WithOne(f => f.Service)
-            .HasForeignKey<FileDetail>(f => f.ServiceId);
+            .HasForeignKey<FileDetail>(f => f.ServiceId)
+            .OnDelete(DeleteBehavior.Cascade);
         builder
             .HasMany(s => s.SubServices)
             .WithOne(ss => ss.Service)
@@ -35,6 +35,7 @@ public class ServiceConfiguration : IEntityTypeConfiguration<Service>
         builder
             .HasMany(s => s.Orders)
             .WithOne(o => o.Service)
-            .HasForeignKey(o => o.ServiceId);
+            .HasForeignKey(o => o.ServiceId)
+            .OnDelete(DeleteBehavior.NoAction);
     }
 }

@@ -7,7 +7,6 @@ public class Order : IAuditableEntity, IBaseEntity, ISoftDeletable
 {
     #region Properties
     public int Id { get; set; }
-    public DateTimeOffset DateAdded { get; set; }
     public DateTimeOffset? DateCompleted { get; set; }
     public string? Description { get; set; }
     public OrderState State { get; set; }
@@ -16,12 +15,14 @@ public class Order : IAuditableEntity, IBaseEntity, ISoftDeletable
 
     #region Navigational Properties
     public int AddressId { get; set; }
-    public Address ReceiverAddress { get; set; } = null!;
-    public int ServiceId { get; set; }
-    public Service Service { get; set; } = null!;
-    public int CustomerId { get; set; }
-    public Customer Customer { get; set; } = null!;
+    public virtual Address ReceiverAddress { get; set; } = null!;
+    // made ServiceId nullable to allow for null value in case deleted service is used in order
+    public int? ServiceId { get; set; }
+    public virtual Service Service { get; set; } = null!;
+    // made customerId nullable to allow for null value in case deleted customer is used in order
+    public int? CustomerId { get; set; }
+    public virtual Customer Customer { get; set; } = null!;
     public int? ExpertId { get; set; }
-    public Expert? Expert { get; set; }
+    public virtual Expert Expert { get; set; } = null!;
     #endregion
 }

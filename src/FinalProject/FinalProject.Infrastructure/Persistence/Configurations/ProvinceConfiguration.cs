@@ -8,7 +8,6 @@ public class ProvinceConfiguration : IEntityTypeConfiguration<Province>
 {
     public void Configure(EntityTypeBuilder<Province> builder)
     {
-        builder.HasKey(x => x.Id);
         builder
             .Property(x => x.Name)
             .IsRequired()
@@ -16,6 +15,7 @@ public class ProvinceConfiguration : IEntityTypeConfiguration<Province>
         builder
             .HasMany(p => p.Cities)
             .WithOne(c => c.Province)
-            .HasForeignKey(c => c.ProvinceId);
+            .HasForeignKey(c => c.ProvinceId)
+            .OnDelete(DeleteBehavior.Cascade);
     }
 }

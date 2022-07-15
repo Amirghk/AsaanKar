@@ -11,6 +11,6 @@ public class Province : IBaseEntity, ISoftDeletable
     public bool IsDeleted { get; set; }
     #endregion
     #region Navigational Property
-    public virtual ICollection<City>? Cities { get; set; }
+    public virtual ICollection<City> Cities { get; set; } = new HashSet<City>();
     #endregion
 }

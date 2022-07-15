@@ -8,7 +8,7 @@ public class Address : ISoftDeletable, IBaseEntity
     #region Properties
     public int Id { get; set; }
     public string Content { get; set; } = null!;
-    public int Zip { get; set; }
+    public string PostalCode { get; set; } = null!;
     public AddressCategory AddressCategory { get; set; }
     public bool IsDeleted { get; set; }
     #endregion
@@ -19,7 +19,8 @@ public class Address : ISoftDeletable, IBaseEntity
     public int? ExpertId { get; set; }
     public virtual Expert? Expert { get; set; }
     public int CityId { get; set; }
+    // TODO : Make relations nullable
     public virtual City City { get; set; } = null!;
-    public virtual ICollection<Order>? Orders { get; set; }
+    public virtual ICollection<Order> Orders { get; set; } = new HashSet<Order>();
     #endregion
 }
