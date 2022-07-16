@@ -4,14 +4,12 @@ using FinalProject.Application.Common.Mappings;
 using FinalProject.Infrastructure;
 using FinalProject.Infrastructure.Identity;
 using FinalProject.Infrastructure.Persistence;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 
 
 var builder = WebApplication.CreateBuilder(args);
 
-// var config = new MapperConfiguration(cfg =>
-// {
-//     cfg.AddProfile<MappingProfile>();
-// });
 
 builder.Services.AddAutoMapper(typeof(MappingProfile).Assembly);
 builder.Services.AddInfrastructure(builder.Configuration);
