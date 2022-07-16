@@ -25,7 +25,7 @@ public class PrivacyModel : PageModel
         await _addressService.Set(new AddressDto
         {
             Content = "Somewhere",
-            Zip = 12345,
+            PostalCode = "12345",
             AddressCategory = AddressCategory.Expert,
             CityId = 1,
         });

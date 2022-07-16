@@ -26,7 +26,7 @@ public class ServiceConfiguration : IEntityTypeConfiguration<Service>
             .HasOne(s => s.FileDetails)
             .WithOne(f => f.Service)
             .HasForeignKey<FileDetail>(f => f.ServiceId)
-            .OnDelete(DeleteBehavior.Cascade);
+            .OnDelete(DeleteBehavior.NoAction);
         builder
             .HasMany(s => s.SubServices)
             .WithOne(ss => ss.Service)

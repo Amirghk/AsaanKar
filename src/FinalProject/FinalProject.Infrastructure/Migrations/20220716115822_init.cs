@@ -55,7 +55,7 @@ namespace FinalProject.Infrastructure.Migrations
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     CustomerId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    FileInfoId = table.Column<int>(type: "int", nullable: true)
+                    ProfilePictureId = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -87,7 +87,8 @@ namespace FinalProject.Infrastructure.Migrations
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Name = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: false),
-                    IsSupported = table.Column<bool>(type: "bit", nullable: false)
+                    IsSupported = table.Column<bool>(type: "bit", nullable: false),
+                    IsDeleted = table.Column<bool>(type: "bit", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -103,6 +104,7 @@ namespace FinalProject.Infrastructure.Migrations
                     Name = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: false),
                     Description = table.Column<string>(type: "nvarchar(max)", maxLength: 5000, nullable: false),
                     IsAvailable = table.Column<bool>(type: "bit", nullable: false),
+                    IsDeleted = table.Column<bool>(type: "bit", nullable: false),
                     ParentServiceId = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
@@ -230,6 +232,7 @@ namespace FinalProject.Infrastructure.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Name = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: false),
                     IsSupported = table.Column<bool>(type: "bit", nullable: false),
+                    IsDeleted = table.Column<bool>(type: "bit", nullable: false),
                     ProvinceId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
@@ -324,6 +327,7 @@ namespace FinalProject.Infrastructure.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Description = table.Column<string>(type: "nvarchar(4000)", maxLength: 4000, nullable: false),
                     Price = table.Column<long>(type: "bigint", nullable: true),
+                    IsDeleted = table.Column<bool>(type: "bit", nullable: false),
                     ServiceId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
@@ -344,8 +348,9 @@ namespace FinalProject.Infrastructure.Migrations
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Content = table.Column<string>(type: "nvarchar(2000)", maxLength: 2000, nullable: false),
-                    Zip = table.Column<int>(type: "int", maxLength: 10, nullable: false),
+                    PostalCode = table.Column<string>(type: "nvarchar(10)", maxLength: 10, nullable: false),
                     AddressCategory = table.Column<int>(type: "int", nullable: false),
+                    IsDeleted = table.Column<bool>(type: "bit", nullable: false),
                     CustomerId = table.Column<int>(type: "int", nullable: true),
                     ExpertId = table.Column<int>(type: "int", nullable: true),
                     CityId = table.Column<int>(type: "int", nullable: false)
@@ -357,18 +362,19 @@ namespace FinalProject.Infrastructure.Migrations
                         name: "FK_Addresses_Cities_CityId",
                         column: x => x.CityId,
                         principalTable: "Cities",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        principalColumn: "Id");
                     table.ForeignKey(
                         name: "FK_Addresses_Customers_CustomerId",
                         column: x => x.CustomerId,
                         principalTable: "Customers",
-                        principalColumn: "Id");
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_Addresses_Experts_ExpertId",
                         column: x => x.ExpertId,
                         principalTable: "Experts",
-                        principalColumn: "Id");
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -379,9 +385,10 @@ namespace FinalProject.Infrastructure.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Content = table.Column<string>(type: "nvarchar(2500)", maxLength: 2500, nullable: false),
                     Votes = table.Column<int>(type: "int", nullable: false),
+                    IsDeleted = table.Column<bool>(type: "bit", nullable: false),
                     CustomerId = table.Column<int>(type: "int", nullable: false),
                     ExpertId = table.Column<int>(type: "int", nullable: false),
-                    ImageId = table.Column<int>(type: "int", nullable: true),
+                    ImageId = table.Column<int>(type: "int", nullable: false),
                     CreatedByBrowserName = table.Column<string>(type: "nvarchar(1000)", maxLength: 1000, nullable: true),
                     CreatedByIp = table.Column<string>(type: "nvarchar(255)", maxLength: 255, nullable: true),
                     CreatedByUserId = table.Column<int>(type: "int", nullable: true),
@@ -398,8 +405,7 @@ namespace FinalProject.Infrastructure.Migrations
                         name: "FK_Comments_Customers_CustomerId",
                         column: x => x.CustomerId,
                         principalTable: "Customers",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        principalColumn: "Id");
                     table.ForeignKey(
                         name: "FK_Comments_Experts_ExpertId",
                         column: x => x.ExpertId,
@@ -419,10 +425,10 @@ namespace FinalProject.Infrastructure.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    DateAdded = table.Column<DateTimeOffset>(type: "datetimeoffset", nullable: false),
                     DateCompleted = table.Column<DateTimeOffset>(type: "datetimeoffset", nullable: true),
                     Description = table.Column<string>(type: "nvarchar(4000)", maxLength: 4000, nullable: true),
                     State = table.Column<int>(type: "int", nullable: false),
+                    IsDeleted = table.Column<bool>(type: "bit", nullable: false),
                     AddressId = table.Column<int>(type: "int", nullable: false),
                     ServiceId = table.Column<int>(type: "int", nullable: false),
                     CustomerId = table.Column<int>(type: "int", nullable: false),
@@ -443,26 +449,22 @@ namespace FinalProject.Infrastructure.Migrations
                         name: "FK_Orders_Addresses_AddressId",
                         column: x => x.AddressId,
                         principalTable: "Addresses",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        principalColumn: "Id");
                     table.ForeignKey(
                         name: "FK_Orders_Customers_CustomerId",
                         column: x => x.CustomerId,
                         principalTable: "Customers",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        principalColumn: "Id");
                     table.ForeignKey(
                         name: "FK_Orders_Experts_ExpertId",
                         column: x => x.ExpertId,
                         principalTable: "Experts",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        principalColumn: "Id");
                     table.ForeignKey(
                         name: "FK_Orders_Services_ServiceId",
                         column: x => x.ServiceId,
                         principalTable: "Services",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        principalColumn: "Id");
                 });
 
             migrationBuilder.CreateIndex(
@@ -540,8 +542,7 @@ namespace FinalProject.Infrastructure.Migrations
                 name: "IX_Comments_ImageId",
                 table: "Comments",
                 column: "ImageId",
-                unique: true,
-                filter: "[ImageId] IS NOT NULL");
+                unique: true);
 
             migrationBuilder.CreateIndex(
                 name: "IX_FileDetails_CustomerId",

@@ -14,6 +14,7 @@ public class Comment : IAuditableEntity, IBaseEntity, ISoftDeletable
     public virtual Customer Customer { get; set; } = null!;
     public int ExpertId { get; set; }
     public virtual Expert Expert { get; set; } = null!;
+    public int? ImageId { get; set; }
     public FileDetail Image { get; set; } = null!;
     #endregion
 }

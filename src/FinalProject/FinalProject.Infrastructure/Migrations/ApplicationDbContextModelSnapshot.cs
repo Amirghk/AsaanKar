@@ -47,9 +47,13 @@ namespace FinalProject.Infrastructure.Migrations
                     b.Property<int?>("ExpertId")
                         .HasColumnType("int");
 
-                    b.Property<int>("Zip")
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("PostalCode")
+                        .IsRequired()
                         .HasMaxLength(10)
-                        .HasColumnType("int");
+                        .HasColumnType("nvarchar(10)");
 
                     b.HasKey("Id");
 
@@ -71,6 +75,9 @@ namespace FinalProject.Infrastructure.Migrations
                         .HasColumnType("int");
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
 
                     b.Property<bool>("IsSupported")
                         .HasColumnType("bit");
@@ -117,14 +124,19 @@ namespace FinalProject.Infrastructure.Migrations
                     b.Property<DateTimeOffset?>("CreatedDateTime")
                         .HasColumnType("datetimeoffset");
 
-                    b.Property<int>("CustomerId")
+                    b.Property<int?>("CustomerId")
+                        .IsRequired()
                         .HasColumnType("int");
 
                     b.Property<int>("ExpertId")
                         .HasColumnType("int");
 
                     b.Property<int?>("ImageId")
+                        .IsRequired()
                         .HasColumnType("int");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
 
                     b.Property<string>("ModifiedByBrowserName")
                         .HasMaxLength(1000)
@@ -150,8 +162,7 @@ namespace FinalProject.Infrastructure.Migrations
                     b.HasIndex("ExpertId");
 
                     b.HasIndex("ImageId")
-                        .IsUnique()
-                        .HasFilter("[ImageId] IS NOT NULL");
+                        .IsUnique();
 
                     b.ToTable("Comments");
                 });
@@ -167,7 +178,7 @@ namespace FinalProject.Infrastructure.Migrations
                     b.Property<Guid>("CustomerId")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<int?>("FileInfoId")
+                    b.Property<int?>("ProfilePictureId")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
@@ -303,11 +314,9 @@ namespace FinalProject.Infrastructure.Migrations
                     b.Property<DateTimeOffset?>("CreatedDateTime")
                         .HasColumnType("datetimeoffset");
 
-                    b.Property<int>("CustomerId")
+                    b.Property<int?>("CustomerId")
+                        .IsRequired()
                         .HasColumnType("int");
-
-                    b.Property<DateTimeOffset>("DateAdded")
-                        .HasColumnType("datetimeoffset");
 
                     b.Property<DateTimeOffset?>("DateCompleted")
                         .HasColumnType("datetimeoffset");
@@ -317,7 +326,11 @@ namespace FinalProject.Infrastructure.Migrations
                         .HasColumnType("nvarchar(4000)");
 
                     b.Property<int?>("ExpertId")
+                        .IsRequired()
                         .HasColumnType("int");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
 
                     b.Property<string>("ModifiedByBrowserName")
                         .HasMaxLength(1000)
@@ -333,7 +346,8 @@ namespace FinalProject.Infrastructure.Migrations
                     b.Property<DateTimeOffset?>("ModifiedDateTime")
                         .HasColumnType("datetimeoffset");
 
-                    b.Property<int>("ServiceId")
+                    b.Property<int?>("ServiceId")
+                        .IsRequired()
                         .HasColumnType("int");
 
                     b.Property<int>("State")
@@ -359,6 +373,9 @@ namespace FinalProject.Infrastructure.Migrations
                         .HasColumnType("int");
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
 
                     b.Property<bool>("IsSupported")
                         .HasColumnType("bit");
@@ -387,6 +404,9 @@ namespace FinalProject.Infrastructure.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<bool>("IsAvailable")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("IsDeleted")
                         .HasColumnType("bit");
 
                     b.Property<string>("Name")
@@ -459,6 +479,9 @@ namespace FinalProject.Infrastructure.Migrations
                         .IsRequired()
                         .HasMaxLength(4000)
                         .HasColumnType("nvarchar(4000)");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
 
                     b.Property<long?>("Price")
                         .HasColumnType("bigint");
@@ -680,16 +703,18 @@ namespace FinalProject.Infrastructure.Migrations
                     b.HasOne("FinalProject.Domain.Entities.City", "City")
                         .WithMany("Addresses")
                         .HasForeignKey("CityId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
                     b.HasOne("FinalProject.Domain.Entities.Customer", "Customer")
                         .WithMany("Addresses")
-                        .HasForeignKey("CustomerId");
+                        .HasForeignKey("CustomerId")
+                        .OnDelete(DeleteBehavior.Cascade);
 
                     b.HasOne("FinalProject.Domain.Entities.Expert", "Expert")
                         .WithOne("Address")
-                        .HasForeignKey("FinalProject.Domain.Entities.Address", "ExpertId");
+                        .HasForeignKey("FinalProject.Domain.Entities.Address", "ExpertId")
+                        .OnDelete(DeleteBehavior.Cascade);
 
                     b.Navigation("City");
 
@@ -714,7 +739,7 @@ namespace FinalProject.Infrastructure.Migrations
                     b.HasOne("FinalProject.Domain.Entities.Customer", "Customer")
                         .WithMany("Comments")
                         .HasForeignKey("CustomerId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
                     b.HasOne("FinalProject.Domain.Entities.Expert", "Expert")
@@ -725,7 +750,9 @@ namespace FinalProject.Infrastructure.Migrations
 
                     b.HasOne("FinalProject.Domain.Entities.FileDetail", "Image")
                         .WithOne("Comment")
-                        .HasForeignKey("FinalProject.Domain.Entities.Comment", "ImageId");
+                        .HasForeignKey("FinalProject.Domain.Entities.Comment", "ImageId")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
 
                     b.Navigation("Customer");
 
@@ -738,7 +765,8 @@ namespace FinalProject.Infrastructure.Migrations
                 {
                     b.HasOne("FinalProject.Domain.Entities.Customer", "Customer")
                         .WithOne("ProfilePicture")
-                        .HasForeignKey("FinalProject.Domain.Entities.FileDetail", "CustomerId");
+                        .HasForeignKey("FinalProject.Domain.Entities.FileDetail", "CustomerId")
+                        .OnDelete(DeleteBehavior.NoAction);
 
                     b.HasOne("FinalProject.Domain.Entities.Expert", "Expert")
                         .WithMany("Pictures")
@@ -746,7 +774,8 @@ namespace FinalProject.Infrastructure.Migrations
 
                     b.HasOne("FinalProject.Domain.Entities.Service", "Service")
                         .WithOne("FileDetails")
-                        .HasForeignKey("FinalProject.Domain.Entities.FileDetail", "ServiceId");
+                        .HasForeignKey("FinalProject.Domain.Entities.FileDetail", "ServiceId")
+                        .OnDelete(DeleteBehavior.NoAction);
 
                     b.Navigation("Customer");
 
@@ -760,23 +789,25 @@ namespace FinalProject.Infrastructure.Migrations
                     b.HasOne("FinalProject.Domain.Entities.Address", "ReceiverAddress")
                         .WithMany("Orders")
                         .HasForeignKey("AddressId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
                     b.HasOne("FinalProject.Domain.Entities.Customer", "Customer")
                         .WithMany("Orders")
                         .HasForeignKey("CustomerId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
                     b.HasOne("FinalProject.Domain.Entities.Expert", "Expert")
                         .WithMany("Orders")
-                        .HasForeignKey("ExpertId");
+                        .HasForeignKey("ExpertId")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
 
                     b.HasOne("FinalProject.Domain.Entities.Service", "Service")
                         .WithMany("Orders")
                         .HasForeignKey("ServiceId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
                     b.Navigation("Customer");

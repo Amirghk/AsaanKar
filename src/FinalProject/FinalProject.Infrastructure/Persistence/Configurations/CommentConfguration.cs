@@ -25,7 +25,8 @@ public class CommentConfiguration : IEntityTypeConfiguration<Comment>
         builder
             .HasOne(c => c.Image)
             .WithOne(f => f.Comment)
-            .HasForeignKey<FileDetail>(f => f.CommentId)
-            .OnDelete(DeleteBehavior.Cascade);
+            .HasForeignKey<Comment>(c => c.ImageId)
+            .OnDelete(DeleteBehavior.NoAction);
+
     }
 }

@@ -8,14 +8,15 @@ public class ExpertConfiguration : IEntityTypeConfiguration<Expert>
 {
     public void Configure(EntityTypeBuilder<Expert> builder)
     {
+        builder.HasKey(x => x.Id);
         builder
             .Property(x => x.Bio)
             .HasMaxLength(4000);
-        builder
-            .HasMany(e => e.Pictures)
-            .WithOne(f => f.Expert)
-            .HasForeignKey(f => f.ExpertId)
-            .OnDelete(DeleteBehavior.Cascade);
+        //builder
+        //    .HasMany(e => e.Pictures)
+        //    .WithOne(f => f.Expert)
+        //    .HasForeignKey(f => f.ExpertId)
+        //    .OnDelete(DeleteBehavior.NoAction);
         builder
             .HasMany(e => e.Services)
             .WithMany(s => s.Experts)

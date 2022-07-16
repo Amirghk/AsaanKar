@@ -11,7 +11,7 @@ public class Customer : IBaseEntity
     #endregion
     #region Navigational Properties
     public Guid CustomerId { get; set; }
-    public int? FileInfoId { get; set; }
+    public int? ProfilePictureId { get; set; }
     public virtual FileDetail? ProfilePicture { get; set; }
     public virtual ICollection<Address> Addresses { get; set; } = new HashSet<Address>();
     public virtual ICollection<Comment> Comments { get; set; } = new HashSet<Comment>();

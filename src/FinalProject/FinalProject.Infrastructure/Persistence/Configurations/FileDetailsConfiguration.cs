@@ -15,17 +15,18 @@ public class FileDetailsConfiguration : IEntityTypeConfiguration<FileDetail>
         builder
             .HasOne(f => f.Customer)
             .WithOne(c => c.ProfilePicture)
-            .HasForeignKey<FileDetail>(f => f.CustomerId)
-            .OnDelete(DeleteBehavior.Cascade);
+            .HasForeignKey<FileDetail>(f => f.CustomerId);
         builder
             .HasOne(f => f.Expert)
             .WithMany(e => e.Pictures)
-            .HasForeignKey(f => f.ExpertId)
-            .OnDelete(DeleteBehavior.Cascade);
+            .HasForeignKey(f => f.ExpertId);
         builder
             .HasOne(f => f.Comment)
             .WithOne(c => c.Image)
-            .HasForeignKey<FileDetail>(f => f.CommentId)
-            .OnDelete(DeleteBehavior.Cascade);
+            .HasForeignKey<Comment>(f => f.ImageId);
+        builder
+            .HasOne(f => f.Service)
+            .WithOne(s => s.FileDetails)
+            .HasForeignKey<FileDetail>(f => f.ServiceId);
     }
 }
