@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "0FwGuufp8ysJR1IWlP3Wr7bSUo2WwvZSCmNhe6CC+AQ=",
+  "Hash": "8vTyLAWQeUcqS9ZhzIHjhghkSTrMvJ7H9zWpzowbrlQ=",
   "Source": "FinalProject.Endpoint",
   "BasePath": "_content/FinalProject.Endpoint",
   "Mode": "Default",
@@ -1071,6 +1071,40 @@
       "OriginalItemSpec": "G:\\FinalProject\\src\\FinalProject\\FinalProject.Endpoint\\obj\\Debug\\net6.0\\scopedcss\\projectbundle\\FinalProject.Endpoint.bundle.scp.css"
     },
     {
+      "Identity": "G:\\FinalProject\\src\\FinalProject\\FinalProject.Endpoint\\wwwroot\\css\\Admin\\bootstrap.min.css",
+      "SourceId": "FinalProject.Endpoint",
+      "SourceType": "Discovered",
+      "ContentRoot": "G:\\FinalProject\\src\\FinalProject\\FinalProject.Endpoint\\wwwroot\\",
+      "BasePath": "_content/FinalProject.Endpoint",
+      "RelativePath": "css/Admin/bootstrap.min.css",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\css\\Admin\\bootstrap.min.css"
+    },
+    {
+      "Identity": "G:\\FinalProject\\src\\FinalProject\\FinalProject.Endpoint\\wwwroot\\css\\Admin\\style.css",
+      "SourceId": "FinalProject.Endpoint",
+      "SourceType": "Discovered",
+      "ContentRoot": "G:\\FinalProject\\src\\FinalProject\\FinalProject.Endpoint\\wwwroot\\",
+      "BasePath": "_content/FinalProject.Endpoint",
+      "RelativePath": "css/Admin/style.css",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\css\\Admin\\style.css"
+    },
+    {
       "Identity": "G:\\FinalProject\\src\\FinalProject\\FinalProject.Endpoint\\wwwroot\\css\\site.css",
       "SourceId": "FinalProject.Endpoint",
       "SourceType": "Discovered",
@@ -1103,6 +1137,23 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\favicon.ico"
+    },
+    {
+      "Identity": "G:\\FinalProject\\src\\FinalProject\\FinalProject.Endpoint\\wwwroot\\js\\Admin\\main.js",
+      "SourceId": "FinalProject.Endpoint",
+      "SourceType": "Discovered",
+      "ContentRoot": "G:\\FinalProject\\src\\FinalProject\\FinalProject.Endpoint\\wwwroot\\",
+      "BasePath": "_content/FinalProject.Endpoint",
+      "RelativePath": "js/Admin/main.js",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\js\\Admin\\main.js"
     },
     {
       "Identity": "G:\\FinalProject\\src\\FinalProject\\FinalProject.Endpoint\\wwwroot\\js\\site.js",
