@@ -18,5 +18,6 @@ public class MappingProfile : Profile
         CreateMap<Order, OrderDto>().ReverseMap();
         CreateMap<Service, ServiceDto>().ReverseMap();
         CreateMap<SubService, SubServiceDto>().ReverseMap();
+        CreateMap<Suggestion, SuggestionDto>().ReverseMap();
     }
 }

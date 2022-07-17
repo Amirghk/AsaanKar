@@ -25,6 +25,7 @@ namespace FinalProject.Infrastructure
             services.AddScoped<ISubServiceRepository, SubServiceRepository>();
             services.AddScoped<IFileDetailRepository, FileDetailRepository>();
             services.AddScoped<ICommentRepository, CommentRepository>();
+            services.AddScoped<ISuggestionRepository, SuggestionRepository>();
             return services;
         }
     }

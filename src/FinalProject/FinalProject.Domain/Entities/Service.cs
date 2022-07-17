@@ -16,7 +16,7 @@ public class Service : IBaseEntity, ISoftDeletable
     #region NavigationalProperties
     public int? ParentServiceId { get; set; }
     public virtual Service? ParentService { get; set; }
-    public virtual ICollection<Service>? Services { get; set; }
+    public virtual ICollection<Service> Services { get; set; } = new HashSet<Service>();
     public virtual FileDetail? FileDetails { get; set; }
     public virtual ICollection<SubService> SubServices { get; set; } = new HashSet<SubService>();
     public virtual ICollection<Expert> Experts { get; set; } = new HashSet<Expert>();

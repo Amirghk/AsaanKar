@@ -12,6 +12,7 @@ public class Expert : IBaseEntity
     public int Votes { get; set; }
     public string? Bio { get; set; }
     public bool IsActive { get; set; }
+    public DateTime BirthDate { get; set; }
 
     #endregion
     #region Navigational Properties

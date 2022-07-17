@@ -26,6 +26,7 @@ public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     public DbSet<ServiceExpert> ServiceExperts { get; set; } = null!;
     public DbSet<Service> Services { get; set; } = null!;
     public DbSet<SubService> SubServices { get; set; } = null!;
+    public DbSet<Suggestion> Suggestions { get; set; } = null!;
 
 
     protected override void OnModelCreating(ModelBuilder builder)

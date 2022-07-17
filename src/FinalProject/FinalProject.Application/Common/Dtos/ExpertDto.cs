@@ -7,6 +7,7 @@ public record ExpertDto
     public int Votes { get; init; }
     public string? Bio { get; init; }
     public bool IsActive { get; init; }
+    public DateTime BirthDate { get; set; }
     public virtual Guid ExpertId { get; init; }
     public int? ProfilePictureId { get; init; }
 }
