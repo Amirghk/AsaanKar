@@ -8,10 +8,10 @@ using System.Threading.Tasks;
 namespace FinalProject.Domain.Interfaces;
 public interface ISuggestionRepository
 {
-    Task<int> Add(Suggestion model);
-    Task<int> Update(Suggestion model);
+    Task<int> Add(Bid model);
+    Task<int> Update(Bid model);
     Task<int> Remove(int id);
-    Task<Suggestion> GetById(int id);
-    Task<IEnumerable<Suggestion>> GetAll();
+    Task<Bid> GetById(int id);
+    Task<IEnumerable<Bid>> GetAll();
 }
 

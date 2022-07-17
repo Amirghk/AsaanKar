@@ -6,9 +6,9 @@ namespace FinalProject.Domain.Interfaces;
 
 public interface IFileDetailRepository
 {
-    Task<int> Add(FileDetail model);
-    Task<int> Update(FileDetail model);
+    Task<int> Add(Upload model);
+    Task<int> Update(Upload model);
     Task<int> Remove(int id);
-    Task<FileDetail> GetById(int id);
-    Task<IEnumerable<FileDetail>> GetAll();
+    Task<Upload> GetById(int id);
+    Task<IEnumerable<Upload>> GetAll();
 }

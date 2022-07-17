@@ -40,12 +40,12 @@ public class SuggestionService : ISuggestionService
 
     public async Task<int> Set(SuggestionDto dto)
     {
-        return await _repository.Add(_mapper.Map<Suggestion>(dto));
+        return await _repository.Add(_mapper.Map<Bid>(dto));
     }
 
     public async Task<int> Update(SuggestionDto dto)
     {
-        return await _repository.Update(_mapper.Map<Suggestion>(dto));
+        return await _repository.Update(_mapper.Map<Bid>(dto));
     }
 }
 

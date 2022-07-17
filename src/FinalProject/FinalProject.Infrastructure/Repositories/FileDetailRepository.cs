@@ -16,24 +16,24 @@ namespace FinalProject.Infrastructure.Repositories
             _context = context;
         }
 
-        public async Task<int> Add(FileDetail model)
+        public async Task<int> Add(Upload model)
         {
             await _context.FileDetails.AddAsync(model);
             await _context.SaveChangesAsync();
             return model.Id;
         }
 
-        public async Task<IEnumerable<FileDetail>> GetAll()
+        public async Task<IEnumerable<Upload>> GetAll()
         {
             return await _context.FileDetails.AsNoTracking().ToListAsync();
         }
 
-        public async Task<FileDetail> GetById(int id)
+        public async Task<Upload> GetById(int id)
         {
             var record = await _context.FileDetails.AsNoTracking().SingleOrDefaultAsync(x => x.Id == id);
             if (record == null)
             {
-                throw new NotFoundException(nameof(FileDetail), id);
+                throw new NotFoundException(nameof(Upload), id);
             }
             return record;
         }
@@ -43,19 +43,19 @@ namespace FinalProject.Infrastructure.Repositories
             var record = await _context.FileDetails.FindAsync(id);
             if (record == null)
             {
-                throw new NotFoundException(nameof(FileDetail), id);
+                throw new NotFoundException(nameof(Upload), id);
             }
             _context.Remove(record);
             await _context.SaveChangesAsync();
             return id;
         }
 
-        public async Task<int> Update(FileDetail model)
+        public async Task<int> Update(Upload model)
         {
             var record = await _context.FileDetails.SingleOrDefaultAsync(x => x.Id == model.Id);
             if (record == null)
             {
-                throw new NotFoundException(nameof(FileDetail), model.Id);
+                throw new NotFoundException(nameof(Upload), model.Id);
             }
             record = model;
             await _context.SaveChangesAsync();

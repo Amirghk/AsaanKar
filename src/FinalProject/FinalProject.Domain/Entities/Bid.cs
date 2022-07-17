@@ -7,16 +7,16 @@ using System.Threading.Tasks;
 
 namespace FinalProject.Domain.Entities;
 
-public class Suggestion : IAuditableEntity
+public class Bid : IAuditableEntity
 {
     #region Properties
     public int Id { get; set; }
-    public string Content { get; set; } = null!;
-    public bool IsRead { get; set; }
+    public string? Notes { get; set; }
+    public decimal Price { get; set; }
     #endregion
     #region Navigational Properties 
-    public int? CustomerId { get; set; }
-    public Customer? Customer { get; set; }
+    public int OrderId { get; set; }
+    public Order Order { get; set; } = null!;
     public int? ExpertId { get; set; }
     public Expert? Expert { get; set; }
     #endregion

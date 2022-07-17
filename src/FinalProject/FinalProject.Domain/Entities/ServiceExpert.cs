@@ -1,7 +1,10 @@
 using FinalProject.Domain.Interfaces;
 
 namespace FinalProject.Domain.Entities;
-
+/// <summary>
+/// an entity joining service and expert
+/// by doing so each expert can support multiple services and each service can have mulltiple experts
+/// </summary>
 public class ServiceExpert : IAuditableEntity
 {
     #region Properties

@@ -19,24 +19,24 @@ public class SuggestionRepository : ISuggestionRepository
         _context = context;
     }
 
-    public async Task<int> Add(Suggestion model)
+    public async Task<int> Add(Bid model)
     {
         await _context.Suggestions.AddAsync(model);
         await _context.SaveChangesAsync();
         return model.Id;
     }
 
-    public async Task<IEnumerable<Suggestion>> GetAll()
+    public async Task<IEnumerable<Bid>> GetAll()
     {
         return await _context.Suggestions.AsNoTracking().ToListAsync();
     }
 
-    public async Task<Suggestion> GetById(int id)
+    public async Task<Bid> GetById(int id)
     {
         var record = await _context.Suggestions.AsNoTracking().SingleOrDefaultAsync(x => x.Id == id);
         if (record == null)
         {
-            throw new NotFoundException(nameof(Suggestion), id);
+            throw new NotFoundException(nameof(Bid), id);
         }
         return record;
     }
@@ -46,20 +46,20 @@ public class SuggestionRepository : ISuggestionRepository
         var record = await _context.Suggestions.FindAsync(id);
         if (record == null)
         {
-            throw new NotFoundException(nameof(Suggestion), id);
+            throw new NotFoundException(nameof(Bid), id);
         }
         _context.Remove(record);
         await _context.SaveChangesAsync();
         return id;
     }
 
-    public async Task<int> Update(Suggestion model)
+    public async Task<int> Update(Bid model)
     {
         // SingleOrDefault tracks related entities?
         var record = await _context.Suggestions.SingleOrDefaultAsync(x => x.Id == model.Id);
         if (record == null)
         {
-            throw new NotFoundException(nameof(Suggestion), model.Id);
+            throw new NotFoundException(nameof(Bid), model.Id);
         }
         record = model;
         await _context.SaveChangesAsync();

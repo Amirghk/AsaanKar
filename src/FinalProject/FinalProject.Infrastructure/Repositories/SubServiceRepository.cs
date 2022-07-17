@@ -16,24 +16,24 @@ namespace FinalProject.Infrastructure.Repositories
             _context = context;
         }
 
-        public async Task<int> Add(SubService model)
+        public async Task<int> Add(Service model)
         {
             await _context.SubServices.AddAsync(model);
             await _context.SaveChangesAsync();
             return model.Id;
         }
 
-        public async Task<IEnumerable<SubService>> GetAll()
+        public async Task<IEnumerable<Service>> GetAll()
         {
             return await _context.SubServices.AsNoTracking().ToListAsync();
         }
 
-        public async Task<SubService> GetById(int id)
+        public async Task<Service> GetById(int id)
         {
             var record = await _context.SubServices.AsNoTracking().SingleOrDefaultAsync(x => x.Id == id);
             if (record == null)
             {
-                throw new NotFoundException(nameof(SubService), id);
+                throw new NotFoundException(nameof(Service), id);
             }
             return record;
         }
@@ -43,19 +43,19 @@ namespace FinalProject.Infrastructure.Repositories
             var record = await _context.SubServices.FindAsync(id);
             if (record == null)
             {
-                throw new NotFoundException(nameof(SubService), id);
+                throw new NotFoundException(nameof(Service), id);
             }
             _context.Remove(record);
             await _context.SaveChangesAsync();
             return id;
         }
 
-        public async Task<int> Update(SubService model)
+        public async Task<int> Update(Service model)
         {
             var record = await _context.SubServices.SingleOrDefaultAsync(x => x.Id == model.Id);
             if (record == null)
             {
-                throw new NotFoundException(nameof(SubService), model.Id);
+                throw new NotFoundException(nameof(Service), model.Id);
             }
             record = model;
             await _context.SaveChangesAsync();

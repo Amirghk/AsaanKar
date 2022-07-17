@@ -35,11 +35,11 @@ public class FileDetailService : IFileDetailService
 
     public async Task<int> Set(FileDetailDto dto)
     {
-        return await _repository.Add(_mapper.Map<FileDetail>(dto));
+        return await _repository.Add(_mapper.Map<Upload>(dto));
     }
 
     public async Task<int> Update(FileDetailDto dto)
     {
-        return await _repository.Update(_mapper.Map<FileDetail>(dto));
+        return await _repository.Update(_mapper.Map<Upload>(dto));
     }
 }

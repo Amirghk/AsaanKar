@@ -35,11 +35,11 @@ public class ServiceService : IServiceService
 
     public async Task<int> Set(ServiceDto dto)
     {
-        return await _repository.Add(_mapper.Map<Service>(dto));
+        return await _repository.Add(_mapper.Map<Category>(dto));
     }
 
     public async Task<int> Update(ServiceDto dto)
     {
-        return await _repository.Update(_mapper.Map<Service>(dto));
+        return await _repository.Update(_mapper.Map<Category>(dto));
     }
 }

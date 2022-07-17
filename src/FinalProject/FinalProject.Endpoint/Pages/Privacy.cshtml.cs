@@ -43,8 +43,8 @@ public class PrivacyModel : PageModel
 
         //await _serviceService.Set(new ServiceDto
         //{
-        //    Name = "Test Service",
-        //    Description = "Test Service Description",
+        //    Name = "Test Category",
+        //    Description = "Test Category Description",
         //    IsAvailable = true,
         //    ParentServiceId = null,
         //    FileInfoId = null

@@ -1,7 +1,10 @@
 using FinalProject.Domain.Interfaces;
 
 namespace FinalProject.Domain.Entities;
-
+/// <summary>
+/// each province has a name and a collection of cities
+/// and an IsSupported field showing if the app offers services in that province
+/// </summary>
 public class Province : IBaseEntity, ISoftDeletable
 {
     #region Property

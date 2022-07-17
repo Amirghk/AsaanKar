@@ -4,9 +4,9 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace FinalProject.Infrastructure.Persistence.Configurations;
 
-public class FileDetailsConfiguration : IEntityTypeConfiguration<FileDetail>
+public class UploadConfiguration : IEntityTypeConfiguration<Upload>
 {
-    public void Configure(EntityTypeBuilder<FileDetail> builder)
+    public void Configure(EntityTypeBuilder<Upload> builder)
     {
         builder
             .Property(f => f.FileName)
@@ -15,7 +15,7 @@ public class FileDetailsConfiguration : IEntityTypeConfiguration<FileDetail>
         builder
             .HasOne(f => f.Customer)
             .WithOne(c => c.ProfilePicture)
-            .HasForeignKey<FileDetail>(f => f.CustomerId);
+            .HasForeignKey<Customer>(c => c.ProfilePictureId);
         builder
             .HasOne(f => f.Expert)
             .WithMany(e => e.Pictures)
@@ -25,8 +25,8 @@ public class FileDetailsConfiguration : IEntityTypeConfiguration<FileDetail>
             .WithOne(c => c.Image)
             .HasForeignKey<Comment>(f => f.ImageId);
         builder
-            .HasOne(f => f.Service)
+            .HasOne(f => f.Category)
             .WithOne(s => s.FileDetails)
-            .HasForeignKey<FileDetail>(f => f.ServiceId);
+            .HasForeignKey<Category>(f => f.PictureId);
     }
 }

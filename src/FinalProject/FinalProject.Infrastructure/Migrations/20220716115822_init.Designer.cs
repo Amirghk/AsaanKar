@@ -220,7 +220,7 @@ namespace FinalProject.Infrastructure.Migrations
                     b.ToTable("Experts");
                 });
 
-            modelBuilder.Entity("FinalProject.Domain.Entities.FileDetail", b =>
+            modelBuilder.Entity("FinalProject.Domain.Entities.Upload", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -392,7 +392,7 @@ namespace FinalProject.Infrastructure.Migrations
                     b.ToTable("Provinces");
                 });
 
-            modelBuilder.Entity("FinalProject.Domain.Entities.Service", b =>
+            modelBuilder.Entity("FinalProject.Domain.Entities.Category", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -469,7 +469,7 @@ namespace FinalProject.Infrastructure.Migrations
                     b.ToTable("ServiceExperts");
                 });
 
-            modelBuilder.Entity("FinalProject.Domain.Entities.SubService", b =>
+            modelBuilder.Entity("FinalProject.Domain.Entities.Service", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -485,7 +485,7 @@ namespace FinalProject.Infrastructure.Migrations
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("bit");
 
-                    b.Property<long?>("Price")
+                    b.Property<long?>("BasePrice")
                         .HasColumnType("bigint");
 
                     b.Property<int>("ServiceId")
@@ -750,7 +750,7 @@ namespace FinalProject.Infrastructure.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("FinalProject.Domain.Entities.FileDetail", "Image")
+                    b.HasOne("FinalProject.Domain.Entities.Upload", "Image")
                         .WithOne("Comment")
                         .HasForeignKey("FinalProject.Domain.Entities.Comment", "ImageId")
                         .OnDelete(DeleteBehavior.NoAction)
@@ -763,27 +763,27 @@ namespace FinalProject.Infrastructure.Migrations
                     b.Navigation("Image");
                 });
 
-            modelBuilder.Entity("FinalProject.Domain.Entities.FileDetail", b =>
+            modelBuilder.Entity("FinalProject.Domain.Entities.Upload", b =>
                 {
                     b.HasOne("FinalProject.Domain.Entities.Customer", "Customer")
                         .WithOne("ProfilePicture")
-                        .HasForeignKey("FinalProject.Domain.Entities.FileDetail", "CustomerId")
+                        .HasForeignKey("FinalProject.Domain.Entities.Upload", "CustomerId")
                         .OnDelete(DeleteBehavior.NoAction);
 
                     b.HasOne("FinalProject.Domain.Entities.Expert", "Expert")
                         .WithMany("Pictures")
                         .HasForeignKey("ExpertId");
 
-                    b.HasOne("FinalProject.Domain.Entities.Service", "Service")
+                    b.HasOne("FinalProject.Domain.Entities.Category", "Category")
                         .WithOne("FileDetails")
-                        .HasForeignKey("FinalProject.Domain.Entities.FileDetail", "ServiceId")
+                        .HasForeignKey("FinalProject.Domain.Entities.Upload", "ServiceId")
                         .OnDelete(DeleteBehavior.NoAction);
 
                     b.Navigation("Customer");
 
                     b.Navigation("Expert");
 
-                    b.Navigation("Service");
+                    b.Navigation("Category");
                 });
 
             modelBuilder.Entity("FinalProject.Domain.Entities.Order", b =>
@@ -806,7 +806,7 @@ namespace FinalProject.Infrastructure.Migrations
                         .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
-                    b.HasOne("FinalProject.Domain.Entities.Service", "Service")
+                    b.HasOne("FinalProject.Domain.Entities.Category", "Category")
                         .WithMany("Orders")
                         .HasForeignKey("ServiceId")
                         .OnDelete(DeleteBehavior.NoAction)
@@ -818,12 +818,12 @@ namespace FinalProject.Infrastructure.Migrations
 
                     b.Navigation("ReceiverAddress");
 
-                    b.Navigation("Service");
+                    b.Navigation("Category");
                 });
 
-            modelBuilder.Entity("FinalProject.Domain.Entities.Service", b =>
+            modelBuilder.Entity("FinalProject.Domain.Entities.Category", b =>
                 {
-                    b.HasOne("FinalProject.Domain.Entities.Service", "ParentService")
+                    b.HasOne("FinalProject.Domain.Entities.Category", "ParentService")
                         .WithMany("Services")
                         .HasForeignKey("ParentServiceId")
                         .OnDelete(DeleteBehavior.Restrict);
@@ -839,7 +839,7 @@ namespace FinalProject.Infrastructure.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("FinalProject.Domain.Entities.Service", "Service")
+                    b.HasOne("FinalProject.Domain.Entities.Category", "Category")
                         .WithMany("ServiceExperts")
                         .HasForeignKey("ServiceId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -847,18 +847,18 @@ namespace FinalProject.Infrastructure.Migrations
 
                     b.Navigation("Expert");
 
-                    b.Navigation("Service");
+                    b.Navigation("Category");
                 });
 
-            modelBuilder.Entity("FinalProject.Domain.Entities.SubService", b =>
+            modelBuilder.Entity("FinalProject.Domain.Entities.Service", b =>
                 {
-                    b.HasOne("FinalProject.Domain.Entities.Service", "Service")
+                    b.HasOne("FinalProject.Domain.Entities.Category", "Category")
                         .WithMany("SubServices")
                         .HasForeignKey("ServiceId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("Service");
+                    b.Navigation("Category");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -947,7 +947,7 @@ namespace FinalProject.Infrastructure.Migrations
                     b.Navigation("ServiceExperts");
                 });
 
-            modelBuilder.Entity("FinalProject.Domain.Entities.FileDetail", b =>
+            modelBuilder.Entity("FinalProject.Domain.Entities.Upload", b =>
                 {
                     b.Navigation("Comment");
                 });
@@ -957,7 +957,7 @@ namespace FinalProject.Infrastructure.Migrations
                     b.Navigation("Cities");
                 });
 
-            modelBuilder.Entity("FinalProject.Domain.Entities.Service", b =>
+            modelBuilder.Entity("FinalProject.Domain.Entities.Category", b =>
                 {
                     b.Navigation("FileDetails");
 

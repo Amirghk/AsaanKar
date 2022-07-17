@@ -1,6 +1,8 @@
 using FinalProject.Domain.Interfaces;
 namespace FinalProject.Domain.Entities;
-
+/// <summary>
+/// entity for comments that has an expert, customer and also has an optional image field
+/// </summary>
 public class Comment : IAuditableEntity, IBaseEntity, ISoftDeletable
 {
     #region Properties
@@ -15,6 +17,6 @@ public class Comment : IAuditableEntity, IBaseEntity, ISoftDeletable
     public int ExpertId { get; set; }
     public virtual Expert Expert { get; set; } = null!;
     public int? ImageId { get; set; }
-    public FileDetail Image { get; set; } = null!;
+    public Upload Image { get; set; } = null!;
     #endregion
 }
