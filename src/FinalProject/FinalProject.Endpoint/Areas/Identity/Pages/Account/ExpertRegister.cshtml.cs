@@ -133,19 +133,12 @@ namespace FinalProject.Endpoint.Areas.Identity.Pages.Account
 
             [DataType(DataType.Date)]
             [Display(Name = "تاریخ تولد")]
-            public DateOnly BirthDate { get; set; }
+            public DateTime BirthDate { get; set; }
         }
 
 
         public async Task OnGetAsync(string returnUrl = null)
         {
-            //var brands = await _brandAppService.GetAll();
-            //ViewBag.Brands = brands.Select
-            //(s => new SelectListItem
-            //{
-            //    Text = s.Name,
-            //    Value = s.Id.ToString()
-            //});
             var provinces = await _provinceService.GetAll();
             Provinces = provinces.Select
                 (s => new SelectListItem

@@ -15,7 +15,7 @@ public class Customer : IBaseEntity
     public DateTime? Birthdate { get; set; }
     #endregion
     #region Navigational Properties
-    public Guid? CustomerId { get; set; }
+    public string? CustomerId { get; set; }
     public int? ProfilePictureId { get; set; }
     public virtual Upload? ProfilePicture { get; set; }
     public virtual ICollection<Address> Addresses { get; set; } = new HashSet<Address>();
