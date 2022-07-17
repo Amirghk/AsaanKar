@@ -10,42 +10,42 @@ namespace FinalProject.Infrastructure.Persistence;
 public static class AuditableShadowProperties
 {
     public static readonly Func<object, string> EfPropertyCreatedByBrowserName =
-        entity => EF.Property<string>(entity, CreatedByBrowserName);
+        entity => EF.Property<string>(entity, CreatedByBrowserName!);
 
     public static readonly string CreatedByBrowserName = nameof(CreatedByBrowserName);
 
     public static readonly Func<object, string> EfPropertyModifiedByBrowserName =
-        entity => EF.Property<string>(entity, ModifiedByBrowserName);
+        entity => EF.Property<string>(entity, ModifiedByBrowserName!);
 
     public static readonly string ModifiedByBrowserName = nameof(ModifiedByBrowserName);
 
     public static readonly Func<object, string> EfPropertyCreatedByIp =
-        entity => EF.Property<string>(entity, CreatedByIp);
+        entity => EF.Property<string>(entity, CreatedByIp!);
 
     public static readonly string CreatedByIp = nameof(CreatedByIp);
 
     public static readonly Func<object, string> EfPropertyModifiedByIp =
-        entity => EF.Property<string>(entity, ModifiedByIp);
+        entity => EF.Property<string>(entity, ModifiedByIp!);
 
     public static readonly string ModifiedByIp = nameof(ModifiedByIp);
 
     public static readonly Func<object, int?> EfPropertyCreatedByUserId =
-        entity => EF.Property<int?>(entity, CreatedByUserId);
+        entity => EF.Property<int?>(entity, CreatedByUserId!);
 
     public static readonly string CreatedByUserId = nameof(CreatedByUserId);
 
     public static readonly Func<object, int?> EfPropertyModifiedByUserId =
-        entity => EF.Property<int?>(entity, ModifiedByUserId);
+        entity => EF.Property<int?>(entity, ModifiedByUserId!);
 
     public static readonly string ModifiedByUserId = nameof(ModifiedByUserId);
 
     public static readonly Func<object, DateTimeOffset?> EfPropertyCreatedDateTime =
-        entity => EF.Property<DateTimeOffset?>(entity, CreatedDateTime);
+        entity => EF.Property<DateTimeOffset?>(entity, CreatedDateTime!);
 
     public static readonly string CreatedDateTime = nameof(CreatedDateTime);
 
     public static readonly Func<object, DateTimeOffset?> EfPropertyModifiedDateTime =
-        entity => EF.Property<DateTimeOffset?>(entity, ModifiedDateTime);
+        entity => EF.Property<DateTimeOffset?>(entity, ModifiedDateTime!);
 
     public static readonly string ModifiedDateTime = nameof(ModifiedDateTime);
 
@@ -82,11 +82,11 @@ public static class AuditableShadowProperties
         this ChangeTracker changeTracker,
         IHttpContextAccessor httpContextAccessor)
     {
-        var httpContext = httpContextAccessor?.HttpContext;
+        HttpContext? httpContext = httpContextAccessor?.HttpContext;
         var userAgent = httpContext?.Request?.Headers["User-Agent"].ToString();
         var userIp = httpContext?.Connection?.RemoteIpAddress?.ToString();
         var now = DateTimeOffset.UtcNow;
-        var userId = GetUserId(httpContext);
+        int? userId = GetUserId(httpContext);
 
         var modifiedEntries = changeTracker.Entries<IAuditableEntity>()
             .Where(x => x.State == EntityState.Modified);
@@ -117,18 +117,18 @@ public static class AuditableShadowProperties
         return userId;
     }
 
-    public static string GetUserId(this IIdentity identity)
+    public static string? GetUserId(this IIdentity identity)
     {
         return identity?.GetUserClaimValue(ClaimTypes.NameIdentifier);
     }
 
-    public static string GetUserClaimValue(this IIdentity identity, string claimType)
+    public static string? GetUserClaimValue(this IIdentity identity, string claimType)
     {
         var identity1 = identity as ClaimsIdentity;
         return identity1?.FindFirstValue(claimType);
     }
 
-    public static string FindFirstValue(this ClaimsIdentity identity, string claimType)
+    public static string? FindFirstValue(this ClaimsIdentity identity, string claimType)
     {
         return identity?.FindFirst(claimType)?.Value;
     }

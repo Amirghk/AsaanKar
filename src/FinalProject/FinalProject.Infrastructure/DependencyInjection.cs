@@ -21,11 +21,11 @@ namespace FinalProject.Infrastructure
             services.AddScoped<IExpertRepository, ExpertRepository>();
             services.AddScoped<ICustomerRepository, CustomerRepository>();
             services.AddScoped<IOrderRepository, OrderRepository>();
+            services.AddScoped<ICategoryRepository, CategoryRepository>();
             services.AddScoped<IServiceRepository, ServiceRepository>();
-            services.AddScoped<ISubServiceRepository, SubServiceRepository>();
             services.AddScoped<IFileDetailRepository, FileDetailRepository>();
             services.AddScoped<ICommentRepository, CommentRepository>();
-            services.AddScoped<ISuggestionRepository, SuggestionRepository>();
+            services.AddScoped<IBidRepository, BidRepository>();
             return services;
         }
     }

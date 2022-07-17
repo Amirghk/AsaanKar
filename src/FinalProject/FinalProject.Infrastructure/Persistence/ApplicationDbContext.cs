@@ -24,9 +24,9 @@ public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     public DbSet<Order> Orders { get; set; } = null!;
     public DbSet<Province> Provinces { get; set; } = null!;
     public DbSet<ServiceExpert> ServiceExperts { get; set; } = null!;
-    public DbSet<Category> Services { get; set; } = null!;
-    public DbSet<Service> SubServices { get; set; } = null!;
-    public DbSet<Bid> Suggestions { get; set; } = null!;
+    public DbSet<Category> Categories { get; set; } = null!;
+    public DbSet<Service> Services { get; set; } = null!;
+    public DbSet<Bid> Bids { get; set; } = null!;
 
 
     protected override void OnModelCreating(ModelBuilder builder)

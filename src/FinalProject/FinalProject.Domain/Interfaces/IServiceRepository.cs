@@ -6,9 +6,9 @@ namespace FinalProject.Domain.Interfaces;
 
 public interface IServiceRepository
 {
-    Task<int> Add(Category model);
-    Task<int> Update(Category model);
+    Task<int> Add(Service model);
+    Task<int> Update(Service model);
     Task<int> Remove(int id);
-    Task<Category> GetById(int id);
-    Task<IEnumerable<Category>> GetAll();
+    Task<Service> GetById(int id);
+    Task<IEnumerable<Service>> GetAll();
 }

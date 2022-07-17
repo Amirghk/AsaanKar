@@ -12,6 +12,7 @@ public class Customer : IBaseEntity
     #region Properties
     public int Id { get; set; }
     public string Name { get; set; } = null!;
+    public DateTime? Birthdate { get; set; }
     #endregion
     #region Navigational Properties
     public Guid? CustomerId { get; set; }

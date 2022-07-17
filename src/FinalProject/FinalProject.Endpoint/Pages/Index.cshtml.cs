@@ -17,7 +17,7 @@ public class IndexModel : PageModel
         _addressService = addressService;
     }
 
-    public async Task OnGet()
+    public void OnGet()
     {
         // await _addressService.Set(new AddressDto
         // {

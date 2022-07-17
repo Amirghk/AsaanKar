@@ -25,11 +25,10 @@ public class Order : IAuditableEntity, IBaseEntity, ISoftDeletable
     // made ServiceId nullable to allow for null value in case deleted service is used in order
     public int? ServiceId { get; set; }
     public virtual Service Service { get; set; } = null!;
-    // made customerId nullable to allow for null value in case deleted customer is used in order
-    public int? CustomerId { get; set; }
+    public int CustomerId { get; set; }
     public virtual Customer Customer { get; set; } = null!;
-    public int? ExpertId { get; set; }
-    public virtual Expert? Expert { get; set; }
+    public int ExpertId { get; set; }
+    public virtual Expert Expert { get; set; } = null!;
     public virtual ICollection<Bid> Bids { get; set; } = new HashSet<Bid>();
     #endregion
 }

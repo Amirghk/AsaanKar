@@ -6,7 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace FinalProject.Domain.Interfaces;
-public interface ISuggestionRepository
+public interface IBidRepository
 {
     Task<int> Add(Bid model);
     Task<int> Update(Bid model);

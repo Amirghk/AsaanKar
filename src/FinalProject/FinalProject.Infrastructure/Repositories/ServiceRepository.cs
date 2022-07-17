@@ -16,24 +16,24 @@ namespace FinalProject.Infrastructure.Repositories
             _context = context;
         }
 
-        public async Task<int> Add(Category model)
+        public async Task<int> Add(Service model)
         {
             await _context.Services.AddAsync(model);
             await _context.SaveChangesAsync();
             return model.Id;
         }
 
-        public async Task<IEnumerable<Category>> GetAll()
+        public async Task<IEnumerable<Service>> GetAll()
         {
             return await _context.Services.AsNoTracking().ToListAsync();
         }
 
-        public async Task<Category> GetById(int id)
+        public async Task<Service> GetById(int id)
         {
             var record = await _context.Services.AsNoTracking().SingleOrDefaultAsync(x => x.Id == id);
             if (record == null)
             {
-                throw new NotFoundException(nameof(Category), id);
+                throw new NotFoundException(nameof(Service), id);
             }
             return record;
         }
@@ -43,19 +43,19 @@ namespace FinalProject.Infrastructure.Repositories
             var record = await _context.Services.FindAsync(id);
             if (record == null)
             {
-                throw new NotFoundException(nameof(Category), id);
+                throw new NotFoundException(nameof(Service), id);
             }
             _context.Remove(record);
             await _context.SaveChangesAsync();
             return id;
         }
 
-        public async Task<int> Update(Category model)
+        public async Task<int> Update(Service model)
         {
             var record = await _context.Services.SingleOrDefaultAsync(x => x.Id == model.Id);
             if (record == null)
             {
-                throw new NotFoundException(nameof(Category), model.Id);
+                throw new NotFoundException(nameof(Service), model.Id);
             }
             record = model;
             await _context.SaveChangesAsync();

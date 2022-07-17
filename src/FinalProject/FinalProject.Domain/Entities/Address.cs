@@ -10,15 +10,10 @@ namespace FinalProject.Domain.Entities;
 public class Address : ISoftDeletable, IBaseEntity
 {
     #region Properties
-    [Display(Name = "شناسه")]
     public int Id { get; set; }
-    [Display(Name = "محتویات")]
     public string Content { get; set; } = null!;
-    [Display(Name = "کد پستی")]
     public string PostalCode { get; set; } = null!;
-    [Display(Name = "نوع آدرس")]
     public AddressCategory AddressCategory { get; set; }
-    [Display(Name = "پاک شده")]
     public bool IsDeleted { get; set; }
     #endregion
 

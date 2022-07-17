@@ -12,12 +12,12 @@ public class MappingProfile : Profile
         CreateMap<Province, ProvinceDto>().ReverseMap();
         CreateMap<Customer, CustomerDto>().ReverseMap();
         CreateMap<Comment, CommentDto>().ReverseMap();
-        CreateMap<Upload, FileDetailDto>().ReverseMap();
+        CreateMap<Upload, UploadDto>().ReverseMap();
         CreateMap<Address, AddressDto>().ReverseMap();
         CreateMap<Expert, ExpertDto>().ReverseMap();
         CreateMap<Order, OrderDto>().ReverseMap();
-        CreateMap<Category, ServiceDto>().ReverseMap();
-        CreateMap<Service, SubServiceDto>().ReverseMap();
-        CreateMap<Bid, SuggestionDto>().ReverseMap();
+        CreateMap<Category, CategoryDto>().ReverseMap();
+        CreateMap<Service, ServiceDto>().ReverseMap();
+        CreateMap<Bid, BidDto>().ReverseMap();
     }
 }

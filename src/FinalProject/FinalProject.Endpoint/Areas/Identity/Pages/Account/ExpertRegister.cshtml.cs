@@ -6,12 +6,14 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
+using System.Security.Claims;
 using System.Text;
 using System.Text.Encodings.Web;
 using System.Threading;
 using System.Threading.Tasks;
 using FinalProject.Application.Common.Dtos;
 using FinalProject.Application.Common.Interfaces.Services;
+using FinalProject.Domain.Enums;
 using FinalProject.Infrastructure.Identity;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authorization;
@@ -35,6 +37,8 @@ namespace FinalProject.Endpoint.Areas.Identity.Pages.Account
         private readonly IEmailSender _emailSender;
         private readonly ICityService _cityService;
         private readonly IProvinceService _provinceService;
+        private readonly IExpertService _expertService;
+        private readonly IAddressService _addressService;
 
         public ExpertRegisterModel(
             UserManager<ApplicationUser> userManager,
@@ -43,7 +47,9 @@ namespace FinalProject.Endpoint.Areas.Identity.Pages.Account
             ILogger<ExpertRegisterModel> logger,
             IEmailSender emailSender,
             ICityService cityService,
-            IProvinceService provinceService)
+            IProvinceService provinceService,
+            IExpertService expertService,
+            IAddressService addressService)
         {
             _userManager = userManager;
             _userStore = userStore;
@@ -53,6 +59,8 @@ namespace FinalProject.Endpoint.Areas.Identity.Pages.Account
             _emailSender = emailSender;
             _cityService = cityService;
             _provinceService = provinceService;
+            _expertService = expertService;
+            _addressService = addressService;
         }
 
 
@@ -122,6 +130,10 @@ namespace FinalProject.Endpoint.Areas.Identity.Pages.Account
             [Display(Name = "کدپستی")]
             [StringLength(10, ErrorMessage = "The {0} must be at least {2} and at max {1} characters long.", MinimumLength = 4)]
             public string PostalCode { get; set; }
+
+            [DataType(DataType.Date)]
+            [Display(Name = "تاریخ تولد")]
+            public DateOnly BirthDate { get; set; }
         }
 
 
@@ -166,10 +178,50 @@ namespace FinalProject.Endpoint.Areas.Identity.Pages.Account
 
                 if (result.Succeeded)
                 {
+                    // Add related data to claims
+                    var expertClaim = new Claim("IsExpert", true.ToString());
+                    await _userManager.AddClaimAsync(user, expertClaim);
+
+                    var firstNameClaim = new Claim(ClaimTypes.GivenName, Input.FirstName);
+                    await _userManager.AddClaimAsync(user, firstNameClaim);
+
+                    var lastNameClaim = new Claim(ClaimTypes.Surname, Input.LastName);
+                    await _userManager.AddClaimAsync(user, lastNameClaim);
+
+                    var phoneNumberClaim = new Claim(ClaimTypes.MobilePhone, Input.PhoneNumber);
+                    await _userManager.AddClaimAsync(user, phoneNumberClaim);
+
+                    var nationalCodeClaim = new Claim("NationalCode", Input.NationalCode);
+                    await _userManager.AddClaimAsync(user, nationalCodeClaim);
+
+                    var birthDateClaim = new Claim(ClaimTypes.DateOfBirth, Input.BirthDate.ToString());
+                    await _userManager.AddClaimAsync(user, birthDateClaim);
+
+
+
+
                     _logger.LogInformation("User created a new account with password.");
 
                     var userId = await _userManager.GetUserIdAsync(user);
                     var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);
+
+                    // add related data to Expert entity 
+                    int expertId = await _expertService.Set(new ExpertDto
+                    {
+                        Name = Input.FirstName + " " + Input.LastName,
+                        BirthDate = Input.BirthDate,
+                        ExpertId = userId
+                    });
+                    // add related data to address entity
+                    await _addressService.Set(new AddressDto
+                    {
+                        CityId = Input.CityId,
+                        Content = Input.Address,
+                        PostalCode = Input.PostalCode,
+                        ExpertId = expertId,
+                        AddressCategory = AddressCategory.Expert
+                    });
+
                     code = WebEncoders.Base64UrlEncode(Encoding.UTF8.GetBytes(code));
                     var callbackUrl = Url.Page(
                         "/Account/ConfirmEmail",
@@ -202,16 +254,9 @@ namespace FinalProject.Endpoint.Areas.Identity.Pages.Account
 
         private ApplicationUser CreateUser()
         {
-            try
-            {
-                return Activator.CreateInstance<ApplicationUser>();
-            }
-            catch
-            {
-                throw new InvalidOperationException($"Can't create an instance of '{nameof(ApplicationUser)}'. " +
-                    $"Ensure that '{nameof(ApplicationUser)}' is not an abstract class and has a parameterless constructor, or alternatively " +
-                    $"override the register page in /Areas/Identity/Pages/Account/Register.cshtml");
-            }
+
+            return Activator.CreateInstance<ApplicationUser>();
+
         }
 
         private IUserEmailStore<ApplicationUser> GetEmailStore()

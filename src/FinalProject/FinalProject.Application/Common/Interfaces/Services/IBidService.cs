@@ -7,12 +7,12 @@ using System.Threading.Tasks;
 
 namespace FinalProject.Application.Common.Interfaces.Services;
 
-public interface ISuggestionService
+public interface IBidService
 {
-    Task<int> Set(SuggestionDto dto);
-    Task<IEnumerable<SuggestionDto>> GetAll();
-    Task<SuggestionDto> GetById(int id);
+    Task<int> Set(BidDto dto);
+    Task<IEnumerable<BidDto>> GetAll();
+    Task<BidDto> GetById(int id);
     Task<int> Remove(int id);
-    Task<int> Update(SuggestionDto dto);
+    Task<int> Update(BidDto dto);
 }
 

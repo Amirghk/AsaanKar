@@ -11,25 +11,25 @@ using System.Threading.Tasks;
 
 namespace FinalProject.Application.Common.Services;
 
-public class SuggestionService : ISuggestionService
+public class BidService : IBidService
 {
     private readonly IMapper _mapper;
-    private readonly ISuggestionRepository _repository;
-    public SuggestionService(ISuggestionRepository repository, IMapper mapper)
+    private readonly IBidRepository _repository;
+    public BidService(IBidRepository repository, IMapper mapper)
     {
         _mapper = mapper;
         _repository = repository;
     }
 
-    public async Task<IEnumerable<SuggestionDto>> GetAll()
+    public async Task<IEnumerable<BidDto>> GetAll()
     {
-        List<SuggestionDto> mappedModels = _mapper.Map<List<SuggestionDto>>(await _repository.GetAll()).ToList();
+        List<BidDto> mappedModels = _mapper.Map<List<BidDto>>(await _repository.GetAll()).ToList();
         return mappedModels;
     }
 
-    public async Task<SuggestionDto> GetById(int id)
+    public async Task<BidDto> GetById(int id)
     {
-        SuggestionDto mappedModel = _mapper.Map<SuggestionDto>(await _repository.GetById(id));
+        BidDto mappedModel = _mapper.Map<BidDto>(await _repository.GetById(id));
         return mappedModel;
     }
 
@@ -38,12 +38,12 @@ public class SuggestionService : ISuggestionService
         return await _repository.Remove(id);
     }
 
-    public async Task<int> Set(SuggestionDto dto)
+    public async Task<int> Set(BidDto dto)
     {
         return await _repository.Add(_mapper.Map<Bid>(dto));
     }
 
-    public async Task<int> Update(SuggestionDto dto)
+    public async Task<int> Update(BidDto dto)
     {
         return await _repository.Update(_mapper.Map<Bid>(dto));
     }

@@ -11,15 +11,16 @@ public class Expert : IBaseEntity
 {
     #region Properties
     public int Id { get; set; }
+    public string Name { get; set; } = null!;
     public float? Rating { get; set; }
     public int Votes { get; set; }
     public string? Bio { get; set; }
     public bool IsActive { get; set; }
-    public DateTime BirthDate { get; set; }
+    public DateOnly BirthDate { get; set; }
 
     #endregion
     #region Navigational Properties
-    public virtual Guid? ExpertId { get; set; }
+    public virtual string? ExpertId { get; set; }
     public virtual Address Address { get; set; } = null!;
     public int? ProfilePictureId { get; set; }
     public virtual ICollection<Service> Services { get; set; } = new HashSet<Service>();

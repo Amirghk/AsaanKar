@@ -7,55 +7,55 @@ using Microsoft.EntityFrameworkCore;
 
 namespace FinalProject.Infrastructure.Repositories
 {
-    public class SubServiceRepository : ISubServiceRepository
+    public class CategoryRepository : ICategoryRepository
     {
         private readonly ApplicationDbContext _context;
 
-        public SubServiceRepository(ApplicationDbContext context)
+        public CategoryRepository(ApplicationDbContext context)
         {
             _context = context;
         }
 
-        public async Task<int> Add(Service model)
+        public async Task<int> Add(Category model)
         {
-            await _context.SubServices.AddAsync(model);
+            await _context.Categories.AddAsync(model);
             await _context.SaveChangesAsync();
             return model.Id;
         }
 
-        public async Task<IEnumerable<Service>> GetAll()
+        public async Task<IEnumerable<Category>> GetAll()
         {
-            return await _context.SubServices.AsNoTracking().ToListAsync();
+            return await _context.Categories.AsNoTracking().ToListAsync();
         }
 
-        public async Task<Service> GetById(int id)
+        public async Task<Category> GetById(int id)
         {
-            var record = await _context.SubServices.AsNoTracking().SingleOrDefaultAsync(x => x.Id == id);
+            var record = await _context.Categories.AsNoTracking().SingleOrDefaultAsync(x => x.Id == id);
             if (record == null)
             {
-                throw new NotFoundException(nameof(Service), id);
+                throw new NotFoundException(nameof(Category), id);
             }
             return record;
         }
 
         public async Task<int> Remove(int id)
         {
-            var record = await _context.SubServices.FindAsync(id);
+            var record = await _context.Categories.FindAsync(id);
             if (record == null)
             {
-                throw new NotFoundException(nameof(Service), id);
+                throw new NotFoundException(nameof(Category), id);
             }
             _context.Remove(record);
             await _context.SaveChangesAsync();
             return id;
         }
 
-        public async Task<int> Update(Service model)
+        public async Task<int> Update(Category model)
         {
-            var record = await _context.SubServices.SingleOrDefaultAsync(x => x.Id == model.Id);
+            var record = await _context.Categories.SingleOrDefaultAsync(x => x.Id == model.Id);
             if (record == null)
             {
-                throw new NotFoundException(nameof(Service), model.Id);
+                throw new NotFoundException(nameof(Category), model.Id);
             }
             record = model;
             await _context.SaveChangesAsync();

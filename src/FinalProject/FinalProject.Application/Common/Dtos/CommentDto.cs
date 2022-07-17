@@ -7,5 +7,5 @@ public record CommentDto
     public int Votes { get; init; }
     public int CustomerId { get; init; }
     public int ExpertId { get; init; }
-    public int? FileInfoId { get; init; }
+    public int? ImageId { get; init; }
 }

@@ -14,11 +14,11 @@ public static class DependencyInjection
         services.AddScoped<IExpertService, ExpertService>();
         services.AddScoped<ICustomerService, CustomerService>();
         services.AddScoped<IOrderService, OrderService>();
+        services.AddScoped<ICategoryService, CategoryService>();
         services.AddScoped<IServiceService, ServiceService>();
-        services.AddScoped<ISubServiceService, SubServiceService>();
-        services.AddScoped<IFileDetailService, FileDetailService>();
+        services.AddScoped<IUploadService, FileDetailService>();
         services.AddScoped<ICommentService, CommentService>();
-        services.AddScoped<ISuggestionService, SuggestionService>();
+        services.AddScoped<IBidService, BidService>();
         return services;
     }
 }

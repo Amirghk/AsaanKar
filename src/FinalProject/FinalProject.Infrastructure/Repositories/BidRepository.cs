@@ -10,30 +10,30 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace FinalProject.Infrastructure.Repositories;
-public class SuggestionRepository : ISuggestionRepository
+public class BidRepository : IBidRepository
 {
     private readonly ApplicationDbContext _context;
 
-    public SuggestionRepository(ApplicationDbContext context)
+    public BidRepository(ApplicationDbContext context)
     {
         _context = context;
     }
 
     public async Task<int> Add(Bid model)
     {
-        await _context.Suggestions.AddAsync(model);
+        await _context.Bids.AddAsync(model);
         await _context.SaveChangesAsync();
         return model.Id;
     }
 
     public async Task<IEnumerable<Bid>> GetAll()
     {
-        return await _context.Suggestions.AsNoTracking().ToListAsync();
+        return await _context.Bids.AsNoTracking().ToListAsync();
     }
 
     public async Task<Bid> GetById(int id)
     {
-        var record = await _context.Suggestions.AsNoTracking().SingleOrDefaultAsync(x => x.Id == id);
+        var record = await _context.Bids.AsNoTracking().SingleOrDefaultAsync(x => x.Id == id);
         if (record == null)
         {
             throw new NotFoundException(nameof(Bid), id);
@@ -43,7 +43,7 @@ public class SuggestionRepository : ISuggestionRepository
 
     public async Task<int> Remove(int id)
     {
-        var record = await _context.Suggestions.FindAsync(id);
+        var record = await _context.Bids.FindAsync(id);
         if (record == null)
         {
             throw new NotFoundException(nameof(Bid), id);
@@ -55,8 +55,7 @@ public class SuggestionRepository : ISuggestionRepository
 
     public async Task<int> Update(Bid model)
     {
-        // SingleOrDefault tracks related entities?
-        var record = await _context.Suggestions.SingleOrDefaultAsync(x => x.Id == model.Id);
+        var record = await _context.Bids.SingleOrDefaultAsync(x => x.Id == model.Id);
         if (record == null)
         {
             throw new NotFoundException(nameof(Bid), model.Id);

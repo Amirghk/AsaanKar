@@ -9,13 +9,9 @@ namespace FinalProject.Domain.Entities;
 public class City : IBaseEntity, ISoftDeletable
 {
     #region Property
-    [Display(Name = "شناسه")]
     public int Id { get; set; }
-    [Display(Name = "نام")]
     public string Name { get; set; } = null!;
-    [Display(Name = "خدمات انجام میشود")]
     public bool IsSupported { get; set; }
-    [Display(Name = "پاک شده")]
     public bool IsDeleted { get; set; }
     #endregion
     #region Navigational Property
