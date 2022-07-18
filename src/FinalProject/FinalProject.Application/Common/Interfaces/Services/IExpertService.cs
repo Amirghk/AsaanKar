@@ -9,4 +9,6 @@ public interface IExpertService
     Task<ExpertDto> GetById(int id);
     Task<int> Remove(int id);
     Task<int> Update(ExpertDto dto);
+    // Task<List<CompoundCustomerDto>> GetAllCompound();
+    // Task<CompoundCustomerDto> GetCompoundById(int id);
 }

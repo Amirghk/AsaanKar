@@ -9,4 +9,6 @@ public interface ICustomerService
     Task<CustomerDto> GetById(int id);
     Task<int> Remove(int id);
     Task<int> Update(CustomerDto dto);
+    Task<List<CustomerQueryDto>> GetAllCompound();
+    Task<CustomerQueryDto> GetCompoundById(int id);
 }

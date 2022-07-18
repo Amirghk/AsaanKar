@@ -3,7 +3,7 @@ using FinalProject.Application.Common.Interfaces.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
-namespace FinalProject.Endpoint.Areas.Administration.Pages.Address
+namespace FinalProject.Endpoint.Areas.Administration.Pages.Users
 {
     public class IndexModel : PageModel
     {

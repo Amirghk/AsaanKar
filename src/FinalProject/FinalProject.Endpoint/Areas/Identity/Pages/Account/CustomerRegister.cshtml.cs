@@ -158,7 +158,7 @@ namespace FinalProject.Endpoint.Areas.Identity.Pages.Account
                     var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);
 
                     // add related data to customer entity 
-                    int expertId = await _customerService.Set(new CustomerDto
+                    await _customerService.Set(new CustomerDto
                     {
                         Name = Input.FirstName + " " + Input.LastName,
                         Birthdate = Input.BirthDate,

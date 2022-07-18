@@ -22,11 +22,13 @@ public class CustomerService : ICustomerService
         return mappedModels;
     }
 
+
     public async Task<CustomerDto> GetById(int id)
     {
         CustomerDto mappedModel = _mapper.Map<CustomerDto>(await _repository.GetById(id));
         return mappedModel;
     }
+
 
     public async Task<int> Remove(int id)
     {
