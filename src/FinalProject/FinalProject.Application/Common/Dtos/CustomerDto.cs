@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace FinalProject.Application.Common.Dtos;
 
-internal record CustomerDto
+public record CustomerDto
 {
     public int Id { get; init; }
     public string FirstName { get; init; } = null!;

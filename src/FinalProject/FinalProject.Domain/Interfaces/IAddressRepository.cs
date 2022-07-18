@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using System.Linq.Expressions;
 using FinalProject.Domain.Entities;
 using FinalProject.Domain.Interfaces;
@@ -10,5 +11,6 @@ public interface IAddressRepository
     Task<int> Update(Address model);
     Task<int> Remove(int id);
     Task<Address> GetById(int id);
+    Task<IEnumerable<Address>> GetByUserId(int userId);
     Task<IEnumerable<Address>> GetAll();
 }

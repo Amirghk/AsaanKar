@@ -175,20 +175,8 @@ namespace FinalProject.Endpoint.Areas.Identity.Pages.Account
                     var expertClaim = new Claim("IsExpert", true.ToString());
                     await _userManager.AddClaimAsync(user, expertClaim);
 
-                    var firstNameClaim = new Claim(ClaimTypes.GivenName, Input.FirstName);
-                    await _userManager.AddClaimAsync(user, firstNameClaim);
-
-                    var lastNameClaim = new Claim(ClaimTypes.Surname, Input.LastName);
-                    await _userManager.AddClaimAsync(user, lastNameClaim);
-
-                    var phoneNumberClaim = new Claim(ClaimTypes.MobilePhone, Input.PhoneNumber);
-                    await _userManager.AddClaimAsync(user, phoneNumberClaim);
-
-                    var nationalCodeClaim = new Claim("NationalCode", Input.NationalCode);
-                    await _userManager.AddClaimAsync(user, nationalCodeClaim);
-
-                    var birthDateClaim = new Claim(ClaimTypes.DateOfBirth, Input.BirthDate.ToString());
-                    await _userManager.AddClaimAsync(user, birthDateClaim);
+                    var nameClaim = new Claim(ClaimTypes.Name, Input.FirstName + " " + Input.LastName);
+                    await _userManager.AddClaimAsync(user, nameClaim);
 
 
 
@@ -201,9 +189,12 @@ namespace FinalProject.Endpoint.Areas.Identity.Pages.Account
                     // add related data to Expert entity 
                     int expertId = await _expertService.Set(new ExpertDto
                     {
-                        Name = Input.FirstName + " " + Input.LastName,
+                        FirstName = Input.FirstName,
+                        LastName = Input.LastName,
                         BirthDate = Input.BirthDate,
-                        ExpertId = userId
+                        ExpertId = userId,
+                        NationalCode = Input.NationalCode,
+                        PhoneNumber = Input.PhoneNumber,
                     });
                     // add related data to address entity
                     await _addressService.Set(new AddressDto

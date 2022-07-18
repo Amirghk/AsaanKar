@@ -37,6 +37,11 @@ namespace FinalProject.Infrastructure.Repositories
             return record;
         }
 
+        public async Task<IEnumerable<Address>> GetByUserId(int userId)
+        {
+            return await _context.Addresses.Where(x => x.ExpertId == userId || x.CustomerId == userId).AsNoTracking().ToListAsync();
+        }
+
         public async Task<int> Remove(int id)
         {
             var record = await _context.Addresses.FindAsync(id);

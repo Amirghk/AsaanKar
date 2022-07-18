@@ -11,7 +11,10 @@ public class Expert : IBaseEntity
 {
     #region Properties
     public int Id { get; set; }
-    public string Name { get; set; } = null!;
+    public string FirstName { get; set; } = null!;
+    public string LastName { get; set; } = null!;
+    public string NationalCode { get; set; } = null!;
+    public string PhoneNumber { get; set; } = null!;
     public float? Rating { get; set; }
     public int Votes { get; set; }
     public string? Bio { get; set; }

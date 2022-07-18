@@ -1,6 +1,7 @@
 using AutoMapper;
 using FinalProject.Application;
 using FinalProject.Application.Common.Mappings;
+using FinalProject.Endpoint.Common.Mappings;
 using FinalProject.Infrastructure;
 using FinalProject.Infrastructure.Identity;
 using FinalProject.Infrastructure.Persistence;
@@ -12,6 +13,7 @@ var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddControllersWithViews().AddRazorRuntimeCompilation();
 builder.Services.AddAutoMapper(typeof(MappingProfile).Assembly);
+builder.Services.AddAutoMapper(typeof(VMMappingProfile).Assembly);
 builder.Services.AddInfrastructure(builder.Configuration);
 builder.Services.AddApplication();
 

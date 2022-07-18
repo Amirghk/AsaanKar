@@ -137,17 +137,9 @@ namespace FinalProject.Endpoint.Areas.Identity.Pages.Account
                     var expertClaim = new Claim("IsCustomer", true.ToString());
                     await _userManager.AddClaimAsync(user, expertClaim);
 
-                    var firstNameClaim = new Claim(ClaimTypes.GivenName, Input.FirstName);
-                    await _userManager.AddClaimAsync(user, firstNameClaim);
+                    var nameClaim = new Claim(ClaimTypes.Name, Input.FirstName + " " + Input.LastName);
+                    await _userManager.AddClaimAsync(user, nameClaim);
 
-                    var lastNameClaim = new Claim(ClaimTypes.Surname, Input.LastName);
-                    await _userManager.AddClaimAsync(user, lastNameClaim);
-
-                    var phoneNumberClaim = new Claim(ClaimTypes.MobilePhone, Input.PhoneNumber);
-                    await _userManager.AddClaimAsync(user, phoneNumberClaim);
-
-                    var birthDateClaim = new Claim(ClaimTypes.DateOfBirth, Input.BirthDate.ToString());
-                    await _userManager.AddClaimAsync(user, birthDateClaim);
 
 
 
@@ -160,9 +152,11 @@ namespace FinalProject.Endpoint.Areas.Identity.Pages.Account
                     // add related data to customer entity 
                     await _customerService.Set(new CustomerDto
                     {
-                        Name = Input.FirstName + " " + Input.LastName,
-                        Birthdate = Input.BirthDate,
-                        CustomerId = userId
+                        FirstName = Input.FirstName,
+                        LastName = Input.LastName,
+                        BirthDate = Input.BirthDate,
+                        CustomerId = userId,
+                        PhoneNumber = Input.PhoneNumber,
                     });
 
                     code = WebEncoders.Base64UrlEncode(Encoding.UTF8.GetBytes(code));

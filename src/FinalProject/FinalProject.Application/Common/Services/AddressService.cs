@@ -28,6 +28,12 @@ public class AddressService : IAddressService
         return mappedModel;
     }
 
+    public async Task<List<AddressDto>> GetByUserId(int userId)
+    {
+        List<AddressDto> mappedModels = _mapper.Map<List<AddressDto>>(await _repository.GetByUserId(userId)).ToList();
+        return mappedModels;
+    }
+
     public async Task<int> Remove(int id)
     {
         return await _repository.Remove(id);
