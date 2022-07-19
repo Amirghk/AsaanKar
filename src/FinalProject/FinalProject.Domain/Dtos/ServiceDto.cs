@@ -1,5 +1,6 @@
 using System.ComponentModel;
-namespace FinalProject.Application.Common.Dtos;
+
+namespace FinalProject.Domain.Dtos;
 
 public record ServiceDto
 {

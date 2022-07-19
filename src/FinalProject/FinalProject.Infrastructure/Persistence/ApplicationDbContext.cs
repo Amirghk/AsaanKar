@@ -20,7 +20,7 @@ public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     public DbSet<Comment> Comments { get; set; } = null!;
     public DbSet<Customer> Customers { get; set; } = null!;
     public DbSet<Expert> Experts { get; set; } = null!;
-    public DbSet<Upload> FileDetails { get; set; } = null!;
+    public DbSet<Upload> Uploads { get; set; } = null!;
     public DbSet<Order> Orders { get; set; } = null!;
     public DbSet<Province> Provinces { get; set; } = null!;
     public DbSet<ServiceExpert> ServiceExperts { get; set; } = null!;

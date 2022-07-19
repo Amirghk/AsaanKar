@@ -1,6 +1,6 @@
 using AutoMapper;
-using FinalProject.Application.Common.Dtos;
 using FinalProject.Application.Common.Interfaces.Services;
+using FinalProject.Domain.Dtos;
 using FinalProject.Domain.Entities;
 using FinalProject.Domain.Interfaces;
 
@@ -18,20 +18,17 @@ public class AddressService : IAddressService
 
     public async Task<IEnumerable<AddressDto>> GetAll()
     {
-        List<AddressDto> mappedModels = _mapper.Map<List<AddressDto>>(await _repository.GetAll()).ToList();
-        return mappedModels;
+        return await _repository.GetAll();
     }
 
     public async Task<AddressDto> GetById(int id)
     {
-        AddressDto mappedModel = _mapper.Map<AddressDto>(await _repository.GetById(id));
-        return mappedModel;
+        return await _repository.GetById(id);
     }
 
-    public async Task<List<AddressDto>> GetByUserId(int userId)
+    public async Task<IEnumerable<AddressDto>> GetByUserId(int userId)
     {
-        List<AddressDto> mappedModels = _mapper.Map<List<AddressDto>>(await _repository.GetByUserId(userId)).ToList();
-        return mappedModels;
+        return await _repository.GetByUserId(userId);
     }
 
     public async Task<int> Remove(int id)
@@ -41,11 +38,11 @@ public class AddressService : IAddressService
 
     public async Task<int> Set(AddressDto dto)
     {
-        return await _repository.Add(_mapper.Map<Address>(dto));
+        return await _repository.Add(dto);
     }
 
     public async Task<int> Update(AddressDto dto)
     {
-        return await _repository.Update(_mapper.Map<Address>(dto));
+        return await _repository.Update(dto);
     }
 }

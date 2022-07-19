@@ -1,4 +1,6 @@
-﻿using FinalProject.Application.Common.Exceptions;
+﻿using AutoMapper;
+using FinalProject.Application.Common.Exceptions;
+using FinalProject.Domain.Dtos;
 using FinalProject.Domain.Entities;
 using FinalProject.Domain.Interfaces;
 using FinalProject.Infrastructure.Persistence;
@@ -9,27 +11,30 @@ namespace FinalProject.Infrastructure.Repositories
     public class AddressRepository : IAddressRepository
     {
         private readonly ApplicationDbContext _context;
+        private readonly IMapper _mapper;
 
-        public AddressRepository(ApplicationDbContext context)
+        public AddressRepository(ApplicationDbContext context, IMapper mapper)
         {
             _context = context;
+            _mapper = mapper;
         }
 
-        public async Task<int> Add(Address model)
+        public async Task<int> Add(AddressDto model)
         {
-            await _context.Addresses.AddAsync(model);
+            var record = _mapper.Map<Address>(model);
+            await _context.Addresses.AddAsync(record);
             await _context.SaveChangesAsync();
-            return model.Id;
+            return record.Id;
         }
 
-        public async Task<IEnumerable<Address>> GetAll()
+        public async Task<IEnumerable<AddressDto>> GetAll()
         {
-            return await _context.Addresses.AsNoTracking().ToListAsync();
+            return await _mapper.ProjectTo<AddressDto>(_context.Addresses).ToListAsync();
         }
 
-        public async Task<Address> GetById(int id)
+        public async Task<AddressDto> GetById(int id)
         {
-            var record = await _context.Addresses.AsNoTracking().SingleOrDefaultAsync(x => x.Id == id);
+            var record = await _mapper.ProjectTo<AddressDto>(_context.Addresses).SingleOrDefaultAsync(x => x.Id == id);
             if (record == null)
             {
                 throw new NotFoundException(nameof(Address), id);
@@ -37,9 +42,14 @@ namespace FinalProject.Infrastructure.Repositories
             return record;
         }
 
-        public async Task<IEnumerable<Address>> GetByUserId(int userId)
+        public async Task<IEnumerable<AddressDto>> GetByUserId(int userId)
         {
-            return await _context.Addresses.Where(x => x.ExpertId == userId || x.CustomerId == userId).AsNoTracking().ToListAsync();
+            var record = await _mapper.ProjectTo<AddressDto>(_context.Addresses).Where(x => x.ExpertId == userId || x.CustomerId == userId).ToListAsync();
+            if (record == null)
+            {
+                throw new NotFoundException(nameof(Address), userId);
+            }
+            return record;
         }
 
         public async Task<int> Remove(int id)
@@ -54,18 +64,17 @@ namespace FinalProject.Infrastructure.Repositories
             return id;
         }
 
-        public async Task<int> Update(Address model)
+        public async Task<int> Update(AddressDto model)
         {
-            // SingleOrDefault tracks related entities?
             var record = await _context.Addresses.SingleOrDefaultAsync(x => x.Id == model.Id);
             if (record == null)
             {
                 throw new NotFoundException(nameof(Address), model.Id);
             }
-            record = model;
+            var newRecord = _mapper.Map<Address>(model);
+            record = newRecord;
             await _context.SaveChangesAsync();
             return record.Id;
         }
-
     }
 }

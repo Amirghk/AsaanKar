@@ -1,16 +1,15 @@
 using System.Collections.Generic;
 using System.Linq.Expressions;
-using FinalProject.Domain.Entities;
-using FinalProject.Domain.Interfaces;
+using FinalProject.Domain.Dtos;
 
 namespace FinalProject.Domain.Interfaces;
 
 public interface IAddressRepository
 {
-    Task<int> Add(Address model);
-    Task<int> Update(Address model);
+    Task<int> Add(AddressDto model);
+    Task<int> Update(AddressDto model);
     Task<int> Remove(int id);
-    Task<Address> GetById(int id);
-    Task<IEnumerable<Address>> GetByUserId(int userId);
-    Task<IEnumerable<Address>> GetAll();
+    Task<AddressDto> GetById(int id);
+    Task<IEnumerable<AddressDto>> GetByUserId(int userId);
+    Task<IEnumerable<AddressDto>> GetAll();
 }

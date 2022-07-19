@@ -4,7 +4,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace FinalProject.Application.Common.Dtos;
+
+namespace FinalProject.Domain.Dtos;
 
 public record CustomerDto
 {

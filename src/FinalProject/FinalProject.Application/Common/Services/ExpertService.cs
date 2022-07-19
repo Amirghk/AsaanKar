@@ -1,6 +1,6 @@
 using AutoMapper;
-using FinalProject.Application.Common.Dtos;
 using FinalProject.Application.Common.Interfaces.Services;
+using FinalProject.Domain.Dtos;
 using FinalProject.Domain.Entities;
 using FinalProject.Domain.Interfaces;
 
@@ -18,14 +18,12 @@ public class ExpertService : IExpertService
 
     public async Task<IEnumerable<ExpertDto>> GetAll()
     {
-        List<ExpertDto> mappedModels = _mapper.Map<List<ExpertDto>>(await _repository.GetAll()).ToList();
-        return mappedModels;
+        return await _repository.GetAll();
     }
 
     public async Task<ExpertDto> GetById(int id)
     {
-        ExpertDto mappedModel = _mapper.Map<ExpertDto>(await _repository.GetById(id));
-        return mappedModel;
+        return await _repository.GetById(id);
     }
 
     public async Task<int> Remove(int id)
@@ -35,11 +33,11 @@ public class ExpertService : IExpertService
 
     public async Task<int> Set(ExpertDto dto)
     {
-        return await _repository.Add(_mapper.Map<Expert>(dto));
+        return await _repository.Add(dto);
     }
 
     public async Task<int> Update(ExpertDto dto)
     {
-        return await _repository.Update(_mapper.Map<Expert>(dto));
+        return await _repository.Update(dto);
     }
 }

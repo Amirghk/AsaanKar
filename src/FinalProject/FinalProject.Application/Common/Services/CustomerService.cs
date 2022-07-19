@@ -1,6 +1,6 @@
 using AutoMapper;
-using FinalProject.Application.Common.Dtos;
 using FinalProject.Application.Common.Interfaces.Services;
+using FinalProject.Domain.Dtos;
 using FinalProject.Domain.Entities;
 using FinalProject.Domain.Interfaces;
 
@@ -18,17 +18,13 @@ public class CustomerService : ICustomerService
 
     public async Task<IEnumerable<CustomerDto>> GetAll()
     {
-        List<CustomerDto> mappedModels = _mapper.Map<List<CustomerDto>>(await _repository.GetAll()).ToList();
-        return mappedModels;
+        return await _repository.GetAll();
     }
-
 
     public async Task<CustomerDto> GetById(int id)
     {
-        CustomerDto mappedModel = _mapper.Map<CustomerDto>(await _repository.GetById(id));
-        return mappedModel;
+        return await _repository.GetById(id);
     }
-
 
     public async Task<int> Remove(int id)
     {
@@ -37,11 +33,11 @@ public class CustomerService : ICustomerService
 
     public async Task<int> Set(CustomerDto dto)
     {
-        return await _repository.Add(_mapper.Map<Customer>(dto));
+        return await _repository.Add(dto);
     }
 
     public async Task<int> Update(CustomerDto dto)
     {
-        return await _repository.Update(_mapper.Map<Customer>(dto));
+        return await _repository.Update(dto);
     }
 }

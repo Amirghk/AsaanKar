@@ -1,4 +1,5 @@
 using System.Linq.Expressions;
+using FinalProject.Domain.Dtos;
 using FinalProject.Domain.Entities;
 using FinalProject.Domain.Interfaces;
 
@@ -6,9 +7,9 @@ namespace FinalProject.Domain.Interfaces;
 
 public interface IServiceRepository
 {
-    Task<int> Add(Service model);
-    Task<int> Update(Service model);
+    Task<int> Add(ServiceDto model);
+    Task<int> Update(ServiceDto model);
     Task<int> Remove(int id);
-    Task<Service> GetById(int id);
-    Task<IEnumerable<Service>> GetAll();
+    Task<ServiceDto> GetById(int id);
+    Task<IEnumerable<ServiceDto>> GetAll();
 }

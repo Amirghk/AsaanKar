@@ -1,4 +1,4 @@
-﻿using FinalProject.Application.Common.Dtos;
+﻿using FinalProject.Domain.Dtos;
 using System;
 using System.Collections.Generic;
 using System.Linq;

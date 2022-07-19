@@ -1,6 +1,6 @@
 using FinalProject.Domain.Enums;
 
-namespace FinalProject.Application.Common.Dtos;
+namespace FinalProject.Domain.Dtos;
 
 public record AddressDto
 {

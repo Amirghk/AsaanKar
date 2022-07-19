@@ -1,8 +1,8 @@
 using AutoMapper;
-using FinalProject.Application.Common.Dtos;
+using FinalProject.Domain.Dtos;
 using FinalProject.Domain.Entities;
 
-namespace FinalProject.Application.Common.Mappings;
+namespace FinalProject.Infrastructure.Mappings;
 
 public class MappingProfile : Profile
 {

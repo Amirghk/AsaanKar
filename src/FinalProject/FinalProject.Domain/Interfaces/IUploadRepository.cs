@@ -5,11 +5,11 @@ using FinalProject.Domain.Interfaces;
 
 namespace FinalProject.Domain.Interfaces;
 
-public interface ICommentRepository
+public interface IUploadRepository
 {
-    Task<int> Add(CommentDto model);
-    Task<int> Update(CommentDto model);
+    Task<int> Add(UploadDto model);
+    Task<int> Update(UploadDto model);
     Task<int> Remove(int id);
-    Task<CommentDto> GetById(int id);
-    Task<IEnumerable<CommentDto>> GetAll();
+    Task<UploadDto> GetById(int id);
+    Task<IEnumerable<UploadDto>> GetAll();
 }

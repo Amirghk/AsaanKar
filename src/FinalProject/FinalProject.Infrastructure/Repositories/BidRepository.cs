@@ -1,67 +1,71 @@
-﻿using FinalProject.Application.Common.Exceptions;
+﻿using AutoMapper;
+using FinalProject.Application.Common.Exceptions;
+using FinalProject.Domain.Dtos;
 using FinalProject.Domain.Entities;
 using FinalProject.Domain.Interfaces;
 using FinalProject.Infrastructure.Persistence;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace FinalProject.Infrastructure.Repositories;
-public class BidRepository : IBidRepository
+namespace FinalProject.Infrastructure.Repositories
 {
-    private readonly ApplicationDbContext _context;
-
-    public BidRepository(ApplicationDbContext context)
+    public class BidRepository : IBidRepository
     {
-        _context = context;
-    }
+        private readonly ApplicationDbContext _context;
+        private readonly IMapper _mapper;
 
-    public async Task<int> Add(Bid model)
-    {
-        await _context.Bids.AddAsync(model);
-        await _context.SaveChangesAsync();
-        return model.Id;
-    }
-
-    public async Task<IEnumerable<Bid>> GetAll()
-    {
-        return await _context.Bids.AsNoTracking().ToListAsync();
-    }
-
-    public async Task<Bid> GetById(int id)
-    {
-        var record = await _context.Bids.AsNoTracking().SingleOrDefaultAsync(x => x.Id == id);
-        if (record == null)
+        public BidRepository(ApplicationDbContext context, IMapper mapper)
         {
-            throw new NotFoundException(nameof(Bid), id);
+            _context = context;
+            _mapper = mapper;
         }
-        return record;
-    }
 
-    public async Task<int> Remove(int id)
-    {
-        var record = await _context.Bids.FindAsync(id);
-        if (record == null)
+        public async Task<int> Add(BidDto model)
         {
-            throw new NotFoundException(nameof(Bid), id);
+            var record = _mapper.Map<Bid>(model);
+            await _context.Bids.AddAsync(record);
+            await _context.SaveChangesAsync();
+            return record.Id;
         }
-        _context.Remove(record);
-        await _context.SaveChangesAsync();
-        return id;
-    }
 
-    public async Task<int> Update(Bid model)
-    {
-        var record = await _context.Bids.SingleOrDefaultAsync(x => x.Id == model.Id);
-        if (record == null)
+        public async Task<IEnumerable<BidDto>> GetAll()
         {
-            throw new NotFoundException(nameof(Bid), model.Id);
+            return await _mapper.ProjectTo<BidDto>(_context.Bids).ToListAsync();
         }
-        record = model;
-        await _context.SaveChangesAsync();
-        return record.Id;
+
+        public async Task<BidDto> GetById(int id)
+        {
+            var record = await _mapper.ProjectTo<BidDto>(_context.Bids).SingleOrDefaultAsync(x => x.Id == id);
+            if (record == null)
+            {
+                throw new NotFoundException(nameof(Bid), id);
+            }
+            return record;
+        }
+
+
+        public async Task<int> Remove(int id)
+        {
+            var record = await _context.Bids.FindAsync(id);
+            if (record == null)
+            {
+                throw new NotFoundException(nameof(Bid), id);
+            }
+            _context.Remove(record);
+            await _context.SaveChangesAsync();
+            return id;
+        }
+
+        public async Task<int> Update(BidDto model)
+        {
+            var record = await _context.Bids.SingleOrDefaultAsync(x => x.Id == model.Id);
+            if (record == null)
+            {
+                throw new NotFoundException(nameof(Bid), model.Id);
+            }
+            var newRecord = _mapper.Map<Bid>(model);
+            record = newRecord;
+            await _context.SaveChangesAsync();
+            return record.Id;
+        }
     }
 }

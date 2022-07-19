@@ -1,42 +1,47 @@
+using AutoMapper;
 using FinalProject.Application.Common.Exceptions;
+using FinalProject.Domain.Dtos;
 using FinalProject.Domain.Entities;
 using FinalProject.Domain.Interfaces;
 using FinalProject.Infrastructure.Persistence;
 using Microsoft.EntityFrameworkCore;
-
 
 namespace FinalProject.Infrastructure.Repositories
 {
     public class CategoryRepository : ICategoryRepository
     {
         private readonly ApplicationDbContext _context;
+        private readonly IMapper _mapper;
 
-        public CategoryRepository(ApplicationDbContext context)
+        public CategoryRepository(ApplicationDbContext context, IMapper mapper)
         {
             _context = context;
+            _mapper = mapper;
         }
 
-        public async Task<int> Add(Category model)
+        public async Task<int> Add(CategoryDto model)
         {
-            await _context.Categories.AddAsync(model);
+            var record = _mapper.Map<Category>(model);
+            await _context.Categories.AddAsync(record);
             await _context.SaveChangesAsync();
-            return model.Id;
+            return record.Id;
         }
 
-        public async Task<IEnumerable<Category>> GetAll()
+        public async Task<IEnumerable<CategoryDto>> GetAll()
         {
-            return await _context.Categories.AsNoTracking().ToListAsync();
+            return await _mapper.ProjectTo<CategoryDto>(_context.Categories).ToListAsync();
         }
 
-        public async Task<Category> GetById(int id)
+        public async Task<CategoryDto> GetById(int id)
         {
-            var record = await _context.Categories.AsNoTracking().SingleOrDefaultAsync(x => x.Id == id);
+            var record = await _mapper.ProjectTo<CategoryDto>(_context.Categories).SingleOrDefaultAsync(x => x.Id == id);
             if (record == null)
             {
                 throw new NotFoundException(nameof(Category), id);
             }
             return record;
         }
+
 
         public async Task<int> Remove(int id)
         {
@@ -50,14 +55,15 @@ namespace FinalProject.Infrastructure.Repositories
             return id;
         }
 
-        public async Task<int> Update(Category model)
+        public async Task<int> Update(CategoryDto model)
         {
             var record = await _context.Categories.SingleOrDefaultAsync(x => x.Id == model.Id);
             if (record == null)
             {
                 throw new NotFoundException(nameof(Category), model.Id);
             }
-            record = model;
+            var newRecord = _mapper.Map<Category>(model);
+            record = newRecord;
             await _context.SaveChangesAsync();
             return record.Id;
         }

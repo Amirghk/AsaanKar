@@ -1,42 +1,47 @@
+using AutoMapper;
 using FinalProject.Application.Common.Exceptions;
+using FinalProject.Domain.Dtos;
 using FinalProject.Domain.Entities;
 using FinalProject.Domain.Interfaces;
 using FinalProject.Infrastructure.Persistence;
 using Microsoft.EntityFrameworkCore;
-
 
 namespace FinalProject.Infrastructure.Repositories
 {
     public class ServiceRepository : IServiceRepository
     {
         private readonly ApplicationDbContext _context;
+        private readonly IMapper _mapper;
 
-        public ServiceRepository(ApplicationDbContext context)
+        public ServiceRepository(ApplicationDbContext context, IMapper mapper)
         {
             _context = context;
+            _mapper = mapper;
         }
 
-        public async Task<int> Add(Service model)
+        public async Task<int> Add(ServiceDto model)
         {
-            await _context.Services.AddAsync(model);
+            var record = _mapper.Map<Service>(model);
+            await _context.Services.AddAsync(record);
             await _context.SaveChangesAsync();
-            return model.Id;
+            return record.Id;
         }
 
-        public async Task<IEnumerable<Service>> GetAll()
+        public async Task<IEnumerable<ServiceDto>> GetAll()
         {
-            return await _context.Services.AsNoTracking().ToListAsync();
+            return await _mapper.ProjectTo<ServiceDto>(_context.Services).ToListAsync();
         }
 
-        public async Task<Service> GetById(int id)
+        public async Task<ServiceDto> GetById(int id)
         {
-            var record = await _context.Services.AsNoTracking().SingleOrDefaultAsync(x => x.Id == id);
+            var record = await _mapper.ProjectTo<ServiceDto>(_context.Services).SingleOrDefaultAsync(x => x.Id == id);
             if (record == null)
             {
                 throw new NotFoundException(nameof(Service), id);
             }
             return record;
         }
+
 
         public async Task<int> Remove(int id)
         {
@@ -50,14 +55,15 @@ namespace FinalProject.Infrastructure.Repositories
             return id;
         }
 
-        public async Task<int> Update(Service model)
+        public async Task<int> Update(ServiceDto model)
         {
             var record = await _context.Services.SingleOrDefaultAsync(x => x.Id == model.Id);
             if (record == null)
             {
                 throw new NotFoundException(nameof(Service), model.Id);
             }
-            record = model;
+            var newRecord = _mapper.Map<Service>(model);
+            record = newRecord;
             await _context.SaveChangesAsync();
             return record.Id;
         }

@@ -11,7 +11,7 @@ using System.Text;
 using System.Text.Encodings.Web;
 using System.Threading;
 using System.Threading.Tasks;
-using FinalProject.Application.Common.Dtos;
+using FinalProject.Domain.Dtos;
 using FinalProject.Application.Common.Interfaces.Services;
 using FinalProject.Domain.Enums;
 using FinalProject.Infrastructure.Identity;

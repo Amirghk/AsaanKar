@@ -1,4 +1,4 @@
-using FinalProject.Application.Common.Dtos;
+using FinalProject.Domain.Dtos;
 
 namespace FinalProject.Application.Common.Interfaces.Services;
 

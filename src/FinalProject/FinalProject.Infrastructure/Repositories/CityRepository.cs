@@ -1,42 +1,47 @@
+using AutoMapper;
 using FinalProject.Application.Common.Exceptions;
+using FinalProject.Domain.Dtos;
 using FinalProject.Domain.Entities;
 using FinalProject.Domain.Interfaces;
 using FinalProject.Infrastructure.Persistence;
 using Microsoft.EntityFrameworkCore;
-
 
 namespace FinalProject.Infrastructure.Repositories
 {
     public class CityRepository : ICityRepository
     {
         private readonly ApplicationDbContext _context;
+        private readonly IMapper _mapper;
 
-        public CityRepository(ApplicationDbContext context)
+        public CityRepository(ApplicationDbContext context, IMapper mapper)
         {
             _context = context;
+            _mapper = mapper;
         }
 
-        public async Task<int> Add(City model)
+        public async Task<int> Add(CityDto model)
         {
-            await _context.Cities.AddAsync(model);
+            var record = _mapper.Map<City>(model);
+            await _context.Cities.AddAsync(record);
             await _context.SaveChangesAsync();
-            return model.Id;
+            return record.Id;
         }
 
-        public async Task<IEnumerable<City>> GetAll()
+        public async Task<IEnumerable<CityDto>> GetAll()
         {
-            return await _context.Cities.AsNoTracking().ToListAsync();
+            return await _mapper.ProjectTo<CityDto>(_context.Cities).ToListAsync();
         }
 
-        public async Task<City> GetById(int id)
+        public async Task<CityDto> GetById(int id)
         {
-            var record = await _context.Cities.AsNoTracking().SingleOrDefaultAsync(x => x.Id == id);
+            var record = await _mapper.ProjectTo<CityDto>(_context.Cities).SingleOrDefaultAsync(x => x.Id == id);
             if (record == null)
             {
                 throw new NotFoundException(nameof(City), id);
             }
             return record;
         }
+
 
         public async Task<int> Remove(int id)
         {
@@ -50,17 +55,17 @@ namespace FinalProject.Infrastructure.Repositories
             return id;
         }
 
-        public async Task<int> Update(City model)
+        public async Task<int> Update(CityDto model)
         {
             var record = await _context.Cities.SingleOrDefaultAsync(x => x.Id == model.Id);
             if (record == null)
             {
                 throw new NotFoundException(nameof(City), model.Id);
             }
-            record = model;
+            var newRecord = _mapper.Map<City>(model);
+            record = newRecord;
             await _context.SaveChangesAsync();
             return record.Id;
         }
-
     }
 }

@@ -1,5 +1,5 @@
 ﻿using AutoMapper;
-using FinalProject.Application.Common.Dtos;
+using FinalProject.Domain.Dtos;
 using FinalProject.Endpoint.Areas.Administration.Models;
 
 namespace FinalProject.Endpoint.Common.Mappings

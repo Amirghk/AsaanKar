@@ -1,6 +1,6 @@
 using AutoMapper;
-using FinalProject.Application.Common.Dtos;
 using FinalProject.Application.Common.Interfaces.Services;
+using FinalProject.Domain.Dtos;
 using FinalProject.Domain.Entities;
 using FinalProject.Domain.Interfaces;
 
@@ -18,14 +18,12 @@ public class CategoryService : ICategoryService
 
     public async Task<IEnumerable<CategoryDto>> GetAll()
     {
-        List<CategoryDto> mappedModels = _mapper.Map<List<CategoryDto>>(await _repository.GetAll()).ToList();
-        return mappedModels;
+        return await _repository.GetAll();
     }
 
-    public async Task<Dtos.CategoryDto> GetById(int id)
+    public async Task<CategoryDto> GetById(int id)
     {
-        CategoryDto mappedModel = _mapper.Map<CategoryDto>(await _repository.GetById(id));
-        return mappedModel;
+        return await _repository.GetById(id);
     }
 
     public async Task<int> Remove(int id)
@@ -35,11 +33,11 @@ public class CategoryService : ICategoryService
 
     public async Task<int> Set(CategoryDto dto)
     {
-        return await _repository.Add(_mapper.Map<Category>(dto));
+        return await _repository.Add(dto);
     }
 
     public async Task<int> Update(CategoryDto dto)
     {
-        return await _repository.Update(_mapper.Map<Category>(dto));
+        return await _repository.Update(dto);
     }
 }

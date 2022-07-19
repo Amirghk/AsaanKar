@@ -1,36 +1,40 @@
+using AutoMapper;
 using FinalProject.Application.Common.Exceptions;
+using FinalProject.Domain.Dtos;
 using FinalProject.Domain.Entities;
 using FinalProject.Domain.Interfaces;
 using FinalProject.Infrastructure.Persistence;
 using Microsoft.EntityFrameworkCore;
 
-
 namespace FinalProject.Infrastructure.Repositories
 {
-    public class FileDetailRepository : IFileDetailRepository
+    public class UploadRepository : IUploadRepository
     {
         private readonly ApplicationDbContext _context;
+        private readonly IMapper _mapper;
 
-        public FileDetailRepository(ApplicationDbContext context)
+        public UploadRepository(ApplicationDbContext context, IMapper mapper)
         {
             _context = context;
+            _mapper = mapper;
         }
 
-        public async Task<int> Add(Upload model)
+        public async Task<int> Add(UploadDto model)
         {
-            await _context.FileDetails.AddAsync(model);
+            var record = _mapper.Map<Upload>(model);
+            await _context.Uploads.AddAsync(record);
             await _context.SaveChangesAsync();
-            return model.Id;
+            return record.Id;
         }
 
-        public async Task<IEnumerable<Upload>> GetAll()
+        public async Task<IEnumerable<UploadDto>> GetAll()
         {
-            return await _context.FileDetails.AsNoTracking().ToListAsync();
+            return await _mapper.ProjectTo<UploadDto>(_context.Uploads).ToListAsync();
         }
 
-        public async Task<Upload> GetById(int id)
+        public async Task<UploadDto> GetById(int id)
         {
-            var record = await _context.FileDetails.AsNoTracking().SingleOrDefaultAsync(x => x.Id == id);
+            var record = await _mapper.ProjectTo<UploadDto>(_context.Uploads).SingleOrDefaultAsync(x => x.Id == id);
             if (record == null)
             {
                 throw new NotFoundException(nameof(Upload), id);
@@ -38,9 +42,10 @@ namespace FinalProject.Infrastructure.Repositories
             return record;
         }
 
+
         public async Task<int> Remove(int id)
         {
-            var record = await _context.FileDetails.FindAsync(id);
+            var record = await _context.Uploads.FindAsync(id);
             if (record == null)
             {
                 throw new NotFoundException(nameof(Upload), id);
@@ -50,14 +55,15 @@ namespace FinalProject.Infrastructure.Repositories
             return id;
         }
 
-        public async Task<int> Update(Upload model)
+        public async Task<int> Update(UploadDto model)
         {
-            var record = await _context.FileDetails.SingleOrDefaultAsync(x => x.Id == model.Id);
+            var record = await _context.Uploads.SingleOrDefaultAsync(x => x.Id == model.Id);
             if (record == null)
             {
                 throw new NotFoundException(nameof(Upload), model.Id);
             }
-            record = model;
+            var newRecord = _mapper.Map<Upload>(model);
+            record = newRecord;
             await _context.SaveChangesAsync();
             return record.Id;
         }

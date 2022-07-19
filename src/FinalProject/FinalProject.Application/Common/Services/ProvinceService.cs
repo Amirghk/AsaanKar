@@ -1,6 +1,6 @@
 using AutoMapper;
-using FinalProject.Application.Common.Dtos;
 using FinalProject.Application.Common.Interfaces.Services;
+using FinalProject.Domain.Dtos;
 using FinalProject.Domain.Entities;
 using FinalProject.Domain.Interfaces;
 
@@ -18,14 +18,12 @@ public class ProvinceService : IProvinceService
 
     public async Task<IEnumerable<ProvinceDto>> GetAll()
     {
-        List<ProvinceDto> mappedModels = _mapper.Map<List<ProvinceDto>>(await _repository.GetAll()).ToList();
-        return mappedModels;
+        return await _repository.GetAll();
     }
 
     public async Task<ProvinceDto> GetById(int id)
     {
-        ProvinceDto mappedModel = _mapper.Map<ProvinceDto>(await _repository.GetById(id));
-        return mappedModel;
+        return await _repository.GetById(id);
     }
 
     public async Task<int> Remove(int id)
@@ -35,11 +33,11 @@ public class ProvinceService : IProvinceService
 
     public async Task<int> Set(ProvinceDto dto)
     {
-        return await _repository.Add(_mapper.Map<Province>(dto));
+        return await _repository.Add(dto);
     }
 
     public async Task<int> Update(ProvinceDto dto)
     {
-        return await _repository.Update(_mapper.Map<Province>(dto));
+        return await _repository.Update(dto);
     }
 }

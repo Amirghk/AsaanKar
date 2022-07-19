@@ -16,7 +16,7 @@ public static class DependencyInjection
         services.AddScoped<IOrderService, OrderService>();
         services.AddScoped<ICategoryService, CategoryService>();
         services.AddScoped<IServiceService, ServiceService>();
-        services.AddScoped<IUploadService, FileDetailService>();
+        services.AddScoped<IUploadService, UploadService>();
         services.AddScoped<ICommentService, CommentService>();
         services.AddScoped<IBidService, BidService>();
         return services;

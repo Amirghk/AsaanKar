@@ -1,6 +1,6 @@
 using AutoMapper;
 using FinalProject.Application;
-using FinalProject.Application.Common.Mappings;
+using FinalProject.Infrastructure.Mappings;
 using FinalProject.Endpoint.Common.Mappings;
 using FinalProject.Infrastructure;
 using FinalProject.Infrastructure.Identity;

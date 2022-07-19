@@ -23,7 +23,7 @@ namespace FinalProject.Infrastructure
             services.AddScoped<IOrderRepository, OrderRepository>();
             services.AddScoped<ICategoryRepository, CategoryRepository>();
             services.AddScoped<IServiceRepository, ServiceRepository>();
-            services.AddScoped<IFileDetailRepository, FileDetailRepository>();
+            services.AddScoped<IUploadRepository, UploadRepository>();
             services.AddScoped<ICommentRepository, CommentRepository>();
             services.AddScoped<IBidRepository, BidRepository>();
             return services;

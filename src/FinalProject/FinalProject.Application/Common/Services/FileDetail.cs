@@ -1,16 +1,16 @@
 using AutoMapper;
-using FinalProject.Application.Common.Dtos;
 using FinalProject.Application.Common.Interfaces.Services;
+using FinalProject.Domain.Dtos;
 using FinalProject.Domain.Entities;
 using FinalProject.Domain.Interfaces;
 
 namespace FinalProject.Application.Common.Services;
 
-public class FileDetailService : IUploadService
+public class UploadService : IUploadService
 {
     private readonly IMapper _mapper;
-    private readonly IFileDetailRepository _repository;
-    public FileDetailService(IFileDetailRepository repository, IMapper mapper)
+    private readonly IUploadRepository _repository;
+    public UploadService(IUploadRepository repository, IMapper mapper)
     {
         _mapper = mapper;
         _repository = repository;
@@ -18,14 +18,12 @@ public class FileDetailService : IUploadService
 
     public async Task<IEnumerable<UploadDto>> GetAll()
     {
-        List<UploadDto> mappedModels = _mapper.Map<List<UploadDto>>(await _repository.GetAll()).ToList();
-        return mappedModels;
+        return await _repository.GetAll();
     }
 
     public async Task<UploadDto> GetById(int id)
     {
-        UploadDto mappedModel = _mapper.Map<UploadDto>(await _repository.GetById(id));
-        return mappedModel;
+        return await _repository.GetById(id);
     }
 
     public async Task<int> Remove(int id)
@@ -35,11 +33,11 @@ public class FileDetailService : IUploadService
 
     public async Task<int> Set(UploadDto dto)
     {
-        return await _repository.Add(_mapper.Map<Upload>(dto));
+        return await _repository.Add(dto);
     }
 
     public async Task<int> Update(UploadDto dto)
     {
-        return await _repository.Update(_mapper.Map<Upload>(dto));
+        return await _repository.Update(dto);
     }
 }

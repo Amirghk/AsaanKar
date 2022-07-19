@@ -1,6 +1,6 @@
 using AutoMapper;
-using FinalProject.Application.Common.Dtos;
 using FinalProject.Application.Common.Interfaces.Services;
+using FinalProject.Domain.Dtos;
 using FinalProject.Domain.Entities;
 using FinalProject.Domain.Interfaces;
 
@@ -18,14 +18,12 @@ public class CityService : ICityService
 
     public async Task<IEnumerable<CityDto>> GetAll()
     {
-        List<CityDto> mappedModels = _mapper.Map<List<CityDto>>(await _repository.GetAll()).ToList();
-        return mappedModels;
+        return await _repository.GetAll();
     }
 
     public async Task<CityDto> GetById(int id)
     {
-        CityDto mappedModel = _mapper.Map<CityDto>(await _repository.GetById(id));
-        return mappedModel;
+        return await _repository.GetById(id);
     }
 
     public async Task<int> Remove(int id)
@@ -35,11 +33,11 @@ public class CityService : ICityService
 
     public async Task<int> Set(CityDto dto)
     {
-        return await _repository.Add(_mapper.Map<City>(dto));
+        return await _repository.Add(dto);
     }
 
     public async Task<int> Update(CityDto dto)
     {
-        return await _repository.Update(_mapper.Map<City>(dto));
+        return await _repository.Update(dto);
     }
 }
