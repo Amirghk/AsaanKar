@@ -18,7 +18,7 @@ public class ExpertService : IExpertService
 
     public async Task<IEnumerable<ExpertDto>> GetAll()
     {
-        return await _repository.GetAll();
+        return (await _repository.GetAll()).Where(x => x.IsDeleted == false);
     }
 
     public async Task<ExpertDto> GetById(int id)
@@ -39,6 +39,11 @@ public class ExpertService : IExpertService
     public async Task<int> Set(ExpertDto dto)
     {
         return await _repository.Add(dto);
+    }
+
+    public async Task<int> SoftDelete(string expertId)
+    {
+        return await _repository.SoftDelete(expertId);
     }
 
     public async Task<int> Update(ExpertDto dto)

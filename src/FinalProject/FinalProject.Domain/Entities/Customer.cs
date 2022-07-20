@@ -7,15 +7,16 @@ namespace FinalProject.Domain.Entities;
 /// customer entity that references a Asp.net core user entity with CustomerId guid
 /// , stores additional info for customers
 /// </summary>
-public class Customer : IBaseEntity
+public class Customer : IBaseEntity, ISoftDeletable
 {
     #region Properties
     public int Id { get; init; }
-    public string FirstName { get; init; } = null!;
+    public string FirstName { get; set; } = null!;
     public string LastName { get; set; } = null!;
     public string PhoneNumber { get; set; } = null!;
-    public int? FileInfoId { get; init; }
+    public int? FileInfoId { get; set; }
     public DateTime? BirthDate { get; set; }
+    public bool IsDeleted { get; set; }
     #endregion
     #region Navigational Properties
     public string? CustomerId { get; set; }

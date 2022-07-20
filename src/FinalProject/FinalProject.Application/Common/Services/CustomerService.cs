@@ -18,7 +18,7 @@ public class CustomerService : ICustomerService
 
     public async Task<IEnumerable<CustomerDto>> GetAll()
     {
-        return await _repository.GetAll();
+        return (await _repository.GetAll()).Where(x => x.IsDeleted == false);
     }
 
     public async Task<CustomerDto> GetById(int id)
@@ -39,6 +39,11 @@ public class CustomerService : ICustomerService
     public async Task<int> Set(CustomerDto dto)
     {
         return await _repository.Add(dto);
+    }
+
+    public async Task<int> SoftDelete(string customerId)
+    {
+        return await _repository.SoftDelete(customerId);
     }
 
     public async Task<int> Update(CustomerDto dto)

@@ -7,7 +7,7 @@ namespace FinalProject.Domain.Entities;
 /// expert entity that references a Asp.net core user entity with ExpertId guid
 /// , stores additional info for experts
 /// </summary>
-public class Expert : IBaseEntity
+public class Expert : IBaseEntity, ISoftDeletable
 {
     #region Properties
     public int Id { get; set; }
@@ -19,6 +19,7 @@ public class Expert : IBaseEntity
     public int Votes { get; set; }
     public string? Bio { get; set; }
     public bool IsActive { get; set; }
+    public bool IsDeleted { get; set; }
     public DateTime BirthDate { get; set; }
 
     #endregion

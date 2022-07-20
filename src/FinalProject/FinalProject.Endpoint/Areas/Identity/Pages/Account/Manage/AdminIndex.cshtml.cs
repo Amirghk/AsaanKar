@@ -36,36 +36,18 @@ namespace FinalProject.Endpoint.Areas.Identity.Pages.Account.Manage
             _customerService = customerService;
         }
 
-        /// <summary>
-        ///     This API supports the ASP.NET Core Identity default UI infrastructure and is not intended to be used
-        ///     directly from your code. This API may change or be removed in future releases.
-        /// </summary>
         public string Username { get; set; }
 
-        /// <summary>
-        ///     This API supports the ASP.NET Core Identity default UI infrastructure and is not intended to be used
-        ///     directly from your code. This API may change or be removed in future releases.
-        /// </summary>
         [TempData]
         public string StatusMessage { get; set; }
 
-        /// <summary>
-        ///     This API supports the ASP.NET Core Identity default UI infrastructure and is not intended to be used
-        ///     directly from your code. This API may change or be removed in future releases.
-        /// </summary>
+
         [BindProperty]
         public InputModel Input { get; set; }
 
-        /// <summary>
-        ///     This API supports the ASP.NET Core Identity default UI infrastructure and is not intended to be used
-        ///     directly from your code. This API may change or be removed in future releases.
-        /// </summary>
         public class InputModel
         {
-            /// <summary>
-            ///     This API supports the ASP.NET Core Identity default UI infrastructure and is not intended to be used
-            ///     directly from your code. This API may change or be removed in future releases.
-            /// </summary>
+
             [Phone]
             [Display(Name = "Phone number")]
             public string PhoneNumber { get; set; }
@@ -192,6 +174,38 @@ namespace FinalProject.Endpoint.Areas.Identity.Pages.Account.Manage
             }
 
             StatusMessage = "User profile has been updated";
+            return LocalRedirect("/Administration/Users");
+        }
+        /// <summary>
+        /// gets username as string and delets the user from identity database but the user entity in our database remains
+        /// </summary>
+        /// <param name="userId"></param>
+        /// <returns></returns>
+        public async Task<IActionResult> OnPostDelete(string userName)
+        {
+            var user = await _userManager.FindByNameAsync(userName);
+            var userId = user.Id;
+            var claims = await _userManager.GetClaimsAsync(user);
+            bool isCustomer = false;
+            bool isExpert = false;
+            if (claims.Select(x => x.Type).Contains("IsCustomer"))
+                isCustomer = true;
+            else if (claims.Select(x => x.Type).Contains("IsExpert"))
+                isExpert = true;
+            var result = await _userManager.DeleteAsync(user);
+            // if user was deleted successfuly from identity database 
+            // softDelete users from our database
+            if (result.Succeeded)
+            {
+                if (isExpert)
+                {
+                    await _expertService.SoftDelete(userId);
+                }
+                else if (isCustomer)
+                {
+                    await _customerService.SoftDelete(userId);
+                }
+            }
             return LocalRedirect("/Administration/Users");
         }
     }

@@ -11,10 +11,11 @@ public record CustomerDto
 {
     public int Id { get; init; }
     public string FirstName { get; init; } = null!;
-    public string LastName { get; set; } = null!;
-    public string PhoneNumber { get; set; } = null!;
+    public string LastName { get; init; } = null!;
+    public string PhoneNumber { get; init; } = null!;
     public int? FileInfoId { get; init; }
-    public DateTime? BirthDate { get; set; }
-    public string? CustomerId { get; set; }
+    public DateTime? BirthDate { get; init; }
+    public string? CustomerId { get; init; }
+    public bool IsDeleted { get; init; }
 }
 

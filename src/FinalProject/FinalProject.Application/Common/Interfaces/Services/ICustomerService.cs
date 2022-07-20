@@ -8,6 +8,7 @@ public interface ICustomerService
     Task<IEnumerable<CustomerDto>> GetAll();
     Task<CustomerDto> GetByUserId(string userId);
     Task<CustomerDto> GetById(int id);
+    Task<int> SoftDelete(string customerId);
     Task<int> Remove(int id);
     Task<int> Update(CustomerDto dto);
 }

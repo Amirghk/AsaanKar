@@ -9,6 +9,7 @@ public interface IExpertService
     Task<ExpertDto> GetByUserId(string userId);
     Task<ExpertDto> GetById(int id);
     Task<int> Remove(int id);
+    Task<int> SoftDelete(string expertId);
     Task<int> Update(ExpertDto dto);
 
 }
