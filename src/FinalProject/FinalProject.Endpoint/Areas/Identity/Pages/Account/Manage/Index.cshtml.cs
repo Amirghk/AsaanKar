@@ -6,8 +6,10 @@ using System;
 using System.ComponentModel.DataAnnotations;
 using System.Text.Encodings.Web;
 using System.Threading.Tasks;
+using FinalProject.Application.Common.Dtos;
 using FinalProject.Application.Common.Interfaces.Services;
 using FinalProject.Domain.Dtos;
+using FinalProject.Domain.Enums;
 using FinalProject.Infrastructure.Identity;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -21,17 +23,23 @@ namespace FinalProject.Endpoint.Areas.Identity.Pages.Account.Manage
         private readonly SignInManager<ApplicationUser> _signInManager;
         private readonly IExpertService _expertService;
         private readonly ICustomerService _customerService;
+        private readonly IUploadService _uploadService;
+        private readonly IWebHostEnvironment _environment;
 
         public IndexModel(
             UserManager<ApplicationUser> userManager,
             SignInManager<ApplicationUser> signInManager,
             IExpertService expertService,
-            ICustomerService customerService)
+            ICustomerService customerService,
+            IUploadService uploadService,
+            IWebHostEnvironment environment)
         {
             _userManager = userManager;
             _signInManager = signInManager;
             _expertService = expertService;
             _customerService = customerService;
+            _uploadService = uploadService;
+            _environment = environment;
         }
 
 
@@ -39,6 +47,7 @@ namespace FinalProject.Endpoint.Areas.Identity.Pages.Account.Manage
 
         [TempData]
         public string StatusMessage { get; set; }
+
 
         [BindProperty]
         public InputModel Input { get; set; }
@@ -60,6 +69,7 @@ namespace FinalProject.Endpoint.Areas.Identity.Pages.Account.Manage
             public string NationalCode { get; set; } = String.Empty;
             public bool IsCustomer { get; set; } = false;
             public bool IsExpert { get; set; } = false;
+            public IFormFile ProfilePic { get; set; } = null;
         }
 
 
@@ -134,7 +144,7 @@ namespace FinalProject.Endpoint.Areas.Identity.Pages.Account.Manage
             }
 
 
-
+            var uploadsRootFolder = Path.Combine(_environment.WebRootPath, "Uploads");
             var claims = User.Claims;
             foreach (var claim in claims)
             {
@@ -151,7 +161,19 @@ namespace FinalProject.Endpoint.Areas.Identity.Pages.Account.Manage
                         PhoneNumber = Input.PhoneNumber,
                         ExpertId = user.Id,
                     };
+
                     await _expertService.Update(expertDto);
+                    if (Input.ProfilePic != null && Input.ProfilePic.Length != 0)
+                    {
+                        await _uploadService.Set(new UploadServiceDto
+                        {
+                            FileCategory = FileCategory.ExpertProfilePic,
+                            ExpertId = expert.Id,
+                            FileName = Input.ProfilePic.FileName,
+                            FileSize = Input.ProfilePic.Length,
+                            UploadedFile = Input.ProfilePic,
+                        }, uploadsRootFolder);
+                    }
                     break;
                 }
                 if (claim.Type == "IsCustomer")
@@ -176,5 +198,6 @@ namespace FinalProject.Endpoint.Areas.Identity.Pages.Account.Manage
             StatusMessage = "Your profile has been updated";
             return RedirectToPage();
         }
+
     }
 }

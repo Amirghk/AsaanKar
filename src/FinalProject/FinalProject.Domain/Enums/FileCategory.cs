@@ -5,5 +5,6 @@ public enum FileCategory
     Customer = 1,
     Expert = 2,
     Comment = 3,
-    Service = 4
+    Service = 4,
+    ExpertProfilePic = 5,
 }

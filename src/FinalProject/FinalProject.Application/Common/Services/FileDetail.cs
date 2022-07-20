@@ -1,7 +1,9 @@
 using AutoMapper;
+using FinalProject.Application.Common.Dtos;
 using FinalProject.Application.Common.Interfaces.Services;
 using FinalProject.Domain.Dtos;
 using FinalProject.Domain.Entities;
+using FinalProject.Domain.Enums;
 using FinalProject.Domain.Interfaces;
 
 namespace FinalProject.Application.Common.Services;
@@ -10,10 +12,12 @@ public class UploadService : IUploadService
 {
     private readonly IMapper _mapper;
     private readonly IUploadRepository _repository;
-    public UploadService(IUploadRepository repository, IMapper mapper)
+    private readonly IExpertService _expertService;
+    public UploadService(IUploadRepository repository, IMapper mapper, IExpertService expertService)
     {
         _mapper = mapper;
         _repository = repository;
+        _expertService = expertService;
     }
 
     public async Task<IEnumerable<UploadDto>> GetAll()
@@ -26,14 +30,62 @@ public class UploadService : IUploadService
         return await _repository.GetById(id);
     }
 
-    public async Task<int> Remove(int id)
+    public async Task<int> Remove(int id, string uploadsRootFolder)
     {
         return await _repository.Remove(id);
     }
 
-    public async Task<int> Set(UploadDto dto)
+    /// <summary>
+    /// gets the uploadDto and uploadRootFolder and saves the file to uploadRootFolder and saves the 
+    /// meta information in the repository
+    /// </summary>
+    /// <param name="dto"></param>
+    /// <param name="uploadsRootFolder"></param>
+    /// <returns></returns>
+    public async Task<int> Set(UploadServiceDto dto, string uploadsRootFolder)
     {
-        return await _repository.Add(dto);
+        if (!Directory.Exists(uploadsRootFolder))
+        {
+            Directory.CreateDirectory(uploadsRootFolder);
+        }
+        var file = dto.UploadedFile;
+        // get file path
+        var filePath = Path.Combine(uploadsRootFolder, file.FileName);
+        using (var fileStream = new FileStream(filePath, FileMode.Create))
+        {
+            await file.CopyToAsync(fileStream);
+            //.ConfigureAwait(false);
+        }
+        // see what category file belongs to
+        var uploadId = await _repository.Add(new UploadDto
+        {
+            ExpertId = dto.ExpertId,
+            FileSize = dto.FileSize,
+            FileName = dto.FileName,
+            FileCategory = dto.FileCategory,
+        });
+        // TODO ---------------------------
+        switch (dto.FileCategory)
+        {
+            case FileCategory.Customer:
+                break;
+            case FileCategory.Expert:
+                break;
+            case FileCategory.Comment:
+                break;
+            case FileCategory.Service:
+                break;
+            case FileCategory.ExpertProfilePic:
+                var expertId = dto.ExpertId;
+                var expert = await _expertService.GetById((int)expertId!);
+                expert.ProfilePictureId = uploadId;
+                await _expertService.Update(expert);
+                break;
+            default:
+                break;
+        }
+        return uploadId;
+
     }
 
     public async Task<int> Update(UploadDto dto)
