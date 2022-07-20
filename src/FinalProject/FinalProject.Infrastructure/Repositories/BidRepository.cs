@@ -62,8 +62,7 @@ namespace FinalProject.Infrastructure.Repositories
             {
                 throw new NotFoundException(nameof(Bid), model.Id);
             }
-            var newRecord = _mapper.Map<Bid>(model);
-            record = newRecord;
+            _mapper.Map(model, record);
             await _context.SaveChangesAsync();
             return record.Id;
         }

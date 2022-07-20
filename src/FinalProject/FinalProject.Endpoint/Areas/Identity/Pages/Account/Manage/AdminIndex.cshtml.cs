@@ -9,20 +9,22 @@ using System.Threading.Tasks;
 using FinalProject.Application.Common.Interfaces.Services;
 using FinalProject.Domain.Dtos;
 using FinalProject.Infrastructure.Identity;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace FinalProject.Endpoint.Areas.Identity.Pages.Account.Manage
 {
-    public class IndexModel : PageModel
+    [Authorize("IsAdmin")]
+    public class AdminIndexModel : PageModel
     {
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly SignInManager<ApplicationUser> _signInManager;
         private readonly IExpertService _expertService;
         private readonly ICustomerService _customerService;
 
-        public IndexModel(
+        public AdminIndexModel(
             UserManager<ApplicationUser> userManager,
             SignInManager<ApplicationUser> signInManager,
             IExpertService expertService,
@@ -34,19 +36,36 @@ namespace FinalProject.Endpoint.Areas.Identity.Pages.Account.Manage
             _customerService = customerService;
         }
 
-
+        /// <summary>
+        ///     This API supports the ASP.NET Core Identity default UI infrastructure and is not intended to be used
+        ///     directly from your code. This API may change or be removed in future releases.
+        /// </summary>
         public string Username { get; set; }
 
+        /// <summary>
+        ///     This API supports the ASP.NET Core Identity default UI infrastructure and is not intended to be used
+        ///     directly from your code. This API may change or be removed in future releases.
+        /// </summary>
         [TempData]
         public string StatusMessage { get; set; }
 
+        /// <summary>
+        ///     This API supports the ASP.NET Core Identity default UI infrastructure and is not intended to be used
+        ///     directly from your code. This API may change or be removed in future releases.
+        /// </summary>
         [BindProperty]
         public InputModel Input { get; set; }
 
-
+        /// <summary>
+        ///     This API supports the ASP.NET Core Identity default UI infrastructure and is not intended to be used
+        ///     directly from your code. This API may change or be removed in future releases.
+        /// </summary>
         public class InputModel
         {
-
+            /// <summary>
+            ///     This API supports the ASP.NET Core Identity default UI infrastructure and is not intended to be used
+            ///     directly from your code. This API may change or be removed in future releases.
+            /// </summary>
             [Phone]
             [Display(Name = "Phone number")]
             public string PhoneNumber { get; set; }
@@ -104,9 +123,11 @@ namespace FinalProject.Endpoint.Areas.Identity.Pages.Account.Manage
             }
         }
 
-        public async Task<IActionResult> OnGetAsync()
+        // for admins
+        // TODO : Needs authorization
+        public async Task<IActionResult> OnGetAsync(string userId)
         {
-            var user = await _userManager.GetUserAsync(User);
+            var user = await _userManager.FindByIdAsync(userId);
             if (user == null)
             {
                 return NotFound($"Unable to load user with ID '{_userManager.GetUserId(User)}'.");
@@ -118,10 +139,9 @@ namespace FinalProject.Endpoint.Areas.Identity.Pages.Account.Manage
             return Page();
         }
 
-
-        public async Task<IActionResult> OnPostAsync()
+        public async Task<IActionResult> OnPostAsync(string userName)
         {
-            var user = await _userManager.GetUserAsync(User);
+            var user = await _userManager.FindByNameAsync(userName);
             if (user == null)
             {
                 return NotFound($"Unable to load user with ID '{_userManager.GetUserId(User)}'.");
@@ -135,7 +155,7 @@ namespace FinalProject.Endpoint.Areas.Identity.Pages.Account.Manage
 
 
 
-            var claims = User.Claims;
+            var claims = await _userManager.GetClaimsAsync(user);
             foreach (var claim in claims)
             {
                 if (claim.Type == "IsExpert")
@@ -171,10 +191,8 @@ namespace FinalProject.Endpoint.Areas.Identity.Pages.Account.Manage
                 }
             }
 
-
-            await _signInManager.RefreshSignInAsync(user);
-            StatusMessage = "Your profile has been updated";
-            return RedirectToPage();
+            StatusMessage = "User profile has been updated";
+            return LocalRedirect("/Administration/Users");
         }
     }
 }

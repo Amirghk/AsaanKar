@@ -11,5 +11,6 @@ public interface IExpertRepository
     Task<int> Update(ExpertDto model);
     Task<int> Remove(int id);
     Task<ExpertDto> GetById(int id);
+    Task<ExpertDto> GetByUserId(string userId);
     Task<IEnumerable<ExpertDto>> GetAll();
 }

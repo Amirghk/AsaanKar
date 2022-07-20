@@ -1,5 +1,5 @@
 ﻿@page
-@model IndexModel
+@model AdminIndexModel
 @{
     ViewData["Title"] = "Profile";
     ViewData["ActivePage"] = ManageNavPages.Index;
@@ -63,6 +63,7 @@
                     <span asp-validation-for="Input.NationalCode" class="text-danger"></span>
                 </div>
             }
+            <input type="hidden" name="userName" value=@Model.Username />
             <button id="update-profile-button" type="submit" class="w-100 btn btn-lg btn-primary">Save</button>
         </form>
     </div>

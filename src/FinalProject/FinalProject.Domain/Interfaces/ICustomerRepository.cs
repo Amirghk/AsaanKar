@@ -11,5 +11,6 @@ public interface ICustomerRepository
     Task<int> Update(CustomerDto model);
     Task<int> Remove(int id);
     Task<CustomerDto> GetById(int id);
+    Task<CustomerDto> GetByUserId(string userId);
     Task<IEnumerable<CustomerDto>> GetAll();
 }

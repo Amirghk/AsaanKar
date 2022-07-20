@@ -7,15 +7,18 @@ using FinalProject.Infrastructure.Identity;
 using FinalProject.Infrastructure.Persistence;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
-
+using System.Security.Claims;
 
 var builder = WebApplication.CreateBuilder(args);
-
 builder.Services.AddControllersWithViews().AddRazorRuntimeCompilation();
 builder.Services.AddAutoMapper(typeof(MappingProfile).Assembly);
 builder.Services.AddAutoMapper(typeof(VMMappingProfile).Assembly);
 builder.Services.AddInfrastructure(builder.Configuration);
 builder.Services.AddApplication();
+builder.Services.AddAuthorization(options =>
+        options.AddPolicy(
+        "IsAdmin", policyBuilder => policyBuilder
+                    .RequireClaim("IsAdmin")));
 
 // Add services to the container.
 builder.Services.AddDefaultIdentity<ApplicationUser>(options =>

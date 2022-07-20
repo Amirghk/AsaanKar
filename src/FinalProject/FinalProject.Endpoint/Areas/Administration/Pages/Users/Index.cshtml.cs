@@ -1,11 +1,13 @@
 using AutoMapper;
 using FinalProject.Application.Common.Interfaces.Services;
 using FinalProject.Endpoint.Areas.Administration.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace FinalProject.Endpoint.Areas.Administration.Pages.Users
 {
+    [Authorize("IsAdmin")]
     public class IndexModel : PageModel
     {
         public IEnumerable<CustomerListVM> Customers { get; set; }

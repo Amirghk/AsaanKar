@@ -11,6 +11,7 @@
             <th scope="col">@Html.DisplayNameForInnerType((CustomerListVM c) => c.LastName)</th>
             <th scope="col">@Html.DisplayNameForInnerType((CustomerListVM c) => c.PhoneNumber)</th>
             <th scope="col">@Html.DisplayNameForInnerType((CustomerListVM c) => c.BirthDate)</th>
+            <th scope="col">ویرایش</th>
         </tr>
     </thead>
     <tbody>
@@ -22,6 +23,12 @@
                 <td>@customer.LastName</td>
                 <td>@customer.PhoneNumber</td>
                 <td>@customer.BirthDate</td>
+                <td>
+                    <form asp-area="Identity" asp-page="/Account/Manage/AdminIndex" method="get">
+                        <button class="btn btn-default">ویرایش</button>
+                        <input type="hidden" name="userId" value=@customer.CustomerId />
+                    </form>
+                </td>
             </tr>
         }
     </tbody>
@@ -39,6 +46,7 @@
             <th scope="col">@Html.DisplayNameForInnerType((ExpertListVM c) => c.BirthDate)</th>
             <th scope="col">@Html.DisplayNameForInnerType((ExpertListVM c) => c.NationalCode)</th>
             <th scope="col">@Html.DisplayNameForInnerType((ExpertListVM c) => c.City)</th>
+            <th scope="col">ویرایش</th>
         </tr>
     </thead>
     <tbody>
@@ -52,6 +60,12 @@
                 <td>@expert.BirthDate</td>
                 <td>@expert.NationalCode</td>
                 <td>@expert.City</td>
+                <td>
+                    <form asp-area="Identity" asp-page="/Account/Manage/AdminIndex" method="get">
+                        <button class="btn btn-default">ویرایش</button>
+                        <input type="hidden" name="userId" value=@expert.ExpertId />
+                    </form>
+                </td>
             </tr>
         }
     </tbody>

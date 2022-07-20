@@ -566,5 +566,4 @@ G:\FinalProject\src\FinalProject\FinalProject.Endpoint\bin\Debug\net6.0\refs\Win
 G:\FinalProject\src\FinalProject\FinalProject.Endpoint\bin\Debug\net6.0\Microsoft.AspNetCore.Mvc.Razor.Extensions.dll
 G:\FinalProject\src\FinalProject\FinalProject.Endpoint\bin\Debug\net6.0\Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation.dll
 G:\FinalProject\src\FinalProject\FinalProject.Endpoint\bin\Debug\net6.0\Microsoft.Extensions.DependencyModel.dll
-G:\FinalProject\src\FinalProject\FinalProject.Endpoint\obj\Debug\net6.0\scopedcss\Areas\Administration\Pages\Shared\_Layout2.cshtml.rz.scp.css
 G:\FinalProject\src\FinalProject\FinalProject.Endpoint\bin\Debug\net6.0\Microsoft.AspNet.Identity.Core.dll

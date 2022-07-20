@@ -19,6 +19,10 @@ build_property._RazorSourceGeneratorDebug =
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5pc3RyYXRpb25cUGFnZXNcSW5kZXguY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
+[G:/FinalProject/src/FinalProject/FinalProject.Endpoint/Areas/Administration/Pages/SeedData/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5pc3RyYXRpb25cUGFnZXNcU2VlZERhdGFcSW5kZXguY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
 [G:/FinalProject/src/FinalProject/FinalProject.Endpoint/Areas/Administration/Pages/Shared/_Layout.cshtml]
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5pc3RyYXRpb25cUGFnZXNcU2hhcmVkXF9MYXlvdXQuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
@@ -89,6 +93,10 @@ build_metadata.AdditionalFiles.CssScope =
 
 [G:/FinalProject/src/FinalProject/FinalProject.Endpoint/Areas/Identity/Pages/Account/Logout.cshtml]
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcSWRlbnRpdHlcUGFnZXNcQWNjb3VudFxMb2dvdXQuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[G:/FinalProject/src/FinalProject/FinalProject.Endpoint/Areas/Identity/Pages/Account/Manage/AdminIndex.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcSWRlbnRpdHlcUGFnZXNcQWNjb3VudFxNYW5hZ2VcQWRtaW5JbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
 [G:/FinalProject/src/FinalProject/FinalProject.Endpoint/Areas/Identity/Pages/Account/Manage/ChangePassword.cshtml]
@@ -234,10 +242,6 @@ build_metadata.AdditionalFiles.CssScope =
 [G:/FinalProject/src/FinalProject/FinalProject.Endpoint/Pages/_ViewStart.cshtml]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcX1ZpZXdTdGFydC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
-
-[G:/FinalProject/src/FinalProject/FinalProject.Endpoint/Areas/Administration/Pages/Shared/_Layout2.cshtml]
-build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5pc3RyYXRpb25cUGFnZXNcU2hhcmVkXF9MYXlvdXQyLmNzaHRtbA==
-build_metadata.AdditionalFiles.CssScope = b-u6duriw0v3
 
 [G:/FinalProject/src/FinalProject/FinalProject.Endpoint/Pages/Shared/_Layout.cshtml]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcU2hhcmVkXF9MYXlvdXQuY3NodG1s

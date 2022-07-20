@@ -42,6 +42,15 @@ namespace FinalProject.Infrastructure.Repositories
             return record;
         }
 
+        public async Task<ExpertDto> GetByUserId(string userId)
+        {
+            var record = await _mapper.ProjectTo<ExpertDto>(_context.Experts).SingleOrDefaultAsync(x => x.ExpertId == userId);
+            if (record == null)
+            {
+                throw new NotFoundException(nameof(Expert), userId);
+            }
+            return record;
+        }
 
         public async Task<int> Remove(int id)
         {
@@ -62,8 +71,7 @@ namespace FinalProject.Infrastructure.Repositories
             {
                 throw new NotFoundException(nameof(Expert), model.Id);
             }
-            var newRecord = _mapper.Map<Expert>(model);
-            record = newRecord;
+            _mapper.Map(model, record);
             await _context.SaveChangesAsync();
             return record.Id;
         }

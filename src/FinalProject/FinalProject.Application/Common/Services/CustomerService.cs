@@ -26,6 +26,11 @@ public class CustomerService : ICustomerService
         return await _repository.GetById(id);
     }
 
+    public async Task<CustomerDto> GetByUserId(string userId)
+    {
+        return await _repository.GetByUserId(userId);
+    }
+
     public async Task<int> Remove(int id)
     {
         return await _repository.Remove(id);

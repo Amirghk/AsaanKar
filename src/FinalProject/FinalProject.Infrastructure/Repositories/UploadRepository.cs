@@ -62,8 +62,7 @@ namespace FinalProject.Infrastructure.Repositories
             {
                 throw new NotFoundException(nameof(Upload), model.Id);
             }
-            var newRecord = _mapper.Map<Upload>(model);
-            record = newRecord;
+            _mapper.Map(model, record);
             await _context.SaveChangesAsync();
             return record.Id;
         }

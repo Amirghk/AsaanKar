@@ -26,6 +26,11 @@ public class ExpertService : IExpertService
         return await _repository.GetById(id);
     }
 
+    public async Task<ExpertDto> GetByUserId(string userId)
+    {
+        return await _repository.GetByUserId(userId);
+    }
+
     public async Task<int> Remove(int id)
     {
         return await _repository.Remove(id);
