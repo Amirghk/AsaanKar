@@ -11,7 +11,7 @@ public class CustomerConfiguration : IEntityTypeConfiguration<Customer>
         builder
             .HasOne(c => c.ProfilePicture)
             .WithOne(f => f.Customer)
-            .HasForeignKey<FileDetail>(f => f.CustomerId)
+            .HasForeignKey<Customer>(f => f.ProfilePictureId)
             .OnDelete(DeleteBehavior.NoAction);
         builder
             .HasMany(c => c.Addresses)

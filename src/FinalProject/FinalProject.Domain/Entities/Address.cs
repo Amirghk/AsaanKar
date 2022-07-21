@@ -1,8 +1,12 @@
-using FinalProject.Domain.Enums;
+﻿using FinalProject.Domain.Enums;
 using FinalProject.Domain.Interfaces;
+using System.ComponentModel.DataAnnotations;
 
 namespace FinalProject.Domain.Entities;
-
+/// <summary>
+/// entity containing addresses and their respective city and provinces
+/// also has a category showing what user it belongs to
+/// </summary>
 public class Address : ISoftDeletable, IBaseEntity
 {
     #region Properties
@@ -19,7 +23,6 @@ public class Address : ISoftDeletable, IBaseEntity
     public int? ExpertId { get; set; }
     public virtual Expert? Expert { get; set; }
     public int CityId { get; set; }
-    // TODO : Make relations nullable
     public virtual City City { get; set; } = null!;
     public virtual ICollection<Order> Orders { get; set; } = new HashSet<Order>();
     #endregion

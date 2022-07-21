@@ -1,6 +1,6 @@
 using AutoMapper;
-using FinalProject.Application.Common.Dtos;
 using FinalProject.Application.Common.Interfaces.Services;
+using FinalProject.Domain.Dtos;
 using FinalProject.Domain.Entities;
 using FinalProject.Domain.Interfaces;
 
@@ -18,14 +18,12 @@ public class CommentService : ICommentService
 
     public async Task<IEnumerable<CommentDto>> GetAll()
     {
-        List<CommentDto> mappedModels = _mapper.Map<List<CommentDto>>(await _repository.GetAll()).ToList();
-        return mappedModels;
+        return await _repository.GetAll();
     }
 
     public async Task<CommentDto> GetById(int id)
     {
-        CommentDto mappedModel = _mapper.Map<CommentDto>(await _repository.GetById(id));
-        return mappedModel;
+        return await _repository.GetById(id);
     }
 
     public async Task<int> Remove(int id)
@@ -35,11 +33,11 @@ public class CommentService : ICommentService
 
     public async Task<int> Set(CommentDto dto)
     {
-        return await _repository.Add(_mapper.Map<Comment>(dto));
+        return await _repository.Add(dto);
     }
 
     public async Task<int> Update(CommentDto dto)
     {
-        return await _repository.Update(_mapper.Map<Comment>(dto));
+        return await _repository.Update(dto);
     }
 }

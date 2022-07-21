@@ -1,4 +1,4 @@
-﻿using FinalProject.Application.Common.Dtos;
+﻿using FinalProject.Domain.Dtos;
 using FinalProject.Application.Common.Interfaces.Services;
 using FinalProject.Domain.Enums;
 using Microsoft.AspNetCore.Mvc;
@@ -17,7 +17,7 @@ public class IndexModel : PageModel
         _addressService = addressService;
     }
 
-    public async Task OnGet()
+    public void OnGet()
     {
         // await _addressService.Set(new AddressDto
         // {

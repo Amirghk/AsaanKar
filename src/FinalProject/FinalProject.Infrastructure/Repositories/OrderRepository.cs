@@ -1,42 +1,47 @@
+using AutoMapper;
 using FinalProject.Application.Common.Exceptions;
+using FinalProject.Domain.Dtos;
 using FinalProject.Domain.Entities;
 using FinalProject.Domain.Interfaces;
 using FinalProject.Infrastructure.Persistence;
 using Microsoft.EntityFrameworkCore;
-
 
 namespace FinalProject.Infrastructure.Repositories
 {
     public class OrderRepository : IOrderRepository
     {
         private readonly ApplicationDbContext _context;
+        private readonly IMapper _mapper;
 
-        public OrderRepository(ApplicationDbContext context)
+        public OrderRepository(ApplicationDbContext context, IMapper mapper)
         {
             _context = context;
+            _mapper = mapper;
         }
 
-        public async Task<int> Add(Order model)
+        public async Task<int> Add(OrderDto model)
         {
-            await _context.Orders.AddAsync(model);
+            var record = _mapper.Map<Order>(model);
+            await _context.Orders.AddAsync(record);
             await _context.SaveChangesAsync();
-            return model.Id;
+            return record.Id;
         }
 
-        public async Task<IEnumerable<Order>> GetAll()
+        public async Task<IEnumerable<OrderDto>> GetAll()
         {
-            return await _context.Orders.AsNoTracking().ToListAsync();
+            return await _mapper.ProjectTo<OrderDto>(_context.Orders).ToListAsync();
         }
 
-        public async Task<Order> GetById(int id)
+        public async Task<OrderDto> GetById(int id)
         {
-            var record = await _context.Orders.AsNoTracking().SingleOrDefaultAsync(x => x.Id == id);
+            var record = await _mapper.ProjectTo<OrderDto>(_context.Orders).SingleOrDefaultAsync(x => x.Id == id);
             if (record == null)
             {
                 throw new NotFoundException(nameof(Order), id);
             }
             return record;
         }
+
 
         public async Task<int> Remove(int id)
         {
@@ -50,14 +55,14 @@ namespace FinalProject.Infrastructure.Repositories
             return id;
         }
 
-        public async Task<int> Update(Order model)
+        public async Task<int> Update(OrderDto model)
         {
             var record = await _context.Orders.SingleOrDefaultAsync(x => x.Id == model.Id);
             if (record == null)
             {
                 throw new NotFoundException(nameof(Order), model.Id);
             }
-            record = model;
+            _mapper.Map(model, record);
             await _context.SaveChangesAsync();
             return record.Id;
         }

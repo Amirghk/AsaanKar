@@ -3,16 +3,25 @@ using System.Security.Cryptography.X509Certificates;
 using FinalProject.Domain.Interfaces;
 
 namespace FinalProject.Domain.Entities;
-
-public class Customer : IBaseEntity
+/// <summary>
+/// customer entity that references a Asp.net core user entity with CustomerId guid
+/// , stores additional info for customers
+/// </summary>
+public class Customer : IBaseEntity, ISoftDeletable
 {
     #region Properties
-    public int Id { get; set; }
+    public int Id { get; init; }
+    public string FirstName { get; set; } = null!;
+    public string LastName { get; set; } = null!;
+    public string PhoneNumber { get; set; } = null!;
+    public int? FileInfoId { get; set; }
+    public DateTime? BirthDate { get; set; }
+    public bool IsDeleted { get; set; }
     #endregion
     #region Navigational Properties
-    public Guid CustomerId { get; set; }
+    public string? CustomerId { get; set; }
     public int? ProfilePictureId { get; set; }
-    public virtual FileDetail? ProfilePicture { get; set; }
+    public virtual Upload? ProfilePicture { get; set; }
     public virtual ICollection<Address> Addresses { get; set; } = new HashSet<Address>();
     public virtual ICollection<Comment> Comments { get; set; } = new HashSet<Comment>();
     public virtual ICollection<Order> Orders { get; set; } = new HashSet<Order>();

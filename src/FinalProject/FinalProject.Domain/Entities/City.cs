@@ -1,8 +1,11 @@
-
+﻿
 using FinalProject.Domain.Interfaces;
+using System.ComponentModel.DataAnnotations;
 
 namespace FinalProject.Domain.Entities;
-
+/// <summary>
+/// entity for cities
+/// </summary>
 public class City : IBaseEntity, ISoftDeletable
 {
     #region Property

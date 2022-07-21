@@ -1,42 +1,47 @@
+using AutoMapper;
 using FinalProject.Application.Common.Exceptions;
+using FinalProject.Domain.Dtos;
 using FinalProject.Domain.Entities;
 using FinalProject.Domain.Interfaces;
 using FinalProject.Infrastructure.Persistence;
 using Microsoft.EntityFrameworkCore;
-
 
 namespace FinalProject.Infrastructure.Repositories
 {
     public class ProvinceRepository : IProvinceRepository
     {
         private readonly ApplicationDbContext _context;
+        private readonly IMapper _mapper;
 
-        public ProvinceRepository(ApplicationDbContext context)
+        public ProvinceRepository(ApplicationDbContext context, IMapper mapper)
         {
             _context = context;
+            _mapper = mapper;
         }
 
-        public async Task<int> Add(Province model)
+        public async Task<int> Add(ProvinceDto model)
         {
-            await _context.Provinces.AddAsync(model);
+            var record = _mapper.Map<Province>(model);
+            await _context.Provinces.AddAsync(record);
             await _context.SaveChangesAsync();
-            return model.Id;
+            return record.Id;
         }
 
-        public async Task<IEnumerable<Province>> GetAll()
+        public async Task<IEnumerable<ProvinceDto>> GetAll()
         {
-            return await _context.Provinces.AsNoTracking().ToListAsync();
+            return await _mapper.ProjectTo<ProvinceDto>(_context.Provinces).ToListAsync();
         }
 
-        public async Task<Province> GetById(int id)
+        public async Task<ProvinceDto> GetById(int id)
         {
-            var record = await _context.Provinces.AsNoTracking().SingleOrDefaultAsync(x => x.Id == id);
+            var record = await _mapper.ProjectTo<ProvinceDto>(_context.Provinces).SingleOrDefaultAsync(x => x.Id == id);
             if (record == null)
             {
                 throw new NotFoundException(nameof(Province), id);
             }
             return record;
         }
+
 
         public async Task<int> Remove(int id)
         {
@@ -50,14 +55,14 @@ namespace FinalProject.Infrastructure.Repositories
             return id;
         }
 
-        public async Task<int> Update(Province model)
+        public async Task<int> Update(ProvinceDto model)
         {
             var record = await _context.Provinces.SingleOrDefaultAsync(x => x.Id == model.Id);
             if (record == null)
             {
                 throw new NotFoundException(nameof(Province), model.Id);
             }
-            record = model;
+            _mapper.Map(model, record);
             await _context.SaveChangesAsync();
             return record.Id;
         }

@@ -20,12 +20,13 @@ public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     public DbSet<Comment> Comments { get; set; } = null!;
     public DbSet<Customer> Customers { get; set; } = null!;
     public DbSet<Expert> Experts { get; set; } = null!;
-    public DbSet<FileDetail> FileDetails { get; set; } = null!;
+    public DbSet<Upload> Uploads { get; set; } = null!;
     public DbSet<Order> Orders { get; set; } = null!;
     public DbSet<Province> Provinces { get; set; } = null!;
     public DbSet<ServiceExpert> ServiceExperts { get; set; } = null!;
+    public DbSet<Category> Categories { get; set; } = null!;
     public DbSet<Service> Services { get; set; } = null!;
-    public DbSet<SubService> SubServices { get; set; } = null!;
+    public DbSet<Bid> Bids { get; set; } = null!;
 
 
     protected override void OnModelCreating(ModelBuilder builder)
@@ -39,12 +40,12 @@ public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
         builder.ApplyConfiguration(new CustomerConfiguration());
         builder.ApplyConfiguration(new ExpertConfiguration());
         builder.ApplyConfiguration(new CommentConfiguration());
-        builder.ApplyConfiguration(new FileDetailsConfiguration());
+        builder.ApplyConfiguration(new UploadConfiguration());
         builder.ApplyConfiguration(new OrderConfiguration());
         builder.ApplyConfiguration(new ProvinceConfiguration());
-        builder.ApplyConfiguration(new ServiceConfiguration());
+        builder.ApplyConfiguration(new CategoryConfiguration());
         builder.ApplyConfiguration(new ServiceExpertConfiguration());
-        builder.ApplyConfiguration(new SubServiceConfiguration());
+        builder.ApplyConfiguration(new ServiceConfiguration());
     }
 
     public override int SaveChanges()

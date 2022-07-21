@@ -1,4 +1,4 @@
-﻿using FinalProject.Application.Common.Dtos;
+﻿using FinalProject.Domain.Dtos;
 using FinalProject.Application.Common.Interfaces.Services;
 using FinalProject.Domain.Enums;
 using Microsoft.AspNetCore.Mvc;
@@ -10,18 +10,29 @@ public class PrivacyModel : PageModel
 {
     private readonly ILogger<PrivacyModel> _logger;
     private readonly IAddressService _addressService;
-    private readonly IOrderService _orderService;
-    private readonly IServiceService _serviceService;
-    public PrivacyModel(ILogger<PrivacyModel> logger, IAddressService addressService, IOrderService orderService, IServiceService serviceService)
+    private readonly IProvinceService _provinceService;
+    private readonly ICityService _cityService;
+    public PrivacyModel(ILogger<PrivacyModel> logger, IAddressService addressService, IProvinceService provinceService, ICityService cityService)
     {
         _logger = logger;
         _addressService = addressService;
-        _orderService = orderService;
-        _serviceService = serviceService;
+        _provinceService = provinceService;
+        _cityService = cityService;
     }
 
     public async Task OnGet()
     {
+        await _provinceService.Set(new ProvinceDto
+        {
+            Name = "Tehran",
+            IsSupported = true,
+        });
+        await _cityService.Set(new CityDto
+        {
+            Name = "Tehran",
+            ProvinceId = 1,
+            IsSupported = false,
+        });
         await _addressService.Set(new AddressDto
         {
             Content = "Somewhere",
@@ -30,14 +41,14 @@ public class PrivacyModel : PageModel
             CityId = 1,
         });
 
-        await _serviceService.Set(new ServiceDto
-        {
-            Name = "Test Service",
-            Description = "Test Service Description",
-            IsAvailable = true,
-            ParentServiceId = null,
-            FileInfoId = null
-        });
+        //await _serviceService.Set(new ServiceDto
+        //{
+        //    Name = "Test Category",
+        //    Description = "Test Category Description",
+        //    IsAvailable = true,
+        //    ParentServiceId = null,
+        //    FileInfoId = null
+        //});
     }
 }
 

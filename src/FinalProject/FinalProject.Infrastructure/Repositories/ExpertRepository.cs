@@ -1,39 +1,53 @@
+using AutoMapper;
 using FinalProject.Application.Common.Exceptions;
+using FinalProject.Domain.Dtos;
 using FinalProject.Domain.Entities;
 using FinalProject.Domain.Interfaces;
 using FinalProject.Infrastructure.Persistence;
 using Microsoft.EntityFrameworkCore;
-
 
 namespace FinalProject.Infrastructure.Repositories
 {
     public class ExpertRepository : IExpertRepository
     {
         private readonly ApplicationDbContext _context;
+        private readonly IMapper _mapper;
 
-        public ExpertRepository(ApplicationDbContext context)
+        public ExpertRepository(ApplicationDbContext context, IMapper mapper)
         {
             _context = context;
+            _mapper = mapper;
         }
 
-        public async Task<int> Add(Expert model)
+        public async Task<int> Add(ExpertDto model)
         {
-            await _context.Experts.AddAsync(model);
+            var record = _mapper.Map<Expert>(model);
+            await _context.Experts.AddAsync(record);
             await _context.SaveChangesAsync();
-            return model.Id;
+            return record.Id;
         }
 
-        public async Task<IEnumerable<Expert>> GetAll()
+        public async Task<IEnumerable<ExpertDto>> GetAll()
         {
-            return await _context.Experts.AsNoTracking().ToListAsync();
+            return await _mapper.ProjectTo<ExpertDto>(_context.Experts).ToListAsync();
         }
 
-        public async Task<Expert> GetById(int id)
+        public async Task<ExpertDto> GetById(int id)
         {
-            var record = await _context.Experts.AsNoTracking().SingleOrDefaultAsync(x => x.Id == id);
+            var record = await _mapper.ProjectTo<ExpertDto>(_context.Experts).SingleOrDefaultAsync(x => x.Id == id);
             if (record == null)
             {
                 throw new NotFoundException(nameof(Expert), id);
+            }
+            return record;
+        }
+
+        public async Task<ExpertDto> GetByUserId(string userId)
+        {
+            var record = await _mapper.ProjectTo<ExpertDto>(_context.Experts).SingleOrDefaultAsync(x => x.ExpertId == userId);
+            if (record == null)
+            {
+                throw new NotFoundException(nameof(Expert), userId);
             }
             return record;
         }
@@ -50,14 +64,28 @@ namespace FinalProject.Infrastructure.Repositories
             return id;
         }
 
-        public async Task<int> Update(Expert model)
+        public async Task<int> SoftDelete(string expertId)
+        {
+            var record = await _context.Experts.SingleOrDefaultAsync(x => x.ExpertId == expertId);
+            if (record == null)
+            {
+                throw new NotFoundException(nameof(Expert), expertId);
+            }
+            record.ExpertId = null;
+            record.IsDeleted = true;
+            record.IsActive = false;
+            await _context.SaveChangesAsync();
+            return record.Id;
+        }
+
+        public async Task<int> Update(ExpertDto model)
         {
             var record = await _context.Experts.SingleOrDefaultAsync(x => x.Id == model.Id);
             if (record == null)
             {
                 throw new NotFoundException(nameof(Expert), model.Id);
             }
-            record = model;
+            _mapper.Map(model, record);
             await _context.SaveChangesAsync();
             return record.Id;
         }
