@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using FinalProject.Domain.Dtos;
 using FinalProject.Endpoint.Areas.Administration.Models;
+using FinalProject.Endpoint.Areas.Identity.Models;
 
 namespace FinalProject.Endpoint.Common.Mappings
 {
@@ -10,6 +11,7 @@ namespace FinalProject.Endpoint.Common.Mappings
         {
             CreateMap<CustomerDto, CustomerListVM>().ReverseMap();
             CreateMap<ExpertDto, ExpertListVM>().ReverseMap();
+            CreateMap<UploadDto, UploadViewModel>().ReverseMap();
         }
     }
 }

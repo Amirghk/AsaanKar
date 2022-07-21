@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "+SI5eMGPpazV8uQuVLbttIE+tKD73hjtgpi64YjH0VM=",
+  "Hash": "w/ZsKkJ6sFljgysPhaX28jG190fzCHciXCxUaVSeDBU=",
   "Source": "FinalProject.Endpoint",
   "BasePath": "_content/FinalProject.Endpoint",
   "Mode": "Default",
@@ -4792,23 +4792,6 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\lib\\jquery-validation-unobtrusive\\LICENSE.txt"
-    },
-    {
-      "Identity": "G:\\FinalProject\\src\\FinalProject\\FinalProject.Endpoint\\wwwroot\\Uploads\\WhatsApp Image 2022-04-14 at 12.32.54 AM@2x.png",
-      "SourceId": "FinalProject.Endpoint",
-      "SourceType": "Discovered",
-      "ContentRoot": "G:\\FinalProject\\src\\FinalProject\\FinalProject.Endpoint\\wwwroot\\",
-      "BasePath": "_content/FinalProject.Endpoint",
-      "RelativePath": "Uploads/WhatsApp Image 2022-04-14 at 12.32.54 AM@2x.png",
-      "AssetKind": "All",
-      "AssetMode": "All",
-      "AssetRole": "Primary",
-      "RelatedAsset": "",
-      "AssetTraitName": "",
-      "AssetTraitValue": "",
-      "CopyToOutputDirectory": "Never",
-      "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "wwwroot\\Uploads\\WhatsApp Image 2022-04-14 at 12.32.54 AM@2x.png"
     }
   ]
 }

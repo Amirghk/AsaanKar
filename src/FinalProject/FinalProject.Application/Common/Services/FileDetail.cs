@@ -1,5 +1,6 @@
 using AutoMapper;
 using FinalProject.Application.Common.Dtos;
+using FinalProject.Application.Common.Exceptions;
 using FinalProject.Application.Common.Interfaces.Services;
 using FinalProject.Domain.Dtos;
 using FinalProject.Domain.Entities;
@@ -32,6 +33,12 @@ public class UploadService : IUploadService
 
     public async Task<int> Remove(int id, string uploadsRootFolder)
     {
+        var record = await _repository.GetById(id);
+        if (File.Exists(Path.Combine(uploadsRootFolder, record.FileName)))
+        {
+            File.Delete(Path.Combine(uploadsRootFolder, record.FileName));
+        }
+        else throw new NotFoundException(nameof(record), record.FileName);
         return await _repository.Remove(id);
     }
 
@@ -49,8 +56,12 @@ public class UploadService : IUploadService
             Directory.CreateDirectory(uploadsRootFolder);
         }
         var file = dto.UploadedFile;
+        var fileExtension = Path.GetExtension(file.FileName);
+
+        // make a new file name to make removing it easier
+        var newFileName = Guid.NewGuid() + fileExtension;
         // get file path
-        var filePath = Path.Combine(uploadsRootFolder, file.FileName);
+        var filePath = Path.Combine(uploadsRootFolder, newFileName);
         using (var fileStream = new FileStream(filePath, FileMode.Create))
         {
             await file.CopyToAsync(fileStream);
@@ -61,7 +72,7 @@ public class UploadService : IUploadService
         {
             ExpertId = dto.ExpertId,
             FileSize = dto.FileSize,
-            FileName = dto.FileName,
+            FileName = newFileName,
             FileCategory = dto.FileCategory,
         });
         // TODO ---------------------------

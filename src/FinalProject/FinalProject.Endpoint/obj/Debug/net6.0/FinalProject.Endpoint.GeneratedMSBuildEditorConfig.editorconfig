@@ -27,8 +27,8 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5pc3RyYXRpb25cUGFnZXNcU2hhcmVkXF9MYXlvdXQuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[G:/FinalProject/src/FinalProject/FinalProject.Endpoint/Areas/Administration/Pages/Shared/_Sidebar.cshtml]
-build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5pc3RyYXRpb25cUGFnZXNcU2hhcmVkXF9TaWRlYmFyLmNzaHRtbA==
+[G:/FinalProject/src/FinalProject/FinalProject.Endpoint/Areas/Administration/Pages/Uploads/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5pc3RyYXRpb25cUGFnZXNcVXBsb2Fkc1xJbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
 [G:/FinalProject/src/FinalProject/FinalProject.Endpoint/Areas/Administration/Pages/Users/Index.cshtml]

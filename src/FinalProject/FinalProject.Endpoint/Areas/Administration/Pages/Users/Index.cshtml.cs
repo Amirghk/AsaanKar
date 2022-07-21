@@ -30,7 +30,7 @@ namespace FinalProject.Endpoint.Areas.Administration.Pages.Users
             _cityService = cityService;
             _mapper = mapper;
         }
-        public async Task<IActionResult> OnGet()
+        public async Task<IActionResult> OnGetAsync()
         {
             Customers = _mapper.Map<List<CustomerListVM>>(await _customerService.GetAll());
             Experts = _mapper.Map<List<ExpertListVM>>(await _expertService.GetAll());
