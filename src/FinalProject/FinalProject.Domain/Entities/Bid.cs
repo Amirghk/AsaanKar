@@ -6,7 +6,10 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace FinalProject.Domain.Entities;
-
+/// <summary>
+/// each expert can make a bid on an order with a price in it and a note by the expert
+/// each order has many bids 
+/// </summary>
 public class Bid : IAuditableEntity
 {
     #region Properties
