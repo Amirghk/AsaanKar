@@ -1,8 +1,8 @@
 using AutoMapper;
 using FinalProject.Application.Common.Exceptions;
-using FinalProject.Domain.Dtos;
+using FinalProject.Application.Common.Interfaces.Repositories;
 using FinalProject.Domain.Entities;
-using FinalProject.Domain.Interfaces;
+using FinalProject.Application.Common.DataTransferObjects;
 using FinalProject.Infrastructure.Persistence;
 using Microsoft.EntityFrameworkCore;
 

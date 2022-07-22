@@ -1,4 +1,4 @@
-﻿using FinalProject.Domain.Interfaces;
+﻿using FinalProject.Application.Common.Interfaces.Repositories;
 using FinalProject.Infrastructure.Persistence;
 using FinalProject.Infrastructure.Repositories;
 using Microsoft.EntityFrameworkCore;

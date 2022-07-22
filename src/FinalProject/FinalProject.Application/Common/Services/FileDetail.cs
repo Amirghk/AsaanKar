@@ -1,11 +1,9 @@
 using AutoMapper;
-using FinalProject.Application.Common.Dtos;
 using FinalProject.Application.Common.Exceptions;
 using FinalProject.Application.Common.Interfaces.Services;
-using FinalProject.Domain.Dtos;
-using FinalProject.Domain.Entities;
+using FinalProject.Application.Common.DataTransferObjects;
 using FinalProject.Domain.Enums;
-using FinalProject.Domain.Interfaces;
+using FinalProject.Application.Common.Interfaces.Repositories;
 
 namespace FinalProject.Application.Common.Services;
 

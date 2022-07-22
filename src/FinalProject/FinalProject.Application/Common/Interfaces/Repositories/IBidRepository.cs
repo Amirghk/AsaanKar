@@ -1,4 +1,4 @@
-﻿using FinalProject.Domain.Dtos;
+﻿using FinalProject.Application.Common.DataTransferObjects;
 using FinalProject.Domain.Entities;
 using System;
 using System.Collections.Generic;
@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace FinalProject.Domain.Interfaces;
+namespace FinalProject.Application.Common.Interfaces.Repositories;
 public interface IBidRepository
 {
     Task<int> Add(BidDto model);

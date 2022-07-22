@@ -1,5 +1,5 @@
 ﻿using AutoMapper;
-using FinalProject.Domain.Dtos;
+using FinalProject.Application.Common.DataTransferObjects;
 using FinalProject.Endpoint.Areas.Administration.Models;
 using FinalProject.Endpoint.Areas.Identity.Models;
 

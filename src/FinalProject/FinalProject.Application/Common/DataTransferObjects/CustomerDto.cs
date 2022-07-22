@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 
-namespace FinalProject.Domain.Dtos;
+namespace FinalProject.Application.Common.DataTransferObjects;
 
 public record CustomerDto
 {

@@ -1,9 +1,9 @@
 using System.Linq.Expressions;
-using FinalProject.Domain.Dtos;
+using FinalProject.Application.Common.DataTransferObjects;
 using FinalProject.Domain.Entities;
 using FinalProject.Domain.Interfaces;
 
-namespace FinalProject.Domain.Interfaces;
+namespace FinalProject.Application.Common.Interfaces.Repositories;
 
 public interface IOrderRepository
 {
