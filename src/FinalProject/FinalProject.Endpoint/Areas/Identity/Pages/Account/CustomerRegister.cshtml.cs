@@ -158,6 +158,7 @@ namespace FinalProject.Endpoint.Areas.Identity.Pages.Account
                         CustomerId = userId,
                         PhoneNumber = Input.PhoneNumber,
                     });
+                    // TODO : delete user if not successful
 
                     code = WebEncoders.Base64UrlEncode(Encoding.UTF8.GetBytes(code));
                     var callbackUrl = Url.Page(

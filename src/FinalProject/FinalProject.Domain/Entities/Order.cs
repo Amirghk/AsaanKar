@@ -29,6 +29,6 @@ public class Order : IAuditableEntity, IBaseEntity, ISoftDeletable
     public virtual Customer Customer { get; set; } = null!;
     public int ExpertId { get; set; }
     public virtual Expert Expert { get; set; } = null!;
-    public virtual ICollection<Bid> Bids { get; set; } = new HashSet<Bid>();
+    public virtual ICollection<Bid> Bids { get; set; } = new List<Bid>();
     #endregion
 }

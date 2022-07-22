@@ -15,8 +15,8 @@ public class Service : IBaseEntity, ISoftDeletable
     #region Navigational Properties
     public int CategoryId { get; set; }
     public Category Category { get; set; } = null!;
-    public ICollection<Expert> Experts { get; set; } = new HashSet<Expert>();
-    public virtual ICollection<ServiceExpert> ServiceExperts { get; set; } = new HashSet<ServiceExpert>();
-    public virtual ICollection<Order> Orders { get; set; } = new HashSet<Order>();
+    public ICollection<Expert> Experts { get; set; } = new List<Expert>();
+    public virtual ICollection<ServiceExpert> ServiceExperts { get; set; } = new List<ServiceExpert>();
+    public virtual ICollection<Order> Orders { get; set; } = new List<Order>();
     #endregion
 }

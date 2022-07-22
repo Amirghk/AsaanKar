@@ -27,10 +27,10 @@ public class Expert : IBaseEntity, ISoftDeletable
     public virtual string? ExpertId { get; set; }
     public virtual Address Address { get; set; } = null!;
     public int? ProfilePictureId { get; set; }
-    public virtual ICollection<Service> Services { get; set; } = new HashSet<Service>();
-    public virtual ICollection<ServiceExpert> ServiceExperts { get; set; } = new HashSet<ServiceExpert>();
-    public virtual ICollection<Comment> Comments { get; set; } = new HashSet<Comment>();
-    public virtual ICollection<Upload> Pictures { get; set; } = new HashSet<Upload>();
-    public virtual ICollection<Order> Orders { get; set; } = new HashSet<Order>();
+    public virtual ICollection<Service> Services { get; set; } = new List<Service>();
+    public virtual ICollection<ServiceExpert> ServiceExperts { get; set; } = new List<ServiceExpert>();
+    public virtual ICollection<Comment> Comments { get; set; } = new List<Comment>();
+    public virtual ICollection<Upload> Pictures { get; set; } = new List<Upload>();
+    public virtual ICollection<Order> Orders { get; set; } = new List<Order>();
     #endregion
 }
