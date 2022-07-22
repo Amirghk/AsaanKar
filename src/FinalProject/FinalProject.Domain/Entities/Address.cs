@@ -24,6 +24,6 @@ public class Address : ISoftDeletable, IBaseEntity
     public virtual Expert? Expert { get; set; }
     public int CityId { get; set; }
     public virtual City City { get; set; } = null!;
-    public virtual ICollection<Order> Orders { get; set; } = new HashSet<Order>();
+    public virtual ICollection<Order> Orders { get; set; } = new List<Order>();
     #endregion
 }

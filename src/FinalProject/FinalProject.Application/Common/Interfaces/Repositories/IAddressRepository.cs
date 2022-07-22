@@ -1,8 +1,9 @@
+using FinalProject.Application.Common.DataTransferObjects;
 using System.Collections.Generic;
 using System.Linq.Expressions;
-using FinalProject.Domain.Dtos;
 
-namespace FinalProject.Domain.Interfaces;
+
+namespace FinalProject.Application.Common.Interfaces.Repositories;
 
 public interface IAddressRepository
 {

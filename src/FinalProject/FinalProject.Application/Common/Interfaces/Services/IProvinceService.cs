@@ -1,4 +1,4 @@
-using FinalProject.Domain.Dtos;
+using FinalProject.Application.Common.DataTransferObjects;
 namespace FinalProject.Application.Common.Interfaces.Services;
 
 public interface IProvinceService

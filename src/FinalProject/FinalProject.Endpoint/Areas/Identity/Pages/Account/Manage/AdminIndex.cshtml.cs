@@ -7,7 +7,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Text.Encodings.Web;
 using System.Threading.Tasks;
 using FinalProject.Application.Common.Interfaces.Services;
-using FinalProject.Domain.Dtos;
+using FinalProject.Application.Common.DataTransferObjects;
 using FinalProject.Infrastructure.Identity;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;

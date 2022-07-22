@@ -1,6 +1,6 @@
 using System.ComponentModel;
 
-namespace FinalProject.Domain.Dtos;
+namespace FinalProject.Application.Common.DataTransferObjects;
 
 public record ServiceDto
 {

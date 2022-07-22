@@ -20,10 +20,10 @@ public class Category : IBaseEntity, ISoftDeletable
     #region NavigationalProperties
     public int? ParentCategoryId { get; set; }
     public virtual Category? ParentCategory { get; set; }
-    public virtual ICollection<Category> Categories { get; set; } = new HashSet<Category>();
+    public virtual ICollection<Category> Categories { get; set; } = new List<Category>();
     public int? PictureId { get; set; }
     public virtual Upload? FileDetails { get; set; }
-    public virtual ICollection<Service> Services { get; set; } = new HashSet<Service>();
+    public virtual ICollection<Service> Services { get; set; } = new List<Service>();
 
     #endregion
 }

@@ -1,4 +1,4 @@
-﻿using FinalProject.Domain.Dtos;
+﻿using FinalProject.Application.Common.DataTransferObjects;
 using System;
 using System.Collections.Generic;
 using System.Linq;

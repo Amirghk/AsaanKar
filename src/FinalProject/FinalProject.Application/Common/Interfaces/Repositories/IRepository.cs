@@ -2,7 +2,7 @@ using System.Linq.Expressions;
 using FinalProject.Domain.Entities;
 using FinalProject.Domain.Interfaces;
 
-namespace FinalProject.Domain.Interfaces;
+namespace FinalProject.Application.Common.Interfaces.Repositories;
 // https://programmingwithmosh.com/net/common-mistakes-with-the-repository-pattern/
 public interface IRepository<T> where T : IBaseEntity
 {

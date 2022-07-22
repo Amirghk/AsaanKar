@@ -1,5 +1,5 @@
 using AutoMapper;
-using FinalProject.Domain.Dtos;
+using FinalProject.Application.Common.DataTransferObjects;
 using FinalProject.Domain.Entities;
 
 namespace FinalProject.Infrastructure.Mappings;

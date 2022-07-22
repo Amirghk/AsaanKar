@@ -1,6 +1,6 @@
 using FinalProject.Domain.Enums;
 
-namespace FinalProject.Domain.Dtos;
+namespace FinalProject.Application.Common.DataTransferObjects;
 
 public record UploadDto
 {

@@ -11,7 +11,7 @@ using System.Text;
 using System.Text.Encodings.Web;
 using System.Threading;
 using System.Threading.Tasks;
-using FinalProject.Domain.Dtos;
+using FinalProject.Application.Common.DataTransferObjects;
 using FinalProject.Application.Common.Interfaces.Services;
 using FinalProject.Domain.Enums;
 using FinalProject.Infrastructure.Identity;
@@ -158,6 +158,7 @@ namespace FinalProject.Endpoint.Areas.Identity.Pages.Account
                         CustomerId = userId,
                         PhoneNumber = Input.PhoneNumber,
                     });
+                    // TODO : delete user if not successful
 
                     code = WebEncoders.Base64UrlEncode(Encoding.UTF8.GetBytes(code));
                     var callbackUrl = Url.Page(

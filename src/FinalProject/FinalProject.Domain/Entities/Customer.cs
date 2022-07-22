@@ -19,11 +19,12 @@ public class Customer : IBaseEntity, ISoftDeletable
     public bool IsDeleted { get; set; }
     #endregion
     #region Navigational Properties
+    // TODO : Make this primary key
     public string? CustomerId { get; set; }
     public int? ProfilePictureId { get; set; }
     public virtual Upload? ProfilePicture { get; set; }
-    public virtual ICollection<Address> Addresses { get; set; } = new HashSet<Address>();
-    public virtual ICollection<Comment> Comments { get; set; } = new HashSet<Comment>();
-    public virtual ICollection<Order> Orders { get; set; } = new HashSet<Order>();
+    public virtual ICollection<Address> Addresses { get; set; } = new List<Address>();
+    public virtual ICollection<Comment> Comments { get; set; } = new List<Comment>();
+    public virtual ICollection<Order> Orders { get; set; } = new List<Order>();
     #endregion
 }
