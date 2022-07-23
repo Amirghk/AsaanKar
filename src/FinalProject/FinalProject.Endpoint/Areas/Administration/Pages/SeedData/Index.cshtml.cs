@@ -1,3 +1,5 @@
+using FinalProject.Application.Common.DataTransferObjects;
+using FinalProject.Application.Common.Interfaces.Services;
 using FinalProject.Infrastructure.Identity;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -13,17 +15,23 @@ namespace FinalProject.Endpoint.Areas.Administration.Pages.SeedData
         private readonly IUserStore<ApplicationUser> _userStore;
         private readonly IUserEmailStore<ApplicationUser> _emailStore;
         private readonly ILogger<IndexModel> _logger;
+        private readonly ICityService _cityService;
+        private readonly IProvinceService _provinceService;
 
         public IndexModel(
             UserManager<ApplicationUser> userManager,
             IUserStore<ApplicationUser> userStore,
             SignInManager<ApplicationUser> signInManager,
-            ILogger<IndexModel> logger)
+            ILogger<IndexModel> logger,
+            ICityService cityService,
+            IProvinceService provinceService)
         {
             _userManager = userManager;
             _userStore = userStore;
             _signInManager = signInManager;
             _logger = logger;
+            _cityService = cityService;
+            _provinceService = provinceService;
             _emailStore = GetEmailStore();
         }
         public async Task OnGetAsync()
@@ -43,6 +51,17 @@ namespace FinalProject.Endpoint.Areas.Administration.Pages.SeedData
                 var nameClaim = new Claim(ClaimTypes.Name, "Admin");
                 await _userManager.AddClaimAsync(user, nameClaim);
             }
+            var provinceId = await _provinceService.Set(new ProvinceDto
+            {
+                IsSupported = true,
+                Name = "Tehran"
+            });
+            await _cityService.Set(new CityDto
+            {
+                IsSupported = true,
+                Name = "Tehran",
+                ProvinceId = provinceId
+            });
         }
 
         private IUserEmailStore<ApplicationUser> GetEmailStore()

@@ -49,30 +49,20 @@ namespace FinalProject.Infrastructure.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Customers",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    CustomerId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    ProfilePictureId = table.Column<int>(type: "int", nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Customers", x => x.Id);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "Experts",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Id = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    FirstName = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    LastName = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    NationalCode = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    PhoneNumber = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Rating = table.Column<float>(type: "real", nullable: true),
                     Votes = table.Column<int>(type: "int", nullable: false),
                     Bio = table.Column<string>(type: "nvarchar(4000)", maxLength: 4000, nullable: true),
                     IsActive = table.Column<bool>(type: "bit", nullable: false),
-                    ExpertId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    IsDeleted = table.Column<bool>(type: "bit", nullable: false),
+                    BirthDate = table.Column<DateTime>(type: "datetime2", nullable: false),
                     ProfilePictureId = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
@@ -93,29 +83,6 @@ namespace FinalProject.Infrastructure.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Provinces", x => x.Id);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Services",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    Name = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: false),
-                    Description = table.Column<string>(type: "nvarchar(max)", maxLength: 5000, nullable: false),
-                    IsAvailable = table.Column<bool>(type: "bit", nullable: false),
-                    IsDeleted = table.Column<bool>(type: "bit", nullable: false),
-                    ParentServiceId = table.Column<int>(type: "int", nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Services", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_Services_Services_ParentServiceId",
-                        column: x => x.ParentServiceId,
-                        principalTable: "Services",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
@@ -225,6 +192,35 @@ namespace FinalProject.Infrastructure.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Uploads",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    FileName = table.Column<string>(type: "nvarchar(300)", maxLength: 300, nullable: false),
+                    FileSize = table.Column<long>(type: "bigint", nullable: false),
+                    FileCategory = table.Column<int>(type: "int", nullable: false),
+                    ExpertId = table.Column<string>(type: "nvarchar(450)", nullable: true),
+                    CreatedByBrowserName = table.Column<string>(type: "nvarchar(1000)", maxLength: 1000, nullable: true),
+                    CreatedByIp = table.Column<string>(type: "nvarchar(255)", maxLength: 255, nullable: true),
+                    CreatedByUserId = table.Column<int>(type: "int", nullable: true),
+                    CreatedDateTime = table.Column<DateTimeOffset>(type: "datetimeoffset", nullable: true),
+                    ModifiedByBrowserName = table.Column<string>(type: "nvarchar(1000)", maxLength: 1000, nullable: true),
+                    ModifiedByIp = table.Column<string>(type: "nvarchar(255)", maxLength: 255, nullable: true),
+                    ModifiedByUserId = table.Column<int>(type: "int", nullable: true),
+                    ModifiedDateTime = table.Column<DateTimeOffset>(type: "datetimeoffset", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Uploads", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Uploads_Experts_ExpertId",
+                        column: x => x.ExpertId,
+                        principalTable: "Experts",
+                        principalColumn: "Id");
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Cities",
                 columns: table => new
                 {
@@ -247,96 +243,75 @@ namespace FinalProject.Infrastructure.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "FileDetails",
+                name: "Categories",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    FileName = table.Column<string>(type: "nvarchar(300)", maxLength: 300, nullable: false),
-                    FileSize = table.Column<long>(type: "bigint", nullable: false),
-                    FileCategory = table.Column<int>(type: "int", nullable: false),
-                    CustomerId = table.Column<int>(type: "int", nullable: true),
-                    ExpertId = table.Column<int>(type: "int", nullable: true),
-                    ServiceId = table.Column<int>(type: "int", nullable: true),
-                    CreatedByBrowserName = table.Column<string>(type: "nvarchar(1000)", maxLength: 1000, nullable: true),
-                    CreatedByIp = table.Column<string>(type: "nvarchar(255)", maxLength: 255, nullable: true),
-                    CreatedByUserId = table.Column<int>(type: "int", nullable: true),
-                    CreatedDateTime = table.Column<DateTimeOffset>(type: "datetimeoffset", nullable: true),
-                    ModifiedByBrowserName = table.Column<string>(type: "nvarchar(1000)", maxLength: 1000, nullable: true),
-                    ModifiedByIp = table.Column<string>(type: "nvarchar(255)", maxLength: 255, nullable: true),
-                    ModifiedByUserId = table.Column<int>(type: "int", nullable: true),
-                    ModifiedDateTime = table.Column<DateTimeOffset>(type: "datetimeoffset", nullable: true)
+                    Name = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: false),
+                    Description = table.Column<string>(type: "nvarchar(max)", maxLength: 5000, nullable: false),
+                    IsAvailable = table.Column<bool>(type: "bit", nullable: false),
+                    IsDeleted = table.Column<bool>(type: "bit", nullable: false),
+                    ParentCategoryId = table.Column<int>(type: "int", nullable: true),
+                    PictureId = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_FileDetails", x => x.Id);
+                    table.PrimaryKey("PK_Categories", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_FileDetails_Customers_CustomerId",
-                        column: x => x.CustomerId,
-                        principalTable: "Customers",
-                        principalColumn: "Id");
+                        name: "FK_Categories_Categories_ParentCategoryId",
+                        column: x => x.ParentCategoryId,
+                        principalTable: "Categories",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
-                        name: "FK_FileDetails_Experts_ExpertId",
-                        column: x => x.ExpertId,
-                        principalTable: "Experts",
-                        principalColumn: "Id");
-                    table.ForeignKey(
-                        name: "FK_FileDetails_Services_ServiceId",
-                        column: x => x.ServiceId,
-                        principalTable: "Services",
+                        name: "FK_Categories_Uploads_PictureId",
+                        column: x => x.PictureId,
+                        principalTable: "Uploads",
                         principalColumn: "Id");
                 });
 
             migrationBuilder.CreateTable(
-                name: "ServiceExperts",
+                name: "Customers",
                 columns: table => new
                 {
-                    ServiceId = table.Column<int>(type: "int", nullable: false),
-                    ExpertId = table.Column<int>(type: "int", nullable: false),
-                    CreatedByBrowserName = table.Column<string>(type: "nvarchar(1000)", maxLength: 1000, nullable: true),
-                    CreatedByIp = table.Column<string>(type: "nvarchar(255)", maxLength: 255, nullable: true),
-                    CreatedByUserId = table.Column<int>(type: "int", nullable: true),
-                    CreatedDateTime = table.Column<DateTimeOffset>(type: "datetimeoffset", nullable: true),
-                    ModifiedByBrowserName = table.Column<string>(type: "nvarchar(1000)", maxLength: 1000, nullable: true),
-                    ModifiedByIp = table.Column<string>(type: "nvarchar(255)", maxLength: 255, nullable: true),
-                    ModifiedByUserId = table.Column<int>(type: "int", nullable: true),
-                    ModifiedDateTime = table.Column<DateTimeOffset>(type: "datetimeoffset", nullable: true)
+                    Id = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    FirstName = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    LastName = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    PhoneNumber = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    FileInfoId = table.Column<int>(type: "int", nullable: true),
+                    BirthDate = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    IsDeleted = table.Column<bool>(type: "bit", nullable: false),
+                    ProfilePictureId = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_ServiceExperts", x => new { x.ServiceId, x.ExpertId });
+                    table.PrimaryKey("PK_Customers", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_ServiceExperts_Experts_ExpertId",
-                        column: x => x.ExpertId,
-                        principalTable: "Experts",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_ServiceExperts_Services_ServiceId",
-                        column: x => x.ServiceId,
-                        principalTable: "Services",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        name: "FK_Customers_Uploads_ProfilePictureId",
+                        column: x => x.ProfilePictureId,
+                        principalTable: "Uploads",
+                        principalColumn: "Id");
                 });
 
             migrationBuilder.CreateTable(
-                name: "SubServices",
+                name: "Services",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Description = table.Column<string>(type: "nvarchar(4000)", maxLength: 4000, nullable: false),
-                    Price = table.Column<long>(type: "bigint", nullable: true),
+                    BasePrice = table.Column<decimal>(type: "decimal(18,2)", nullable: true),
                     IsDeleted = table.Column<bool>(type: "bit", nullable: false),
-                    ServiceId = table.Column<int>(type: "int", nullable: false)
+                    CategoryId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_SubServices", x => x.Id);
+                    table.PrimaryKey("PK_Services", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_SubServices_Services_ServiceId",
-                        column: x => x.ServiceId,
-                        principalTable: "Services",
+                        name: "FK_Services_Categories_CategoryId",
+                        column: x => x.CategoryId,
+                        principalTable: "Categories",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -351,8 +326,8 @@ namespace FinalProject.Infrastructure.Migrations
                     PostalCode = table.Column<string>(type: "nvarchar(10)", maxLength: 10, nullable: false),
                     AddressCategory = table.Column<int>(type: "int", nullable: false),
                     IsDeleted = table.Column<bool>(type: "bit", nullable: false),
-                    CustomerId = table.Column<int>(type: "int", nullable: true),
-                    ExpertId = table.Column<int>(type: "int", nullable: true),
+                    CustomerId = table.Column<string>(type: "nvarchar(450)", nullable: true),
+                    ExpertId = table.Column<string>(type: "nvarchar(450)", nullable: true),
                     CityId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
@@ -386,8 +361,8 @@ namespace FinalProject.Infrastructure.Migrations
                     Content = table.Column<string>(type: "nvarchar(2500)", maxLength: 2500, nullable: false),
                     Votes = table.Column<int>(type: "int", nullable: false),
                     IsDeleted = table.Column<bool>(type: "bit", nullable: false),
-                    CustomerId = table.Column<int>(type: "int", nullable: false),
-                    ExpertId = table.Column<int>(type: "int", nullable: false),
+                    CustomerId = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    ExpertId = table.Column<string>(type: "nvarchar(450)", nullable: false),
                     ImageId = table.Column<int>(type: "int", nullable: false),
                     CreatedByBrowserName = table.Column<string>(type: "nvarchar(1000)", maxLength: 1000, nullable: true),
                     CreatedByIp = table.Column<string>(type: "nvarchar(255)", maxLength: 255, nullable: true),
@@ -413,10 +388,42 @@ namespace FinalProject.Infrastructure.Migrations
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_Comments_FileDetails_ImageId",
+                        name: "FK_Comments_Uploads_ImageId",
                         column: x => x.ImageId,
-                        principalTable: "FileDetails",
+                        principalTable: "Uploads",
                         principalColumn: "Id");
+                });
+
+            migrationBuilder.CreateTable(
+                name: "ServiceExperts",
+                columns: table => new
+                {
+                    ServiceId = table.Column<int>(type: "int", nullable: false),
+                    ExpertId = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    CreatedByBrowserName = table.Column<string>(type: "nvarchar(1000)", maxLength: 1000, nullable: true),
+                    CreatedByIp = table.Column<string>(type: "nvarchar(255)", maxLength: 255, nullable: true),
+                    CreatedByUserId = table.Column<int>(type: "int", nullable: true),
+                    CreatedDateTime = table.Column<DateTimeOffset>(type: "datetimeoffset", nullable: true),
+                    ModifiedByBrowserName = table.Column<string>(type: "nvarchar(1000)", maxLength: 1000, nullable: true),
+                    ModifiedByIp = table.Column<string>(type: "nvarchar(255)", maxLength: 255, nullable: true),
+                    ModifiedByUserId = table.Column<int>(type: "int", nullable: true),
+                    ModifiedDateTime = table.Column<DateTimeOffset>(type: "datetimeoffset", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_ServiceExperts", x => new { x.ServiceId, x.ExpertId });
+                    table.ForeignKey(
+                        name: "FK_ServiceExperts_Experts_ExpertId",
+                        column: x => x.ExpertId,
+                        principalTable: "Experts",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_ServiceExperts_Services_ServiceId",
+                        column: x => x.ServiceId,
+                        principalTable: "Services",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -429,10 +436,12 @@ namespace FinalProject.Infrastructure.Migrations
                     Description = table.Column<string>(type: "nvarchar(4000)", maxLength: 4000, nullable: true),
                     State = table.Column<int>(type: "int", nullable: false),
                     IsDeleted = table.Column<bool>(type: "bit", nullable: false),
+                    ServiceBasePrice = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
+                    CompletedPrice = table.Column<decimal>(type: "decimal(18,2)", nullable: true),
                     AddressId = table.Column<int>(type: "int", nullable: false),
                     ServiceId = table.Column<int>(type: "int", nullable: false),
-                    CustomerId = table.Column<int>(type: "int", nullable: false),
-                    ExpertId = table.Column<int>(type: "int", nullable: false),
+                    CustomerId = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    ExpertId = table.Column<string>(type: "nvarchar(450)", nullable: true),
                     CreatedByBrowserName = table.Column<string>(type: "nvarchar(1000)", maxLength: 1000, nullable: true),
                     CreatedByIp = table.Column<string>(type: "nvarchar(255)", maxLength: 255, nullable: true),
                     CreatedByUserId = table.Column<int>(type: "int", nullable: true),
@@ -465,6 +474,41 @@ namespace FinalProject.Infrastructure.Migrations
                         column: x => x.ServiceId,
                         principalTable: "Services",
                         principalColumn: "Id");
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Bids",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Notes = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Price = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
+                    OrderId = table.Column<int>(type: "int", nullable: false),
+                    ExpertId = table.Column<string>(type: "nvarchar(450)", nullable: true),
+                    CreatedByBrowserName = table.Column<string>(type: "nvarchar(1000)", maxLength: 1000, nullable: true),
+                    CreatedByIp = table.Column<string>(type: "nvarchar(255)", maxLength: 255, nullable: true),
+                    CreatedByUserId = table.Column<int>(type: "int", nullable: true),
+                    CreatedDateTime = table.Column<DateTimeOffset>(type: "datetimeoffset", nullable: true),
+                    ModifiedByBrowserName = table.Column<string>(type: "nvarchar(1000)", maxLength: 1000, nullable: true),
+                    ModifiedByIp = table.Column<string>(type: "nvarchar(255)", maxLength: 255, nullable: true),
+                    ModifiedByUserId = table.Column<int>(type: "int", nullable: true),
+                    ModifiedDateTime = table.Column<DateTimeOffset>(type: "datetimeoffset", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Bids", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Bids_Experts_ExpertId",
+                        column: x => x.ExpertId,
+                        principalTable: "Experts",
+                        principalColumn: "Id");
+                    table.ForeignKey(
+                        name: "FK_Bids_Orders_OrderId",
+                        column: x => x.OrderId,
+                        principalTable: "Orders",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateIndex(
@@ -524,6 +568,28 @@ namespace FinalProject.Infrastructure.Migrations
                 filter: "[NormalizedUserName] IS NOT NULL");
 
             migrationBuilder.CreateIndex(
+                name: "IX_Bids_ExpertId",
+                table: "Bids",
+                column: "ExpertId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Bids_OrderId",
+                table: "Bids",
+                column: "OrderId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Categories_ParentCategoryId",
+                table: "Categories",
+                column: "ParentCategoryId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Categories_PictureId",
+                table: "Categories",
+                column: "PictureId",
+                unique: true,
+                filter: "[PictureId] IS NOT NULL");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Cities_ProvinceId",
                 table: "Cities",
                 column: "ProvinceId");
@@ -545,23 +611,11 @@ namespace FinalProject.Infrastructure.Migrations
                 unique: true);
 
             migrationBuilder.CreateIndex(
-                name: "IX_FileDetails_CustomerId",
-                table: "FileDetails",
-                column: "CustomerId",
+                name: "IX_Customers_ProfilePictureId",
+                table: "Customers",
+                column: "ProfilePictureId",
                 unique: true,
-                filter: "[CustomerId] IS NOT NULL");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_FileDetails_ExpertId",
-                table: "FileDetails",
-                column: "ExpertId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_FileDetails_ServiceId",
-                table: "FileDetails",
-                column: "ServiceId",
-                unique: true,
-                filter: "[ServiceId] IS NOT NULL");
+                filter: "[ProfilePictureId] IS NOT NULL");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Orders_AddressId",
@@ -589,14 +643,14 @@ namespace FinalProject.Infrastructure.Migrations
                 column: "ExpertId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Services_ParentServiceId",
+                name: "IX_Services_CategoryId",
                 table: "Services",
-                column: "ParentServiceId");
+                column: "CategoryId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_SubServices_ServiceId",
-                table: "SubServices",
-                column: "ServiceId");
+                name: "IX_Uploads_ExpertId",
+                table: "Uploads",
+                column: "ExpertId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
@@ -617,16 +671,13 @@ namespace FinalProject.Infrastructure.Migrations
                 name: "AspNetUserTokens");
 
             migrationBuilder.DropTable(
+                name: "Bids");
+
+            migrationBuilder.DropTable(
                 name: "Comments");
 
             migrationBuilder.DropTable(
-                name: "Orders");
-
-            migrationBuilder.DropTable(
                 name: "ServiceExperts");
-
-            migrationBuilder.DropTable(
-                name: "SubServices");
 
             migrationBuilder.DropTable(
                 name: "AspNetRoles");
@@ -635,7 +686,7 @@ namespace FinalProject.Infrastructure.Migrations
                 name: "AspNetUsers");
 
             migrationBuilder.DropTable(
-                name: "FileDetails");
+                name: "Orders");
 
             migrationBuilder.DropTable(
                 name: "Addresses");
@@ -650,10 +701,16 @@ namespace FinalProject.Infrastructure.Migrations
                 name: "Customers");
 
             migrationBuilder.DropTable(
-                name: "Experts");
+                name: "Categories");
 
             migrationBuilder.DropTable(
                 name: "Provinces");
+
+            migrationBuilder.DropTable(
+                name: "Uploads");
+
+            migrationBuilder.DropTable(
+                name: "Experts");
         }
     }
 }
