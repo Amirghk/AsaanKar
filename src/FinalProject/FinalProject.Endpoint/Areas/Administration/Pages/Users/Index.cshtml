@@ -6,7 +6,7 @@
 <table class="table">
     <thead class="thead-dark">
         <tr>
-            <th scope="col">@Html.DisplayNameForInnerType((CustomerListVM c) => c.CustomerId)</th>
+            <th scope="col">@Html.DisplayNameForInnerType((CustomerListVM c) => c.Id)</th>
             <th scope="col">@Html.DisplayNameForInnerType((CustomerListVM c) => c.FirstName )</th>
             <th scope="col">@Html.DisplayNameForInnerType((CustomerListVM c) => c.LastName)</th>
             <th scope="col">@Html.DisplayNameForInnerType((CustomerListVM c) => c.PhoneNumber)</th>
@@ -18,7 +18,7 @@
         @foreach (var customer in Model.Customers)
         {
             <tr>
-                <th scope="row">@customer.CustomerId</th>
+                <th scope="row">@customer.Id</th>
                 <td>@customer.FirstName</td>
                 <td>@customer.LastName</td>
                 <td>@customer.PhoneNumber</td>
@@ -26,7 +26,7 @@
                 <td>
                     <form asp-area="Identity" asp-page="/Account/Manage/AdminIndex" method="get">
                         <button class="btn btn-default">ویرایش</button>
-                        <input type="hidden" name="userId" value=@customer.CustomerId />
+                        <input type="hidden" name="userId" value=@customer.Id />
                     </form>
                 </td>
             </tr>
@@ -39,7 +39,7 @@
 <table class="table">
     <thead class="thead-dark">
         <tr>
-            <th scope="col">@Html.DisplayNameForInnerType((ExpertListVM c) => c.ExpertId)</th>
+            <th scope="col">@Html.DisplayNameForInnerType((ExpertListVM c) => c.Id)</th>
             <th scope="col">@Html.DisplayNameForInnerType((ExpertListVM c) => c.FirstName )</th>
             <th scope="col">@Html.DisplayNameForInnerType((ExpertListVM c) => c.LastName)</th>
             <th scope="col">@Html.DisplayNameForInnerType((ExpertListVM c) => c.PhoneNumber)</th>
@@ -53,7 +53,7 @@
         @foreach (var expert in Model.Experts)
         {
             <tr>
-                <th scope="row">@expert.ExpertId</th>
+                <th scope="row">@expert.Id</th>
                 <td>@expert.FirstName</td>
                 <td>@expert.LastName</td>
                 <td>@expert.PhoneNumber</td>
@@ -63,7 +63,7 @@
                 <td>
                     <form asp-area="Identity" asp-page="/Account/Manage/AdminIndex" method="get">
                         <button class="btn btn-default">ویرایش</button>
-                        <input type="hidden" name="userId" value=@expert.ExpertId />
+                        <input type="hidden" name="userId" value=@expert.Id />
                     </form>
                 </td>
             </tr>

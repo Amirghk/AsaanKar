@@ -12,6 +12,9 @@ namespace FinalProject.Endpoint.Common.Mappings
             CreateMap<CustomerDto, CustomerListVM>().ReverseMap();
             CreateMap<ExpertDto, ExpertListVM>().ReverseMap();
             CreateMap<UploadDto, UploadViewModel>().ReverseMap();
+            CreateMap<OrderDto, OrderListViewModel>()
+                .ForMember(z => z.Address, a => a.MapFrom(x => x.Address.Content))
+                .ForMember(z => z.ServiceName, a => a.MapFrom(x => x.Service.Description));
         }
     }
 }

@@ -187,24 +187,35 @@ namespace FinalProject.Endpoint.Areas.Identity.Pages.Account
                     var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);
 
                     // add related data to Expert entity 
-                    string expertId = await _expertService.Set(new ExpertDto
+                    try
                     {
-                        Id = userId,
-                        FirstName = Input.FirstName,
-                        LastName = Input.LastName,
-                        BirthDate = Input.BirthDate,
-                        NationalCode = Input.NationalCode,
-                        PhoneNumber = Input.PhoneNumber,
-                    });
-                    // add related data to address entity
-                    await _addressService.Set(new AddressDto
+                        string expertId = await _expertService.Set(new ExpertDto
+                        {
+                            Id = userId,
+                            FirstName = Input.FirstName,
+                            LastName = Input.LastName,
+                            BirthDate = Input.BirthDate,
+                            NationalCode = Input.NationalCode,
+                            PhoneNumber = Input.PhoneNumber,
+                        });
+                        // add related data to address entity
+                        await _addressService.Set(new AddressDto
+                        {
+                            CityId = Input.CityId,
+                            Content = Input.Address,
+                            PostalCode = Input.PostalCode,
+                            ExpertId = expertId,
+                            AddressCategory = AddressCategory.Expert
+                        });
+                    }
+                    catch (Exception) // Roll back for when user doesn't get added to db
                     {
-                        CityId = Input.CityId,
-                        Content = Input.Address,
-                        PostalCode = Input.PostalCode,
-                        ExpertId = expertId,
-                        AddressCategory = AddressCategory.Expert
-                    });
+                        await _userManager.DeleteAsync(await _userManager.FindByIdAsync(userId));
+                        throw;
+                    }
+
+
+
 
                     code = WebEncoders.Base64UrlEncode(Encoding.UTF8.GetBytes(code));
                     var callbackUrl = Url.Page(

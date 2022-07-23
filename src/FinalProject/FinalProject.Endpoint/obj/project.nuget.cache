@@ -1,10 +1,11 @@
 {
   "version": 2,
-  "dgSpecHash": "xTLchbNrBdfYlYm/mSKdYnM8VItLBxERWjKNAg8QuP4taKZtZuk5nWW2HtAd5g3gNrXenajnWViev/LnYx3oOA==",
+  "dgSpecHash": "03NQsDl1mV++5Lr7qu77nAIo4Xo3GjKEdXZ/b39KULSnTJO86Ddl9vDyk25vL3zwd2M0iJL0rWmVyM4cnLB8tA==",
   "success": true,
   "projectFilePath": "G:\\FinalProject\\src\\FinalProject\\FinalProject.Endpoint\\FinalProject.Endpoint.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Lion\\.nuget\\packages\\automapper\\11.0.1\\automapper.11.0.1.nupkg.sha512",
+    "C:\\Users\\Lion\\.nuget\\packages\\automapper.collection\\8.0.0\\automapper.collection.8.0.0.nupkg.sha512",
     "C:\\Users\\Lion\\.nuget\\packages\\automapper.extensions.microsoft.dependencyinjection\\11.0.0\\automapper.extensions.microsoft.dependencyinjection.11.0.0.nupkg.sha512",
     "C:\\Users\\Lion\\.nuget\\packages\\humanizer.core\\2.8.26\\humanizer.core.2.8.26.nupkg.sha512",
     "C:\\Users\\Lion\\.nuget\\packages\\messagepack\\2.1.152\\messagepack.2.1.152.nupkg.sha512",

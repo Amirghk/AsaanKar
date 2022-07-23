@@ -150,14 +150,22 @@ namespace FinalProject.Endpoint.Areas.Identity.Pages.Account
                     var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);
 
                     // add related data to customer entity 
-                    await _customerService.Set(new CustomerDto
+                    try
                     {
-                        Id = userId,
-                        FirstName = Input.FirstName,
-                        LastName = Input.LastName,
-                        BirthDate = Input.BirthDate,
-                        PhoneNumber = Input.PhoneNumber,
-                    });
+                        await _customerService.Set(new CustomerDto
+                        {
+                            Id = userId,
+                            FirstName = Input.FirstName,
+                            LastName = Input.LastName,
+                            BirthDate = Input.BirthDate,
+                            PhoneNumber = Input.PhoneNumber,
+                        });
+                    }
+                    catch (Exception) // Roll back for when user doesn't get added to db
+                    {
+                        await _userManager.DeleteAsync(await _userManager.FindByIdAsync(userId));
+                        throw;
+                    }
                     // TODO : delete user if not successful
 
                     code = WebEncoders.Base64UrlEncode(Encoding.UTF8.GetBytes(code));

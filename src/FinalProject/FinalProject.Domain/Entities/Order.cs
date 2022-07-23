@@ -11,6 +11,7 @@ public class Order : IAuditableEntity, IBaseEntity, ISoftDeletable
 {
     #region Properties
     public int Id { get; set; }
+    public DateTimeOffset OrderDate { get; set; }
     public DateTimeOffset? DateCompleted { get; set; }
     public string? Description { get; set; }
     public OrderState State { get; set; }

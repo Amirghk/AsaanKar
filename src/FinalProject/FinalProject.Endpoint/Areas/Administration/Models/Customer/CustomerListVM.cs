@@ -4,7 +4,8 @@ namespace FinalProject.Endpoint.Areas.Administration.Models
 {
     public record CustomerListVM
     {
-        public int Id { get; init; }
+        [Display(Name = "شناسه")]
+        public string Id { get; init; } = string.Empty;
         [Display(Name = "نام")]
         public string FirstName { get; init; } = null!;
         [Display(Name = "نام خانوادگی")]
@@ -13,7 +14,5 @@ namespace FinalProject.Endpoint.Areas.Administration.Models
         public string PhoneNumber { get; set; } = null!;
         [Display(Name = "تاریخ تولد")]
         public DateTime? BirthDate { get; set; }
-        [Display(Name = "شناسه")]
-        public string? CustomerId { get; set; }
     }
 }

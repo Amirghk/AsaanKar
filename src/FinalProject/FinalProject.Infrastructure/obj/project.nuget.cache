@@ -1,10 +1,11 @@
 {
   "version": 2,
-  "dgSpecHash": "z2STqOYUVcniCKIOt8f2blh/KZG0yJZTaOovEcw4btp7JT2yIxFenSj4fEdwauh5wlHYjKvg2w6qi3y5R1KSMw==",
+  "dgSpecHash": "22okqskXWrvyStFH3a6d7YfbqaOj8pNHGxy4cqkwSvI/ZCTb8ADtWhfHtE9CWW6NnDtw24vELc/JAy0TrbiEqA==",
   "success": true,
   "projectFilePath": "G:\\FinalProject\\src\\FinalProject\\FinalProject.Infrastructure\\FinalProject.Infrastructure.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Lion\\.nuget\\packages\\automapper\\11.0.1\\automapper.11.0.1.nupkg.sha512",
+    "C:\\Users\\Lion\\.nuget\\packages\\automapper.collection\\8.0.0\\automapper.collection.8.0.0.nupkg.sha512",
     "C:\\Users\\Lion\\.nuget\\packages\\humanizer.core\\2.8.26\\humanizer.core.2.8.26.nupkg.sha512",
     "C:\\Users\\Lion\\.nuget\\packages\\microsoft.aspnet.identity.core\\2.2.3\\microsoft.aspnet.identity.core.2.2.3.nupkg.sha512",
     "C:\\Users\\Lion\\.nuget\\packages\\microsoft.aspnetcore.cryptography.internal\\6.0.6\\microsoft.aspnetcore.cryptography.internal.6.0.6.nupkg.sha512",

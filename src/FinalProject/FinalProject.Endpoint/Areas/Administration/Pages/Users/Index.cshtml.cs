@@ -37,10 +37,10 @@ namespace FinalProject.Endpoint.Areas.Administration.Pages.Users
 
             foreach (var expert in Experts)
             {
-                var expertAddress = await _addressService.GetById(expert.Id);
-                if (expertAddress != null)
+                var expertAddress = await _addressService.GetByUserId(expert.Id);
+                if (expertAddress.FirstOrDefault() != null)
                 {
-                    expert.City = (await _cityService.GetById(expertAddress.CityId)).Name;
+                    expert.City = (await _cityService.GetById(expertAddress.First().CityId)).Name;
                 }
             }
             return Page();
