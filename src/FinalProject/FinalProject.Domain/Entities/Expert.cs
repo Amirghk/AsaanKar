@@ -30,7 +30,7 @@ public class Expert : IBaseEntity, ISoftDeletable
     public virtual ICollection<Service> Services { get; set; } = new List<Service>();
     public virtual ICollection<ServiceExpert> ServiceExperts { get; set; } = new List<ServiceExpert>();
     public virtual ICollection<Comment> Comments { get; set; } = new List<Comment>();
-    public virtual ICollection<Upload> Pictures { get; set; } = new List<Upload>();
+    public virtual ICollection<Upload> WorkSamples { get; set; } = new List<Upload>();
     public virtual ICollection<Order> Orders { get; set; } = new List<Order>();
     #endregion
 }

@@ -18,7 +18,7 @@ public class UploadConfiguration : IEntityTypeConfiguration<Upload>
             .HasForeignKey<Customer>(c => c.ProfilePictureId);
         builder
             .HasOne(f => f.Expert)
-            .WithMany(e => e.Pictures)
+            .WithMany(e => e.WorkSamples)
             .HasForeignKey(f => f.ExpertId);
         builder
             .HasOne(f => f.Comment)

@@ -11,7 +11,7 @@ namespace FinalProject.Application.Common.DataTransferObjects;
 public record UploadServiceDto
 {
     public int Id { get; init; }
-    public string FileName { get; init; } = null!;
+    public string FileName { get; set; } = null!;
     public long FileSize { get; init; }
     public FileCategory FileCategory { get; init; }
     public int? ExpertId { get; init; }

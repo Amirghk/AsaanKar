@@ -4,6 +4,7 @@ using FinalProject.Application.Common.Interfaces.Services;
 using FinalProject.Application.Common.DataTransferObjects;
 using FinalProject.Domain.Enums;
 using FinalProject.Application.Common.Interfaces.Repositories;
+using Microsoft.AspNetCore.Http;
 
 namespace FinalProject.Application.Common.Services;
 
@@ -12,11 +13,23 @@ public class UploadService : IUploadService
     private readonly IMapper _mapper;
     private readonly IUploadRepository _repository;
     private readonly IExpertService _expertService;
-    public UploadService(IUploadRepository repository, IMapper mapper, IExpertService expertService)
+    private readonly ICustomerService _customerService;
+    private readonly ICommentService _commentService;
+    private readonly ICategoryService _categoryService;
+
+    public UploadService(IUploadRepository repository,
+                         IMapper mapper,
+                         IExpertService expertService,
+                         ICustomerService customerService,
+                         ICommentService commentService,
+                         ICategoryService categoryService)
     {
         _mapper = mapper;
         _repository = repository;
         _expertService = expertService;
+        _customerService = customerService;
+        _commentService = commentService;
+        _categoryService = categoryService;
     }
 
     public async Task<IEnumerable<UploadDto>> GetAll()
@@ -44,28 +57,20 @@ public class UploadService : IUploadService
     /// gets the uploadDto and uploadRootFolder and saves the file to uploadRootFolder and saves the 
     /// meta information in the repository
     /// </summary>
-    /// <param name="dto"></param>
-    /// <param name="uploadsRootFolder"></param>
+    /// <param name="dto">Upload Dto containing info such as file name and size and the IFormFile itself</param>
+    /// <param name="uploadsRootFolder">The root folder that the file be saved in</param>
     /// <returns></returns>
     public async Task<int> Set(UploadServiceDto dto, string uploadsRootFolder)
     {
-        if (!Directory.Exists(uploadsRootFolder))
-        {
-            Directory.CreateDirectory(uploadsRootFolder);
-        }
         var file = dto.UploadedFile;
         var fileExtension = Path.GetExtension(file.FileName);
 
         // make a new file name to make removing it easier
         var newFileName = Guid.NewGuid() + fileExtension;
-        // get file path
-        var filePath = Path.Combine(uploadsRootFolder, newFileName);
-        using (var fileStream = new FileStream(filePath, FileMode.Create))
-        {
-            await file.CopyToAsync(fileStream);
-            //.ConfigureAwait(false);
-        }
-        // see what category file belongs to
+
+        await SaveFile(file, uploadsRootFolder, newFileName);
+
+
         var uploadId = await _repository.Add(new UploadDto
         {
             ExpertId = dto.ExpertId,
@@ -73,16 +78,25 @@ public class UploadService : IUploadService
             FileName = newFileName,
             FileCategory = dto.FileCategory,
         });
-        // TODO ---------------------------
         switch (dto.FileCategory)
         {
             case FileCategory.Customer:
-                break;
-            case FileCategory.Expert:
+                var customerId = dto.CustomerId;
+                var customer = await _customerService.GetById((int)customerId!);
+                customer.ProfilePictureId = uploadId;
+                await _customerService.Update(customer);
                 break;
             case FileCategory.Comment:
+                var commentId = dto.CommentId;
+                var comment = await _commentService.GetById((int)commentId!);
+                comment.ImageId = uploadId;
+                await _commentService.Update(comment);
                 break;
-            case FileCategory.Service:
+            case FileCategory.ServiceCategory:
+                var categoryId = dto.CategoryId;
+                var category = await _categoryService.GetById((int)categoryId!);
+                category.PictureId = uploadId;
+                await _categoryService.Update(category);
                 break;
             case FileCategory.ExpertProfilePic:
                 var expertId = dto.ExpertId;
@@ -95,6 +109,56 @@ public class UploadService : IUploadService
         }
         return uploadId;
 
+    }
+
+    public async Task SaveFile(IFormFile file, string uploadsRootFolder, string newFileName)
+    {
+        if (!Directory.Exists(uploadsRootFolder))
+        {
+            Directory.CreateDirectory(uploadsRootFolder);
+        }
+        // get file path
+        var filePath = Path.Combine(uploadsRootFolder, newFileName);
+        try
+        {
+            using (var fileStream = new FileStream(filePath, FileMode.Create))
+            {
+                await file.CopyToAsync(fileStream);
+            }
+        }
+        catch (Exception)
+        {
+
+            throw;
+        }
+    }
+
+    public async Task<int> SetExpertWorkSamples(List<UploadServiceDto> workSamples, string uploadsRootFolder)
+    {
+        if (workSamples == null || workSamples.Count == 0)
+        {
+            throw new NotSupportedException();
+        }
+
+        var expertId = workSamples.First().ExpertId;
+        var expert = await _expertService.GetById((int)expertId!);
+        foreach (var sample in workSamples)
+        {
+            var file = sample.UploadedFile;
+            var fileExtension = Path.GetExtension(file.FileName);
+            var newFileName = Guid.NewGuid() + fileExtension;
+            sample.FileName = newFileName;
+            await SaveFile(file, uploadsRootFolder, newFileName);
+        }
+        List<UploadDto> expertWorkSamples = workSamples.Select(x => new UploadDto
+        {
+            ExpertId = x.ExpertId,
+            FileCategory = x.FileCategory,
+            FileName = x.FileName,
+            FileSize = x.FileSize,
+        }).ToList();
+        expert.WorkSamples = expertWorkSamples;
+        return await _expertService.Update(expert);
     }
 
     public async Task<int> Update(UploadDto dto)

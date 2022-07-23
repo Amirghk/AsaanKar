@@ -16,4 +16,5 @@ public record ExpertDto
     public string? ExpertId { get; init; }
     public int? ProfilePictureId { get; set; }
     public bool IsDeleted { get; set; }
+    public virtual ICollection<UploadDto> WorkSamples { get; set; } = new List<UploadDto>();
 }

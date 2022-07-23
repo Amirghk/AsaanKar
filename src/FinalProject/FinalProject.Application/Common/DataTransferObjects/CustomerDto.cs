@@ -17,5 +17,6 @@ public record CustomerDto
     public DateTime? BirthDate { get; init; }
     public string? CustomerId { get; init; }
     public bool IsDeleted { get; init; }
+    public int? ProfilePictureId { get; set; }
 }
 
