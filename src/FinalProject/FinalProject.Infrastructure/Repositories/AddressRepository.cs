@@ -42,7 +42,7 @@ namespace FinalProject.Infrastructure.Repositories
             return record;
         }
 
-        public async Task<IEnumerable<AddressDto>> GetByUserId(int userId)
+        public async Task<IEnumerable<AddressDto>> GetByUserId(string userId)
         {
             var record = await _mapper.ProjectTo<AddressDto>(_context.Addresses).Where(x => x.ExpertId == userId || x.CustomerId == userId).ToListAsync();
             if (record == null)

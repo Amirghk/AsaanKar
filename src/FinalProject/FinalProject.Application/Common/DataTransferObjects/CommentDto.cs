@@ -6,7 +6,7 @@ public record CommentDto
     public int Id { get; init; }
     public string Content { get; set; } = null!;
     public int Votes { get; set; }
-    public int CustomerId { get; init; }
-    public int ExpertId { get; init; }
+    public string CustomerId { get; init; } = null!;
+    public string ExpertId { get; init; } = null!;
     public int? ImageId { get; set; }
 }

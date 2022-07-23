@@ -82,7 +82,7 @@ public class UploadService : IUploadService
         {
             case FileCategory.Customer:
                 var customerId = dto.CustomerId;
-                var customer = await _customerService.GetById((int)customerId!);
+                var customer = await _customerService.GetById(customerId!);
                 customer.ProfilePictureId = uploadId;
                 await _customerService.Update(customer);
                 break;
@@ -100,7 +100,7 @@ public class UploadService : IUploadService
                 break;
             case FileCategory.ExpertProfilePic:
                 var expertId = dto.ExpertId;
-                var expert = await _expertService.GetById((int)expertId!);
+                var expert = await _expertService.GetById(expertId!);
                 expert.ProfilePictureId = uploadId;
                 await _expertService.Update(expert);
                 break;
@@ -133,7 +133,7 @@ public class UploadService : IUploadService
         }
     }
 
-    public async Task<int> SetExpertWorkSamples(List<UploadServiceDto> workSamples, string uploadsRootFolder)
+    public async Task<string> SetExpertWorkSamples(List<UploadServiceDto> workSamples, string uploadsRootFolder)
     {
         if (workSamples == null || workSamples.Count == 0)
         {
@@ -141,7 +141,7 @@ public class UploadService : IUploadService
         }
 
         var expertId = workSamples.First().ExpertId;
-        var expert = await _expertService.GetById((int)expertId!);
+        var expert = await _expertService.GetById(expertId!);
         foreach (var sample in workSamples)
         {
             var file = sample.UploadedFile;

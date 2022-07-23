@@ -4,12 +4,11 @@ namespace FinalProject.Application.Common.Interfaces.Services;
 
 public interface IExpertService
 {
-    Task<int> Set(ExpertDto dto);
+    Task<string> Set(ExpertDto dto);
     Task<IEnumerable<ExpertDto>> GetAll();
-    Task<ExpertDto> GetByUserId(string userId);
-    Task<ExpertDto> GetById(int id);
-    Task<int> Remove(int id);
-    Task<int> SoftDelete(string expertId);
-    Task<int> Update(ExpertDto dto);
+    Task<ExpertDto> GetById(string id);
+    Task<string> Remove(string id);
+    Task<string> SoftDelete(string id);
+    Task<string> Update(ExpertDto dto);
 
 }

@@ -25,7 +25,7 @@ public class AddressService : IAddressService
         return await _repository.GetById(id);
     }
 
-    public async Task<IEnumerable<AddressDto>> GetByUserId(int userId)
+    public async Task<IEnumerable<AddressDto>> GetByUserId(string userId)
     {
         return await _repository.GetByUserId(userId);
     }

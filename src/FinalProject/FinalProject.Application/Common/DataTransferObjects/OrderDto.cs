@@ -11,8 +11,8 @@ public record OrderDto
     public OrderState State { get; init; }
     public int AddressId { get; init; }
     public int ServiceId { get; init; }
-    public int CustomerId { get; init; }
-    public int? ExpertId { get; init; }
+    public string CustomerId { get; init; } = null!;
+    public string? ExpertId { get; set; }
     public decimal ServiceBasePrice { get; set; }
     public decimal? CompletedPrice { get; set; }
 }

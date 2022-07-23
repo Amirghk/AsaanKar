@@ -9,6 +9,8 @@ public class ExpertConfiguration : IEntityTypeConfiguration<Expert>
     public void Configure(EntityTypeBuilder<Expert> builder)
     {
         builder.HasKey(x => x.Id);
+        builder.Property(x => x.Id)
+            .ValueGeneratedNever();
         builder
             .Property(x => x.Bio)
             .HasMaxLength(4000);

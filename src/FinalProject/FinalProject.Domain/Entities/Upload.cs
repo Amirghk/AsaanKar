@@ -19,7 +19,7 @@ public class Upload : IAuditableEntity, IBaseEntity
     #region Navigational Properties
     public virtual Comment? Comment { get; set; }
     public virtual Customer? Customer { get; set; }
-    public int? ExpertId { get; set; }
+    public string? ExpertId { get; set; }
     public virtual Expert? Expert { get; set; }
     public virtual Category? Category { get; set; }
     #endregion

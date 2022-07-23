@@ -152,10 +152,10 @@ namespace FinalProject.Endpoint.Areas.Identity.Pages.Account
                     // add related data to customer entity 
                     await _customerService.Set(new CustomerDto
                     {
+                        Id = userId,
                         FirstName = Input.FirstName,
                         LastName = Input.LastName,
                         BirthDate = Input.BirthDate,
-                        CustomerId = userId,
                         PhoneNumber = Input.PhoneNumber,
                     });
                     // TODO : delete user if not successful

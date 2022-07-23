@@ -8,6 +8,9 @@ public class CustomerConfiguration : IEntityTypeConfiguration<Customer>
 {
     public void Configure(EntityTypeBuilder<Customer> builder)
     {
+        builder.HasKey(x => x.Id);
+        builder.Property(x => x.Id)
+            .ValueGeneratedNever();
         builder
             .HasOne(c => c.ProfilePicture)
             .WithOne(f => f.Customer)

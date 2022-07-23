@@ -8,7 +8,7 @@ public record AddressDto
     public string Content { get; init; } = null!;
     public string PostalCode { get; init; } = null!;
     public AddressCategory AddressCategory { get; init; }
-    public int? CustomerId { get; init; }
-    public int? ExpertId { get; init; }
+    public string? CustomerId { get; init; }
+    public string? ExpertId { get; init; }
     public int CityId { get; init; }
 }

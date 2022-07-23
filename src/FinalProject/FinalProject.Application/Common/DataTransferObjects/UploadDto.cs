@@ -8,5 +8,5 @@ public record UploadDto
     public string FileName { get; init; } = null!;
     public long FileSize { get; init; }
     public FileCategory FileCategory { get; init; }
-    public int? ExpertId { get; init; }
+    public string? ExpertId { get; init; }
 }

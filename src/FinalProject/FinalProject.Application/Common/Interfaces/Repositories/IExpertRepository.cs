@@ -7,11 +7,10 @@ namespace FinalProject.Application.Common.Interfaces.Repositories;
 
 public interface IExpertRepository
 {
-    Task<int> Add(ExpertDto model);
-    Task<int> Update(ExpertDto model);
-    Task<int> Remove(int id);
-    Task<int> SoftDelete(string expertId);
-    Task<ExpertDto> GetById(int id);
-    Task<ExpertDto> GetByUserId(string userId);
+    Task<string> Add(ExpertDto model);
+    Task<string> Update(ExpertDto model);
+    Task<string> Remove(string id);
+    Task<string> SoftDelete(string id);
+    Task<ExpertDto> GetById(string id);
     Task<IEnumerable<ExpertDto>> GetAll();
 }

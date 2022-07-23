@@ -14,9 +14,9 @@ public record UploadServiceDto
     public string FileName { get; set; } = null!;
     public long FileSize { get; init; }
     public FileCategory FileCategory { get; init; }
-    public int? ExpertId { get; init; }
+    public string? ExpertId { get; init; }
     public int? CategoryId { get; init; }
-    public int? CustomerId { get; init; }
+    public string? CustomerId { get; init; }
     public int? CommentId { get; init; }
     public IFormFile UploadedFile { get; init; } = null!;
 }

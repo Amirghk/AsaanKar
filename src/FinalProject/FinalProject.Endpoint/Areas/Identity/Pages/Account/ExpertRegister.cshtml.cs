@@ -187,12 +187,12 @@ namespace FinalProject.Endpoint.Areas.Identity.Pages.Account
                     var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);
 
                     // add related data to Expert entity 
-                    int expertId = await _expertService.Set(new ExpertDto
+                    string expertId = await _expertService.Set(new ExpertDto
                     {
+                        Id = userId,
                         FirstName = Input.FirstName,
                         LastName = Input.LastName,
                         BirthDate = Input.BirthDate,
-                        ExpertId = userId,
                         NationalCode = Input.NationalCode,
                         PhoneNumber = Input.PhoneNumber,
                     });

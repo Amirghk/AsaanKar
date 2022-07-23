@@ -37,7 +37,7 @@ namespace FinalProject.Endpoint.Areas.Administration.Pages.Users
 
             foreach (var expert in Experts)
             {
-                var expertAddress = (await _addressService.GetByUserId(expert.Id)).FirstOrDefault();
+                var expertAddress = await _addressService.GetById(expert.Id);
                 if (expertAddress != null)
                 {
                     expert.City = (await _cityService.GetById(expertAddress.CityId)).Name;
