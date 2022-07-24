@@ -9,4 +9,6 @@ public record CommentDto
     public string CustomerId { get; init; } = null!;
     public string ExpertId { get; init; } = null!;
     public int? ImageId { get; set; }
+    public UploadDto? Image { get; set; }
+    public bool IsApproved { get; set; }
 }
