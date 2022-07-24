@@ -12,12 +12,16 @@ namespace FinalProject.Endpoint.Areas.Administration.Controllers
     {
         private readonly IOrderService _orderService;
         private readonly IMapper _mapper;
+        private readonly ILogger<OrderController> _logger;
 
-        public OrderController(IOrderService orderService,
-                          IMapper mapper)
+        public OrderController(
+            IOrderService orderService,
+            IMapper mapper,
+            ILogger<OrderController> logger)
         {
             _orderService = orderService;
             _mapper = mapper;
+            _logger = logger;
         }
 
         public async Task<IActionResult> Index()

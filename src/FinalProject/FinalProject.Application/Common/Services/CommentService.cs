@@ -15,6 +15,15 @@ public class CommentService : ICommentService
         _repository = repository;
     }
 
+    public async Task<int> Approve(int id)
+    {
+        var record = await _repository.GetById(id);
+        record.IsApproved = true;
+        await _repository.Update(record);
+        return record.Id;
+
+    }
+
     public async Task<IEnumerable<CommentDto>> GetAll()
     {
         return await _repository.GetAll();

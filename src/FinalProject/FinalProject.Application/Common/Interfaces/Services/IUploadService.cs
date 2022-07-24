@@ -10,4 +10,5 @@ public interface IUploadService
     Task<int> Remove(int id, string uploadsRootFolder);
     Task<int> Update(UploadDto dto);
     Task<string> SetExpertWorkSamples(List<UploadServiceDto> workSamples, string uploadsRootFolder);
+    Task<string> GetFileDirectory(string rootPath, int fileId);
 }

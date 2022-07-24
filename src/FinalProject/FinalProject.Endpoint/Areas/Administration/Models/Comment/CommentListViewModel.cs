@@ -14,6 +14,7 @@ public class CommentListViewModel
     public string CustomerId { get; init; } = null!;
     [Display(Name = "شناسه متخصص")]
     public string ExpertId { get; init; } = null!;
+    [Display(Name = "تصویر")]
     public string? ImageAddress { get; set; }
     [Display(Name = "تایید شده")]
     public bool IsApproved { get; set; }

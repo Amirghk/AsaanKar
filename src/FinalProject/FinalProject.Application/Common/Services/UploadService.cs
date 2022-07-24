@@ -165,4 +165,11 @@ public class UploadService : IUploadService
     {
         return await _repository.Update(dto);
     }
+
+    public async Task<string> GetFileDirectory(string rootPath, int fileId)
+    {
+        var file = await _repository.GetById(fileId);
+        string folder = Path.Combine(rootPath, "Uploads");
+        return Path.Combine(folder, file.FileName);
+    }
 }

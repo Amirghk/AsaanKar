@@ -14,7 +14,6 @@ public class Customer : IBaseEntity, ISoftDeletable
     public string FirstName { get; set; } = null!;
     public string LastName { get; set; } = null!;
     public string PhoneNumber { get; set; } = null!;
-    public int? FileInfoId { get; set; }
     public DateTime? BirthDate { get; set; }
     public bool IsDeleted { get; set; }
     #endregion

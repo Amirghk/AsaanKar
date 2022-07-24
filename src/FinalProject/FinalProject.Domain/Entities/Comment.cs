@@ -18,6 +18,6 @@ public class Comment : IAuditableEntity, IBaseEntity, ISoftDeletable
     public string ExpertId { get; set; } = null!;
     public virtual Expert Expert { get; set; } = null!;
     public int? ImageId { get; set; }
-    public Upload Image { get; set; } = null!;
+    public Upload? Image { get; set; }
     #endregion
 }

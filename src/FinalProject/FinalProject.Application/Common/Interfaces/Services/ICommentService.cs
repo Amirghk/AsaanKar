@@ -8,4 +8,5 @@ public interface ICommentService
     Task<CommentDto> GetById(int id);
     Task<int> Remove(int id);
     Task<int> Update(CommentDto dto);
+    Task<int> Approve(int id);
 }

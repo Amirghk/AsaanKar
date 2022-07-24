@@ -23,7 +23,7 @@ namespace FinalProject.Endpoint.Areas.Identity.Pages.Account.Manage
         private readonly IExpertService _expertService;
         private readonly ICustomerService _customerService;
         private readonly IUploadService _uploadService;
-        private readonly IWebHostEnvironment _environment;
+        private readonly string _rootPath;
 
         public IndexModel(
             UserManager<ApplicationUser> userManager,
@@ -38,7 +38,7 @@ namespace FinalProject.Endpoint.Areas.Identity.Pages.Account.Manage
             _expertService = expertService;
             _customerService = customerService;
             _uploadService = uploadService;
-            _environment = environment;
+            _rootPath = environment.ContentRootPath;
         }
 
 
@@ -69,6 +69,7 @@ namespace FinalProject.Endpoint.Areas.Identity.Pages.Account.Manage
             public bool IsCustomer { get; set; } = false;
             public bool IsExpert { get; set; } = false;
             public IFormFile ProfilePic { get; set; } = null;
+            public string ProfilePicAddress { get; set; } = String.Empty;
         }
 
 
@@ -78,6 +79,7 @@ namespace FinalProject.Endpoint.Areas.Identity.Pages.Account.Manage
 
 
             Username = userName;
+            string profilePicAddress = string.Empty;
 
             var claims = await _userManager.GetClaimsAsync(user);
             foreach (var claim in claims)
@@ -85,6 +87,13 @@ namespace FinalProject.Endpoint.Areas.Identity.Pages.Account.Manage
                 if (claim.Type == "IsExpert")
                 {
                     var expert = await _expertService.GetById(user.Id);
+                    // get expert profile pic
+                    if (expert.ProfilePictureId != null)
+                    {
+                        profilePicAddress = await _uploadService.GetFileDirectory(_rootPath, (int)expert.ProfilePictureId);
+                    }
+
+
                     Input = new InputModel
                     {
                         FirstName = expert.FirstName,
@@ -92,7 +101,8 @@ namespace FinalProject.Endpoint.Areas.Identity.Pages.Account.Manage
                         BirthDate = expert.BirthDate,
                         NationalCode = expert.NationalCode,
                         PhoneNumber = expert.PhoneNumber,
-                        IsExpert = true
+                        IsExpert = true,
+                        ProfilePicAddress = profilePicAddress
                     };
 
                     return;
@@ -100,14 +110,22 @@ namespace FinalProject.Endpoint.Areas.Identity.Pages.Account.Manage
                 if (claim.Type == "IsCustomer")
                 {
                     var customer = await _customerService.GetById(user.Id);
+                    // get customer profile pic
+                    if (customer.ProfilePictureId != null)
+                    {
+                        profilePicAddress = await _uploadService.GetFileDirectory(_rootPath, (int)customer.ProfilePictureId);
+                    }
+
                     Input = new InputModel
                     {
                         FirstName = customer.FirstName,
                         LastName = customer.LastName,
                         BirthDate = customer.BirthDate,
                         PhoneNumber = customer.PhoneNumber,
-                        IsCustomer = true
+                        IsCustomer = true,
+                        ProfilePicAddress = profilePicAddress
                     };
+
                     return;
                 }
             }
@@ -143,7 +161,7 @@ namespace FinalProject.Endpoint.Areas.Identity.Pages.Account.Manage
             }
 
 
-            var uploadsRootFolder = Path.Combine(_environment.WebRootPath, "Uploads");
+            var uploadsRootFolder = Path.Combine(_rootPath, "Uploads");
             var claims = User.Claims;
             foreach (var claim in claims)
             {
