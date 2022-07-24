@@ -15,6 +15,7 @@ namespace FinalProject.Endpoint.Common.Mappings
             CreateMap<OrderDto, OrderListViewModel>()
                 .ForMember(z => z.Address, a => a.MapFrom(x => x.Address.Content))
                 .ForMember(z => z.ServiceName, a => a.MapFrom(x => x.Service.Description));
+            CreateMap<OrderDto, OrderEditViewModel>();
         }
     }
 }
