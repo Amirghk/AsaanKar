@@ -23,7 +23,7 @@
                 <tr>
                     <th scope="row">@comment.Id</th>
                     <td>
-                        <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target=@("#c" + comment.Id) aria-expanded="true" aria-controls="collapseOne">
+                        <button class="accordion-button text-nowrap" type="button" data-bs-toggle="collapse" data-bs-target=@("#c" + comment.Id) aria-expanded="true" aria-controls="collapseOne">
                             مشاهده محتویات
                         </button>
                     </td>
@@ -33,23 +33,23 @@
                     <td>
                         @if (!String.IsNullOrEmpty(comment.ImageAddress))
                         {
-                            <img src=@comment.ImageAddress>
+                            <img src=~/@comment.ImageAddress>
                         }
                         else
                         {
-                            <p>عکس ندارد</p>
+                            <p class="text-nowrap">عکس ندارد</p>
                         }
                     </td>
                     <td>@comment.IsApproved</td>
-                    <td>
+                    <td class="d-inline-flex btn-group align-items-center">
                         <form asp-controller="Comment" asp-action="Delete" asp-route-id=@comment.Id method="post">
 
                             <button class="btn btn-danger" type="submit">حذف</button>
                         </form>
                         @if (@comment.IsApproved == false)
                         {
-                            <form asp-controller="Comment" asp-action="Approve" asp-route-id=@comment.Id method="posts">
-                                <button class="btn btn-success" type="submit">تایید کامنت</button>
+                            <form asp-controller="Comment" asp-action="Approve" asp-route-id=@comment.Id method="posts" >
+                                <button class="btn btn-success text-nowrap" type="submit">تایید کامنت</button>
                             </form>
                         }
                     </td>

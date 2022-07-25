@@ -1,0 +1,106 @@
+﻿
+<ul class="nav nav-tabs" id="myTab" role="tablist">
+    <li class="nav-item">
+        <a class="nav-link active" id="customers-tab" data-toggle="tab" href="#customers" role="tab" aria-controls="customers" aria-selected="true">مشتریان</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" id="experts-tab" data-toggle="tab" href="#experts" role="tab" aria-controls="experts" aria-selected="false">متخصصان</a>
+    </li>
+</ul>
+
+
+
+<div class="tab-content" id="myTabContent">
+    <div class="tab-pane fade show active" id="customers" role="tabpanel" aria-labelledby="customers-tab">
+        <table class="table">
+            <thead class="thead-dark">
+                <tr>
+                    <th scope="col">@Html.DisplayNameForInnerType((CustomerListVM c) => c.Id)</th>
+                    <th scope="col">@Html.DisplayNameForInnerType((CustomerListVM c) => c.FirstName )</th>
+                    <th scope="col">@Html.DisplayNameForInnerType((CustomerListVM c) => c.LastName)</th>
+                    <th scope="col">@Html.DisplayNameForInnerType((CustomerListVM c) => c.PhoneNumber)</th>
+                    <th scope="col">@Html.DisplayNameForInnerType((CustomerListVM c) => c.BirthDate)</th>
+                    <th scope="col">ویرایش</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var customer in ViewBag.Customers)
+                {
+                    <tr>
+                        <th scope="row">@customer.Id</th>
+                        <td>@customer.FirstName</td>
+                        <td>@customer.LastName</td>
+                        <td>@customer.PhoneNumber</td>
+                        <td>@customer.BirthDate</td>
+                        <td>
+                            <form asp-area="Identity" asp-page="/Account/Manage/AdminIndex" method="get">
+                                <button class="btn btn-default">ویرایش</button>
+                                <input type="hidden" name="userId" value=@customer.Id />
+                            </form>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+    <div class="tab-pane fade" id="experts" role="tabpanel" aria-labelledby="experts-tab">
+        <table class="table">
+            <thead class="thead-dark">
+                <tr>
+                    <th scope="col">@Html.DisplayNameForInnerType((ExpertListVM c) => c.Id)</th>
+                    <th scope="col">@Html.DisplayNameForInnerType((ExpertListVM c) => c.FirstName )</th>
+                    <th scope="col">@Html.DisplayNameForInnerType((ExpertListVM c) => c.LastName)</th>
+                    <th scope="col">@Html.DisplayNameForInnerType((ExpertListVM c) => c.PhoneNumber)</th>
+                    <th scope="col">@Html.DisplayNameForInnerType((ExpertListVM c) => c.BirthDate)</th>
+                    <th scope="col">@Html.DisplayNameForInnerType((ExpertListVM c) => c.NationalCode)</th>
+                    <th scope="col">@Html.DisplayNameForInnerType((ExpertListVM c) => c.City)</th>
+                    <th scope="col">ویرایش</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var expert in ViewBag.Experts)
+                {
+                    <tr>
+                        <th scope="row">@expert.Id</th>
+                        <td>@expert.FirstName</td>
+                        <td>@expert.LastName</td>
+                        <td>@expert.PhoneNumber</td>
+                        <td>@expert.BirthDate</td>
+                        <td>@expert.NationalCode</td>
+                        <td>@expert.City</td>
+                        <td>
+                            <form asp-area="Identity" asp-page="/Account/Manage/AdminIndex" method="get">
+                                <button class="btn btn-default">ویرایش</button>
+                                <input type="hidden" name="userId" value=@expert.Id />
+                            </form>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+
+
+@section Scripts{
+<script>
+                document.getElementById('experts-tab').addEventListener('click', () => {
+                    document.getElementById('experts').classList.add('active')
+                    document.getElementById('experts').classList.add('show')
+                    document.getElementById('customers').classList.remove('active')
+                    document.getElementById('customers').classList.remove('show')
+                    document.getElementById('experts-tab').classList.add('active')
+                    document.getElementById('customers-tab').classList.remove('active')
+
+                })
+
+                document.getElementById('customers-tab').addEventListener('click', () => {
+                    document.getElementById('customers').classList.add('active')
+                    document.getElementById('customers').classList.add('show')
+                    document.getElementById('experts').classList.remove('active')
+                    document.getElementById('experts').classList.remove('show')
+                    document.getElementById('customers-tab').classList.add('active')
+                    document.getElementById('experts-tab').classList.remove('active')
+                })
+</script>
+}

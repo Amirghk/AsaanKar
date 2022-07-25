@@ -7,12 +7,6 @@ namespace FinalProject.Endpoint.Common.Mappings
 {
     public class VMMappingProfile : Profile
     {
-        private readonly IWebHostEnvironment _environment;
-
-        public VMMappingProfile(IWebHostEnvironment environment)
-        {
-            _environment = environment;
-        }
         public VMMappingProfile()
         {
             CreateMap<CustomerDto, CustomerListVM>().ReverseMap();
@@ -23,7 +17,7 @@ namespace FinalProject.Endpoint.Common.Mappings
                 .ForMember(z => z.ServiceName, a => a.MapFrom(x => x.Service.Description));
             CreateMap<OrderDto, OrderEditViewModel>();
             CreateMap<CommentDto, CommentListViewModel>()
-                .ForMember(z => z.ImageAddress, a => a.MapFrom(x => Path.Combine(_environment.WebRootPath, x.Image.FileName)));
+                .ForMember(z => z.ImageAddress, a => a.MapFrom(x => Path.Combine("Uploads", x.Image.FileName)));
         }
     }
 }

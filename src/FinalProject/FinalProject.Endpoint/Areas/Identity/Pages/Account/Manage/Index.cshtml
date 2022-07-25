@@ -13,7 +13,7 @@
             <div class="card-body text-center">
                 @if (!String.IsNullOrEmpty(Model.Input.ProfilePicAddress))
                 {
-                    <img src=@Model.Input.ProfilePicAddress alt="avatar"
+                    <img src="~/@Model.Input.ProfilePicAddress" alt="avatar"
                      class="rounded-circle img-fluid" style="width: 150px;">
                 }
                 else

@@ -38,7 +38,7 @@ namespace FinalProject.Endpoint.Areas.Identity.Pages.Account.Manage
             _expertService = expertService;
             _customerService = customerService;
             _uploadService = uploadService;
-            _rootPath = environment.ContentRootPath;
+            _rootPath = environment.WebRootPath;
         }
 
 
@@ -90,7 +90,7 @@ namespace FinalProject.Endpoint.Areas.Identity.Pages.Account.Manage
                     // get expert profile pic
                     if (expert.ProfilePictureId != null)
                     {
-                        profilePicAddress = await _uploadService.GetFileDirectory(_rootPath, (int)expert.ProfilePictureId);
+                        profilePicAddress = await _uploadService.GetFileDirectory((int)expert.ProfilePictureId);
                     }
 
 
@@ -113,7 +113,7 @@ namespace FinalProject.Endpoint.Areas.Identity.Pages.Account.Manage
                     // get customer profile pic
                     if (customer.ProfilePictureId != null)
                     {
-                        profilePicAddress = await _uploadService.GetFileDirectory(_rootPath, (int)customer.ProfilePictureId);
+                        profilePicAddress = await _uploadService.GetFileDirectory((int)customer.ProfilePictureId);
                     }
 
                     Input = new InputModel

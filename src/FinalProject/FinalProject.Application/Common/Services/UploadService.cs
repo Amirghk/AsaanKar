@@ -157,7 +157,7 @@ public class UploadService : IUploadService
             FileName = x.FileName,
             FileSize = x.FileSize,
         }).ToList();
-        expert.WorkSamples = expertWorkSamples;
+        //expert.WorkSamples = expertWorkSamples;
         return await _expertService.Update(expert);
     }
 
@@ -166,10 +166,9 @@ public class UploadService : IUploadService
         return await _repository.Update(dto);
     }
 
-    public async Task<string> GetFileDirectory(string rootPath, int fileId)
+    public async Task<string> GetFileDirectory(int fileId)
     {
         var file = await _repository.GetById(fileId);
-        string folder = Path.Combine(rootPath, "Uploads");
-        return Path.Combine(folder, file.FileName);
+        return "Uploads/" + file.FileName;
     }
 }

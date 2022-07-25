@@ -36,12 +36,12 @@
                     <td>@order.Address</td>
                     <td>
 
-                        <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target=@("#b" + order.Id) aria-expanded="true" aria-controls="collapseOne">
+                        <button class="accordion-button text-nowrap" type="button" data-bs-toggle="collapse" data-bs-target=@("#b" + order.Id) aria-expanded="true" aria-controls="collapseOne">
                             مشاهده پیشنهادات
                         </button>
                     </td>
                     <td>@order.Description</td>
-                    <td>
+                    <td class="d-inline-flex justify-items-center">
                         <form asp-controller="Order" asp-action="Delete"  asp-route-id=@order.Id method="post">
 
                             <button class="btn btn-danger" type="submit">حذف</button>
@@ -51,7 +51,7 @@
                         </form>
                     </td>
                 </tr>
-                <tr id=@("b" + order.Id) class="accordion-collapse collapse show" aria-labelledby="headingOne" data-parent="#accordionExample">
+                <tr id=@("b" + order.Id) class="accordion-collapse collapse" aria-labelledby="headingOne" data-parent="#accordionExample">
                     <th scope="col">@Html.DisplayNameForInnerType((BidViewModel c) => c.Id)</th>
                     <th scope="col">@Html.DisplayNameForInnerType((BidViewModel c) => c.ExpertId)</th>
                     <th scope="col">@Html.DisplayNameForInnerType((BidViewModel c) => c.Price)</th>
