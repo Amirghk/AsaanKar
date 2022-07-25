@@ -34,7 +34,7 @@
                         <td>@customer.BirthDate</td>
                         <td>
                             <form asp-area="Identity" asp-page="/Account/Manage/AdminIndex" method="get">
-                                <button class="btn btn-default">ویرایش</button>
+                                <button class="btn btn-warning">ویرایش</button>
                                 <input type="hidden" name="userId" value=@customer.Id />
                             </form>
                         </td>
@@ -70,7 +70,7 @@
                         <td>@expert.City</td>
                         <td>
                             <form asp-area="Identity" asp-page="/Account/Manage/AdminIndex" method="get">
-                                <button class="btn btn-default">ویرایش</button>
+                                <button class="btn btn-warning">ویرایش</button>
                                 <input type="hidden" name="userId" value=@expert.Id />
                             </form>
                         </td>
