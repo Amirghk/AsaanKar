@@ -18,6 +18,7 @@ namespace FinalProject.Endpoint.Common.Mappings
             CreateMap<OrderDto, OrderEditViewModel>();
             CreateMap<CommentDto, CommentListViewModel>()
                 .ForMember(z => z.ImageAddress, a => a.MapFrom(x => Path.Combine("Uploads", x.Image.FileName)));
+            CreateMap<AddressDto, AddressViewModel>().ReverseMap();
         }
     }
 }

@@ -8,10 +8,17 @@ namespace FinalProject.Application.Common.Services;
 public class AddressService : IAddressService
 {
     private readonly IMapper _mapper;
+    private readonly ICityRepository _cityRepository;
+    private readonly IProvinceService _provinceService;
     private readonly IAddressRepository _repository;
-    public AddressService(IAddressRepository repository, IMapper mapper)
+    public AddressService(IAddressRepository repository,
+        IMapper mapper,
+        ICityRepository cityRepository,
+        IProvinceService provinceService)
     {
         _mapper = mapper;
+        _cityRepository = cityRepository;
+        _provinceService = provinceService;
         _repository = repository;
     }
 
@@ -28,6 +35,17 @@ public class AddressService : IAddressService
     public async Task<IEnumerable<AddressDto>> GetByUserId(string userId)
     {
         return await _repository.GetByUserId(userId);
+    }
+
+    public async Task<string> GetFullAddressToString(AddressDto dto)
+    {
+        var city = await _cityRepository.GetById(dto.CityId);
+        var cityName = city.Name;
+        var ProvinceName = (await _provinceService.GetById(city.ProvinceId)).Name;
+        var content = dto.Content;
+        var postalCode = dto.PostalCode;
+
+        return $"{ProvinceName} - {cityName} - {content}  -  PostalCode : {postalCode}";
     }
 
     public async Task<int> Remove(int id)

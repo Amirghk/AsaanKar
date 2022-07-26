@@ -1050,8 +1050,7 @@ namespace FinalProject.Infrastructure.Migrations
 
             modelBuilder.Entity("FinalProject.Domain.Entities.Expert", b =>
                 {
-                    b.Navigation("Address")
-                        .IsRequired();
+                    b.Navigation("Address");
 
                     b.Navigation("Comments");
 

@@ -105,8 +105,6 @@ namespace FinalProject.Endpoint.Areas.Identity.Pages.Account.Manage
             }
         }
 
-        // for admins
-        // TODO : Needs authorization
         public async Task<IActionResult> OnGetAsync(string userId)
         {
             var user = await _userManager.FindByIdAsync(userId);

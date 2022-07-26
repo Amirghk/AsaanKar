@@ -24,7 +24,7 @@ public class Expert : IBaseEntity, ISoftDeletable
 
     #endregion
     #region Navigational Properties
-    public virtual Address Address { get; set; } = null!;
+    public virtual Address? Address { get; set; }
     public int? ProfilePictureId { get; set; }
     public virtual ICollection<Service> Services { get; set; } = new List<Service>();
     public virtual ICollection<ServiceExpert> ServiceExperts { get; set; } = new List<ServiceExpert>();

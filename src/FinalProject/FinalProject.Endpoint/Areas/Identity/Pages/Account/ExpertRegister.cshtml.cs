@@ -115,22 +115,6 @@ namespace FinalProject.Endpoint.Areas.Identity.Pages.Account
             [StringLength(10, ErrorMessage = "The {0} must be at least {2} and at max {1} characters long.", MinimumLength = 8)]
             public string NationalCode { get; set; }
 
-
-            [Display(Name = "استان")]
-            public int ProvinceId { get; set; }
-
-            [Display(Name = "شهر")]
-            public int CityId { get; set; }
-
-            [DataType(DataType.Text)]
-            [Display(Name = "آدرس")]
-            public string Address { get; set; }
-
-            [DataType(DataType.PostalCode)]
-            [Display(Name = "کدپستی")]
-            [StringLength(10, ErrorMessage = "The {0} must be at least {2} and at max {1} characters long.", MinimumLength = 4)]
-            public string PostalCode { get; set; }
-
             [DataType(DataType.Date)]
             [Display(Name = "تاریخ تولد")]
             public DateTime BirthDate { get; set; }
@@ -197,15 +181,6 @@ namespace FinalProject.Endpoint.Areas.Identity.Pages.Account
                             BirthDate = Input.BirthDate,
                             NationalCode = Input.NationalCode,
                             PhoneNumber = Input.PhoneNumber,
-                        });
-                        // add related data to address entity
-                        await _addressService.Set(new AddressDto
-                        {
-                            CityId = Input.CityId,
-                            Content = Input.Address,
-                            PostalCode = Input.PostalCode,
-                            ExpertId = expertId,
-                            AddressCategory = AddressCategory.Expert
                         });
                     }
                     catch (Exception) // Roll back for when user doesn't get added to db

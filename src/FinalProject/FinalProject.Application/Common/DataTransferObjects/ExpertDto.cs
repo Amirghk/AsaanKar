@@ -15,5 +15,6 @@ public record ExpertDto
     public DateTime? BirthDate { get; init; }
     public int? ProfilePictureId { get; set; }
     public bool IsDeleted { get; set; }
+    public AddressDto? Address { get; set; }
     // public virtual ICollection<UploadDto> WorkSamples { get; set; } = new List<UploadDto>();
 }

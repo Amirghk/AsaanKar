@@ -1,0 +1,42 @@
+﻿@page
+@model FinalProject.Endpoint.Areas.Identity.Pages.Account.Manage.CustomerAddressModel
+@{
+}
+<div class="container p-3">
+    <div class="d-flex justify-content-between">
+        <div>
+            <h2 class="text-primary">آدرس ها</h2>
+        </div>
+        <div>
+            <a asp-page="AddAddress"  class="btn btn-success">افزودن آدرس جدید</a>
+        </div>
+    </div>
+
+
+    <table class="table">
+        <thead class="thead-dark">
+            <tr>
+                <th scope="col">آدرس</th>
+                <th scope="col">ویرایش</th>
+            </tr>
+        </thead>
+        <tbody>
+            @if (Model.Addresses is not null)
+            {
+                @foreach (var address in Model.Addresses)
+                {
+                    <tr>
+                        <td>@address.Address</td>
+                        <td class="d-inline-flex align-items-center">
+                            <a asp-page="EditAddress" asp-route-id=@address.Id class="btn btn-warning mx-1">ویرایش</a>
+                            <form asp-page-handler="delete" method="post" asp-route-id=@address.Id>
+                                <button asp-route-id=@address.Id type="submit" class="btn btn-danger">حذف</button>
+                            </form>
+                        </td>
+                    </tr>
+                }
+            }
+        </tbody>
+    </table>
+
+</div>
