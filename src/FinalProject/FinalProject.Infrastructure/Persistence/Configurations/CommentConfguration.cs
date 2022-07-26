@@ -12,6 +12,8 @@ public class CommentConfiguration : IEntityTypeConfiguration<Comment>
             .Property(c => c.Content)
             .IsRequired()
             .HasMaxLength(2500);
+        builder.Property(c => c.ImageId)
+            .IsRequired(false);
         builder
             .HasOne(c => c.Customer)
             .WithMany(cu => cu.Comments)
@@ -26,7 +28,7 @@ public class CommentConfiguration : IEntityTypeConfiguration<Comment>
             .HasOne(c => c.Image)
             .WithOne(f => f.Comment)
             .HasForeignKey<Comment>(c => c.ImageId)
-            .OnDelete(DeleteBehavior.NoAction);
+            .OnDelete(DeleteBehavior.SetNull);
 
     }
 }

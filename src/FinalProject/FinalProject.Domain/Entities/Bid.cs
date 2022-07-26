@@ -20,7 +20,7 @@ public class Bid : IAuditableEntity
     #region Navigational Properties 
     public int OrderId { get; set; }
     public Order Order { get; set; } = null!;
-    public int? ExpertId { get; set; }
+    public string? ExpertId { get; set; }
     public Expert? Expert { get; set; }
     #endregion
 }

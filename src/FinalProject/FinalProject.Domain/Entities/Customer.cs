@@ -10,17 +10,14 @@ namespace FinalProject.Domain.Entities;
 public class Customer : IBaseEntity, ISoftDeletable
 {
     #region Properties
-    public int Id { get; init; }
+    public string? Id { get; set; }
     public string FirstName { get; set; } = null!;
     public string LastName { get; set; } = null!;
     public string PhoneNumber { get; set; } = null!;
-    public int? FileInfoId { get; set; }
     public DateTime? BirthDate { get; set; }
     public bool IsDeleted { get; set; }
     #endregion
     #region Navigational Properties
-    // TODO : Make this primary key
-    public string? CustomerId { get; set; }
     public int? ProfilePictureId { get; set; }
     public virtual Upload? ProfilePicture { get; set; }
     public virtual ICollection<Address> Addresses { get; set; } = new List<Address>();

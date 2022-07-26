@@ -1,0 +1,36 @@
+﻿
+
+@model IEnumerable<UploadViewModel>
+
+
+
+<h1>فایل های آپلود شده</h1>
+<table class="table">
+    <thead class="thead-dark">
+        <tr>
+            <th scope="col">@Html.DisplayNameFor(model => model.Id)</th>
+            <th scope="col">@Html.DisplayNameFor((model => model.FileName))</th>
+            <th scope="col">@Html.DisplayNameFor((model => model.FileSize))</th>
+            <th scope="col">@Html.DisplayNameFor((model => model.FileCategory))</th>
+
+            <th scope="col">ویرایش</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var upload in Model)
+        {
+            <tr>
+                <th scope="row">@upload.Id</th>
+                <td>@upload.FileName</td>
+                <td>@upload.FileSize</td>
+                <td>@upload.FileCategory.GetDisplayName()</td>
+                <td>
+                    <form asp-controller="Upload" asp-action="Delete" asp-route-id=@upload.Id method="post">
+
+                        <button type="submit">حذف</button>
+                    </form>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

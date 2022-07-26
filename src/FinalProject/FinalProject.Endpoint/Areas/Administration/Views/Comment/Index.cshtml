@@ -1,0 +1,63 @@
+﻿@model IEnumerable<CommentListViewModel>
+
+
+
+<h1>کامنت ها</h1>
+<div class="accordion accordion-flush" id="accordionFlush">
+
+    <table class="table">
+        <thead class="thead-dark">
+            <tr>
+                <th scope="col">@Html.DisplayNameFor(c => c.Id)</th>
+                <th scope="col">@Html.DisplayNameFor(c => c.Content)</th>
+                <th scope="col">@Html.DisplayNameFor(c => c.CustomerId)</th>
+                <th scope="col">@Html.DisplayNameFor(c => c.ExpertId)</th>
+                <th scope="col">@Html.DisplayNameFor(c => c.ImageAddress)</th>
+                <th scope="col">@Html.DisplayNameFor(c => c.IsApproved)</th>
+                <th scope="col">عملیات</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var comment in Model)
+            {
+                <tr>
+                    <th scope="row">@comment.Id</th>
+                    <td>
+                        <button class="accordion-button text-nowrap" type="button" data-bs-toggle="collapse" data-bs-target=@("#c" + comment.Id) aria-expanded="true" aria-controls="collapseOne">
+                            مشاهده محتویات
+                        </button>
+                    </td>
+                    <td>@comment.CustomerId</td>
+                    <td>@comment.ExpertId</td>
+
+                    <td>
+                        @if (!String.IsNullOrEmpty(comment.ImageAddress))
+                        {
+                            <img src=~/@comment.ImageAddress>
+                        }
+                        else
+                        {
+                            <p class="text-nowrap">عکس ندارد</p>
+                        }
+                    </td>
+                    <td>@comment.IsApproved</td>
+                    <td class="d-inline-flex btn-group align-items-center">
+                        <form asp-controller="Comment" asp-action="Delete" asp-route-id=@comment.Id method="post">
+
+                            <button class="btn btn-danger" type="submit">حذف</button>
+                        </form>
+                        @if (@comment.IsApproved == false)
+                        {
+                            <form asp-controller="Comment" asp-action="Approve" asp-route-id=@comment.Id method="posts" >
+                                <button class="btn btn-success text-nowrap" type="submit">تایید کامنت</button>
+                            </form>
+                        }
+                    </td>
+                </tr>
+                <tr id=@("c" + comment.Id) class="accordion-collapse collapse" aria-labelledby="headingOne" data-parent="#accordionFlush">
+                    <td class="accordion-body" colspan="7">@comment.Content</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

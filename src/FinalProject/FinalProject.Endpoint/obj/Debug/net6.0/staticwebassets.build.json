@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "w/ZsKkJ6sFljgysPhaX28jG190fzCHciXCxUaVSeDBU=",
+  "Hash": "wvvAgU8cw6BRq6zYT9CDuTNRefNhyQKrz8Ran04RZK0=",
   "Source": "FinalProject.Endpoint",
   "BasePath": "_content/FinalProject.Endpoint",
   "Mode": "Default",
@@ -1086,6 +1086,23 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\AdminArea\\css\\bootstrap.css"
+    },
+    {
+      "Identity": "G:\\FinalProject\\src\\FinalProject\\FinalProject.Endpoint\\wwwroot\\AdminArea\\css\\bootstrap.min.css",
+      "SourceId": "FinalProject.Endpoint",
+      "SourceType": "Discovered",
+      "ContentRoot": "G:\\FinalProject\\src\\FinalProject\\FinalProject.Endpoint\\wwwroot\\",
+      "BasePath": "_content/FinalProject.Endpoint",
+      "RelativePath": "AdminArea/css/bootstrap.min.css",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\AdminArea\\css\\bootstrap.min.css"
     },
     {
       "Identity": "G:\\FinalProject\\src\\FinalProject\\FinalProject.Endpoint\\wwwroot\\AdminArea\\css\\bootstrap.rtl.min.css",

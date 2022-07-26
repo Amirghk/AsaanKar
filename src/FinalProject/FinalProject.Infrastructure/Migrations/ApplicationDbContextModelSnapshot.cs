@@ -41,11 +41,11 @@ namespace FinalProject.Infrastructure.Migrations
                         .HasMaxLength(2000)
                         .HasColumnType("nvarchar(2000)");
 
-                    b.Property<int?>("CustomerId")
-                        .HasColumnType("int");
+                    b.Property<string>("CustomerId")
+                        .HasColumnType("nvarchar(450)");
 
-                    b.Property<int?>("ExpertId")
-                        .HasColumnType("int");
+                    b.Property<string>("ExpertId")
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("bit");
@@ -90,8 +90,8 @@ namespace FinalProject.Infrastructure.Migrations
                     b.Property<DateTimeOffset?>("CreatedDateTime")
                         .HasColumnType("datetimeoffset");
 
-                    b.Property<int?>("ExpertId")
-                        .HasColumnType("int");
+                    b.Property<string>("ExpertId")
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("ModifiedByBrowserName")
                         .HasMaxLength(1000)
@@ -222,16 +222,19 @@ namespace FinalProject.Infrastructure.Migrations
                     b.Property<DateTimeOffset?>("CreatedDateTime")
                         .HasColumnType("datetimeoffset");
 
-                    b.Property<int?>("CustomerId")
+                    b.Property<string>("CustomerId")
                         .IsRequired()
-                        .HasColumnType("int");
+                        .HasColumnType("nvarchar(450)");
 
-                    b.Property<int>("ExpertId")
-                        .HasColumnType("int");
+                    b.Property<string>("ExpertId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<int?>("ImageId")
-                        .IsRequired()
                         .HasColumnType("int");
+
+                    b.Property<bool>("IsApproved")
+                        .HasColumnType("bit");
 
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("bit");
@@ -260,27 +263,19 @@ namespace FinalProject.Infrastructure.Migrations
                     b.HasIndex("ExpertId");
 
                     b.HasIndex("ImageId")
-                        .IsUnique();
+                        .IsUnique()
+                        .HasFilter("[ImageId] IS NOT NULL");
 
                     b.ToTable("Comments");
                 });
 
             modelBuilder.Entity("FinalProject.Domain.Entities.Customer", b =>
                 {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+                    b.Property<string>("Id")
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<DateTime?>("BirthDate")
                         .HasColumnType("datetime2");
-
-                    b.Property<string>("CustomerId")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int?>("FileInfoId")
-                        .HasColumnType("int");
 
                     b.Property<string>("FirstName")
                         .IsRequired()
@@ -311,11 +306,8 @@ namespace FinalProject.Infrastructure.Migrations
 
             modelBuilder.Entity("FinalProject.Domain.Entities.Expert", b =>
                 {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+                    b.Property<string>("Id")
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("Bio")
                         .HasMaxLength(4000)
@@ -323,9 +315,6 @@ namespace FinalProject.Infrastructure.Migrations
 
                     b.Property<DateTime>("BirthDate")
                         .HasColumnType("datetime2");
-
-                    b.Property<string>("ExpertId")
-                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("FirstName")
                         .IsRequired()
@@ -391,8 +380,9 @@ namespace FinalProject.Infrastructure.Migrations
                     b.Property<DateTimeOffset?>("CreatedDateTime")
                         .HasColumnType("datetimeoffset");
 
-                    b.Property<int>("CustomerId")
-                        .HasColumnType("int");
+                    b.Property<string>("CustomerId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<DateTimeOffset?>("DateCompleted")
                         .HasColumnType("datetimeoffset");
@@ -401,8 +391,8 @@ namespace FinalProject.Infrastructure.Migrations
                         .HasMaxLength(4000)
                         .HasColumnType("nvarchar(4000)");
 
-                    b.Property<int>("ExpertId")
-                        .HasColumnType("int");
+                    b.Property<string>("ExpertId")
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("bit");
@@ -419,6 +409,9 @@ namespace FinalProject.Infrastructure.Migrations
                         .HasColumnType("int");
 
                     b.Property<DateTimeOffset?>("ModifiedDateTime")
+                        .HasColumnType("datetimeoffset");
+
+                    b.Property<DateTimeOffset>("OrderDate")
                         .HasColumnType("datetimeoffset");
 
                     b.Property<decimal>("ServiceBasePrice")
@@ -502,8 +495,8 @@ namespace FinalProject.Infrastructure.Migrations
                     b.Property<int>("ServiceId")
                         .HasColumnType("int");
 
-                    b.Property<int>("ExpertId")
-                        .HasColumnType("int");
+                    b.Property<string>("ExpertId")
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("CreatedByBrowserName")
                         .HasMaxLength(1000)
@@ -562,8 +555,8 @@ namespace FinalProject.Infrastructure.Migrations
                     b.Property<DateTimeOffset?>("CreatedDateTime")
                         .HasColumnType("datetimeoffset");
 
-                    b.Property<int?>("ExpertId")
-                        .HasColumnType("int");
+                    b.Property<string>("ExpertId")
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<int>("FileCategory")
                         .HasColumnType("int");
@@ -886,8 +879,7 @@ namespace FinalProject.Infrastructure.Migrations
                     b.HasOne("FinalProject.Domain.Entities.Upload", "Image")
                         .WithOne("Comment")
                         .HasForeignKey("FinalProject.Domain.Entities.Comment", "ImageId")
-                        .OnDelete(DeleteBehavior.NoAction)
-                        .IsRequired();
+                        .OnDelete(DeleteBehavior.SetNull);
 
                     b.Navigation("Customer");
 
@@ -923,8 +915,7 @@ namespace FinalProject.Infrastructure.Migrations
                     b.HasOne("FinalProject.Domain.Entities.Expert", "Expert")
                         .WithMany("Orders")
                         .HasForeignKey("ExpertId")
-                        .OnDelete(DeleteBehavior.NoAction)
-                        .IsRequired();
+                        .OnDelete(DeleteBehavior.NoAction);
 
                     b.HasOne("FinalProject.Domain.Entities.Service", "Service")
                         .WithMany("Orders")
@@ -974,7 +965,7 @@ namespace FinalProject.Infrastructure.Migrations
             modelBuilder.Entity("FinalProject.Domain.Entities.Upload", b =>
                 {
                     b.HasOne("FinalProject.Domain.Entities.Expert", "Expert")
-                        .WithMany("Pictures")
+                        .WithMany("WorkSamples")
                         .HasForeignKey("ExpertId");
 
                     b.Navigation("Expert");
@@ -1059,16 +1050,15 @@ namespace FinalProject.Infrastructure.Migrations
 
             modelBuilder.Entity("FinalProject.Domain.Entities.Expert", b =>
                 {
-                    b.Navigation("Address")
-                        .IsRequired();
+                    b.Navigation("Address");
 
                     b.Navigation("Comments");
 
                     b.Navigation("Orders");
 
-                    b.Navigation("Pictures");
-
                     b.Navigation("ServiceExperts");
+
+                    b.Navigation("WorkSamples");
                 });
 
             modelBuilder.Entity("FinalProject.Domain.Entities.Order", b =>

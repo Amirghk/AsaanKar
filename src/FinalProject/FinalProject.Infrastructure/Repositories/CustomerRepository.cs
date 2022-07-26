@@ -19,12 +19,12 @@ namespace FinalProject.Infrastructure.Repositories
             _mapper = mapper;
         }
 
-        public async Task<int> Add(CustomerDto model)
+        public async Task<string> Add(CustomerDto model)
         {
             var record = _mapper.Map<Customer>(model);
             await _context.Customers.AddAsync(record);
             await _context.SaveChangesAsync();
-            return record.Id;
+            return record.Id!;
         }
 
         public async Task<IEnumerable<CustomerDto>> GetAll()
@@ -32,7 +32,7 @@ namespace FinalProject.Infrastructure.Repositories
             return await _mapper.ProjectTo<CustomerDto>(_context.Customers).ToListAsync();
         }
 
-        public async Task<CustomerDto> GetById(int id)
+        public async Task<CustomerDto> GetById(string id)
         {
             var record = await _mapper.ProjectTo<CustomerDto>(_context.Customers).SingleOrDefaultAsync(x => x.Id == id);
             if (record == null)
@@ -42,17 +42,17 @@ namespace FinalProject.Infrastructure.Repositories
             return record;
         }
 
-        public async Task<CustomerDto> GetByUserId(string userId)
+        public async Task<CustomerDto> GetByUserId(string id)
         {
-            var record = await _mapper.ProjectTo<CustomerDto>(_context.Customers).SingleOrDefaultAsync(x => x.CustomerId == userId);
+            var record = await _mapper.ProjectTo<CustomerDto>(_context.Customers).SingleOrDefaultAsync(x => x.Id == id);
             if (record == null)
             {
-                throw new NotFoundException(nameof(Customer), userId);
+                throw new NotFoundException(nameof(Customer), id);
             }
             return record;
         }
 
-        public async Task<int> Remove(int id)
+        public async Task<string> Remove(string id)
         {
             var record = await _context.Customers.FindAsync(id);
             if (record == null)
@@ -64,20 +64,19 @@ namespace FinalProject.Infrastructure.Repositories
             return id;
         }
 
-        public async Task<int> SoftDelete(string customerId)
+        public async Task<string> SoftDelete(string customerId)
         {
-            var record = await _context.Customers.SingleOrDefaultAsync(x => x.CustomerId == customerId);
+            var record = await _context.Customers.SingleOrDefaultAsync(x => x.Id == customerId);
             if (record == null)
             {
                 throw new NotFoundException(nameof(Expert), customerId);
             }
-            record.CustomerId = null;
             record.IsDeleted = true;
             await _context.SaveChangesAsync();
-            return record.Id;
+            return record.Id!;
         }
 
-        public async Task<int> Update(CustomerDto model)
+        public async Task<string> Update(CustomerDto model)
         {
             var record = await _context.Customers.SingleOrDefaultAsync(x => x.Id == model.Id);
             if (record == null)
@@ -86,7 +85,7 @@ namespace FinalProject.Infrastructure.Repositories
             }
             _mapper.Map(model, record);
             await _context.SaveChangesAsync();
-            return record.Id;
+            return record.Id!;
         }
     }
 }

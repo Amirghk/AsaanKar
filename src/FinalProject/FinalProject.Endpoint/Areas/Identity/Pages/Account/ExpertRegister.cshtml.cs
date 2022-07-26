@@ -115,22 +115,6 @@ namespace FinalProject.Endpoint.Areas.Identity.Pages.Account
             [StringLength(10, ErrorMessage = "The {0} must be at least {2} and at max {1} characters long.", MinimumLength = 8)]
             public string NationalCode { get; set; }
 
-
-            [Display(Name = "استان")]
-            public int ProvinceId { get; set; }
-
-            [Display(Name = "شهر")]
-            public int CityId { get; set; }
-
-            [DataType(DataType.Text)]
-            [Display(Name = "آدرس")]
-            public string Address { get; set; }
-
-            [DataType(DataType.PostalCode)]
-            [Display(Name = "کدپستی")]
-            [StringLength(10, ErrorMessage = "The {0} must be at least {2} and at max {1} characters long.", MinimumLength = 4)]
-            public string PostalCode { get; set; }
-
             [DataType(DataType.Date)]
             [Display(Name = "تاریخ تولد")]
             public DateTime BirthDate { get; set; }
@@ -187,24 +171,26 @@ namespace FinalProject.Endpoint.Areas.Identity.Pages.Account
                     var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);
 
                     // add related data to Expert entity 
-                    int expertId = await _expertService.Set(new ExpertDto
+                    try
                     {
-                        FirstName = Input.FirstName,
-                        LastName = Input.LastName,
-                        BirthDate = Input.BirthDate,
-                        ExpertId = userId,
-                        NationalCode = Input.NationalCode,
-                        PhoneNumber = Input.PhoneNumber,
-                    });
-                    // add related data to address entity
-                    await _addressService.Set(new AddressDto
+                        string expertId = await _expertService.Set(new ExpertDto
+                        {
+                            Id = userId,
+                            FirstName = Input.FirstName,
+                            LastName = Input.LastName,
+                            BirthDate = Input.BirthDate,
+                            NationalCode = Input.NationalCode,
+                            PhoneNumber = Input.PhoneNumber,
+                        });
+                    }
+                    catch (Exception) // Roll back for when user doesn't get added to db
                     {
-                        CityId = Input.CityId,
-                        Content = Input.Address,
-                        PostalCode = Input.PostalCode,
-                        ExpertId = expertId,
-                        AddressCategory = AddressCategory.Expert
-                    });
+                        await _userManager.DeleteAsync(await _userManager.FindByIdAsync(userId));
+                        throw;
+                    }
+
+
+
 
                     code = WebEncoders.Base64UrlEncode(Encoding.UTF8.GetBytes(code));
                     var callbackUrl = Url.Page(

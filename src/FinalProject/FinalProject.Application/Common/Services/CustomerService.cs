@@ -7,11 +7,9 @@ namespace FinalProject.Application.Common.Services;
 
 public class CustomerService : ICustomerService
 {
-    private readonly IMapper _mapper;
     private readonly ICustomerRepository _repository;
-    public CustomerService(ICustomerRepository repository, IMapper mapper)
+    public CustomerService(ICustomerRepository repository)
     {
-        _mapper = mapper;
         _repository = repository;
     }
 
@@ -20,32 +18,28 @@ public class CustomerService : ICustomerService
         return (await _repository.GetAll()).Where(x => x.IsDeleted == false);
     }
 
-    public async Task<CustomerDto> GetById(int id)
+    public async Task<CustomerDto> GetById(string id)
     {
         return await _repository.GetById(id);
     }
 
-    public async Task<CustomerDto> GetByUserId(string userId)
-    {
-        return await _repository.GetByUserId(userId);
-    }
 
-    public async Task<int> Remove(int id)
+    public async Task<string> Remove(string id)
     {
         return await _repository.Remove(id);
     }
 
-    public async Task<int> Set(CustomerDto dto)
+    public async Task<string> Set(CustomerDto dto)
     {
         return await _repository.Add(dto);
     }
 
-    public async Task<int> SoftDelete(string customerId)
+    public async Task<string> SoftDelete(string id)
     {
-        return await _repository.SoftDelete(customerId);
+        return await _repository.SoftDelete(id);
     }
 
-    public async Task<int> Update(CustomerDto dto)
+    public async Task<string> Update(CustomerDto dto)
     {
         return await _repository.Update(dto);
     }

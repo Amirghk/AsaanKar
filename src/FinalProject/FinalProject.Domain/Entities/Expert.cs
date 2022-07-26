@@ -10,7 +10,7 @@ namespace FinalProject.Domain.Entities;
 public class Expert : IBaseEntity, ISoftDeletable
 {
     #region Properties
-    public int Id { get; set; }
+    public virtual string? Id { get; set; }
     public string FirstName { get; set; } = null!;
     public string LastName { get; set; } = null!;
     public string NationalCode { get; set; } = null!;
@@ -24,8 +24,7 @@ public class Expert : IBaseEntity, ISoftDeletable
 
     #endregion
     #region Navigational Properties
-    public virtual string? ExpertId { get; set; }
-    public virtual Address Address { get; set; } = null!;
+    public virtual Address? Address { get; set; }
     public int? ProfilePictureId { get; set; }
     public virtual ICollection<Service> Services { get; set; } = new List<Service>();
     public virtual ICollection<ServiceExpert> ServiceExperts { get; set; } = new List<ServiceExpert>();

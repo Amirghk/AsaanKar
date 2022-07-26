@@ -18,9 +18,9 @@ public class Address : ISoftDeletable, IBaseEntity
     #endregion
 
     #region Navigational Properties
-    public int? CustomerId { get; set; }
+    public string? CustomerId { get; set; }
     public virtual Customer? Customer { get; set; }
-    public int? ExpertId { get; set; }
+    public string? ExpertId { get; set; }
     public virtual Expert? Expert { get; set; }
     public int CityId { get; set; }
     public virtual City City { get; set; } = null!;

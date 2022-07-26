@@ -76,7 +76,7 @@ namespace FinalProject.Endpoint.Areas.Identity.Pages.Account.Manage
             {
                 if (claim.Type == "IsExpert")
                 {
-                    var expert = await _expertService.GetByUserId(user.Id);
+                    var expert = await _expertService.GetById(user.Id);
                     Input = new InputModel
                     {
                         FirstName = expert.FirstName,
@@ -91,7 +91,7 @@ namespace FinalProject.Endpoint.Areas.Identity.Pages.Account.Manage
                 }
                 if (claim.Type == "IsCustomer")
                 {
-                    var customer = await _customerService.GetByUserId(user.Id);
+                    var customer = await _customerService.GetById(user.Id);
                     Input = new InputModel
                     {
                         FirstName = customer.FirstName,
@@ -105,8 +105,6 @@ namespace FinalProject.Endpoint.Areas.Identity.Pages.Account.Manage
             }
         }
 
-        // for admins
-        // TODO : Needs authorization
         public async Task<IActionResult> OnGetAsync(string userId)
         {
             var user = await _userManager.FindByIdAsync(userId);
@@ -142,7 +140,7 @@ namespace FinalProject.Endpoint.Areas.Identity.Pages.Account.Manage
             {
                 if (claim.Type == "IsExpert")
                 {
-                    var expert = await _expertService.GetByUserId(user.Id);
+                    var expert = await _expertService.GetById(user.Id);
                     var expertDto = new ExpertDto
                     {
                         Id = expert.Id,
@@ -151,14 +149,13 @@ namespace FinalProject.Endpoint.Areas.Identity.Pages.Account.Manage
                         BirthDate = Input.BirthDate,
                         NationalCode = Input.NationalCode,
                         PhoneNumber = Input.PhoneNumber,
-                        ExpertId = user.Id,
                     };
                     await _expertService.Update(expertDto);
                     break;
                 }
                 if (claim.Type == "IsCustomer")
                 {
-                    var customer = await _customerService.GetByUserId(user.Id);
+                    var customer = await _customerService.GetById(user.Id);
                     var customerDto = new CustomerDto
                     {
                         Id = customer.Id,
@@ -166,7 +163,6 @@ namespace FinalProject.Endpoint.Areas.Identity.Pages.Account.Manage
                         LastName = Input.LastName,
                         BirthDate = Input.BirthDate,
                         PhoneNumber = Input.PhoneNumber,
-                        CustomerId = user.Id,
                     };
                     await _customerService.Update(customerDto);
                     break;

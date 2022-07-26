@@ -1,0 +1,16 @@
+﻿@page
+@model FinalProject.Endpoint.Areas.Identity.Pages.Account.Manage.ExpertAddressModel
+
+
+
+@if (!String.IsNullOrEmpty(Model.Address))
+{
+    <div>
+        @Model.Address
+    </div>
+    <a asp-page="EditAddress" asp-route-id=@Model.AddressId class="btn btn-warning">تغییر آدرس</a>
+}
+else
+{
+    <a asp-page="AddAddress"  class="btn btn-success">اضافه کردن آدرس جدید</a>
+}

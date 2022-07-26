@@ -22,32 +22,28 @@ public class ExpertService : IExpertService
         return (await _repository.GetAll()).Where(x => x.IsDeleted == false);
     }
 
-    public async Task<ExpertDto> GetById(int id)
+    public async Task<ExpertDto> GetById(string id)
     {
         return await _repository.GetById(id);
     }
 
-    public async Task<ExpertDto> GetByUserId(string userId)
-    {
-        return await _repository.GetByUserId(userId);
-    }
 
-    public async Task<int> Remove(int id)
+    public async Task<string> Remove(string id)
     {
         return await _repository.Remove(id);
     }
 
-    public async Task<int> Set(ExpertDto dto)
+    public async Task<string> Set(ExpertDto dto)
     {
         return await _repository.Add(dto);
     }
 
-    public async Task<int> SoftDelete(string expertId)
+    public async Task<string> SoftDelete(string id)
     {
-        return await _repository.SoftDelete(expertId);
+        return await _repository.SoftDelete(id);
     }
 
-    public async Task<int> Update(ExpertDto dto)
+    public async Task<string> Update(ExpertDto dto)
     {
         return await _repository.Update(dto);
     }

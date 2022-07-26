@@ -10,13 +10,14 @@ public class Comment : IAuditableEntity, IBaseEntity, ISoftDeletable
     public string Content { get; set; } = null!;
     public int Votes { get; set; }
     public bool IsDeleted { get; set; }
+    public bool IsApproved { get; set; }
     #endregion
     #region Navigational Properties
-    public int? CustomerId { get; set; }
+    public string CustomerId { get; set; } = null!;
     public virtual Customer Customer { get; set; } = null!;
-    public int ExpertId { get; set; }
+    public string ExpertId { get; set; } = null!;
     public virtual Expert Expert { get; set; } = null!;
     public int? ImageId { get; set; }
-    public Upload Image { get; set; } = null!;
+    public Upload? Image { get; set; }
     #endregion
 }

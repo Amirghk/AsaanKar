@@ -7,11 +7,10 @@ namespace FinalProject.Application.Common.Interfaces.Repositories;
 
 public interface ICustomerRepository
 {
-    Task<int> Add(CustomerDto model);
-    Task<int> Update(CustomerDto model);
-    Task<int> Remove(int id);
-    Task<int> SoftDelete(string customerId);
-    Task<CustomerDto> GetById(int id);
-    Task<CustomerDto> GetByUserId(string userId);
+    Task<string> Add(CustomerDto model);
+    Task<string> Update(CustomerDto model);
+    Task<string> Remove(string id);
+    Task<string> SoftDelete(string id);
+    Task<CustomerDto> GetById(string id);
     Task<IEnumerable<CustomerDto>> GetAll();
 }

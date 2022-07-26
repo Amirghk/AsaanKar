@@ -13,6 +13,6 @@ public record BidDto
     public string? Notes { get; init; }
     public decimal Price { get; init; }
     public int OrderId { get; init; }
-    public int? ExpertId { get; init; }
+    public string? ExpertId { get; init; }
 }
 

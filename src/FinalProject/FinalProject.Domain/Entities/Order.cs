@@ -11,6 +11,7 @@ public class Order : IAuditableEntity, IBaseEntity, ISoftDeletable
 {
     #region Properties
     public int Id { get; set; }
+    public DateTimeOffset OrderDate { get; set; }
     public DateTimeOffset? DateCompleted { get; set; }
     public string? Description { get; set; }
     public OrderState State { get; set; }
@@ -25,10 +26,10 @@ public class Order : IAuditableEntity, IBaseEntity, ISoftDeletable
     // made ServiceId nullable to allow for null value in case deleted service is used in order
     public int? ServiceId { get; set; }
     public virtual Service Service { get; set; } = null!;
-    public int CustomerId { get; set; }
+    public string CustomerId { get; set; } = null!;
     public virtual Customer Customer { get; set; } = null!;
-    public int ExpertId { get; set; }
-    public virtual Expert Expert { get; set; } = null!;
+    public string? ExpertId { get; set; }
+    public virtual Expert? Expert { get; set; }
     public virtual ICollection<Bid> Bids { get; set; } = new List<Bid>();
     #endregion
 }

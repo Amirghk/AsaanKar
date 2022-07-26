@@ -11,6 +11,6 @@ public interface IAddressRepository
     Task<int> Update(AddressDto model);
     Task<int> Remove(int id);
     Task<AddressDto> GetById(int id);
-    Task<IEnumerable<AddressDto>> GetByUserId(int userId);
+    Task<IEnumerable<AddressDto>> GetByUserId(string userId);
     Task<IEnumerable<AddressDto>> GetAll();
 }

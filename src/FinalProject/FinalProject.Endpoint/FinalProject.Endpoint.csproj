@@ -32,7 +32,6 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <Folder Include="Areas\Identity\Models\" />
 	  <Folder Include="wwwroot\css\Admin\" />
 	  <Folder Include="wwwroot\js\Admin\" />
 	</ItemGroup>
