@@ -9,4 +9,5 @@ public record CategoryDto
     public bool IsAvailable { get; set; }
     public int? ParentCategoryId { get; init; }
     public int? PictureId { get; set; }
+    public UploadDto? Picture { get; set; }
 }

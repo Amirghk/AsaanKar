@@ -841,14 +841,14 @@ namespace FinalProject.Infrastructure.Migrations
                         .HasForeignKey("ParentCategoryId")
                         .OnDelete(DeleteBehavior.Restrict);
 
-                    b.HasOne("FinalProject.Domain.Entities.Upload", "FileDetails")
+                    b.HasOne("FinalProject.Domain.Entities.Upload", "Picture")
                         .WithOne("Category")
                         .HasForeignKey("FinalProject.Domain.Entities.Category", "PictureId")
                         .OnDelete(DeleteBehavior.NoAction);
 
-                    b.Navigation("FileDetails");
-
                     b.Navigation("ParentCategory");
+
+                    b.Navigation("Picture");
                 });
 
             modelBuilder.Entity("FinalProject.Domain.Entities.City", b =>

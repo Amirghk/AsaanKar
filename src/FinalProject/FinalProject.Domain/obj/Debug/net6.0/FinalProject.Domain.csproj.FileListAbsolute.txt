@@ -10,3 +10,15 @@ G:\FinalProject\src\FinalProject\FinalProject.Domain\obj\Debug\net6.0\FinalProje
 G:\FinalProject\src\FinalProject\FinalProject.Domain\obj\Debug\net6.0\refint\FinalProject.Domain.dll
 G:\FinalProject\src\FinalProject\FinalProject.Domain\obj\Debug\net6.0\FinalProject.Domain.pdb
 G:\FinalProject\src\FinalProject\FinalProject.Domain\obj\Debug\net6.0\ref\FinalProject.Domain.dll
+G:\FinalProject\FinalProjectMaktab\src\FinalProject\FinalProject.Domain\bin\Debug\net6.0\FinalProject.Domain.deps.json
+G:\FinalProject\FinalProjectMaktab\src\FinalProject\FinalProject.Domain\bin\Debug\net6.0\FinalProject.Domain.dll
+G:\FinalProject\FinalProjectMaktab\src\FinalProject\FinalProject.Domain\bin\Debug\net6.0\FinalProject.Domain.pdb
+G:\FinalProject\FinalProjectMaktab\src\FinalProject\FinalProject.Domain\obj\Debug\net6.0\FinalProject.Domain.csproj.AssemblyReference.cache
+G:\FinalProject\FinalProjectMaktab\src\FinalProject\FinalProject.Domain\obj\Debug\net6.0\FinalProject.Domain.GeneratedMSBuildEditorConfig.editorconfig
+G:\FinalProject\FinalProjectMaktab\src\FinalProject\FinalProject.Domain\obj\Debug\net6.0\FinalProject.Domain.AssemblyInfoInputs.cache
+G:\FinalProject\FinalProjectMaktab\src\FinalProject\FinalProject.Domain\obj\Debug\net6.0\FinalProject.Domain.AssemblyInfo.cs
+G:\FinalProject\FinalProjectMaktab\src\FinalProject\FinalProject.Domain\obj\Debug\net6.0\FinalProject.Domain.csproj.CoreCompileInputs.cache
+G:\FinalProject\FinalProjectMaktab\src\FinalProject\FinalProject.Domain\obj\Debug\net6.0\FinalProject.Domain.dll
+G:\FinalProject\FinalProjectMaktab\src\FinalProject\FinalProject.Domain\obj\Debug\net6.0\refint\FinalProject.Domain.dll
+G:\FinalProject\FinalProjectMaktab\src\FinalProject\FinalProject.Domain\obj\Debug\net6.0\FinalProject.Domain.pdb
+G:\FinalProject\FinalProjectMaktab\src\FinalProject\FinalProject.Domain\obj\Debug\net6.0\ref\FinalProject.Domain.dll

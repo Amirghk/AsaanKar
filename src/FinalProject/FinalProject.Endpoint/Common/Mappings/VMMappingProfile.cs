@@ -2,6 +2,7 @@
 using FinalProject.Application.Common.DataTransferObjects;
 using FinalProject.Endpoint.Areas.Administration.Models;
 using FinalProject.Endpoint.Areas.Identity.Models;
+using FinalProject.Endpoint.Models;
 
 namespace FinalProject.Endpoint.Common.Mappings
 {
@@ -18,6 +19,8 @@ namespace FinalProject.Endpoint.Common.Mappings
             CreateMap<OrderDto, OrderEditViewModel>();
             CreateMap<CommentDto, CommentListViewModel>()
                 .ForMember(z => z.ImageAddress, a => a.MapFrom(x => Path.Combine("Uploads", x.Image.FileName)));
+            CreateMap<CategoryDto, CategoryViewModel>()
+                .ForMember(z => z.ImageAddress, a => a.MapFrom(x => Path.Combine("Uploads", x.Picture.FileName)));
             CreateMap<AddressDto, AddressViewModel>().ReverseMap();
         }
     }

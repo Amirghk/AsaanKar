@@ -23,7 +23,7 @@ public class CategoryConfiguration : IEntityTypeConfiguration<Category>
             .IsRequired(false)
             .OnDelete(DeleteBehavior.Restrict);
         builder
-            .HasOne(s => s.FileDetails)
+            .HasOne(s => s.Picture)
             .WithOne(f => f.Category)
             .HasForeignKey<Category>(f => f.PictureId)
             .OnDelete(DeleteBehavior.NoAction);

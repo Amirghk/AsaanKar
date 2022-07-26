@@ -26,36 +26,50 @@ namespace FinalProject.Endpoint.Areas.Administration.Controllers
 
         public async Task<IActionResult> Index()
         {
+            _logger.LogTrace("start of method : {methodName}", nameof(Index));
             var orders = _mapper.Map<List<OrderListViewModel>>(await _orderService.GetAll());
-
+            if (orders.Count == 0)
+            {
+                _logger.LogWarning("count of {orders} is 0", orders);
+            }
+            _logger.LogTrace("end of {method}", nameof(Index));
             return View(orders);
         }
 
         [HttpPost]
         public async Task<IActionResult> Delete(int id)
         {
+            _logger.LogTrace("start of method : {}", nameof(Delete));
             await _orderService.Remove(id);
+            _logger.LogTrace("end of method : {}", nameof(Delete));
             return RedirectToAction(nameof(Index));
         }
 
         [HttpGet]
         public async Task<IActionResult> Edit(int id)
         {
+            _logger.LogTrace("start of method : {}", nameof(Edit));
             var model = _mapper.Map<OrderEditViewModel>(await _orderService.GetById(id));
+            _logger.LogTrace("end of method : {}", nameof(Edit));
             return View(model);
         }
 
         [HttpPost]
         public async Task<IActionResult> Edit(OrderEditViewModel model)
         {
+            _logger.LogTrace("start of method : {}", nameof(Edit));
+            _logger.LogTrace("checking validity of : {}", model);
             if (!ModelState.IsValid)
             {
                 return View(model);
             }
+            _logger.LogTrace("calling {method} in service", "GetById");
             var record = await _orderService.GetById(model.Id);
             record.State = model.State;
             record.DateCompleted = model.DateCompleted;
+            _logger.LogTrace("calling {method} in service", "Update");
             await _orderService.Update(record);
+            _logger.LogTrace("end of method : {}", nameof(Edit));
             return RedirectToAction(nameof(Index));
 
         }
