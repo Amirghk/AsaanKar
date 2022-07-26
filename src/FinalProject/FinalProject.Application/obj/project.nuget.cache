@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "Q4etmUL+hi9L0XUxKNH9BH3qkHJz0rjfY+1tqTotTxNYJZ2cQMem+Pk2xtx/GLk3M2dcGt5dq5Kbvw0BhTMNxA==",
+  "dgSpecHash": "bSt7HNBs9T/z7TWQejO3DGOaYV3hLMOxY8PJJaZ/LJ2WX0Dj9h5uBCaAJzNWWeCZr0l0i4Yal1A5dz4ybYAJiA==",
   "success": true,
-  "projectFilePath": "G:\\FinalProject\\src\\FinalProject\\FinalProject.Application\\FinalProject.Application.csproj",
+  "projectFilePath": "G:\\FinalProject\\FinalProjectMaktab\\src\\FinalProject\\FinalProject.Application\\FinalProject.Application.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Lion\\.nuget\\packages\\automapper\\11.0.1\\automapper.11.0.1.nupkg.sha512",
     "C:\\Users\\Lion\\.nuget\\packages\\microsoft.aspnet.identity.core\\2.2.3\\microsoft.aspnet.identity.core.2.2.3.nupkg.sha512",

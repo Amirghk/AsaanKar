@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "03NQsDl1mV++5Lr7qu77nAIo4Xo3GjKEdXZ/b39KULSnTJO86Ddl9vDyk25vL3zwd2M0iJL0rWmVyM4cnLB8tA==",
+  "dgSpecHash": "WmXDgj3J10PGFw/Rua94/PytCC+xBFbrqVpOqRqSISdCSXmdFuGmMj4i79zFjAvI02VnRksaovQswYNMgvRTUw==",
   "success": true,
-  "projectFilePath": "G:\\FinalProject\\src\\FinalProject\\FinalProject.Endpoint\\FinalProject.Endpoint.csproj",
+  "projectFilePath": "G:\\FinalProject\\FinalProjectMaktab\\src\\FinalProject\\FinalProject.Endpoint\\FinalProject.Endpoint.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Lion\\.nuget\\packages\\automapper\\11.0.1\\automapper.11.0.1.nupkg.sha512",
     "C:\\Users\\Lion\\.nuget\\packages\\automapper.collection\\8.0.0\\automapper.collection.8.0.0.nupkg.sha512",

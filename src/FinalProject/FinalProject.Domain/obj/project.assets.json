@@ -115,11 +115,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "G:\\FinalProject\\src\\FinalProject\\FinalProject.Domain\\FinalProject.Domain.csproj",
+      "projectUniqueName": "G:\\FinalProject\\FinalProjectMaktab\\src\\FinalProject\\FinalProject.Domain\\FinalProject.Domain.csproj",
       "projectName": "FinalProject.Domain",
-      "projectPath": "G:\\FinalProject\\src\\FinalProject\\FinalProject.Domain\\FinalProject.Domain.csproj",
+      "projectPath": "G:\\FinalProject\\FinalProjectMaktab\\src\\FinalProject\\FinalProject.Domain\\FinalProject.Domain.csproj",
       "packagesPath": "C:\\Users\\Lion\\.nuget\\packages\\",
-      "outputPath": "G:\\FinalProject\\src\\FinalProject\\FinalProject.Domain\\obj\\",
+      "outputPath": "G:\\FinalProject\\FinalProjectMaktab\\src\\FinalProject\\FinalProject.Domain\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\Lion\\AppData\\Roaming\\NuGet\\NuGet.Config",

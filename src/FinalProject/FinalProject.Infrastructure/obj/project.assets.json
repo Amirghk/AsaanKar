@@ -2437,11 +2437,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "G:\\FinalProject\\src\\FinalProject\\FinalProject.Infrastructure\\FinalProject.Infrastructure.csproj",
+      "projectUniqueName": "G:\\FinalProject\\FinalProjectMaktab\\src\\FinalProject\\FinalProject.Infrastructure\\FinalProject.Infrastructure.csproj",
       "projectName": "FinalProject.Infrastructure",
-      "projectPath": "G:\\FinalProject\\src\\FinalProject\\FinalProject.Infrastructure\\FinalProject.Infrastructure.csproj",
+      "projectPath": "G:\\FinalProject\\FinalProjectMaktab\\src\\FinalProject\\FinalProject.Infrastructure\\FinalProject.Infrastructure.csproj",
       "packagesPath": "C:\\Users\\Lion\\.nuget\\packages\\",
-      "outputPath": "G:\\FinalProject\\src\\FinalProject\\FinalProject.Infrastructure\\obj\\",
+      "outputPath": "G:\\FinalProject\\FinalProjectMaktab\\src\\FinalProject\\FinalProject.Infrastructure\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\Lion\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -2458,8 +2458,8 @@
         "net6.0": {
           "targetAlias": "net6.0",
           "projectReferences": {
-            "G:\\FinalProject\\src\\FinalProject\\FinalProject.Application\\FinalProject.Application.csproj": {
-              "projectPath": "G:\\FinalProject\\src\\FinalProject\\FinalProject.Application\\FinalProject.Application.csproj"
+            "G:\\FinalProject\\FinalProjectMaktab\\src\\FinalProject\\FinalProject.Application\\FinalProject.Application.csproj": {
+              "projectPath": "G:\\FinalProject\\FinalProjectMaktab\\src\\FinalProject\\FinalProject.Application\\FinalProject.Application.csproj"
             }
           }
         }
