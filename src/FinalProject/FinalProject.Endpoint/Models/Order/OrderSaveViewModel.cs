@@ -4,8 +4,8 @@
     {
         public DateTimeOffset DateRequired { get; set; }
         public string? Description { get; init; }
-        public int AddressId { get; init; }
-        public int ServiceId { get; init; }
-        public string CustomerId { get; init; } = null!;
+        public int AddressId { get; set; }
+        public int ServiceId { get; set; }
+        public string? CustomerId { get; init; } = null!;
     }
 }

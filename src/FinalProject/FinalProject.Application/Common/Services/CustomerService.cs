@@ -23,6 +23,11 @@ public class CustomerService : ICustomerService
         return await _repository.GetById(id);
     }
 
+    public async Task<string> GetName(string id)
+    {
+        var user = await _repository.GetById(id);
+        return user.FirstName + " " + user.LastName;
+    }
 
     public async Task<string> Remove(string id)
     {

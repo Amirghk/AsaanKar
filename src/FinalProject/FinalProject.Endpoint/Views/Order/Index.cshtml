@@ -1,0 +1,66 @@
+﻿@using FinalProject.Application.Common.Interfaces.Services
+@inject IExpertService ExpertService
+
+@model IEnumerable<OrderListViewModel>
+
+<h1>سفارشات</h1>
+<div class="accordion accordion-flush">
+
+    <table class="table">
+        <thead class="thead-dark">
+            <tr>
+                <th scope="col">@Html.DisplayNameForInnerType((OrderListViewModel c) => c.ServiceName)</th>
+                <th scope="col">@Html.DisplayNameForInnerType((OrderListViewModel c) => c.OrderDate)</th>
+                <th scope="col">@Html.DisplayNameForInnerType((OrderListViewModel c) => c.DateCompleted)</th>
+                <th scope="col">@Html.DisplayNameForInnerType((OrderListViewModel c) => c.State)</th>
+                <th scope="col">@Html.DisplayNameForInnerType((OrderListViewModel c) => c.ServiceBasePrice)</th>
+                <th scope="col">@Html.DisplayNameForInnerType((OrderListViewModel c) => c.CompletedPrice)</th>
+                <th scope="col">@Html.DisplayNameForInnerType((OrderListViewModel c) => c.Address)</th>
+                <th scope="col">@Html.DisplayNameForInnerType((OrderListViewModel c) => c.Bids)</th>
+                <th scope="col">@Html.DisplayNameForInnerType((OrderListViewModel c) => c.Description)</th>
+
+                <th scope="col">عملیات</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var order in Model)
+            {
+                <tr>
+                    <td>@order.ServiceName</td>
+                    <td>@order.OrderDate</td>
+                    <td>@order.DateCompleted</td>
+                    <td>@order.State.GetDisplayName()</td>
+                    <td>@order.ServiceBasePrice</td>
+                    <td>@order.CompletedPrice</td>
+                    <td>@order.Address</td>
+                    <td>
+
+                        <button class="accordion-button text-nowrap" type="button" data-bs-toggle="collapse" data-bs-target=@("#b" + order.Id) aria-expanded="true" aria-controls="collapseOne">
+                            مشاهده پیشنهادات
+                        </button>
+                    </td>
+                    <td>@order.Description</td>
+                    <td class="d-inline-flex justify-items-center">
+                        <a class="btn btn-secondary" asp-controller="Order" asp-action="Details" asp-route-id=@order.Id>مشاهده جزییات</a>
+                    </td>
+                </tr>
+                <tr id=@("b" + order.Id) class="accordion-collapse collapse" aria-labelledby="headingOne" data-parent="#accordionExample">
+                    <th scope="col">متخصص</th>
+                    <th scope="col">@Html.DisplayNameForInnerType((BidViewModel c) => c.Price)</th>
+                    <th scope="col">@Html.DisplayNameForInnerType((BidViewModel c) => c.Notes)</th>
+                    @foreach (var bid in order.Bids)
+                    {
+                        <td>@await ExpertService.GetName(bid.ExpertId!)</td>
+                        <td>@bid.Price</td>
+                        <td>@bid.Notes</td>
+                        <td>
+                            <form asp-controller="Order" asp-action="Edit" asp-route-id=@bid.Id method="get">
+                                <button class="btn btn-success" type="submit">تایید پیشنهاد</button>
+                            </form>
+                        </td>
+                    }
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

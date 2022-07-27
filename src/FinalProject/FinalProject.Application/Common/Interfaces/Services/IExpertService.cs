@@ -10,5 +10,6 @@ public interface IExpertService
     Task<string> Remove(string id);
     Task<string> SoftDelete(string id);
     Task<string> Update(ExpertDto dto);
+    Task<string> GetName(string name);
 
 }

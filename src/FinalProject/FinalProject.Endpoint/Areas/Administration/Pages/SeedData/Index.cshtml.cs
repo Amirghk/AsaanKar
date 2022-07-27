@@ -17,6 +17,8 @@ namespace FinalProject.Endpoint.Areas.Administration.Pages.SeedData
         private readonly ILogger<IndexModel> _logger;
         private readonly ICityService _cityService;
         private readonly IProvinceService _provinceService;
+        private readonly ICategoryService _categoryService;
+        private readonly IServiceService _serviceService;
 
         public IndexModel(
             UserManager<ApplicationUser> userManager,
@@ -24,7 +26,9 @@ namespace FinalProject.Endpoint.Areas.Administration.Pages.SeedData
             SignInManager<ApplicationUser> signInManager,
             ILogger<IndexModel> logger,
             ICityService cityService,
-            IProvinceService provinceService)
+            IProvinceService provinceService,
+            ICategoryService categoryService,
+            IServiceService serviceService)
         {
             _userManager = userManager;
             _userStore = userStore;
@@ -32,35 +36,56 @@ namespace FinalProject.Endpoint.Areas.Administration.Pages.SeedData
             _logger = logger;
             _cityService = cityService;
             _provinceService = provinceService;
+            _categoryService = categoryService;
+            _serviceService = serviceService;
             _emailStore = GetEmailStore();
         }
         public async Task OnGetAsync()
         {
-            var user = Activator.CreateInstance<ApplicationUser>();
+            //var user = Activator.CreateInstance<ApplicationUser>();
 
-            await _userStore.SetUserNameAsync(user, "admin@gmail.com", CancellationToken.None);
-            await _emailStore.SetEmailAsync(user, "admin@gmail.com", CancellationToken.None);
-            var result = await _userManager.CreateAsync(user, "Asdasdasd");
+            //await _userStore.SetUserNameAsync(user, "admin@gmail.com", CancellationToken.None);
+            //await _emailStore.SetEmailAsync(user, "admin@gmail.com", CancellationToken.None);
+            //var result = await _userManager.CreateAsync(user, "Asdasdasd");
 
-            if (result.Succeeded)
+            //if (result.Succeeded)
+            //{
+            //    // Add related data to claims
+            //    var adminClaim = new Claim("IsAdmin", true.ToString());
+            //    await _userManager.AddClaimAsync(user, adminClaim);
+
+            //    var nameClaim = new Claim(ClaimTypes.Name, "Admin");
+            //    await _userManager.AddClaimAsync(user, nameClaim);
+            //}
+            //var provinceId = await _provinceService.Set(new ProvinceDto
+            //{
+            //    IsSupported = true,
+            //    Name = "Tehran"
+            //});
+            //await _cityService.Set(new CityDto
+            //{
+            //    IsSupported = true,
+            //    Name = "Tehran",
+            //    ProvinceId = provinceId
+            //});
+
+            var cId = await _categoryService.Set(new CategoryDto
             {
-                // Add related data to claims
-                var adminClaim = new Claim("IsAdmin", true.ToString());
-                await _userManager.AddClaimAsync(user, adminClaim);
-
-                var nameClaim = new Claim(ClaimTypes.Name, "Admin");
-                await _userManager.AddClaimAsync(user, nameClaim);
-            }
-            var provinceId = await _provinceService.Set(new ProvinceDto
-            {
-                IsSupported = true,
-                Name = "Tehran"
+                Name = "Electronics2",
+                ParentCategoryId = null,
+                Description = "Something"
             });
-            await _cityService.Set(new CityDto
+            var cIdd = await _categoryService.Set(new CategoryDto
             {
-                IsSupported = true,
-                Name = "Tehran",
-                ProvinceId = provinceId
+                Name = "Mobile Services",
+                ParentCategoryId = cId,
+                Description = "Fix your phone"
+            });
+            await _serviceService.Set(new ServiceDto
+            {
+                Description = "battery service",
+                CategoryId = cIdd,
+                BasePrice = 1000000
             });
         }
 

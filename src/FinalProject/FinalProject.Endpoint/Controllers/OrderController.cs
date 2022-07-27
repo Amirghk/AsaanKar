@@ -47,7 +47,6 @@ namespace FinalProject.Endpoint.Controllers
                 return NotFound($"Unable to load user with ID '{_userManager.GetUserId(User)}'.");
             }
             var model = _mapper.Map<List<OrderListViewModel>>(await _orderService.GetByUserId(user.Id));
-            // TODO
             return View(model);
         }
 
@@ -59,15 +58,10 @@ namespace FinalProject.Endpoint.Controllers
             {
                 return NotFound($"Unable to load user with ID '{_userManager.GetUserId(User)}'.");
             }
-            // fill an orderSaveViewModel and send it back to db
             ViewBag.Addresses = await LoadAsync(user);
-            var model = new OrderSaveViewModel()
-            {
-                ServiceId = id,
-            };
-            // get customer addresses
+            ViewBag.ServiceId = id;
 
-            return View(model);
+            return View();
         }
 
         [HttpPost]
@@ -83,9 +77,16 @@ namespace FinalProject.Endpoint.Controllers
             dto.CustomerId = user.Id;
             await _orderService.Set(dto);
 
-
             return RedirectToAction(nameof(Index));
 
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> Details(int id)
+        {
+            var order = await _orderService.GetById(id);
+            var model = _mapper.Map<OrderListViewModel>(order);
+            return View(model);
         }
 
 
