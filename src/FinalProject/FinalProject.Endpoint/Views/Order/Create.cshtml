@@ -1,0 +1,40 @@
+﻿@model OrderSaveViewModel
+
+<div asp-validation-summary="ModelOnly" class="text-danger"></div>
+<form asp-controller="Order" asp-action="Create" method="post" class="col-8 py-3">
+    <div class="form-group my-3">
+        <label asp-for=DateRequired></label>
+        <input asp-for=DateRequired type="date" class="form-control">
+        <span asp-validation-for="DateRequired" class="text-danger"></span>
+    </div>
+
+    @if (ViewBag.Addresses is not null)
+    {
+        @foreach (var address in ViewBag.Addresses)
+        {
+            <div class="form-check my-2">
+                <input asp-for=AddressId class="form-check-input" type="radio" name="flexRadioDefault"  value=@address.Id>
+                <label asp-for=AddressId class="form-check-label">
+                    @address.Address
+                </label>
+            </div>
+        }
+        <a class="btn btn-warning" asp-area="Identity" asp-page="/Account/Manage/AddAddress">افزودن آدرس جدید</a>
+    }
+    else
+    {
+        <a class="btn btn-warning" asp-area="Identity" asp-page="/Account/Manage/AddAddress">افزودن آدرس</a>
+    }
+    <div class="form-group my-3">
+        <label asp-for=Description></label>
+        <input asp-for=Description type="date" class="form-control">
+        <span asp-validation-for="Description" class="text-danger"></span>
+    </div>
+
+    <button type="submit" class="btn btn-primary">ثبت درخواست</button>
+</form>
+
+
+@section Scripts{
+<partial name="_ValidationScriptsPartial" />
+}

@@ -2,7 +2,7 @@
 using FinalProject.Domain.Enums;
 using System.ComponentModel.DataAnnotations;
 
-namespace FinalProject.Endpoint.Areas.Administration.Models
+namespace FinalProject.Endpoint.Models
 {
     public class OrderListViewModel
     {
@@ -12,8 +12,12 @@ namespace FinalProject.Endpoint.Areas.Administration.Models
         public string ServiceName { get; set; } = string.Empty;
         [Display(Name = "شناسه مشتری")]
         public string CustomerId { get; set; } = null!;
+        [Display(Name = "مشتری")]
+        public CustomerDto? Customer { get; set; }
         [Display(Name = "شناسه متخصص")]
         public string? ExpertId { get; set; }
+        [Display(Name = "متخصص")]
+        public ExpertDto? Expert { get; set; }
         [Display(Name = "تاریخ سفارش")]
         public DateTimeOffset OrderDate { get; set; }
         [Display(Name = "تاریخ اتمام سفارش")]

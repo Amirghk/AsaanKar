@@ -3,6 +3,7 @@ using AutoMapper;
 using FinalProject.Application.Common.Interfaces.Services;
 using FinalProject.Endpoint.Areas.Administration.Models;
 using Microsoft.AspNetCore.Authorization;
+using FinalProject.Endpoint.Models;
 
 namespace FinalProject.Endpoint.Areas.Administration.Controllers
 {

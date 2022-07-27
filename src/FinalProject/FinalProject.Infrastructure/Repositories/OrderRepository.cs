@@ -6,6 +6,7 @@ using FinalProject.Infrastructure.Persistence;
 using Microsoft.EntityFrameworkCore;
 using FinalProject.Application.Common.Interfaces.Repositories;
 using Microsoft.Extensions.Logging;
+using FinalProject.Domain.Enums;
 
 namespace FinalProject.Infrastructure.Repositories
 {
@@ -34,6 +35,12 @@ namespace FinalProject.Infrastructure.Repositories
         {
             _logger.LogTrace("start of {methodName}", nameof(GetAll));
             return await _mapper.ProjectTo<OrderDto>(_context.Orders).ToListAsync();
+        }
+
+        public async Task<IEnumerable<OrderDto>> GetByUserId(string id, OrderState? orderState = null)
+        {
+            var records = await _mapper.ProjectTo<OrderDto>(_context.Orders).Where(x => x.CustomerId == id || x.ExpertId == id).Where(x => x.State == orderState || true).ToListAsync();
+            return records;
         }
 
         public async Task<OrderDto> GetById(int id)
