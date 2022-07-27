@@ -25,6 +25,11 @@ public class CategoryService : ICategoryService
         return await _repository.GetById(id);
     }
 
+    public async Task<IEnumerable<CategoryDto>> GetChildren(int id)
+    {
+        return await _repository.GetChildren(id);
+    }
+
     public async Task<int> Remove(int id)
     {
         return await _repository.Remove(id);

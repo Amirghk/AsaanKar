@@ -12,4 +12,6 @@ public interface ICategoryRepository
     Task<int> Remove(int id);
     Task<CategoryDto> GetById(int id);
     Task<IEnumerable<CategoryDto>> GetAll();
+    Task<IEnumerable<CategoryDto>> GetChildren(int id);
+
 }

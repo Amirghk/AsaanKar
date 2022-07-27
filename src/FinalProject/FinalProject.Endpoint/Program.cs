@@ -32,9 +32,18 @@ builder.Services.AddAutoMapper(typeof(VMMappingProfile).Assembly);
 builder.Services.AddInfrastructure(builder.Configuration);
 builder.Services.AddApplication();
 builder.Services.AddAuthorization(options =>
-        options.AddPolicy(
-        "IsAdmin", policyBuilder => policyBuilder
-                    .RequireClaim("IsAdmin")));
+{
+    options.AddPolicy(
+            "IsAdmin",
+            policyBuilder => policyBuilder.RequireClaim("IsAdmin"));
+    options.AddPolicy(
+        "IsCustomer",
+        policyBuilder => policyBuilder.RequireClaim("IsCustomer"));
+    options.AddPolicy(
+        "IsExpert",
+        policyBuilder => policyBuilder.RequireClaim("IsExpert"));
+}
+);
 
 // Add services to the container.
 builder.Services.AddDefaultIdentity<ApplicationUser>(options =>

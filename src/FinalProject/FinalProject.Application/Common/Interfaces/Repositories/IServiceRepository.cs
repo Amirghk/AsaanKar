@@ -12,4 +12,5 @@ public interface IServiceRepository
     Task<int> Remove(int id);
     Task<ServiceDto> GetById(int id);
     Task<IEnumerable<ServiceDto>> GetAll();
+    Task<IEnumerable<ServiceDto>> GetByCategoryId(int categoryId);
 }

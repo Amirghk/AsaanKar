@@ -1,0 +1,26 @@
+﻿@model IEnumerable<CategoryViewModel>
+
+
+
+@foreach (var category in Model)
+{
+
+    <h1>@category.Name</h1>
+    <ul class="list-group list-group-horizontal">
+        @if (category.Services is not null)
+        {
+            @foreach (var service in category.Services)
+            {
+                <li class="list-group-item">
+                    <div class="card" style="width: 18rem;">
+                        <div class="card-body">
+                            <h5 class="card-title">@service.Description</h5>
+                            <p class="card-text">@service.Description</p>
+                            <a asp-controller="Order" asp-action="Set" asp-route-id=@service.Id class="btn btn-primary">درخواست سرویس</a>
+                        </div>
+                    </div> 
+                </li>
+            }
+        }
+    </ul>
+}

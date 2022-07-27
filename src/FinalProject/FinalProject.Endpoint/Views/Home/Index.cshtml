@@ -22,7 +22,7 @@
                     <div class="card-body">
                         <h5 class="card-title">@category.Name</h5>
                         <p class="card-text">@category.Description</p>
-                        <a class="btn btn-primary">مشاهده سرویس ها</a>
+                        <a asp-controller="Home" asp-action="Category" asp-route-id=@category.Id class="btn btn-primary">مشاهده سرویس ها</a>
                     </div>
                 </div>
             </li>

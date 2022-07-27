@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using FinalProject.Application.Common.DataTransferObjects;
+using FinalProject.Domain.Enums;
 using FinalProject.Endpoint.Areas.Administration.Models;
 using FinalProject.Endpoint.Areas.Identity.Models;
 using FinalProject.Endpoint.Models;
@@ -21,7 +22,10 @@ namespace FinalProject.Endpoint.Common.Mappings
                 .ForMember(z => z.ImageAddress, a => a.MapFrom(x => Path.Combine("Uploads", x.Image.FileName)));
             CreateMap<CategoryDto, CategoryViewModel>()
                 .ForMember(z => z.ImageAddress, a => a.MapFrom(x => Path.Combine("Uploads", x.Picture.FileName)));
+            CreateMap<ServiceDto, ServiceViewModel>().ReverseMap();
             CreateMap<AddressDto, AddressViewModel>().ReverseMap();
+            CreateMap<OrderSaveViewModel, OrderDto>()
+                .ForMember(z => z.State, a => a.MapFrom(x => OrderState.WaitingForExpertBid));
         }
     }
 }
