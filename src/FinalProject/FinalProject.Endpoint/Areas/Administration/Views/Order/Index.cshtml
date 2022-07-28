@@ -44,7 +44,7 @@
                     </td>
                     <td>@order.Description</td>
                     <td class="d-inline-flex justify-items-center">
-                        <form asp-controller="Order" asp-action="Delete"  asp-route-id=@order.Id method="post">
+                        <form asp-controller="Order" asp-action="Delete" asp-route-id=@order.Id method="post">
 
                             <button class="btn btn-danger" type="submit">حذف</button>
                         </form>
@@ -54,17 +54,29 @@
                     </td>
                 </tr>
                 <tr id=@("b" + order.Id) class="accordion-collapse collapse" aria-labelledby="headingOne" data-parent="#accordionExample">
-                    <th scope="col">@Html.DisplayNameForInnerType((BidViewModel c) => c.Id)</th>
-                    <th scope="col">@Html.DisplayNameForInnerType((BidViewModel c) => c.ExpertId)</th>
-                    <th scope="col">@Html.DisplayNameForInnerType((BidViewModel c) => c.Price)</th>
-                    <th scope="col">@Html.DisplayNameForInnerType((BidViewModel c) => c.Notes)</th>
-                    @foreach (var bid in order.Bids)
-                    {
-                        <td>@bid.Id</td>
-                        <td>@bid.ExpertId</td>
-                        <td>@bid.Price</td>
-                        <td>@bid.Notes</td>
-                    }
+                    <td colspan=4>
+                        <table>
+                            <tr>
+                                <th scope="col">@Html.DisplayNameForInnerType((BidViewModel c) => c.Id)</th>
+                                <th scope="col">متخصص</th>
+                                <th scope="col">@Html.DisplayNameForInnerType((BidViewModel c) => c.Price)</th>
+                                <th scope="col">@Html.DisplayNameForInnerType((BidViewModel c) => c.Notes)</th>
+                                <th scope="col">ویرایش</th>
+
+                            </tr>
+
+                            @foreach (var bid in order.Bids)
+                            {
+                                <tr>
+                                    <td>@bid.Id</td>
+                                    <td><a class="btn btn-info" asp-controller="User" asp-action="Profile" asp-route-id=@bid.ExpertId>@bid.ExpertId</a></td>
+                                    <td>@bid.Price</td>
+                                    <td>@bid.Notes</td>
+                                    <td><a class="btn btn-warning" asp-controller="Order" asp-action="EditBid" asp-route-id=@bid.Id>ویرایش</a></td>
+                                </tr>
+                            }
+                        </table>
+                    </td>
                 </tr>
             }
         </tbody>

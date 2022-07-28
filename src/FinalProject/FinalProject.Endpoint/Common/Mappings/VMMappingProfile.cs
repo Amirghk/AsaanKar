@@ -25,6 +25,7 @@ namespace FinalProject.Endpoint.Common.Mappings
             CreateMap<AddressDto, AddressViewModel>().ReverseMap();
             CreateMap<OrderSaveViewModel, OrderDto>()
                 .ForMember(z => z.State, a => a.MapFrom(x => OrderState.WaitingForExpertBid));
+            CreateMap<BidDto, BidViewModel>().ReverseMap();
         }
     }
 }

@@ -4,6 +4,7 @@ using FinalProject.Application.Common.Interfaces.Services;
 using FinalProject.Endpoint.Areas.Administration.Models;
 using Microsoft.AspNetCore.Authorization;
 using FinalProject.Endpoint.Models;
+using FinalProject.Application.Common.DataTransferObjects;
 
 namespace FinalProject.Endpoint.Areas.Administration.Controllers
 {
@@ -14,15 +15,18 @@ namespace FinalProject.Endpoint.Areas.Administration.Controllers
         private readonly IOrderService _orderService;
         private readonly IMapper _mapper;
         private readonly ILogger<OrderController> _logger;
+        private readonly IBidService _bidService;
 
         public OrderController(
             IOrderService orderService,
             IMapper mapper,
-            ILogger<OrderController> logger)
+            ILogger<OrderController> logger,
+            IBidService bidService)
         {
             _orderService = orderService;
             _mapper = mapper;
             _logger = logger;
+            _bidService = bidService;
         }
 
         public async Task<IActionResult> Index()
@@ -73,6 +77,21 @@ namespace FinalProject.Endpoint.Areas.Administration.Controllers
             _logger.LogTrace("end of method : {}", nameof(Edit));
             return RedirectToAction(nameof(Index));
 
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> EditBid(int id)
+        {
+            var model = _mapper.Map<BidViewModel>(await _bidService.GetById(id));
+            return View(model);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> EditBid(BidViewModel model)
+        {
+            var bid = _mapper.Map<BidDto>(model);
+            await _bidService.Update(bid);
+            return RedirectToAction(nameof(Index));
         }
     }
 }
