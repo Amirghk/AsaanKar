@@ -1,74 +1,81 @@
-﻿@page
+﻿@model UserEditViewModel
+
 @{
     ViewData["Title"] = "Profile";
-    ViewData["ActivePage"] = ManageNavPages.Index;
+    Layout = "/Areas/Administration/Views/Shared/_ProfileLayout.cshtml";
 }
 
-@*<h3>@ViewData["Title"]</h3>
-<partial name="_StatusMessage" for="StatusMessage" />
+
+<h3>@ViewData["Title"]</h3>
+
 <div class="row">
     <div class="col-lg-4">
         <div class="card mb-4">
             <div class="card-body text-center">
                 <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava3.webp" alt="avatar"
                      class="rounded-circle img-fluid" style="width: 150px;">
-                <h5 class="my-3">@(Model.Input.FirstName + " " + Model.Input.LastName)</h5>
+                <h5 class="my-3">@(Model.FirstName + " " + Model.LastName)</h5>
                 <p class="text-muted mb-1">Full Stack Developer</p>
                 <p class="text-muted mb-4">Bay Area, San Francisco, CA</p>
                 <div class="d-flex justify-content-center mb-2">
-                    <form asp-page-handler="delete" method="post">
+                    <form asp-controller="User" asp-action="Delete" method="post">
                         <input type="hidden" name="userName" value=@Model.Username />
                         <button type="submit" class="btn btn-danger">حذف کاربر</button>
-                    </form>                    
+                    </form>
                 </div>
             </div>
         </div>
         <div class="card mb-4 mb-lg-0">
             <div class="card-body p-0">
-                <partial name="_ManageNav" />
+                
             </div>
         </div>
     </div>
     <div class="col-md-8">
-        <form id="profile-form" method="post">
+        <form id="profile-form" asp-controller="User" asp-action="Edit" method="post">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-floating">
                 <input asp-for="Username" class="form-control" disabled />
                 <label asp-for="Username" class="form-label"></label>
             </div>
             <div class="form-floating">
-                <input asp-for="Input.FirstName" class="form-control" />
-                <label asp-for="Input.FirstName" class="form-label"></label>
-                <span asp-validation-for="Input.FirstName" class="text-danger"></span>
+                <input asp-for="Email" class="form-control" />
+                <label asp-for="Email" class="form-label"></label>
+                <span asp-validation-for="Email" class="text-danger"></span>
             </div>
             <div class="form-floating">
-                <input asp-for="Input.LastName" class="form-control" />
-                <label asp-for="Input.LastName" class="form-label"></label>
-                <span asp-validation-for="Input.LastName" class="text-danger"></span>
+                <input asp-for="FirstName" class="form-control" />
+                <label asp-for="FirstName" class="form-label"></label>
+                <span asp-validation-for="FirstName" class="text-danger"></span>
             </div>
             <div class="form-floating">
-                <input asp-for="Input.PhoneNumber" class="form-control" />
-                <label asp-for="Input.PhoneNumber" class="form-label"></label>
-                <span asp-validation-for="Input.PhoneNumber" class="text-danger"></span>
+                <input asp-for="LastName" class="form-control" />
+                <label asp-for="LastName" class="form-label"></label>
+                <span asp-validation-for="LastName" class="text-danger"></span>
             </div>
             <div class="form-floating">
-                <input asp-for="Input.BirthDate" class="form-control" />
-                <label asp-for="Input.BirthDate" class="form-label"></label>
-                <span asp-validation-for="Input.BirthDate" class="text-danger"></span>
+                <input asp-for="PhoneNumber" class="form-control" />
+                <label asp-for="PhoneNumber" class="form-label"></label>
+                <span asp-validation-for="PhoneNumber" class="text-danger"></span>
+            </div>
+            <div class="form-floating">
+                <input asp-for="BirthDate" class="form-control" />
+                <label asp-for="BirthDate" class="form-label"></label>
+                <span asp-validation-for="BirthDate" class="text-danger"></span>
             </div>
             @if (ViewData["IsExpert"]!.ToString() == true.ToString())
             {
                 <div class="form-floating">
-                    <input asp-for="Input.NationalCode" class="form-control" />
-                    <label asp-for="Input.NationalCode" class="form-label"></label>
-                    <span asp-validation-for="Input.NationalCode" class="text-danger"></span>
+                    <input asp-for="NationalCode" class="form-control" />
+                    <label asp-for="NationalCode" class="form-label"></label>
+                    <span asp-validation-for="NationalCode" class="text-danger"></span>
                 </div>
             }
             <input type="hidden" name="userName" value=@Model.Username />
             <button id="update-profile-button" type="submit" class="w-100 btn btn-lg btn-primary">Save</button>
         </form>
     </div>
-</div>*@
+</div>
 
 @section Scripts {
 <partial name="_ValidationScriptsPartial" />

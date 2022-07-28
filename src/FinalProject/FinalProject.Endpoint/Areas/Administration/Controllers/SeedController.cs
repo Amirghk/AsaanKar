@@ -1,30 +1,28 @@
-using FinalProject.Application.Common.DataTransferObjects;
+﻿using FinalProject.Application.Common.DataTransferObjects;
 using FinalProject.Application.Common.Interfaces.Services;
 using FinalProject.Infrastructure.Identity;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.RazorPages;
-using System.Security.Claims;
 
-namespace FinalProject.Endpoint.Areas.Administration.Pages.SeedData
+namespace FinalProject.Endpoint.Areas.Administration.Controllers
 {
-    public class IndexModel : PageModel
+    public class SeedController : Controller
     {
         private readonly SignInManager<ApplicationUser> _signInManager;
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly IUserStore<ApplicationUser> _userStore;
         private readonly IUserEmailStore<ApplicationUser> _emailStore;
-        private readonly ILogger<IndexModel> _logger;
+        private readonly ILogger<SeedController> _logger;
         private readonly ICityService _cityService;
         private readonly IProvinceService _provinceService;
         private readonly ICategoryService _categoryService;
         private readonly IServiceService _serviceService;
 
-        public IndexModel(
+        public SeedController(
             UserManager<ApplicationUser> userManager,
             IUserStore<ApplicationUser> userStore,
             SignInManager<ApplicationUser> signInManager,
-            ILogger<IndexModel> logger,
+            ILogger<SeedController> logger,
             ICityService cityService,
             IProvinceService provinceService,
             ICategoryService categoryService,
@@ -40,7 +38,7 @@ namespace FinalProject.Endpoint.Areas.Administration.Pages.SeedData
             _serviceService = serviceService;
             _emailStore = GetEmailStore();
         }
-        public async Task OnGetAsync()
+        public async Task Index()
         {
             //var user = Activator.CreateInstance<ApplicationUser>();
 

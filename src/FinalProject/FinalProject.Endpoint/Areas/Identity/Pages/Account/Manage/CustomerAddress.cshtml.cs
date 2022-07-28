@@ -44,7 +44,7 @@ namespace FinalProject.Endpoint.Areas.Identity.Pages.Account.Manage
                 Addresses.Add(new AddressListViewModel
                 {
                     Id = address.Id,
-                    Address = await _addressService.GetFullAddressToString(address),
+                    Address = await _addressService.GetFullAddressToString(address.Id),
                 });
             }
         }

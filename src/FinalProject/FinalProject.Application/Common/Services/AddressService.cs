@@ -37,13 +37,14 @@ public class AddressService : IAddressService
         return await _repository.GetByUserId(userId);
     }
 
-    public async Task<string> GetFullAddressToString(AddressDto dto)
+    public async Task<string> GetFullAddressToString(int id)
     {
-        var city = await _cityRepository.GetById(dto.CityId);
+        var address = await _repository.GetById(id);
+        var city = await _cityRepository.GetById(address.CityId);
         var cityName = city.Name;
         var ProvinceName = (await _provinceService.GetById(city.ProvinceId)).Name;
-        var content = dto.Content;
-        var postalCode = dto.PostalCode;
+        var content = address.Content;
+        var postalCode = address.PostalCode;
 
         return $"{ProvinceName} - {cityName} - {content}  -  PostalCode : {postalCode}";
     }

@@ -9,7 +9,7 @@ using FinalProject.Application.Common.DataTransferObjects;
 
 namespace FinalProject.Endpoint.Controllers
 {
-    //[Authorize("IsCustomer")]
+    [Authorize("IsCustomer")]
     public class OrderController : Controller
     {
         private readonly IMapper _mapper;
@@ -100,7 +100,7 @@ namespace FinalProject.Endpoint.Controllers
                 model.Add(new AddressListViewModel
                 {
                     Id = address.Id,
-                    Address = await _addressService.GetFullAddressToString(address),
+                    Address = await _addressService.GetFullAddressToString(address.Id),
                 });
             }
             return model;

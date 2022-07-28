@@ -1,4 +1,5 @@
-﻿@using Microsoft.AspNetCore.Identity
+﻿
+@using Microsoft.AspNetCore.Identity
 
 @inject SignInManager<ApplicationUser> SignInManager
 @inject UserManager<ApplicationUser> UserManager
@@ -6,16 +7,22 @@
 <ul class="navbar-nav">
     @if (SignInManager.IsSignedIn(User))
     {
-        if (User.HasClaim("IsExpert", true.ToString()))
+        if (User.IsExpert())
         {
             <li class="nav-item">
                 <a id="manage" class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Manage/ExpertIndex" title="Manage">Hello @UserManager.GetUserName(User)!</a>
             </li>
         }
-        else if (User.HasClaim("IsCustomer", true.ToString()))
+        else if (User.IsCustomer())
         {
             <li class="nav-item">
                 <a id="manage" class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Manage/CustomerIndex" title="Manage">Hello @UserManager.GetUserName(User)!</a>
+            </li>
+        }
+        else if (User.IsAdmin())
+        {
+            <li class="nav-item">
+                <a id="manage" class="nav-link text-dark" asp-area="Administration" asp-controller="Order" asp-action="Index" title="Manage">Hello @UserManager.GetUserName(User)!</a>
             </li>
         }
         <li class="nav-item">

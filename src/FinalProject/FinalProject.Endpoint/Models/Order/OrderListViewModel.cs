@@ -29,7 +29,7 @@ namespace FinalProject.Endpoint.Models
         [Display(Name = "قیمت انجام شده")]
         public decimal? CompletedPrice { get; set; }
         [Display(Name = "آدرس")]
-        public string Address { get; set; } = string.Empty;
+        public int AddressId { get; set; }
         [Display(Name = "پیشنهادات قیمت")]
         public ICollection<BidDto> Bids { get; set; } = new List<BidDto>();
         [Display(Name = "توضیحات")]

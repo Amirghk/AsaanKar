@@ -10,5 +10,5 @@ public interface IAddressService
     Task<IEnumerable<AddressDto>> GetByUserId(string userId);
     Task<int> Remove(int id);
     Task<int> Update(AddressDto dto);
-    Task<string> GetFullAddressToString(AddressDto dto);
+    Task<string> GetFullAddressToString(int id);
 }
