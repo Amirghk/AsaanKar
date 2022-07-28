@@ -1,0 +1,38 @@
+﻿@model List<CategoryViewModel>
+
+<div class="jumbotron">
+    <h1 class="display-4">Hello, world!</h1>
+    <p class="lead">This is a simple hero unit, a simple jumbotron-style component for calling extra attention to featured content or information.</p>
+    <hr class="my-4">
+    <p>It uses utility classes for typography and spacing to space content out within the larger container.</p>
+    <p class="lead">
+        <a class="btn btn-primary btn-lg" href="#" role="button">Learn more</a>
+    </p>
+</div>
+
+
+<ul class="list-group list-group-horizontal">
+    @foreach (var category in Model)
+    {
+        @if (category.ParentCategoryId == null)
+        {
+            <li class="list-group-item">
+                <div class="card" style="width: 18rem;">
+                    <img class="card-img-top" src=@("~/" + category.ImageAddress) alt="Category Image">
+                    <div class="card-body">
+                        <h5 class="card-title">@category.Name</h5>
+                        <p class="card-text">@category.Description</p>
+                        <a asp-controller="Home" asp-action="Category" asp-route-id=@category.Id class="btn btn-primary">مشاهده سرویس ها</a>
+                    </div>
+                </div>
+            </li>
+        }
+    }
+</ul>
+
+
+
+
+
+
+

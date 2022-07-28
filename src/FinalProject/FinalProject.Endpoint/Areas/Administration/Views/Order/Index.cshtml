@@ -1,11 +1,13 @@
 ﻿@using FinalProject.Application.Common.Extensions
+@using FinalProject.Application.Common.Interfaces.Services
 @using FinalProject.Endpoint.Areas.Administration.Models
+@inject IAddressService AddressService
 @model IEnumerable<OrderListViewModel>
 
 <h1>سفارشات</h1>
-<div class="accordion accordion-flush">
+<div class="accordion accordion-flush ">
 
-    <table class="table">
+    <table class="table table-sm">
         <thead class="thead-dark">
             <tr>
                 <th scope="col">@Html.DisplayNameForInnerType((OrderListViewModel c) => c.Id)</th>
@@ -15,7 +17,7 @@
                 <th scope="col">@Html.DisplayNameForInnerType((OrderListViewModel c) => c.State)</th>
                 <th scope="col">@Html.DisplayNameForInnerType((OrderListViewModel c) => c.ServiceBasePrice)</th>
                 <th scope="col">@Html.DisplayNameForInnerType((OrderListViewModel c) => c.CompletedPrice)</th>
-                <th scope="col">@Html.DisplayNameForInnerType((OrderListViewModel c) => c.Address)</th>
+                <th scope="col">@Html.DisplayNameForInnerType((OrderListViewModel c) => c.AddressId)</th>
                 <th scope="col">@Html.DisplayNameForInnerType((OrderListViewModel c) => c.Bids)</th>
                 <th scope="col">@Html.DisplayNameForInnerType((OrderListViewModel c) => c.Description)</th>
 
@@ -33,7 +35,7 @@
                     <td>@order.State.GetDisplayName()</td>
                     <td>@order.ServiceBasePrice</td>
                     <td>@order.CompletedPrice</td>
-                    <td>@order.Address</td>
+                    <td>@await AddressService.GetFullAddressToString(order.AddressId)</td>
                     <td>
 
                         <button class="accordion-button text-nowrap" type="button" data-bs-toggle="collapse" data-bs-target=@("#b" + order.Id) aria-expanded="true" aria-controls="collapseOne">
@@ -42,7 +44,7 @@
                     </td>
                     <td>@order.Description</td>
                     <td class="d-inline-flex justify-items-center">
-                        <form asp-controller="Order" asp-action="Delete"  asp-route-id=@order.Id method="post">
+                        <form asp-controller="Order" asp-action="Delete" asp-route-id=@order.Id method="post">
 
                             <button class="btn btn-danger" type="submit">حذف</button>
                         </form>
@@ -52,17 +54,29 @@
                     </td>
                 </tr>
                 <tr id=@("b" + order.Id) class="accordion-collapse collapse" aria-labelledby="headingOne" data-parent="#accordionExample">
-                    <th scope="col">@Html.DisplayNameForInnerType((BidViewModel c) => c.Id)</th>
-                    <th scope="col">@Html.DisplayNameForInnerType((BidViewModel c) => c.ExpertId)</th>
-                    <th scope="col">@Html.DisplayNameForInnerType((BidViewModel c) => c.Price)</th>
-                    <th scope="col">@Html.DisplayNameForInnerType((BidViewModel c) => c.Notes)</th>
-                    @foreach (var bid in order.Bids)
-                    {
-                        <td>@bid.Id</td>
-                        <td>@bid.ExpertId</td>
-                        <td>@bid.Price</td>
-                        <td>@bid.Notes</td>
-                    }
+                    <td colspan=4>
+                        <table>
+                            <tr>
+                                <th scope="col">@Html.DisplayNameForInnerType((BidViewModel c) => c.Id)</th>
+                                <th scope="col">متخصص</th>
+                                <th scope="col">@Html.DisplayNameForInnerType((BidViewModel c) => c.Price)</th>
+                                <th scope="col">@Html.DisplayNameForInnerType((BidViewModel c) => c.Notes)</th>
+                                <th scope="col">ویرایش</th>
+
+                            </tr>
+
+                            @foreach (var bid in order.Bids)
+                            {
+                                <tr>
+                                    <td>@bid.Id</td>
+                                    <td><a class="btn btn-info" asp-controller="User" asp-action="Profile" asp-route-id=@bid.ExpertId>@bid.ExpertId</a></td>
+                                    <td>@bid.Price</td>
+                                    <td>@bid.Notes</td>
+                                    <td><a class="btn btn-warning" asp-controller="Order" asp-action="EditBid" asp-route-id=@bid.Id>ویرایش</a></td>
+                                </tr>
+                            }
+                        </table>
+                    </td>
                 </tr>
             }
         </tbody>

@@ -20,6 +20,12 @@ public class ServiceService : IServiceService
         return await _repository.GetAll();
     }
 
+    public async Task<IEnumerable<ServiceDto>> GetByCategoryId(int categoryId)
+    {
+        var records = await _repository.GetByCategoryId(categoryId);
+        return records;
+    }
+
     public async Task<ServiceDto> GetById(int id)
     {
         return await _repository.GetById(id);

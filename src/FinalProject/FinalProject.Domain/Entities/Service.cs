@@ -9,7 +9,7 @@ public class Service : IBaseEntity, ISoftDeletable
     #region Properties
     public int Id { get; set; }
     public string Description { get; set; } = null!;
-    public decimal? BasePrice { get; set; }
+    public decimal BasePrice { get; set; }
     public bool IsDeleted { get; set; }
     #endregion
     #region Navigational Properties

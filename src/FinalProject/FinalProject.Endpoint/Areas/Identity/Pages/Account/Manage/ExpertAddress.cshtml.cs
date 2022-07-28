@@ -39,7 +39,7 @@ namespace FinalProject.Endpoint.Areas.Identity.Pages.Account.Manage
             var expert = await _expertService.GetById(user.Id);
             if (expert.Address != null)
             {
-                Address = await _addressService.GetFullAddressToString(expert.Address);
+                Address = await _addressService.GetFullAddressToString(expert.Address.Id);
                 AddressId = expert.Address.Id;
             }
         }

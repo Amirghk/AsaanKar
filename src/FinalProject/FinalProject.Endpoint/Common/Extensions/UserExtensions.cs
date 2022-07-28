@@ -13,5 +13,10 @@ namespace FinalProject.Endpoint.Common.Extensions
         {
             return user.HasClaim("IsCustomer", true.ToString());
         }
+
+        public static bool IsAdmin(this ClaimsPrincipal user)
+        {
+            return user.HasClaim("IsAdmin", true.ToString());
+        }
     }
 }

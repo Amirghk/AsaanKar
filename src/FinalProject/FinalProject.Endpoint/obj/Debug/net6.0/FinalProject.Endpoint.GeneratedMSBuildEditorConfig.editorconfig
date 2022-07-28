@@ -15,32 +15,20 @@ build_property.GenerateRazorMetadataSourceChecksumAttributes = true
 build_property.MSBuildProjectDirectory = G:\FinalProject\FinalProjectMaktab\src\FinalProject\FinalProject.Endpoint
 build_property._RazorSourceGeneratorDebug = 
 
-[G:/FinalProject/FinalProjectMaktab/src/FinalProject/FinalProject.Endpoint/Areas/Administration/Pages/Index.cshtml]
-build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5pc3RyYXRpb25cUGFnZXNcSW5kZXguY3NodG1s
-build_metadata.AdditionalFiles.CssScope = 
-
-[G:/FinalProject/FinalProjectMaktab/src/FinalProject/FinalProject.Endpoint/Areas/Administration/Pages/SeedData/Index.cshtml]
-build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5pc3RyYXRpb25cUGFnZXNcU2VlZERhdGFcSW5kZXguY3NodG1s
-build_metadata.AdditionalFiles.CssScope = 
-
-[G:/FinalProject/FinalProjectMaktab/src/FinalProject/FinalProject.Endpoint/Areas/Administration/Pages/Shared/_Layout.cshtml]
-build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5pc3RyYXRpb25cUGFnZXNcU2hhcmVkXF9MYXlvdXQuY3NodG1s
-build_metadata.AdditionalFiles.CssScope = 
-
-[G:/FinalProject/FinalProjectMaktab/src/FinalProject/FinalProject.Endpoint/Areas/Administration/Pages/_ViewImports.cshtml]
-build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5pc3RyYXRpb25cUGFnZXNcX1ZpZXdJbXBvcnRzLmNzaHRtbA==
-build_metadata.AdditionalFiles.CssScope = 
-
-[G:/FinalProject/FinalProjectMaktab/src/FinalProject/FinalProject.Endpoint/Areas/Administration/Pages/_ViewStart.cshtml]
-build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5pc3RyYXRpb25cUGFnZXNcX1ZpZXdTdGFydC5jc2h0bWw=
-build_metadata.AdditionalFiles.CssScope = 
-
 [G:/FinalProject/FinalProjectMaktab/src/FinalProject/FinalProject.Endpoint/Areas/Administration/Views/Comment/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5pc3RyYXRpb25cVmlld3NcQ29tbWVudFxJbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
+[G:/FinalProject/FinalProjectMaktab/src/FinalProject/FinalProject.Endpoint/Areas/Administration/Views/Home/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5pc3RyYXRpb25cVmlld3NcSG9tZVxJbmRleC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
 [G:/FinalProject/FinalProjectMaktab/src/FinalProject/FinalProject.Endpoint/Areas/Administration/Views/Order/Edit.cshtml]
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5pc3RyYXRpb25cVmlld3NcT3JkZXJcRWRpdC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[G:/FinalProject/FinalProjectMaktab/src/FinalProject/FinalProject.Endpoint/Areas/Administration/Views/Order/EditBid.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5pc3RyYXRpb25cVmlld3NcT3JkZXJcRWRpdEJpZC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
 [G:/FinalProject/FinalProjectMaktab/src/FinalProject/FinalProject.Endpoint/Areas/Administration/Views/Order/Index.cshtml]
@@ -49,6 +37,10 @@ build_metadata.AdditionalFiles.CssScope =
 
 [G:/FinalProject/FinalProjectMaktab/src/FinalProject/FinalProject.Endpoint/Areas/Administration/Views/Shared/_Layout.cshtml]
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5pc3RyYXRpb25cVmlld3NcU2hhcmVkXF9MYXlvdXQuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[G:/FinalProject/FinalProjectMaktab/src/FinalProject/FinalProject.Endpoint/Areas/Administration/Views/Shared/_ProfileLayout.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5pc3RyYXRpb25cVmlld3NcU2hhcmVkXF9Qcm9maWxlTGF5b3V0LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
 [G:/FinalProject/FinalProjectMaktab/src/FinalProject/FinalProject.Endpoint/Areas/Administration/Views/Shared/_ValidationScriptsPartial.cshtml]
@@ -61,6 +53,10 @@ build_metadata.AdditionalFiles.CssScope =
 
 [G:/FinalProject/FinalProjectMaktab/src/FinalProject/FinalProject.Endpoint/Areas/Administration/Views/User/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5pc3RyYXRpb25cVmlld3NcVXNlclxJbmRleC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[G:/FinalProject/FinalProjectMaktab/src/FinalProject/FinalProject.Endpoint/Areas/Administration/Views/User/Profile.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5pc3RyYXRpb25cVmlld3NcVXNlclxQcm9maWxlLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
 [G:/FinalProject/FinalProjectMaktab/src/FinalProject/FinalProject.Endpoint/Areas/Administration/Views/_ViewImports.cshtml]
@@ -263,34 +259,50 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcSWRlbnRpdHlcUGFnZXNcX1ZpZXdTdGFydC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[G:/FinalProject/FinalProjectMaktab/src/FinalProject/FinalProject.Endpoint/Pages/Error.cshtml]
-build_metadata.AdditionalFiles.TargetPath = UGFnZXNcRXJyb3IuY3NodG1s
+[G:/FinalProject/FinalProjectMaktab/src/FinalProject/FinalProject.Endpoint/Views/Home/Category.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxDYXRlZ29yeS5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[G:/FinalProject/FinalProjectMaktab/src/FinalProject/FinalProject.Endpoint/Pages/Index.cshtml]
-build_metadata.AdditionalFiles.TargetPath = UGFnZXNcSW5kZXguY3NodG1s
+[G:/FinalProject/FinalProjectMaktab/src/FinalProject/FinalProject.Endpoint/Views/Home/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxJbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[G:/FinalProject/FinalProjectMaktab/src/FinalProject/FinalProject.Endpoint/Pages/Privacy.cshtml]
-build_metadata.AdditionalFiles.TargetPath = UGFnZXNcUHJpdmFjeS5jc2h0bWw=
+[G:/FinalProject/FinalProjectMaktab/src/FinalProject/FinalProject.Endpoint/Views/Order/Create.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcT3JkZXJcQ3JlYXRlLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[G:/FinalProject/FinalProjectMaktab/src/FinalProject/FinalProject.Endpoint/Pages/Shared/_LoginPartial.cshtml]
-build_metadata.AdditionalFiles.TargetPath = UGFnZXNcU2hhcmVkXF9Mb2dpblBhcnRpYWwuY3NodG1s
+[G:/FinalProject/FinalProjectMaktab/src/FinalProject/FinalProject.Endpoint/Views/Order/Details.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcT3JkZXJcRGV0YWlscy5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[G:/FinalProject/FinalProjectMaktab/src/FinalProject/FinalProject.Endpoint/Pages/Shared/_ValidationScriptsPartial.cshtml]
-build_metadata.AdditionalFiles.TargetPath = UGFnZXNcU2hhcmVkXF9WYWxpZGF0aW9uU2NyaXB0c1BhcnRpYWwuY3NodG1s
+[G:/FinalProject/FinalProjectMaktab/src/FinalProject/FinalProject.Endpoint/Views/Order/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcT3JkZXJcSW5kZXguY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[G:/FinalProject/FinalProjectMaktab/src/FinalProject/FinalProject.Endpoint/Pages/_ViewImports.cshtml]
-build_metadata.AdditionalFiles.TargetPath = UGFnZXNcX1ZpZXdJbXBvcnRzLmNzaHRtbA==
+[G:/FinalProject/FinalProjectMaktab/src/FinalProject/FinalProject.Endpoint/Views/Shared/Error.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXEVycm9yLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[G:/FinalProject/FinalProjectMaktab/src/FinalProject/FinalProject.Endpoint/Pages/_ViewStart.cshtml]
-build_metadata.AdditionalFiles.TargetPath = UGFnZXNcX1ZpZXdTdGFydC5jc2h0bWw=
+[G:/FinalProject/FinalProjectMaktab/src/FinalProject/FinalProject.Endpoint/Views/Shared/_LoginPartial.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9Mb2dpblBhcnRpYWwuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[G:/FinalProject/FinalProjectMaktab/src/FinalProject/FinalProject.Endpoint/Pages/Shared/_Layout.cshtml]
-build_metadata.AdditionalFiles.TargetPath = UGFnZXNcU2hhcmVkXF9MYXlvdXQuY3NodG1s
-build_metadata.AdditionalFiles.CssScope = b-j8xuhdrbsn
+[G:/FinalProject/FinalProjectMaktab/src/FinalProject/FinalProject.Endpoint/Views/Shared/_ValidationScriptsPartial.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9WYWxpZGF0aW9uU2NyaXB0c1BhcnRpYWwuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[G:/FinalProject/FinalProjectMaktab/src/FinalProject/FinalProject.Endpoint/Views/_ViewImports.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcX1ZpZXdJbXBvcnRzLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[G:/FinalProject/FinalProjectMaktab/src/FinalProject/FinalProject.Endpoint/Views/_ViewStart.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcX1ZpZXdTdGFydC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[G:/FinalProject/FinalProjectMaktab/src/FinalProject/FinalProject.Endpoint/Areas/Identity/Pages/Shared/_Layout.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcSWRlbnRpdHlcUGFnZXNcU2hhcmVkXF9MYXlvdXQuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = b-54776ww4ki
+
+[G:/FinalProject/FinalProjectMaktab/src/FinalProject/FinalProject.Endpoint/Views/Shared/_Layout.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9MYXlvdXQuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = b-szocsvp3z1

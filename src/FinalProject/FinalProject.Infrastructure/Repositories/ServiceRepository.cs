@@ -32,6 +32,12 @@ namespace FinalProject.Infrastructure.Repositories
             return await _mapper.ProjectTo<ServiceDto>(_context.Services).ToListAsync();
         }
 
+        public async Task<IEnumerable<ServiceDto>> GetByCategoryId(int categoryId)
+        {
+            var records = await _mapper.ProjectTo<ServiceDto>(_context.Services).Where(x => x.CategoryId == categoryId).ToListAsync();
+            return records;
+        }
+
         public async Task<ServiceDto> GetById(int id)
         {
             var record = await _mapper.ProjectTo<ServiceDto>(_context.Services).SingleOrDefaultAsync(x => x.Id == id);

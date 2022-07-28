@@ -84,8 +84,8 @@ namespace FinalProject.Infrastructure.Migrations
                         .HasMaxLength(255)
                         .HasColumnType("nvarchar(255)");
 
-                    b.Property<int?>("CreatedByUserId")
-                        .HasColumnType("int");
+                    b.Property<string>("CreatedByUserId")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTimeOffset?>("CreatedDateTime")
                         .HasColumnType("datetimeoffset");
@@ -101,8 +101,8 @@ namespace FinalProject.Infrastructure.Migrations
                         .HasMaxLength(255)
                         .HasColumnType("nvarchar(255)");
 
-                    b.Property<int?>("ModifiedByUserId")
-                        .HasColumnType("int");
+                    b.Property<string>("ModifiedByUserId")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTimeOffset?>("ModifiedDateTime")
                         .HasColumnType("datetimeoffset");
@@ -216,8 +216,8 @@ namespace FinalProject.Infrastructure.Migrations
                         .HasMaxLength(255)
                         .HasColumnType("nvarchar(255)");
 
-                    b.Property<int?>("CreatedByUserId")
-                        .HasColumnType("int");
+                    b.Property<string>("CreatedByUserId")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTimeOffset?>("CreatedDateTime")
                         .HasColumnType("datetimeoffset");
@@ -247,8 +247,8 @@ namespace FinalProject.Infrastructure.Migrations
                         .HasMaxLength(255)
                         .HasColumnType("nvarchar(255)");
 
-                    b.Property<int?>("ModifiedByUserId")
-                        .HasColumnType("int");
+                    b.Property<string>("ModifiedByUserId")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTimeOffset?>("ModifiedDateTime")
                         .HasColumnType("datetimeoffset");
@@ -374,8 +374,8 @@ namespace FinalProject.Infrastructure.Migrations
                         .HasMaxLength(255)
                         .HasColumnType("nvarchar(255)");
 
-                    b.Property<int?>("CreatedByUserId")
-                        .HasColumnType("int");
+                    b.Property<string>("CreatedByUserId")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTimeOffset?>("CreatedDateTime")
                         .HasColumnType("datetimeoffset");
@@ -385,6 +385,9 @@ namespace FinalProject.Infrastructure.Migrations
                         .HasColumnType("nvarchar(450)");
 
                     b.Property<DateTimeOffset?>("DateCompleted")
+                        .HasColumnType("datetimeoffset");
+
+                    b.Property<DateTimeOffset>("DateRequired")
                         .HasColumnType("datetimeoffset");
 
                     b.Property<string>("Description")
@@ -405,8 +408,8 @@ namespace FinalProject.Infrastructure.Migrations
                         .HasMaxLength(255)
                         .HasColumnType("nvarchar(255)");
 
-                    b.Property<int?>("ModifiedByUserId")
-                        .HasColumnType("int");
+                    b.Property<string>("ModifiedByUserId")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTimeOffset?>("ModifiedDateTime")
                         .HasColumnType("datetimeoffset");
@@ -469,7 +472,7 @@ namespace FinalProject.Infrastructure.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
-                    b.Property<decimal?>("BasePrice")
+                    b.Property<decimal>("BasePrice")
                         .HasColumnType("decimal(18,2)");
 
                     b.Property<int>("CategoryId")
@@ -506,8 +509,8 @@ namespace FinalProject.Infrastructure.Migrations
                         .HasMaxLength(255)
                         .HasColumnType("nvarchar(255)");
 
-                    b.Property<int?>("CreatedByUserId")
-                        .HasColumnType("int");
+                    b.Property<string>("CreatedByUserId")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTimeOffset?>("CreatedDateTime")
                         .HasColumnType("datetimeoffset");
@@ -520,8 +523,8 @@ namespace FinalProject.Infrastructure.Migrations
                         .HasMaxLength(255)
                         .HasColumnType("nvarchar(255)");
 
-                    b.Property<int?>("ModifiedByUserId")
-                        .HasColumnType("int");
+                    b.Property<string>("ModifiedByUserId")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTimeOffset?>("ModifiedDateTime")
                         .HasColumnType("datetimeoffset");
@@ -549,8 +552,8 @@ namespace FinalProject.Infrastructure.Migrations
                         .HasMaxLength(255)
                         .HasColumnType("nvarchar(255)");
 
-                    b.Property<int?>("CreatedByUserId")
-                        .HasColumnType("int");
+                    b.Property<string>("CreatedByUserId")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTimeOffset?>("CreatedDateTime")
                         .HasColumnType("datetimeoffset");
@@ -577,8 +580,8 @@ namespace FinalProject.Infrastructure.Migrations
                         .HasMaxLength(255)
                         .HasColumnType("nvarchar(255)");
 
-                    b.Property<int?>("ModifiedByUserId")
-                        .HasColumnType("int");
+                    b.Property<string>("ModifiedByUserId")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTimeOffset?>("ModifiedDateTime")
                         .HasColumnType("datetimeoffset");
@@ -841,14 +844,14 @@ namespace FinalProject.Infrastructure.Migrations
                         .HasForeignKey("ParentCategoryId")
                         .OnDelete(DeleteBehavior.Restrict);
 
-                    b.HasOne("FinalProject.Domain.Entities.Upload", "FileDetails")
+                    b.HasOne("FinalProject.Domain.Entities.Upload", "Picture")
                         .WithOne("Category")
                         .HasForeignKey("FinalProject.Domain.Entities.Category", "PictureId")
                         .OnDelete(DeleteBehavior.NoAction);
 
-                    b.Navigation("FileDetails");
-
                     b.Navigation("ParentCategory");
+
+                    b.Navigation("Picture");
                 });
 
             modelBuilder.Entity("FinalProject.Domain.Entities.City", b =>

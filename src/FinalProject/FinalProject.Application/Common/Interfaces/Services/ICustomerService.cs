@@ -10,4 +10,5 @@ public interface ICustomerService
     Task<string> SoftDelete(string id);
     Task<string> Remove(string id);
     Task<string> Update(CustomerDto dto);
+    Task<string> GetName(string id);
 }

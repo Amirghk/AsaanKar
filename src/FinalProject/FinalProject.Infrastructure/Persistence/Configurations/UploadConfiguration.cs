@@ -26,7 +26,7 @@ public class UploadConfiguration : IEntityTypeConfiguration<Upload>
             .HasForeignKey<Comment>(f => f.ImageId);
         builder
             .HasOne(f => f.Category)
-            .WithOne(s => s.FileDetails)
+            .WithOne(s => s.Picture)
             .HasForeignKey<Category>(f => f.PictureId);
     }
 }

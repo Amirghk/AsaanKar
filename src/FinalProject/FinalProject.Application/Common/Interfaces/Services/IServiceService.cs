@@ -9,4 +9,5 @@ public interface IServiceService
     Task<ServiceDto> GetById(int id);
     Task<int> Remove(int id);
     Task<int> Update(ServiceDto dto);
+    Task<IEnumerable<ServiceDto>> GetByCategoryId(int categoryId);
 }

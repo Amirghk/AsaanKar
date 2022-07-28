@@ -1,0 +1,95 @@
+﻿@model OrderListViewModel
+
+<section class="h-100 h-custom" style="background-color: #eee;">
+    <div class="container py-5 h-100">
+        <div class="row d-flex justify-content-center align-items-center h-100">
+            <div class="col-lg-8 col-xl-6">
+                <div class="card border-top border-bottom border-3">
+                    <div class="card-body p-5">
+
+                        <p class="lead fw-bold mb-5">جزییات سفارش</p>
+
+                        <div class="row">
+                            <div class="col mb-3">
+                                <p class="small text-muted mb-1">@Html.DisplayNameFor(x => x.OrderDate)</p>
+                                <p>@Model.OrderDate.Date</p>
+                            </div>
+                            <div class="col mb-3">
+                                <p class="small text-muted mb-1">@Html.DisplayNameFor(x => x.Id)</p>
+                                <p>@Model.Id</p>
+                            </div>
+                        </div>
+
+                        <div class="mx-n5 px-5 py-4" style="background-color: #f2f2f2;">
+                            <div class="row">
+                                <div class="col-md-6 col-lg-7">
+                                    <p>@Html.DisplayNameFor(x => x.ServiceName)</p>
+                                </div>
+                                <div class="col-md-6 col-lg-5">
+                                    <p>@Model.ServiceName</p>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6 col-lg-7">
+                                    <p>@Html.DisplayNameFor(x => x.ServiceBasePrice)</p>
+                                </div>
+                                <div class="col-md-6 col-lg-5">
+                                    <p>@Model.ServiceBasePrice</p>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6 col-lg-7">
+                                    <p>@Html.DisplayNameFor(x => x.CompletedPrice)</p>
+                                </div>
+                                <div class="col-md-6 col-lg-5">
+                                    <p>@Model.CompletedPrice</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-6 col-lg-7">
+                                <p>@Html.DisplayNameFor(x => x.State)</p>
+                            </div>
+                            <div class="col-md-6 col-lg-5">
+                                <p>@Model.State.GetDisplayName()</p>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-lg-12">
+
+                                @if ((int)Model.State == 1 || (int)Model.State == 2)
+                                {
+                                    <div class="progress">
+                                        <div class="progress-bar" role="progressbar" style="width: 25%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+                                    </div>
+                                }
+                                @if ((int)Model.State == 3 || (int)Model.State == 4)
+                                {
+                                    <div class="progress">
+                                        <div class="progress-bar" role="progressbar" style="width: 50%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+                                    </div>
+                                }
+                                @if ((int)Model.State == 5)
+                                {
+                                    <div class="progress">
+                                        <div class="progress-bar" role="progressbar" style="width: 75%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+                                    </div>
+                                }
+                                @if ((int)Model.State == 6)
+                                {
+                                    <div class="progress">
+                                        <div class="progress-bar" role="progressbar" style="width: 100%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+                                    </div>
+                                }
+
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

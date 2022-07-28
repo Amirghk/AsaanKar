@@ -1,6 +1,7 @@
 using System.Linq.Expressions;
 using FinalProject.Application.Common.DataTransferObjects;
 using FinalProject.Domain.Entities;
+using FinalProject.Domain.Enums;
 using FinalProject.Domain.Interfaces;
 
 namespace FinalProject.Application.Common.Interfaces.Repositories;
@@ -12,4 +13,5 @@ public interface IOrderRepository
     Task<int> Remove(int id);
     Task<OrderDto> GetById(int id);
     Task<IEnumerable<OrderDto>> GetAll();
+    Task<IEnumerable<OrderDto>> GetByUserId(string id, OrderState? orderState = null);
 }

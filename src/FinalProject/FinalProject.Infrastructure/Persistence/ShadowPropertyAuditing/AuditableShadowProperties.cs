@@ -67,9 +67,9 @@ public static class AuditableShadowProperties
                 .Property<string>(ModifiedByIp).HasMaxLength(255);
 
             modelBuilder.Entity(entityType.ClrType)
-                .Property<int?>(CreatedByUserId);
+                .Property<string?>(CreatedByUserId);
             modelBuilder.Entity(entityType.ClrType)
-                .Property<int?>(ModifiedByUserId);
+                .Property<string?>(ModifiedByUserId);
 
             modelBuilder.Entity(entityType.ClrType)
                 .Property<DateTimeOffset?>(CreatedDateTime);
@@ -86,7 +86,7 @@ public static class AuditableShadowProperties
         var userAgent = httpContext?.Request?.Headers["User-Agent"].ToString();
         var userIp = httpContext?.Connection?.RemoteIpAddress?.ToString();
         var now = DateTimeOffset.UtcNow;
-        int? userId = GetUserId(httpContext);
+        string? userId = GetUserId(httpContext);
 
         var modifiedEntries = changeTracker.Entries<IAuditableEntity>()
             .Where(x => x.State == EntityState.Modified);
@@ -109,11 +109,11 @@ public static class AuditableShadowProperties
         }
     }
 
-    private static int? GetUserId(HttpContext httpContext)
+    private static string? GetUserId(HttpContext httpContext)
     {
-        int? userId = null;
+        string? userId = null;
         var userIdValue = httpContext?.User?.Identity?.GetUserId();
-        if (!string.IsNullOrWhiteSpace(userIdValue)) userId = int.Parse(userIdValue);
+        if (!string.IsNullOrWhiteSpace(userIdValue)) userId = userIdValue;
         return userId;
     }
 

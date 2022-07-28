@@ -1,4 +1,5 @@
 using FinalProject.Application.Common.Interfaces.Services;
+using FinalProject.Endpoint.Models;
 using FinalProject.Infrastructure.Identity;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -31,24 +32,19 @@ namespace FinalProject.Endpoint.Areas.Identity.Pages.Account.Manage
             _signInManager = signInManager;
         }
 
-        public List<ListModel> Addresses { get; set; } = new();
-        public class ListModel
-        {
-            public int Id { get; set; }
-            public string Address { get; set; } = string.Empty;
-        }
+        public List<AddressListViewModel> Addresses { get; set; } = new();
 
         private async Task LoadAsync(ApplicationUser user)
         {
             var customer = await _customerService.GetById(user.Id);
             var addresses = await _addressService.GetByUserId(user.Id);
+            Addresses = new List<AddressListViewModel>();
             foreach (var address in addresses)
             {
-                Addresses = new List<ListModel>();
-                Addresses.Add(new ListModel
+                Addresses.Add(new AddressListViewModel
                 {
                     Id = address.Id,
-                    Address = await _addressService.GetFullAddressToString(address),
+                    Address = await _addressService.GetFullAddressToString(address.Id),
                 });
             }
         }

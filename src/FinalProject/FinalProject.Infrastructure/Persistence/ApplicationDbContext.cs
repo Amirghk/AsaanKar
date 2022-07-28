@@ -48,14 +48,23 @@ public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
         builder.ApplyConfiguration(new ServiceConfiguration());
     }
 
-    public override int SaveChanges()
+    //public override int SaveChanges()
+    //{
+    //    ChangeTracker.DetectChanges();
+    //    SetShadowProperties();
+    //    var result = base.SaveChanges();
+    //    ChangeTracker.AutoDetectChangesEnabled = true;
+    //    return result;
+    //}
+
+
+    public override Task<int> SaveChangesAsync(CancellationToken cancellationToken = default)
     {
         ChangeTracker.DetectChanges();
         SetShadowProperties();
-        var result = base.SaveChanges();
-        ChangeTracker.AutoDetectChangesEnabled = true;
-        return result;
+        return base.SaveChangesAsync(cancellationToken);
     }
+
 
     private void SetShadowProperties()
     {

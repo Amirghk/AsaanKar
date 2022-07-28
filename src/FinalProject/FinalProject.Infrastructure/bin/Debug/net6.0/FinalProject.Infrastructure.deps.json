@@ -675,7 +675,8 @@
           "AutoMapper": "11.0.1",
           "FinalProject.Domain": "1.0.0",
           "Microsoft.AspNet.Identity.Core": "2.2.3",
-          "Microsoft.Extensions.DependencyInjection": "6.0.0"
+          "Microsoft.Extensions.DependencyInjection": "6.0.0",
+          "Microsoft.Extensions.Logging": "6.0.0"
         },
         "runtime": {
           "FinalProject.Application.dll": {}

@@ -94,7 +94,7 @@
                 <div class="position-sticky pt-3">
                     <ul class="nav flex-column">
                         <li class="nav-item">
-                            <a class="nav-link active" href="Administration/Users" aria-current="page">
+                            <a class="nav-link active" asp-controller="User" aria-current="page">
                                 <span data-feather="home" class="align-text-bottom"></span>
                                 مدیریت کاربران
                             </a>
@@ -102,29 +102,24 @@
                     </ul>
 
                     <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted text-uppercase">
-                        <spanت< /span>
-              <a class="link-secondary" href="#" aria-label="إضافة تقرير جديد">
-                <span data-feather="plus-circle" class="align-text-bottom">TODO</span>
-              </a>
                     </h6>
                     <ul class="nav flex-column mb-2">
                         <li class="nav-item">
-                            <a class="nav-link" href="#">
+                            <a class="nav-link" asp-controller="Comment">
                                 <span data-feather="file-text" class="align-text-bottom"></span>
-                                مشاهده لیست کامنت ها
+                                لیست کامنت ها
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#">
+                            <a class="nav-link" asp-controller='Upload'>
                                 <span data-feather="file-text" class="align-text-bottom"></span>
-                                مشاهده و امکان حذف تمام فایل
-                                های آپلود شد
+                                فایل های آپلود شده
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#">
+                            <a class="nav-link" asp-controller="Order">
                                 <span data-feather="file-text" class="align-text-bottom"></span>
-                                >مشاهده لیست سفارشات
+                                سفارشات
                             </a>
                         </li>
                         <li class="nav-item">
