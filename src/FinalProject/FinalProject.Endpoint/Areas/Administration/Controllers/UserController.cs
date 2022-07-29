@@ -74,9 +74,11 @@ namespace FinalProject.Endpoint.Areas.Administration.Controllers
         [HttpPost]
         public async Task<IActionResult> Edit(UserEditViewModel model)
         {
+            // TODO c token
             var user = await _userManager.FindByNameAsync(model.Username);
             if (user == null)
             {
+                // TODO
                 return NotFound($"Unable to load user with ID '{_userManager.GetUserId(User)}'.");
             }
 
@@ -124,6 +126,7 @@ namespace FinalProject.Endpoint.Areas.Administration.Controllers
         {
 
             var user = await _userManager.FindByNameAsync(userName);
+            // TODO null check
             var userId = user.Id;
 
             var isCustomer = await IsCustomer(user);

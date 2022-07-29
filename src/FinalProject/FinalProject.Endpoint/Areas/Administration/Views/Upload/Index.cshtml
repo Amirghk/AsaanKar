@@ -25,10 +25,29 @@
                 <td>@upload.FileSize</td>
                 <td>@upload.FileCategory.GetDisplayName()</td>
                 <td>
-                    <form asp-controller="Upload" asp-action="Delete" asp-route-id=@upload.Id method="post">
-
-                        <button type="submit">حذف</button>
-                    </form>
+                    <button type="button" class="btn btn-danger m-1" data-bs-toggle="modal" data-bs-target=@("#modal_" + upload.Id)>
+                            حذف
+                        </button>
+                        <div class="modal fade" id=@("modal_" + upload.Id) tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                            <div class="modal-dialog" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                                        <button type="button" class="btn-close m-0" data-bs-dismiss="modal" aria-label="Close">
+                                        </button>
+                                    </div>
+                                    <div class="modal-body text-dark">
+                                        مطئنید میخواهید حذف کنید؟
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">بستن</button>
+                                        <form asp-controller="Upload" asp-action="Delete" asp-route-id=@upload.Id method="post">
+                                            <button class="btn btn-danger" type="submit">حذف</button>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                 </td>
             </tr>
         }

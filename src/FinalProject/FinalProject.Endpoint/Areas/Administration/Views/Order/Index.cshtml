@@ -19,7 +19,6 @@
                 <th scope="col">@Html.DisplayNameForInnerType((OrderListViewModel c) => c.CompletedPrice)</th>
                 <th scope="col">@Html.DisplayNameForInnerType((OrderListViewModel c) => c.AddressId)</th>
                 <th scope="col">@Html.DisplayNameForInnerType((OrderListViewModel c) => c.Bids)</th>
-                <th scope="col">@Html.DisplayNameForInnerType((OrderListViewModel c) => c.Description)</th>
 
                 <th scope="col">عملیات</th>
             </tr>
@@ -42,15 +41,34 @@
                             مشاهده پیشنهادات
                         </button>
                     </td>
-                    <td>@order.Description</td>
-                    <td class="d-inline-flex justify-items-center">
-                        <form asp-controller="Order" asp-action="Delete" asp-route-id=@order.Id method="post">
-
-                            <button class="btn btn-danger" type="submit">حذف</button>
-                        </form>
+                    <td class="d-inline-flex justify-items-center align-items-center">
+                        <button type="button" class="btn btn-danger m-1" data-bs-toggle="modal" data-bs-target=@("#modal_" + order.Id)>
+                            حذف
+                        </button>
+                        <div class="modal fade" id=@("modal_" + order.Id) tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                            <div class="modal-dialog" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                                        <button type="button" class="btn-close m-0" data-bs-dismiss="modal" aria-label="Close">
+                                        </button>
+                                    </div>
+                                    <div class="modal-body text-dark">
+                                        مطئنید میخواهید حذف کنید؟
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">بستن</button>
+                                        <form asp-controller="Order" asp-action="Delete" asp-route-id=@order.Id method="post">
+                                            <button class="btn btn-danger" type="submit">حذف</button>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                         <form asp-controller="Order" asp-action="Edit" asp-route-id=@order.Id method="get">
                             <button class="btn btn-warning" type="submit">ویرایش</button>
                         </form>
+                        <a class="btn btn-info" asp-controller="Order" asp-action="Details" asp-route-id=@order.Id>جزییات</a>
                     </td>
                 </tr>
                 <tr id=@("b" + order.Id) class="accordion-collapse collapse" aria-labelledby="headingOne" data-parent="#accordionExample">

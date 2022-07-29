@@ -1,4 +1,8 @@
-﻿
+﻿@using FinalProject.Infrastructure.Identity
+@using Microsoft.AspNetCore.Identity
+@inject UserManager<ApplicationUser> UserManager
+
+
 <h1>مدیریت کاربران</h1>
 <br />
 
@@ -19,7 +23,7 @@
         <table class="table">
             <thead class="thead-dark">
                 <tr>
-                    <th scope="col">@Html.DisplayNameForInnerType((CustomerListVM c) => c.Id)</th>
+                    <th scope="col">نام کاربری</th>
                     <th scope="col">@Html.DisplayNameForInnerType((CustomerListVM c) => c.FirstName )</th>
                     <th scope="col">@Html.DisplayNameForInnerType((CustomerListVM c) => c.LastName)</th>
                     <th scope="col">@Html.DisplayNameForInnerType((CustomerListVM c) => c.PhoneNumber)</th>
@@ -31,12 +35,19 @@
                 @foreach (var customer in ViewBag.Customers)
                 {
                     <tr>
-                        <th scope="row">@customer.Id</th>
+                        <th scope="row">
+                            @{
+                                var user = await UserManager.FindByIdAsync(customer.Id);
+                                <p>
+                                    @user.UserName
+                                </p>
+                            }
+                        </th>
                         <td>@customer.FirstName</td>
                         <td>@customer.LastName</td>
                         <td>@customer.PhoneNumber</td>
                         <td>@customer.BirthDate</td>
-                        <td>                          
+                        <td>
                             <a asp-controller="User" asp-action="Profile" asp-route-id=@customer.Id>ویرایش</a>
                         </td>
                     </tr>
@@ -48,7 +59,7 @@
         <table class="table">
             <thead class="thead-dark">
                 <tr>
-                    <th scope="col">@Html.DisplayNameForInnerType((ExpertListVM c) => c.Id)</th>
+                    <th scope="col">نام کاربری</th>
                     <th scope="col">@Html.DisplayNameForInnerType((ExpertListVM c) => c.FirstName )</th>
                     <th scope="col">@Html.DisplayNameForInnerType((ExpertListVM c) => c.LastName)</th>
                     <th scope="col">@Html.DisplayNameForInnerType((ExpertListVM c) => c.PhoneNumber)</th>
@@ -62,7 +73,14 @@
                 @foreach (var expert in ViewBag.Experts)
                 {
                     <tr>
-                        <th scope="row">@expert.Id</th>
+                        <th scope="row">
+                            @{
+                                var user = await UserManager.FindByIdAsync(expert.Id);
+                                <p>
+                                    @user.UserName
+                                </p>
+                            }
+                        </th>
                         <td>@expert.FirstName</td>
                         <td>@expert.LastName</td>
                         <td>@expert.PhoneNumber</td>
@@ -70,7 +88,7 @@
                         <td>@expert.NationalCode</td>
                         <td>@expert.City</td>
                         <td>
-                            <a asp-controller="User" asp-action="Profile" asp-route-id=@expert.Id>ویرایش</a>
+                            <a class="btn btn-info" asp-controller="User" asp-action="Profile" asp-route-id=@expert.Id>ویرایش</a>
                         </td>
                     </tr>
                 }
@@ -82,23 +100,23 @@
 
 @section Scripts{
 <script>
-                document.getElementById('experts-tab').addEventListener('click', () => {
-                    document.getElementById('experts').classList.add('active')
-                    document.getElementById('experts').classList.add('show')
-                    document.getElementById('customers').classList.remove('active')
-                    document.getElementById('customers').classList.remove('show')
-                    document.getElementById('experts-tab').classList.add('active')
-                    document.getElementById('customers-tab').classList.remove('active')
+    document.getElementById('experts-tab').addEventListener('click', () => {
+        document.getElementById('experts').classList.add('active')
+        document.getElementById('experts').classList.add('show')
+        document.getElementById('customers').classList.remove('active')
+        document.getElementById('customers').classList.remove('show')
+        document.getElementById('experts-tab').classList.add('active')
+        document.getElementById('customers-tab').classList.remove('active')
 
-                })
+    })
 
-                document.getElementById('customers-tab').addEventListener('click', () => {
-                    document.getElementById('customers').classList.add('active')
-                    document.getElementById('customers').classList.add('show')
-                    document.getElementById('experts').classList.remove('active')
-                    document.getElementById('experts').classList.remove('show')
-                    document.getElementById('customers-tab').classList.add('active')
-                    document.getElementById('experts-tab').classList.remove('active')
-                })
+    document.getElementById('customers-tab').addEventListener('click', () => {
+        document.getElementById('customers').classList.add('active')
+        document.getElementById('customers').classList.add('show')
+        document.getElementById('experts').classList.remove('active')
+        document.getElementById('experts').classList.remove('show')
+        document.getElementById('customers-tab').classList.add('active')
+        document.getElementById('experts-tab').classList.remove('active')
+    })
 </script>
 }

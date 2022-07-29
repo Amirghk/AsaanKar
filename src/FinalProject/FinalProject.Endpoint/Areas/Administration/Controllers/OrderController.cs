@@ -66,6 +66,7 @@ namespace FinalProject.Endpoint.Areas.Administration.Controllers
             _logger.LogTrace("checking validity of : {}", model);
             if (!ModelState.IsValid)
             {
+                // TODO add errors to modelstate
                 return View(model);
             }
             _logger.LogTrace("calling {method} in service", "GetById");
@@ -92,6 +93,14 @@ namespace FinalProject.Endpoint.Areas.Administration.Controllers
             var bid = _mapper.Map<BidDto>(model);
             await _bidService.Update(bid);
             return RedirectToAction(nameof(Index));
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> Details(int id)
+        {
+            var order = await _orderService.GetById(id);
+            var model = _mapper.Map<OrderListViewModel>(order);
+            return View(model);
         }
     }
 }

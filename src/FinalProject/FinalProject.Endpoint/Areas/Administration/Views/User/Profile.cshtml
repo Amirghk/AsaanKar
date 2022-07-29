@@ -18,16 +18,36 @@
                 <p class="text-muted mb-1">Full Stack Developer</p>
                 <p class="text-muted mb-4">Bay Area, San Francisco, CA</p>
                 <div class="d-flex justify-content-center mb-2">
-                    <form asp-controller="User" asp-action="Delete" method="post">
-                        <input type="hidden" name="userName" value=@Model.Username />
-                        <button type="submit" class="btn btn-danger">حذف کاربر</button>
-                    </form>
+                    <button type="button" class="btn btn-danger m-1" data-bs-toggle="modal" data-bs-target="#deleteModal">
+                        حذف
+                    </button>
+                    <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                                    <button type="button" class="btn-close m-0" data-bs-dismiss="modal" aria-label="Close">
+                                    </button>
+                                </div>
+                                <div class="modal-body text-dark">
+                                    مطئنید میخواهید حذف کنید؟
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">بستن</button>
+                                    <form asp-controller="User" asp-action="Delete" method="post">
+                                        <input type="hidden" name="userName" value=@Model.Username />
+                                        <button type="submit" class="btn btn-danger">حذف کاربر</button>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
                 </div>
             </div>
         </div>
         <div class="card mb-4 mb-lg-0">
             <div class="card-body p-0">
-                
             </div>
         </div>
     </div>
