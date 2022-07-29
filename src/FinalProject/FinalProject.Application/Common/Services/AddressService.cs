@@ -42,7 +42,7 @@ public class AddressService : IAddressService
         var address = await _repository.GetById(id, cancellationToken);
         var city = await _cityRepository.GetById(address.CityId, cancellationToken);
         var cityName = city.Name;
-        var ProvinceName = (await _provinceService.GetById(city.ProvinceId)).Name;
+        var ProvinceName = (await _provinceService.GetById(city.ProvinceId, cancellationToken)).Name;
         var content = address.Content;
         var postalCode = address.PostalCode;
 

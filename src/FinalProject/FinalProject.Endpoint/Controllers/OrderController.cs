@@ -39,33 +39,33 @@ namespace FinalProject.Endpoint.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(CancellationToken cancellationToken)
         {
             var user = await _userManager.GetUserAsync(User);
             if (user == null)
             {
                 return NotFound($"Unable to load user with ID '{_userManager.GetUserId(User)}'.");
             }
-            var model = _mapper.Map<List<OrderListViewModel>>(await _orderService.GetByUserId(user.Id));
+            var model = _mapper.Map<List<OrderListViewModel>>(await _orderService.GetByUserId(user.Id, cancellationToken));
             return View(model);
         }
 
         [HttpGet]
-        public async Task<IActionResult> Create(int id)
+        public async Task<IActionResult> Create(int id, CancellationToken cancellationToken)
         {
             var user = await _userManager.GetUserAsync(User);
             if (user == null)
             {
                 return NotFound($"Unable to load user with ID '{_userManager.GetUserId(User)}'.");
             }
-            ViewBag.Addresses = await LoadAsync(user);
+            ViewBag.Addresses = await LoadAsync(user, cancellationToken);
             ViewBag.ServiceId = id;
 
             return View();
         }
 
         [HttpPost]
-        public async Task<IActionResult> Create(OrderSaveViewModel model)
+        public async Task<IActionResult> Create(OrderSaveViewModel model, CancellationToken cancellationToken)
         {
             if (!ModelState.IsValid)
             {
@@ -75,32 +75,32 @@ namespace FinalProject.Endpoint.Controllers
             var dto = _mapper.Map<OrderDto>(model);
             var user = await _userManager.GetUserAsync(User);
             dto.CustomerId = user.Id;
-            await _orderService.Set(dto);
+            await _orderService.Set(dto, cancellationToken);
 
             return RedirectToAction(nameof(Index));
 
         }
 
         [HttpGet]
-        public async Task<IActionResult> Details(int id)
+        public async Task<IActionResult> Details(int id, CancellationToken cancellationToken)
         {
-            var order = await _orderService.GetById(id);
+            var order = await _orderService.GetById(id, cancellationToken);
             var model = _mapper.Map<OrderListViewModel>(order);
             return View(model);
         }
 
 
-        private async Task<List<AddressListViewModel>> LoadAsync(ApplicationUser user)
+        private async Task<List<AddressListViewModel>> LoadAsync(ApplicationUser user, CancellationToken cancellationToken)
         {
-            var customer = await _customerService.GetById(user.Id);
-            var addresses = await _addressService.GetByUserId(user.Id);
+            var customer = await _customerService.GetById(user.Id, cancellationToken);
+            var addresses = await _addressService.GetByUserId(user.Id, cancellationToken);
             var model = new List<AddressListViewModel>();
             foreach (var address in addresses)
             {
                 model.Add(new AddressListViewModel
                 {
                     Id = address.Id,
-                    Address = await _addressService.GetFullAddressToString(address.Id),
+                    Address = await _addressService.GetFullAddressToString(address.Id, cancellationToken),
                 });
             }
             return model;

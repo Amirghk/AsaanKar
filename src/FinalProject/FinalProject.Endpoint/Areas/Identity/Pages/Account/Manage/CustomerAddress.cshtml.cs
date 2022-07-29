@@ -34,22 +34,22 @@ namespace FinalProject.Endpoint.Areas.Identity.Pages.Account.Manage
 
         public List<AddressListViewModel> Addresses { get; set; } = new();
 
-        private async Task LoadAsync(ApplicationUser user)
+        private async Task LoadAsync(ApplicationUser user, CancellationToken cancellationToken)
         {
-            var customer = await _customerService.GetById(user.Id);
-            var addresses = await _addressService.GetByUserId(user.Id);
+            var customer = await _customerService.GetById(user.Id, cancellationToken);
+            var addresses = await _addressService.GetByUserId(user.Id, cancellationToken);
             Addresses = new List<AddressListViewModel>();
             foreach (var address in addresses)
             {
                 Addresses.Add(new AddressListViewModel
                 {
                     Id = address.Id,
-                    Address = await _addressService.GetFullAddressToString(address.Id),
+                    Address = await _addressService.GetFullAddressToString(address.Id, cancellationToken),
                 });
             }
         }
 
-        public async Task<IActionResult> OnGetAsync()
+        public async Task<IActionResult> OnGetAsync(CancellationToken cancellationToken)
         {
             var user = await _userManager.GetUserAsync(User);
             if (user == null)
@@ -57,13 +57,13 @@ namespace FinalProject.Endpoint.Areas.Identity.Pages.Account.Manage
                 return NotFound($"Unable to load user with ID '{_userManager.GetUserId(User)}'.");
             }
 
-            await LoadAsync(user);
+            await LoadAsync(user, cancellationToken);
             return Page();
         }
 
-        public async Task<IActionResult> OnPostDeleteAsync(int id)
+        public async Task<IActionResult> OnPostDeleteAsync(int id, CancellationToken cancellationToken)
         {
-            await _addressService.Remove(id);
+            await _addressService.Remove(id, cancellationToken);
             return RedirectToPage(nameof(Index));
         }
     }

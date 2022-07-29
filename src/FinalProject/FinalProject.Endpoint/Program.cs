@@ -37,6 +37,7 @@ builder.Services.AddAutoMapper(typeof(MappingProfile).Assembly);
 builder.Services.AddAutoMapper(typeof(VMMappingProfile).Assembly);
 builder.Services.AddInfrastructure(builder.Configuration);
 builder.Services.AddApplication();
+
 builder.Services.AddAuthorization(options =>
 {
     options.AddPolicy(

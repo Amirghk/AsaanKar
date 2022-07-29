@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using FinalProject.Application.Common.DataTransferObjects;
+using FinalProject.Application.Common.Exceptions;
 using FinalProject.Application.Common.Interfaces.Services;
 using FinalProject.Endpoint.Areas.Administration.Models;
 using FinalProject.Infrastructure.Identity;
@@ -39,17 +40,17 @@ namespace FinalProject.Endpoint.Areas.Administration.Controllers
             _userManager = userManager;
             _signInManager = signInManager;
         }
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(CancellationToken cancellationToken)
         {
-            ViewBag.Customers = _mapper.Map<List<CustomerListVM>>(await _customerService.GetAll());
-            ViewBag.Experts = _mapper.Map<List<ExpertListVM>>(await _expertService.GetAll());
+            ViewBag.Customers = _mapper.Map<List<CustomerListVM>>(await _customerService.GetAll(cancellationToken));
+            ViewBag.Experts = _mapper.Map<List<ExpertListVM>>(await _expertService.GetAll(cancellationToken));
 
             foreach (var expert in ViewBag.Experts)
             {
-                List<AddressDto> expertAddress = await _addressService.GetByUserId(expert.Id);
+                List<AddressDto> expertAddress = await _addressService.GetByUserId(expert.Id, cancellationToken);
                 if (expertAddress.FirstOrDefault() != null)
                 {
-                    expert.City = (await _cityService.GetById(expertAddress.First().CityId)).Name;
+                    expert.City = (await _cityService.GetById(expertAddress.First().CityId, cancellationToken)).Name;
                 }
             }
 
@@ -57,7 +58,7 @@ namespace FinalProject.Endpoint.Areas.Administration.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> Profile(string id)
+        public async Task<IActionResult> Profile(string id, CancellationToken cancellationToken)
         {
             var user = await _userManager.FindByIdAsync(id);
             if (user == null)
@@ -65,14 +66,14 @@ namespace FinalProject.Endpoint.Areas.Administration.Controllers
                 return NotFound($"Unable to load user with ID '{_userManager.GetUserId(User)}'.");
             }
 
-            var model = await LoadAsync(user);
+            var model = await LoadAsync(user, cancellationToken);
             if (model.IsExpert) ViewData["IsExpert"] = true.ToString();
             else ViewData["IsExpert"] = false.ToString();
             return View(model);
         }
 
         [HttpPost]
-        public async Task<IActionResult> Edit(UserEditViewModel model)
+        public async Task<IActionResult> Edit(UserEditViewModel model, CancellationToken cancellationToken)
         {
             // TODO c token
             var user = await _userManager.FindByNameAsync(model.Username);
@@ -93,7 +94,7 @@ namespace FinalProject.Endpoint.Areas.Administration.Controllers
 
             if (isCustomer)
             {
-                var customer = await _customerService.GetById(user.Id);
+                var customer = await _customerService.GetById(user.Id, cancellationToken);
                 var customerDto = new CustomerDto
                 {
                     Id = customer.Id,
@@ -102,11 +103,11 @@ namespace FinalProject.Endpoint.Areas.Administration.Controllers
                     BirthDate = model.BirthDate,
                     PhoneNumber = model.PhoneNumber,
                 };
-                await _customerService.Update(customerDto);
+                await _customerService.Update(customerDto, cancellationToken);
             }
             else
             {
-                var expert = await _expertService.GetById(user.Id);
+                var expert = await _expertService.GetById(user.Id, cancellationToken);
                 var expertDto = new ExpertDto
                 {
                     Id = expert.Id,
@@ -116,17 +117,20 @@ namespace FinalProject.Endpoint.Areas.Administration.Controllers
                     NationalCode = model.NationalCode,
                     PhoneNumber = model.PhoneNumber,
                 };
-                await _expertService.Update(expertDto);
+                await _expertService.Update(expertDto, cancellationToken);
             }
             return RedirectToAction(nameof(Index));
         }
 
         [HttpPost]
-        public async Task<IActionResult> Delete(string userName)
+        public async Task<IActionResult> Delete(string userName, CancellationToken cancellationToken)
         {
 
             var user = await _userManager.FindByNameAsync(userName);
-            // TODO null check
+            if (user == null)
+            {
+                throw new NotFoundException(nameof(user), userName);
+            }
             var userId = user.Id;
 
             var isCustomer = await IsCustomer(user);
@@ -138,11 +142,11 @@ namespace FinalProject.Endpoint.Areas.Administration.Controllers
             {
                 if (isCustomer)
                 {
-                    await _customerService.SoftDelete(userId);
+                    await _customerService.SoftDelete(userId, cancellationToken);
                 }
                 else
                 {
-                    await _expertService.SoftDelete(userId);
+                    await _expertService.SoftDelete(userId, cancellationToken);
                 }
             }
             return LocalRedirect("/Administration/Users");
@@ -180,7 +184,7 @@ namespace FinalProject.Endpoint.Areas.Administration.Controllers
         }
 
 
-        private async Task<UserEditViewModel> LoadAsync(ApplicationUser user)
+        private async Task<UserEditViewModel> LoadAsync(ApplicationUser user, CancellationToken cancellationToken)
         {
             var userName = await _userManager.GetUserNameAsync(user);
 
@@ -192,7 +196,7 @@ namespace FinalProject.Endpoint.Areas.Administration.Controllers
 
             if (isCustomer)
             {
-                var customer = await _customerService.GetById(user.Id);
+                var customer = await _customerService.GetById(user.Id, cancellationToken);
 
                 model.FirstName = customer.FirstName;
                 model.LastName = customer.LastName;
@@ -203,7 +207,7 @@ namespace FinalProject.Endpoint.Areas.Administration.Controllers
             }
             else
             {
-                var expert = await _expertService.GetById(user.Id);
+                var expert = await _expertService.GetById(user.Id, cancellationToken);
 
                 model.FirstName = expert.FirstName;
                 model.LastName = expert.LastName;

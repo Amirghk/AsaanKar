@@ -17,7 +17,7 @@ public class ExpertService : IExpertService
         _repository = repository;
     }
 
-    public async Task<IEnumerable<ExpertDto>> GetAll(, CancellationToken cancellationToken)
+    public async Task<IEnumerable<ExpertDto>> GetAll(CancellationToken cancellationToken)
     {
         return (await _repository.GetAll(cancellationToken)).Where(x => x.IsDeleted == false);
     }

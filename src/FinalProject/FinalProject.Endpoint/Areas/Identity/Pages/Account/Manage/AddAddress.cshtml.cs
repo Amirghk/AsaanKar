@@ -50,9 +50,9 @@ namespace FinalProject.Endpoint.Areas.Identity.Pages.Account.Manage
 
 
 
-        public async Task<IActionResult> OnGetAsync()
+        public async Task<IActionResult> OnGetAsync(CancellationToken cancellationToken)
         {
-            var provinces = await _provinceService.GetAll();
+            var provinces = await _provinceService.GetAll(cancellationToken);
             Provinces = provinces.Select(p => new SelectListItem
             {
                 Text = p.Name,
@@ -62,10 +62,10 @@ namespace FinalProject.Endpoint.Areas.Identity.Pages.Account.Manage
             return Page();
         }
 
-        public async Task<IActionResult> OnPostProvinceAsync()
+        public async Task<IActionResult> OnPostProvinceAsync(CancellationToken cancellationToken)
         {
             State = 2;
-            var cities = await _cityService.GetAll();
+            var cities = await _cityService.GetAll(cancellationToken);
             var provinceCities = cities.Where(c => c.ProvinceId == Address.ProvinceId).ToList();
             Cities = provinceCities.Select(c => new SelectListItem
             {
@@ -76,7 +76,7 @@ namespace FinalProject.Endpoint.Areas.Identity.Pages.Account.Manage
             return Page();
         }
 
-        public async Task<IActionResult> OnPostAsync()
+        public async Task<IActionResult> OnPostAsync(CancellationToken cancellationToken)
         {
             var user = await _userManager.GetUserAsync(User);
             if (user == null)
@@ -99,7 +99,7 @@ namespace FinalProject.Endpoint.Areas.Identity.Pages.Account.Manage
                 record.CustomerId = user.Id;
                 record.AddressCategory = AddressCategory.Customer;
             }
-            await _addressService.Set(record);
+            await _addressService.Set(record, cancellationToken);
             if (User.IsExpert())
                 return RedirectToPage("ExpertAddress");
             return RedirectToPage("CustomerAddress");

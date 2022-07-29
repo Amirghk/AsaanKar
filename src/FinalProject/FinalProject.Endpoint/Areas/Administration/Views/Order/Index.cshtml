@@ -34,7 +34,7 @@
                     <td>@order.State.GetDisplayName()</td>
                     <td>@order.ServiceBasePrice</td>
                     <td>@order.CompletedPrice</td>
-                    <td>@await AddressService.GetFullAddressToString(order.AddressId)</td>
+                    <td>@await AddressService.GetFullAddressToString(order.AddressId, Context.RequestAborted)</td>
                     <td>
 
                         <button class="accordion-button text-nowrap" type="button" data-bs-toggle="collapse" data-bs-target=@("#b" + order.Id) aria-expanded="true" aria-controls="collapseOne">

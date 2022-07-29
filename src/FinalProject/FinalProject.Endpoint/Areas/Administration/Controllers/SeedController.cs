@@ -38,7 +38,7 @@ namespace FinalProject.Endpoint.Areas.Administration.Controllers
             _serviceService = serviceService;
             _emailStore = GetEmailStore();
         }
-        public async Task Index()
+        public async Task Index(CancellationToken cancellationToken)
         {
             //var user = Activator.CreateInstance<ApplicationUser>();
 
@@ -72,19 +72,19 @@ namespace FinalProject.Endpoint.Areas.Administration.Controllers
                 Name = "Electronics2",
                 ParentCategoryId = null,
                 Description = "Something"
-            });
+            }, cancellationToken);
             var cIdd = await _categoryService.Set(new CategoryDto
             {
                 Name = "Mobile Services",
                 ParentCategoryId = cId,
                 Description = "Fix your phone"
-            });
+            }, cancellationToken);
             await _serviceService.Set(new ServiceDto
             {
                 Description = "battery service",
                 CategoryId = cIdd,
                 BasePrice = 1000000
-            });
+            }, cancellationToken);
         }
 
         private IUserEmailStore<ApplicationUser> GetEmailStore()

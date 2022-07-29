@@ -34,7 +34,7 @@ public class OrderService : IOrderService
 
     public async Task<IEnumerable<OrderDto>> GetByUserId(string id, CancellationToken cancellationToken, OrderState? orderState = null)
     {
-        return await _repository.GetByUserId(id, orderState, cancellationToken);
+        return await _repository.GetByUserId(id, cancellationToken, orderState);
     }
 
     public async Task<OrderDto> GetById(int id, CancellationToken cancellationToken)

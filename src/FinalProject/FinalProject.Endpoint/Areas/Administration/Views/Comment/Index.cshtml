@@ -1,4 +1,5 @@
-﻿@model IEnumerable<CommentListViewModel>
+﻿
+@model IEnumerable<CommentListViewModel>
 @inject ICustomerService CustomerService
 @inject IExpertService ExpertService
 
@@ -30,12 +31,12 @@
                     </td>
                     <td>
                         <a asp-controller="User" asp-action="Profile" asp-route-id=@comment.CustomerId>
-                            @await CustomerService.GetName(comment.CustomerId)
+                            @await CustomerService.GetName(comment.CustomerId, Context.RequestAborted)
                         </a>
                     </td>
                     <td>
                         <a asp-controller="User" asp-action="Profile" asp-route-id=@comment.ExpertId>
-                            @await ExpertService.GetName(comment.ExpertId)
+                            @await ExpertService.GetName(comment.ExpertId, Context.RequestAborted)
                         </a>
                     </td>
 
