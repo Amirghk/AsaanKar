@@ -35,18 +35,18 @@ namespace FinalProject.Infrastructure.Repositories
             return record.Id;
         }
 
-        public async Task<IEnumerable<CategoryDto>> GetAll()
+        public async Task<IEnumerable<CategoryDto>> GetAll(CancellationToken cancellationToken)
         {
             _logger.LogTrace("Start of {method}", nameof(GetAll));
-            var records = await _mapper.ProjectTo<CategoryDto>(_context.Categories).ToListAsync();
+            var records = await _mapper.ProjectTo<CategoryDto>(_context.Categories).ToListAsync(cancellationToken);
             _logger.LogTrace("End of {method}", nameof(GetAll));
             return records;
         }
 
-        public async Task<CategoryDto> GetById(int id)
+        public async Task<CategoryDto> GetById(int id, CancellationToken cancellationToken)
         {
             _logger.LogTrace("Start of {method}", nameof(GetById));
-            var record = await _mapper.ProjectTo<CategoryDto>(_context.Categories).SingleOrDefaultAsync(x => x.Id == id);
+            var record = await _mapper.ProjectTo<CategoryDto>(_context.Categories).SingleOrDefaultAsync(x => x.Id == id, cancellationToken);
             if (record == null)
             {
                 throw new NotFoundException(nameof(Category), id);
@@ -55,10 +55,10 @@ namespace FinalProject.Infrastructure.Repositories
             return record;
         }
 
-        public async Task<IEnumerable<CategoryDto>> GetChildren(int id)
+        public async Task<IEnumerable<CategoryDto>> GetChildren(int id, CancellationToken cancellationToken)
         {
             _logger.LogTrace("Start of {method}", nameof(GetChildren));
-            var records = await _mapper.ProjectTo<CategoryDto>(_context.Categories).Where(x => x.ParentCategoryId == id).ToListAsync();
+            var records = await _mapper.ProjectTo<CategoryDto>(_context.Categories).Where(x => x.ParentCategoryId == id).ToListAsync(cancellationToken);
             _logger.LogTrace("End of {method}", nameof(GetChildren));
             return records;
         }

@@ -27,14 +27,14 @@ namespace FinalProject.Infrastructure.Repositories
             return record.Id;
         }
 
-        public async Task<IEnumerable<ProvinceDto>> GetAll()
+        public async Task<IEnumerable<ProvinceDto>> GetAll(CancellationToken cancellationToken)
         {
-            return await _mapper.ProjectTo<ProvinceDto>(_context.Provinces).ToListAsync();
+            return await _mapper.ProjectTo<ProvinceDto>(_context.Provinces).ToListAsync(cancellationToken);
         }
 
-        public async Task<ProvinceDto> GetById(int id)
+        public async Task<ProvinceDto> GetById(int id, CancellationToken cancellationToken)
         {
-            var record = await _mapper.ProjectTo<ProvinceDto>(_context.Provinces).SingleOrDefaultAsync(x => x.Id == id);
+            var record = await _mapper.ProjectTo<ProvinceDto>(_context.Provinces).SingleOrDefaultAsync(x => x.Id == id, cancellationToken);
             if (record == null)
             {
                 throw new NotFoundException(nameof(Province), id);

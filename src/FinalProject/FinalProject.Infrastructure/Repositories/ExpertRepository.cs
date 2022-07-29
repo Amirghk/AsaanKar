@@ -27,27 +27,17 @@ namespace FinalProject.Infrastructure.Repositories
             return record.Id!;
         }
 
-        public async Task<IEnumerable<ExpertDto>> GetAll()
+        public async Task<IEnumerable<ExpertDto>> GetAll(CancellationToken cancellationToken)
         {
-            return await _mapper.ProjectTo<ExpertDto>(_context.Experts).ToListAsync();
+            return await _mapper.ProjectTo<ExpertDto>(_context.Experts).ToListAsync(cancellationToken);
         }
 
-        public async Task<ExpertDto> GetById(string id)
+        public async Task<ExpertDto> GetById(string id, CancellationToken cancellationToken)
         {
-            var record = await _mapper.ProjectTo<ExpertDto>(_context.Experts).SingleOrDefaultAsync(x => x.Id == id);
+            var record = await _mapper.ProjectTo<ExpertDto>(_context.Experts).SingleOrDefaultAsync(x => x.Id == id, cancellationToken);
             if (record == null)
             {
                 throw new NotFoundException(nameof(Expert), id);
-            }
-            return record;
-        }
-
-        public async Task<ExpertDto> GetByUserId(string userId)
-        {
-            var record = await _mapper.ProjectTo<ExpertDto>(_context.Experts).SingleOrDefaultAsync(x => x.Id == userId);
-            if (record == null)
-            {
-                throw new NotFoundException(nameof(Expert), userId);
             }
             return record;
         }

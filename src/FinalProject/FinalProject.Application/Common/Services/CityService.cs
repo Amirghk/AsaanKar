@@ -15,27 +15,27 @@ public class CityService : ICityService
         _repository = repository;
     }
 
-    public async Task<IEnumerable<CityDto>> GetAll()
+    public async Task<IEnumerable<CityDto>> GetAll(CancellationToken cancellationToken)
     {
-        return await _repository.GetAll();
+        return await _repository.GetAll(cancellationToken);
     }
 
-    public async Task<CityDto> GetById(int id)
+    public async Task<CityDto> GetById(int id, CancellationToken cancellationToken)
     {
-        return await _repository.GetById(id);
+        return await _repository.GetById(id, cancellationToken);
     }
 
-    public async Task<int> Remove(int id)
+    public async Task<int> Remove(int id, CancellationToken cancellationToken)
     {
         return await _repository.Remove(id);
     }
 
-    public async Task<int> Set(CityDto dto)
+    public async Task<int> Set(CityDto dto, CancellationToken cancellationToken)
     {
         return await _repository.Add(dto);
     }
 
-    public async Task<int> Update(CityDto dto)
+    public async Task<int> Update(CityDto dto, CancellationToken cancellationToken)
     {
         return await _repository.Update(dto);
     }

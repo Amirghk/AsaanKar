@@ -10,8 +10,8 @@ public interface ICategoryRepository
     Task<int> Add(CategoryDto model);
     Task<int> Update(CategoryDto model);
     Task<int> Remove(int id);
-    Task<CategoryDto> GetById(int id);
-    Task<IEnumerable<CategoryDto>> GetAll();
-    Task<IEnumerable<CategoryDto>> GetChildren(int id);
+    Task<CategoryDto> GetById(int id, CancellationToken cancellationToken);
+    Task<IEnumerable<CategoryDto>> GetAll(CancellationToken cancellationToken);
+    Task<IEnumerable<CategoryDto>> GetChildren(int id, CancellationToken cancellationToken);
 
 }

@@ -11,6 +11,6 @@ public interface IExpertRepository
     Task<string> Update(ExpertDto model);
     Task<string> Remove(string id);
     Task<string> SoftDelete(string id);
-    Task<ExpertDto> GetById(string id);
-    Task<IEnumerable<ExpertDto>> GetAll();
+    Task<ExpertDto> GetById(string id, CancellationToken cancellationToken);
+    Task<IEnumerable<ExpertDto>> GetAll(CancellationToken cancellationToken);
 }

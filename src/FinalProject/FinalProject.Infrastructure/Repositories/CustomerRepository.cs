@@ -27,24 +27,14 @@ namespace FinalProject.Infrastructure.Repositories
             return record.Id!;
         }
 
-        public async Task<IEnumerable<CustomerDto>> GetAll()
+        public async Task<IEnumerable<CustomerDto>> GetAll(CancellationToken cancellationToken)
         {
-            return await _mapper.ProjectTo<CustomerDto>(_context.Customers).ToListAsync();
+            return await _mapper.ProjectTo<CustomerDto>(_context.Customers).ToListAsync(cancellationToken);
         }
 
-        public async Task<CustomerDto> GetById(string id)
+        public async Task<CustomerDto> GetById(string id, CancellationToken cancellationToken)
         {
-            var record = await _mapper.ProjectTo<CustomerDto>(_context.Customers).SingleOrDefaultAsync(x => x.Id == id);
-            if (record == null)
-            {
-                throw new NotFoundException(nameof(Customer), id);
-            }
-            return record;
-        }
-
-        public async Task<CustomerDto> GetByUserId(string id)
-        {
-            var record = await _mapper.ProjectTo<CustomerDto>(_context.Customers).SingleOrDefaultAsync(x => x.Id == id);
+            var record = await _mapper.ProjectTo<CustomerDto>(_context.Customers).SingleOrDefaultAsync(x => x.Id == id, cancellationToken);
             if (record == null)
             {
                 throw new NotFoundException(nameof(Customer), id);

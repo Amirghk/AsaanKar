@@ -27,14 +27,14 @@ namespace FinalProject.Infrastructure.Repositories
             return record.Id;
         }
 
-        public async Task<IEnumerable<AddressDto>> GetAll()
+        public async Task<IEnumerable<AddressDto>> GetAll(CancellationToken cancellationToken)
         {
-            return await _mapper.ProjectTo<AddressDto>(_context.Addresses).ToListAsync();
+            return await _mapper.ProjectTo<AddressDto>(_context.Addresses).ToListAsync(cancellationToken);
         }
 
-        public async Task<AddressDto> GetById(int id)
+        public async Task<AddressDto> GetById(int id, CancellationToken cancellationToken)
         {
-            var record = await _mapper.ProjectTo<AddressDto>(_context.Addresses).SingleOrDefaultAsync(x => x.Id == id);
+            var record = await _mapper.ProjectTo<AddressDto>(_context.Addresses).SingleOrDefaultAsync(x => x.Id == id, cancellationToken);
             if (record == null)
             {
                 throw new NotFoundException(nameof(Address), id);
@@ -42,9 +42,9 @@ namespace FinalProject.Infrastructure.Repositories
             return record;
         }
 
-        public async Task<IEnumerable<AddressDto>> GetByUserId(string userId)
+        public async Task<IEnumerable<AddressDto>> GetByUserId(string userId, CancellationToken cancellationToken)
         {
-            var record = await _mapper.ProjectTo<AddressDto>(_context.Addresses).Where(x => x.ExpertId == userId || x.CustomerId == userId).ToListAsync();
+            var record = await _mapper.ProjectTo<AddressDto>(_context.Addresses).Where(x => x.ExpertId == userId || x.CustomerId == userId).ToListAsync(cancellationToken);
             if (record == null)
             {
                 throw new NotFoundException(nameof(Address), userId);

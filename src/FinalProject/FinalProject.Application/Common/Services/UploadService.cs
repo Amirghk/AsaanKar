@@ -32,19 +32,19 @@ public class UploadService : IUploadService
         _categoryService = categoryService;
     }
 
-    public async Task<IEnumerable<UploadDto>> GetAll()
+    public async Task<IEnumerable<UploadDto>> GetAll(CancellationToken cancellationToken)
     {
-        return await _repository.GetAll();
+        return await _repository.GetAll(cancellationToken);
     }
 
-    public async Task<UploadDto> GetById(int id)
+    public async Task<UploadDto> GetById(int id, CancellationToken cancellationToken)
     {
-        return await _repository.GetById(id);
+        return await _repository.GetById(id, cancellationToken);
     }
 
-    public async Task<int> Remove(int id, string uploadsRootFolder)
+    public async Task<int> Remove(int id, string uploadsRootFolder, CancellationToken cancellationToken)
     {
-        var record = await _repository.GetById(id);
+        var record = await _repository.GetById(id, cancellationToken);
         if (File.Exists(Path.Combine(uploadsRootFolder, record.FileName)))
         {
             File.Delete(Path.Combine(uploadsRootFolder, record.FileName));
@@ -60,7 +60,7 @@ public class UploadService : IUploadService
     /// <param name="dto">Upload Dto containing info such as file name and size and the IFormFile itself</param>
     /// <param name="uploadsRootFolder">The root folder that the file be saved in</param>
     /// <returns></returns>
-    public async Task<int> Set(UploadServiceDto dto, string uploadsRootFolder)
+    public async Task<int> Set(UploadServiceDto dto, string uploadsRootFolder, CancellationToken cancellationToken)
     {
         var file = dto.UploadedFile;
         var fileExtension = Path.GetExtension(file.FileName);
@@ -78,34 +78,45 @@ public class UploadService : IUploadService
             FileName = newFileName,
             FileCategory = dto.FileCategory,
         });
-        switch (dto.FileCategory)
+        try
         {
-            case FileCategory.Customer:
-                var customerId = dto.CustomerId;
-                var customer = await _customerService.GetById(customerId!);
-                customer.ProfilePictureId = uploadId;
-                await _customerService.Update(customer);
-                break;
-            case FileCategory.Comment:
-                var commentId = dto.CommentId;
-                var comment = await _commentService.GetById((int)commentId!);
-                comment.ImageId = uploadId;
-                await _commentService.Update(comment);
-                break;
-            case FileCategory.ServiceCategory:
-                var categoryId = dto.CategoryId;
-                var category = await _categoryService.GetById((int)categoryId!);
-                category.PictureId = uploadId;
-                await _categoryService.Update(category);
-                break;
-            case FileCategory.ExpertProfilePic:
-                var expertId = dto.ExpertId;
-                var expert = await _expertService.GetById(expertId!);
-                expert.ProfilePictureId = uploadId;
-                await _expertService.Update(expert);
-                break;
-            default:
-                break;
+
+
+            switch (dto.FileCategory)
+            {
+                case FileCategory.Customer:
+                    var customerId = dto.CustomerId;
+                    var customer = await _customerService.GetById(customerId!, cancellationToken);
+                    customer.ProfilePictureId = uploadId;
+                    await _customerService.Update(customer, cancellationToken);
+                    break;
+                case FileCategory.Comment:
+                    var commentId = dto.CommentId;
+                    var comment = await _commentService.GetById((int)commentId!, cancellationToken);
+                    comment.ImageId = uploadId;
+                    await _commentService.Update(comment, cancellationToken);
+                    break;
+                case FileCategory.ServiceCategory:
+                    var categoryId = dto.CategoryId;
+                    var category = await _categoryService.GetById((int)categoryId!, cancellationToken);
+                    category.PictureId = uploadId;
+                    await _categoryService.Update(category, cancellationToken);
+                    break;
+                case FileCategory.ExpertProfilePic:
+                    var expertId = dto.ExpertId;
+                    var expert = await _expertService.GetById(expertId!, cancellationToken);
+                    expert.ProfilePictureId = uploadId;
+                    await _expertService.Update(expert, cancellationToken);
+                    break;
+                default:
+                    break;
+            }
+        }
+        catch (Exception)
+        {
+            // if there's a problem in other repos
+            await _repository.Remove(uploadId);
+            throw;
         }
         return uploadId;
 
@@ -133,7 +144,7 @@ public class UploadService : IUploadService
         }
     }
 
-    public async Task<string> SetExpertWorkSamples(List<UploadServiceDto> workSamples, string uploadsRootFolder)
+    public async Task<string> SetExpertWorkSamples(List<UploadServiceDto> workSamples, string uploadsRootFolder, CancellationToken cancellationToken)
     {
         if (workSamples == null || workSamples.Count == 0)
         {
@@ -141,7 +152,7 @@ public class UploadService : IUploadService
         }
 
         var expertId = workSamples.First().ExpertId;
-        var expert = await _expertService.GetById(expertId!);
+        var expert = await _expertService.GetById(expertId!, cancellationToken);
         foreach (var sample in workSamples)
         {
             var file = sample.UploadedFile;
@@ -158,17 +169,17 @@ public class UploadService : IUploadService
             FileSize = x.FileSize,
         }).ToList();
         //expert.WorkSamples = expertWorkSamples;
-        return await _expertService.Update(expert);
+        return await _expertService.Update(expert, cancellationToken);
     }
 
-    public async Task<int> Update(UploadDto dto)
+    public async Task<int> Update(UploadDto dto, CancellationToken cancellationToken)
     {
         return await _repository.Update(dto);
     }
 
-    public async Task<string> GetFileDirectory(int fileId)
+    public async Task<string> GetFileDirectory(int fileId, CancellationToken cancellationToken)
     {
-        var file = await _repository.GetById(fileId);
+        var file = await _repository.GetById(fileId, cancellationToken);
         return "Uploads/" + file.FileName;
     }
 }

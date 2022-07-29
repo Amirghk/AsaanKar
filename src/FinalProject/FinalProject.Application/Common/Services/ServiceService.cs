@@ -15,33 +15,33 @@ public class ServiceService : IServiceService
         _repository = repository;
     }
 
-    public async Task<IEnumerable<ServiceDto>> GetAll()
+    public async Task<IEnumerable<ServiceDto>> GetAll(CancellationToken cancellationToken)
     {
-        return await _repository.GetAll();
+        return await _repository.GetAll(cancellationToken);
     }
 
-    public async Task<IEnumerable<ServiceDto>> GetByCategoryId(int categoryId)
+    public async Task<IEnumerable<ServiceDto>> GetByCategoryId(int categoryId, CancellationToken cancellationToken)
     {
-        var records = await _repository.GetByCategoryId(categoryId);
+        var records = await _repository.GetByCategoryId(categoryId, cancellationToken);
         return records;
     }
 
-    public async Task<ServiceDto> GetById(int id)
+    public async Task<ServiceDto> GetById(int id, CancellationToken cancellationToken)
     {
-        return await _repository.GetById(id);
+        return await _repository.GetById(id, cancellationToken);
     }
 
-    public async Task<int> Remove(int id)
+    public async Task<int> Remove(int id, CancellationToken cancellationToken)
     {
         return await _repository.Remove(id);
     }
 
-    public async Task<int> Set(ServiceDto dto)
+    public async Task<int> Set(ServiceDto dto, CancellationToken cancellationToken)
     {
         return await _repository.Add(dto);
     }
 
-    public async Task<int> Update(ServiceDto dto)
+    public async Task<int> Update(ServiceDto dto, CancellationToken cancellationToken)
     {
         return await _repository.Update(dto);
     }

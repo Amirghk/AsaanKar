@@ -24,7 +24,7 @@ namespace FinalProject.Endpoint.Areas.Administration.Controllers
             _logger = logger;
         }
         [HttpGet]
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(CancellationToken cancellationToken)
         {
             var model = _mapper.Map<List<CommentListViewModel>>(await _commentService.GetAll());
             return View(model);

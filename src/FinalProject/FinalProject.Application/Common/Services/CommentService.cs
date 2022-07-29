@@ -15,36 +15,36 @@ public class CommentService : ICommentService
         _repository = repository;
     }
 
-    public async Task<int> Approve(int id)
+    public async Task<int> Approve(int id, CancellationToken cancellationToken)
     {
-        var record = await _repository.GetById(id);
+        var record = await _repository.GetById(id, cancellationToken);
         record.IsApproved = true;
         await _repository.Update(record);
         return record.Id;
 
     }
 
-    public async Task<IEnumerable<CommentDto>> GetAll()
+    public async Task<IEnumerable<CommentDto>> GetAll(CancellationToken cancellationToken)
     {
-        return await _repository.GetAll();
+        return await _repository.GetAll(cancellationToken);
     }
 
-    public async Task<CommentDto> GetById(int id)
+    public async Task<CommentDto> GetById(int id, CancellationToken cancellationToken)
     {
-        return await _repository.GetById(id);
+        return await _repository.GetById(id, cancellationToken);
     }
 
-    public async Task<int> Remove(int id)
+    public async Task<int> Remove(int id, CancellationToken cancellationToken)
     {
         return await _repository.Remove(id);
     }
 
-    public async Task<int> Set(CommentDto dto)
+    public async Task<int> Set(CommentDto dto, CancellationToken cancellationToken)
     {
         return await _repository.Add(dto);
     }
 
-    public async Task<int> Update(CommentDto dto)
+    public async Task<int> Update(CommentDto dto, CancellationToken cancellationToken)
     {
         return await _repository.Update(dto);
     }

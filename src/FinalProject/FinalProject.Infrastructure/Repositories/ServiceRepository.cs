@@ -27,20 +27,20 @@ namespace FinalProject.Infrastructure.Repositories
             return record.Id;
         }
 
-        public async Task<IEnumerable<ServiceDto>> GetAll()
+        public async Task<IEnumerable<ServiceDto>> GetAll(CancellationToken cancellationToken)
         {
-            return await _mapper.ProjectTo<ServiceDto>(_context.Services).ToListAsync();
+            return await _mapper.ProjectTo<ServiceDto>(_context.Services).ToListAsync(cancellationToken);
         }
 
-        public async Task<IEnumerable<ServiceDto>> GetByCategoryId(int categoryId)
+        public async Task<IEnumerable<ServiceDto>> GetByCategoryId(int categoryId, CancellationToken cancellationToken)
         {
-            var records = await _mapper.ProjectTo<ServiceDto>(_context.Services).Where(x => x.CategoryId == categoryId).ToListAsync();
+            var records = await _mapper.ProjectTo<ServiceDto>(_context.Services).Where(x => x.CategoryId == categoryId).ToListAsync(cancellationToken);
             return records;
         }
 
-        public async Task<ServiceDto> GetById(int id)
+        public async Task<ServiceDto> GetById(int id, CancellationToken cancellationToken)
         {
-            var record = await _mapper.ProjectTo<ServiceDto>(_context.Services).SingleOrDefaultAsync(x => x.Id == id);
+            var record = await _mapper.ProjectTo<ServiceDto>(_context.Services).SingleOrDefaultAsync(x => x.Id == id, cancellationToken);
             if (record == null)
             {
                 throw new NotFoundException(nameof(Service), id);

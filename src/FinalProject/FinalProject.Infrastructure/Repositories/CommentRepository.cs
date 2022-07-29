@@ -27,14 +27,14 @@ namespace FinalProject.Infrastructure.Repositories
             return record.Id;
         }
 
-        public async Task<IEnumerable<CommentDto>> GetAll()
+        public async Task<IEnumerable<CommentDto>> GetAll(CancellationToken cancellationToken)
         {
-            return await _mapper.ProjectTo<CommentDto>(_context.Comments).ToListAsync();
+            return await _mapper.ProjectTo<CommentDto>(_context.Comments).ToListAsync(cancellationToken);
         }
 
-        public async Task<CommentDto> GetById(int id)
+        public async Task<CommentDto> GetById(int id, CancellationToken cancellationToken)
         {
-            var record = await _mapper.ProjectTo<CommentDto>(_context.Comments).SingleOrDefaultAsync(x => x.Id == id);
+            var record = await _mapper.ProjectTo<CommentDto>(_context.Comments).SingleOrDefaultAsync(x => x.Id == id, cancellationToken);
             if (record == null)
             {
                 throw new NotFoundException(nameof(Comment), id);

@@ -27,14 +27,14 @@ namespace FinalProject.Infrastructure.Repositories
             return record.Id;
         }
 
-        public async Task<IEnumerable<UploadDto>> GetAll()
+        public async Task<IEnumerable<UploadDto>> GetAll(CancellationToken cancellationToken)
         {
-            return await _mapper.ProjectTo<UploadDto>(_context.Uploads).ToListAsync();
+            return await _mapper.ProjectTo<UploadDto>(_context.Uploads).ToListAsync(cancellationToken);
         }
 
-        public async Task<UploadDto> GetById(int id)
+        public async Task<UploadDto> GetById(int id, CancellationToken cancellationToken)
         {
-            var record = await _mapper.ProjectTo<UploadDto>(_context.Uploads).SingleOrDefaultAsync(x => x.Id == id);
+            var record = await _mapper.ProjectTo<UploadDto>(_context.Uploads).SingleOrDefaultAsync(x => x.Id == id, cancellationToken);
             if (record == null)
             {
                 throw new NotFoundException(nameof(Upload), id);

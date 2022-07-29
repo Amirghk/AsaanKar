@@ -10,6 +10,6 @@ public interface IProvinceRepository
     Task<int> Add(ProvinceDto model);
     Task<int> Update(ProvinceDto model);
     Task<int> Remove(int id);
-    Task<ProvinceDto> GetById(int id);
-    Task<IEnumerable<ProvinceDto>> GetAll();
+    Task<ProvinceDto> GetById(int id, CancellationToken cancellationToken);
+    Task<IEnumerable<ProvinceDto>> GetAll(CancellationToken cancellationToken);
 }
