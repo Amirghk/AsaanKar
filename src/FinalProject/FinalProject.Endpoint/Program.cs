@@ -12,6 +12,7 @@ using System.Configuration;
 using Serilog;
 using Serilog.Extensions.Logging;
 using FinalProject.Application.Common.ConfigurationModels;
+using FinalProject.Endpoint.Common.Filters;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -61,6 +62,13 @@ builder.Services.AddDefaultIdentity<ApplicationUser>(options =>
     options.Password.RequireDigit = false;
 }).AddEntityFrameworkStores<ApplicationDbContext>();
 
+/// <summary>
+/// adds a global OperationCancelledException filter to handle the exception and short circuit the middleware
+/// </summary>
+builder.Services.AddControllersWithViews(options =>
+{
+    options.Filters.Add<OperationCancelledExceptionFilter>();
+});
 
 builder.Services.AddRazorPages();
 
