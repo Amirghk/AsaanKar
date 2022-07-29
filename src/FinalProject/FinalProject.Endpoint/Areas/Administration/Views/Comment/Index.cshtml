@@ -1,5 +1,6 @@
 ﻿@model IEnumerable<CommentListViewModel>
-
+@inject ICustomerService CustomerService
+@inject IExpertService ExpertService
 
 
 <h1>کامنت ها</h1>
@@ -10,8 +11,8 @@
             <tr>
                 <th scope="col">@Html.DisplayNameFor(c => c.Id)</th>
                 <th scope="col">@Html.DisplayNameFor(c => c.Content)</th>
-                <th scope="col">@Html.DisplayNameFor(c => c.CustomerId)</th>
-                <th scope="col">@Html.DisplayNameFor(c => c.ExpertId)</th>
+                <th scope="col">مشتری</th>
+                <th scope="col">متخصص</th>
                 <th scope="col">@Html.DisplayNameFor(c => c.ImageAddress)</th>
                 <th scope="col">@Html.DisplayNameFor(c => c.IsApproved)</th>
                 <th scope="col">عملیات</th>
@@ -27,8 +28,16 @@
                             مشاهده محتویات
                         </button>
                     </td>
-                    <td>@comment.CustomerId</td>
-                    <td>@comment.ExpertId</td>
+                    <td>
+                        <a asp-controller="User" asp-action="Profile" asp-route-id=@comment.CustomerId>
+                            @await CustomerService.GetName(comment.CustomerId)
+                        </a>
+                    </td>
+                    <td>
+                        <a asp-controller="User" asp-action="Profile" asp-route-id=@comment.ExpertId>
+                            @await ExpertService.GetName(comment.ExpertId)
+                        </a>
+                    </td>
 
                     <td>
                         @if (!String.IsNullOrEmpty(comment.ImageAddress))
@@ -42,13 +51,33 @@
                     </td>
                     <td>@comment.IsApproved</td>
                     <td class="d-inline-flex btn-group align-items-center">
-                        <form asp-controller="Comment" asp-action="Delete" asp-route-id=@comment.Id method="post">
 
-                            <button class="btn btn-danger" type="submit">حذف</button>
-                        </form>
+                        <button type="button" class="btn btn-danger m-1" data-bs-toggle="modal" data-bs-target=@("#modal_" + comment.Id)>
+                            حذف
+                        </button>
+                        <div class="modal fade" id=@("modal_" + comment.Id) tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                            <div class="modal-dialog" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                                        <button type="button" class="btn-close m-0" data-bs-dismiss="modal" aria-label="Close">
+                                        </button>
+                                    </div>
+                                    <div class="modal-body text-dark">
+                                        مطئنید میخواهید حذف کنید؟
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">بستن</button>
+                                        <form asp-controller="Comment" asp-action="Delete" asp-route-id=@comment.Id method="post">
+                                            <button class="btn btn-danger" type="submit">حذف</button>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                         @if (@comment.IsApproved == false)
                         {
-                            <form asp-controller="Comment" asp-action="Approve" asp-route-id=@comment.Id method="posts" >
+                            <form asp-controller="Comment" asp-action="Approve" asp-route-id=@comment.Id method="posts">
                                 <button class="btn btn-success text-nowrap" type="submit">تایید کامنت</button>
                             </form>
                         }

@@ -1,7 +1,9 @@
 namespace FinalProject.Application;
 
+using FinalProject.Application.Common.ConfigurationModels;
 using FinalProject.Application.Common.Interfaces.Services;
 using FinalProject.Application.Common.Services;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
 public static class DependencyInjection

@@ -82,7 +82,14 @@ namespace FinalProject.Endpoint.Areas.Identity.Pages.Account.Manage
             // get customer profile pic
             if (customer.ProfilePictureId != null)
             {
-                profilePicAddress = await _uploadService.GetFileDirectory((int)customer.ProfilePictureId);
+                try
+                {
+                    profilePicAddress = await _uploadService.GetFileDirectory((int)customer.ProfilePictureId);
+                }
+                catch (Exception)
+                {
+                    profilePicAddress = String.Empty;
+                }
             }
 
             Input = new InputModel
@@ -137,6 +144,18 @@ namespace FinalProject.Endpoint.Areas.Identity.Pages.Account.Manage
                 PhoneNumber = Input.PhoneNumber,
             };
             await _customerService.Update(customerDto);
+
+            if (Input.ProfilePic != null && Input.ProfilePic.Length != 0)
+            {
+                await _uploadService.Set(new UploadServiceDto
+                {
+                    FileCategory = FileCategory.Customer,
+                    CustomerId = customer.Id,
+                    FileName = Input.ProfilePic.FileName,
+                    FileSize = Input.ProfilePic.Length,
+                    UploadedFile = Input.ProfilePic,
+                }, uploadsRootFolder);
+            }
 
 
 

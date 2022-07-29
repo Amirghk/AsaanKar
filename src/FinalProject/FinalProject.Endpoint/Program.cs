@@ -11,6 +11,7 @@ using System.Security.Claims;
 using System.Configuration;
 using Serilog;
 using Serilog.Extensions.Logging;
+using FinalProject.Application.Common.ConfigurationModels;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -24,6 +25,10 @@ builder.Logging.AddProvider(new SerilogLoggerProvider());
 builder.Host.UseSerilog((ctx, lc) => lc
     .WriteTo.Console()
     .ReadFrom.Configuration(ctx.Configuration));
+
+// bind appsettings json to Appsettings class
+builder.Services.Configure<AppSettings>(builder.Configuration);
+builder.Services.AddSingleton(builder.Configuration.Get<AppSettings>());
 
 
 builder.Services.AddControllersWithViews().AddRazorRuntimeCompilation();
