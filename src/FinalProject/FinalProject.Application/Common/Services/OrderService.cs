@@ -13,17 +13,20 @@ public class OrderService : IOrderService
     private readonly IOrderRepository _repository;
     private readonly ILogger _logger;
     private readonly IServiceService _serviceService;
+    private readonly IExpertService _expertService;
 
     public OrderService(
         IOrderRepository repository,
         IMapper mapper,
         ILogger<OrderService> logger,
-        IServiceService serviceService)
+        IServiceService serviceService,
+        IExpertService expertService)
     {
         _mapper = mapper;
         _repository = repository;
         _logger = logger;
         _serviceService = serviceService;
+        _expertService = expertService;
     }
 
     public async Task<IEnumerable<OrderDto>> GetAll(CancellationToken cancellationToken)
@@ -34,7 +37,7 @@ public class OrderService : IOrderService
 
     public async Task<IEnumerable<OrderDto>> GetByUserId(string id, CancellationToken cancellationToken, OrderState? orderState = null)
     {
-        return await _repository.GetByUserId(id, cancellationToken, orderState);
+        return await _repository.GetAll(userId: id, cancellationToken: cancellationToken, orderState: orderState);
     }
 
     public async Task<OrderDto> GetById(int id, CancellationToken cancellationToken)
@@ -61,5 +64,22 @@ public class OrderService : IOrderService
     {
         _logger.LogTrace("calling and awaiting repository {}({dto})", "Update", dto);
         return await _repository.Update(dto);
+    }
+    /// <summary>
+    /// returns orders that are available to the expert
+    /// (by being in the same city as the expert and having the same skills and being in OrderState 1 or 2)
+    /// </summary>
+    /// <param name="expertId"></param>
+    /// <param name="cancellationToken"></param>
+    /// <returns></returns>
+    /// // TODO fix it
+    public async Task<IEnumerable<OrderDto>> GetAvailable(string expertId, CancellationToken cancellationToken)
+    {
+        var expert = await _expertService.GetById(expertId, cancellationToken);
+        var services = await _serviceService.GetAll(expertId: expertId, cancellationToken: cancellationToken);
+        var stateOneOrders = await _repository.GetAll(cancellationToken, expert.Address!.CityId, orderState: OrderState.WaitingForExpertBid);
+        var stateTwoOrders = await _repository.GetAll(cancellationToken, expert.Address!.CityId, orderState: OrderState.WaitingToChooseExpert);
+        var orders = stateOneOrders.Concat(stateTwoOrders);
+        return orders.Where(x => services.Select(x => x.Id).Contains(x.ServiceId));
     }
 }

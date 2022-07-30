@@ -1,0 +1,47 @@
+﻿@using FinalProject.Application.Common.Interfaces.Services
+@inject IAddressService AddressService
+@model IEnumerable<ExpertOrderViewModel>
+
+@if (ViewBag.NoAddress == true)
+{
+    <h1>باید ابتدا آدرس خود را تکمیل کنید!</h1>
+    <a href="/Identity/Account/Manage/AddAddress" class="btn btn-info">افزودن آدرس</a>
+}
+else
+{
+    <h1>سفارشات</h1>
+    <div>
+
+        <table class="table">
+            <thead class="thead-dark">
+                <tr>
+                    <th scope="col">@Html.DisplayNameForInnerType((ExpertOrderViewModel c) => c.ServiceName)</th>
+                    <th scope="col">@Html.DisplayNameForInnerType((ExpertOrderViewModel c) => c.Customer)</th>
+                    <th scope="col">@Html.DisplayNameForInnerType((ExpertOrderViewModel c) => c.OrderDate)</th>
+                    <th scope="col">@Html.DisplayNameForInnerType((ExpertOrderViewModel c) => c.State)</th>
+                    <th scope="col">@Html.DisplayNameForInnerType((ExpertOrderViewModel c) => c.ServiceBasePrice)</th>
+                    <th scope="col">@Html.DisplayNameForInnerType((ExpertOrderViewModel c) => c.AddressId)</th>
+                    <th scope="col">@Html.DisplayNameForInnerType((ExpertOrderViewModel c) => c.Description)</th>
+                    <th scope="col">ثبت پیشنهاد</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var order in Model)
+                {
+                    <tr>
+                        <td>@order.ServiceName</td>
+                        <td>@(order.Customer!.FirstName + " " + order.Customer!.LastName)</td>
+                        <td>@order.OrderDate</td>
+                        <td>@order.State.GetDisplayName()</td>
+                        <td>@order.ServiceBasePrice</td>
+                        <td>@await AddressService.GetFullAddressToString(order.AddressId, Context.RequestAborted)</td>
+                        <td>@order.Description</td>
+                        <td>
+                            <a class="btn btn-info" asp-controller="Order" asp-action="Bid" asp-route-id=@order.Id>ثبت پیشنهاد</a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+}

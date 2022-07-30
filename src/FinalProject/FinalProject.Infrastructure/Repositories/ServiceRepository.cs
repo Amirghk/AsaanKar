@@ -31,7 +31,7 @@ namespace FinalProject.Infrastructure.Repositories
         {
             if (expertId is not null)
             {
-                return await _mapper.ProjectTo<ServiceDto>(_context.Services.Where(x => x.ServiceExperts.Any(x => x.ExpertId == expertId))).ToListAsync(cancellationToken);
+                return await _mapper.ProjectTo<ServiceDto>(_context.Services.Where(x => x.Experts.Any(x => x.Id == expertId))).ToListAsync(cancellationToken);
             }
             return await _mapper.ProjectTo<ServiceDto>(_context.Services).Where(x => x.CategoryId == categoryId || true).ToListAsync(cancellationToken);
         }

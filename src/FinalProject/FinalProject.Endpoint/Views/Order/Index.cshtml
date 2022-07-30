@@ -1,7 +1,6 @@
 ﻿@using FinalProject.Application.Common.Interfaces.Services
 @inject IExpertService ExpertService
 @inject IAddressService AddressService
-@inject IHttpContextAccessor HttpContextAccessor
 @model IEnumerable<OrderListViewModel>
 
 <h1>سفارشات</h1>
@@ -33,7 +32,7 @@
                     <td>@order.State.GetDisplayName()</td>
                     <td>@order.ServiceBasePrice</td>
                     <td>@order.CompletedPrice</td>
-                    <td>@await AddressService.GetFullAddressToString(order.AddressId, HttpContextAccessor.HttpContext.RequestAborted)</td>
+                    <td>@await AddressService.GetFullAddressToString(order.AddressId, Context.RequestAborted)</td>
                     <td>
 
                         <button class="accordion-button text-nowrap" type="button" data-bs-toggle="collapse" data-bs-target=@("#b" + order.Id) aria-expanded="true" aria-controls="collapseOne">
@@ -51,7 +50,7 @@
                     <th scope="col">@Html.DisplayNameForInnerType((BidViewModel c) => c.Notes)</th>
                     @foreach (var bid in order.Bids)
                     {
-                        <td>@await ExpertService.GetName(bid.ExpertId!, HttpContextAccessor.HttpContext.RequestAborted)</td>
+                        <td>@await ExpertService.GetName(bid.ExpertId!, Context.RequestAborted)</td>
                         <td>@bid.Price</td>
                         <td>@bid.Notes</td>
                         <td>

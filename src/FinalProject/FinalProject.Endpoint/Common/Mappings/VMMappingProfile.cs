@@ -2,6 +2,7 @@
 using FinalProject.Application.Common.DataTransferObjects;
 using FinalProject.Domain.Enums;
 using FinalProject.Endpoint.Areas.Administration.Models;
+using FinalProject.Endpoint.Areas.Expert.Models;
 using FinalProject.Endpoint.Areas.Identity.Models;
 using FinalProject.Endpoint.Models;
 
@@ -27,6 +28,8 @@ namespace FinalProject.Endpoint.Common.Mappings
             CreateMap<OrderSaveViewModel, OrderDto>()
                 .ForMember(z => z.State, a => a.MapFrom(x => OrderState.WaitingForExpertBid));
             CreateMap<BidDto, BidViewModel>().ReverseMap();
+            CreateMap<OrderDto, ExpertOrderViewModel>()
+                .ForMember(z => z.ServiceName, a => a.MapFrom(x => x.Service.Description));
         }
     }
 }

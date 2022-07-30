@@ -31,17 +31,18 @@ namespace FinalProject.Infrastructure.Repositories
             return record.Id;
         }
 
-        public async Task<IEnumerable<OrderDto>> GetAll(CancellationToken cancellationToken)
+        public async Task<IEnumerable<OrderDto>> GetAll(CancellationToken cancellationToken, int? cityId = null, OrderState? orderState = null, string? userId = null)
         {
             _logger.LogTrace("start of {methodName}", nameof(GetAll));
-            return await _mapper.ProjectTo<OrderDto>(_context.Orders).ToListAsync(cancellationToken);
-        }
-
-        public async Task<IEnumerable<OrderDto>> GetByUserId(string id, CancellationToken cancellationToken, OrderState? orderState = null)
-        {
-            var records = await _mapper.ProjectTo<OrderDto>(_context.Orders).Where(x => x.CustomerId == id || x.ExpertId == id).Where(x => x.State == orderState || true).ToListAsync(cancellationToken);
+            var records = await _mapper.ProjectTo<OrderDto>(_context.Orders.Where(x => x.ReceiverAddress.CityId == cityId || true))
+                .Where(x => x.CustomerId == userId
+                            || x.ExpertId == userId
+                            || true)
+                .Where(x => x.State == orderState || true)
+                                        .ToListAsync(cancellationToken);
             return records;
         }
+
 
         public async Task<OrderDto> GetById(int id, CancellationToken cancellationToken)
         {

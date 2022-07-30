@@ -34,7 +34,6 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		<Folder Include="Areas\Expert\Models\" />
 		<Folder Include="wwwroot\css\Admin\" />
 		<Folder Include="wwwroot\js\Admin\" />
 	</ItemGroup>
