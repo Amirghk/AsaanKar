@@ -1,11 +1,13 @@
 {
   "version": 2,
-  "dgSpecHash": "9pv0be85FwH1F7h9GEYARX6CXtVdzIx5llvYKe//Sd6YiBxZ4omwRxwCUgYY6d7ZjYwK1cSMWaUvbPF7f51QYQ==",
+  "dgSpecHash": "CtdcY8ITOp8TZVihaLf5s+5dXDycviPr3n8b0JqqC884gSpBJvjn+KGxq22FNs6lg+oIS2mYCfYHZXdBZk11pQ==",
   "success": true,
   "projectFilePath": "G:\\FinalProject\\FinalProjectMaktab\\src\\FinalProject\\FinalProject.Endpoint\\FinalProject.Endpoint.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Lion\\.nuget\\packages\\automapper\\11.0.1\\automapper.11.0.1.nupkg.sha512",
     "C:\\Users\\Lion\\.nuget\\packages\\automapper.collection\\8.0.0\\automapper.collection.8.0.0.nupkg.sha512",
+    "C:\\Users\\Lion\\.nuget\\packages\\automapper.collection.entityframeworkcore\\8.0.0\\automapper.collection.entityframeworkcore.8.0.0.nupkg.sha512",
+    "C:\\Users\\Lion\\.nuget\\packages\\automapper.extensions.expressionmapping\\5.0.0\\automapper.extensions.expressionmapping.5.0.0.nupkg.sha512",
     "C:\\Users\\Lion\\.nuget\\packages\\automapper.extensions.microsoft.dependencyinjection\\11.0.0\\automapper.extensions.microsoft.dependencyinjection.11.0.0.nupkg.sha512",
     "C:\\Users\\Lion\\.nuget\\packages\\humanizer.core\\2.8.26\\humanizer.core.2.8.26.nupkg.sha512",
     "C:\\Users\\Lion\\.nuget\\packages\\messagepack\\2.1.152\\messagepack.2.1.152.nupkg.sha512",

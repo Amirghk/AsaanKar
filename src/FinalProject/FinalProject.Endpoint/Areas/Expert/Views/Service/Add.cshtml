@@ -1,0 +1,25 @@
+﻿@model List<int>
+
+
+<form class="col-8" asp-controller="Service" asp-action="Add" method="post">
+
+    <div class="form-group row p-3">
+        <div>
+            <select name="services" id="services" class="select-chosen form-select" asp-items="@ViewBag.Services" multiple>
+                <option disabled selected>انتخاب سرویس ها</option>
+            </select>
+        </div>
+    </div>
+    <button class="btn btn-success" type="submit">افزودن مهارت ها</button>
+</form>
+
+@section Scripts{
+<partial name="_ValidationScriptsPartial" />
+<script>
+
+            $(function() {
+        $(".select-chosen").chosen({rtl: true});
+    });
+
+</script>
+}

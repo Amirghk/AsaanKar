@@ -69,13 +69,33 @@ namespace FinalProject.Infrastructure.Repositories
 
         public async Task<string> Update(ExpertDto model)
         {
-            var record = await _context.Experts.SingleOrDefaultAsync(x => x.Id == model.Id);
+            var record = await _context.Experts.Include(x => x.ServiceExperts).SingleOrDefaultAsync(x => x.Id == model.Id);
             if (record == null)
             {
                 throw new NotFoundException(nameof(Expert), model.Id);
             }
+
+            var services = await _mapper.ProjectTo<ServiceDto>(_context.Experts.SelectMany(x => x.Services)).ToListAsync();
+            if (services.Count > model.Services.Count)
+            {
+                var serviceExperts = new List<ServiceExpert>();
+                foreach (var service in model.Services)
+                {
+                    ServiceExpert serviceExpert = new ServiceExpert
+                    {
+
+                        ExpertId = record.Id,
+                        ServiceId = service.Id,
+                    };
+                    serviceExperts.Add(serviceExpert);
+                }
+                record.ServiceExperts = serviceExperts;
+                await _context.SaveChangesAsync();
+            }
+
             _mapper.Map(model, record);
             await _context.SaveChangesAsync();
+
             return record.Id!;
         }
     }

@@ -310,6 +310,10 @@
               "target": "Package",
               "version": "[8.0.0, )"
             },
+            "AutoMapper.Collection.EntityFrameworkCore": {
+              "target": "Package",
+              "version": "[8.0.0, )"
+            },
             "Microsoft.AspNet.Identity.Core": {
               "target": "Package",
               "version": "[2.2.3, )"

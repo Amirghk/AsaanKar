@@ -11,5 +11,6 @@ public interface IExpertService
     Task<string> SoftDelete(string id, CancellationToken cancellationToken);
     Task<string> Update(ExpertDto dto, CancellationToken cancellationToken);
     Task<string> GetName(string name, CancellationToken cancellationToken);
-
+    Task<string> AddServices(string expertId, List<int> serviceIds, CancellationToken cancellationToken);
+    Task<string> RemoveService(string expertId, int serviceId, CancellationToken cancellationToken);
 }

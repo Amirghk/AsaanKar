@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "+kSSm3rZ+0+2AqHPpBl1iFrduNofjJ3knHDE1XYiYSM=",
+  "Hash": "KP8FOZ9CuAzhkBUb+FEwVmN7d2JYxInXEUetF4yHCD0=",
   "Source": "FinalProject.Endpoint",
   "BasePath": "_content/FinalProject.Endpoint",
   "Mode": "Default",
@@ -3808,6 +3808,23 @@
       "OriginalItemSpec": "wwwroot\\css\\bootstrap.min.css"
     },
     {
+      "Identity": "G:\\FinalProject\\FinalProjectMaktab\\src\\FinalProject\\FinalProject.Endpoint\\wwwroot\\css\\chosen.min.css",
+      "SourceId": "FinalProject.Endpoint",
+      "SourceType": "Discovered",
+      "ContentRoot": "G:\\FinalProject\\FinalProjectMaktab\\src\\FinalProject\\FinalProject.Endpoint\\wwwroot\\",
+      "BasePath": "_content/FinalProject.Endpoint",
+      "RelativePath": "css/chosen.min.css",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\css\\chosen.min.css"
+    },
+    {
       "Identity": "G:\\FinalProject\\FinalProjectMaktab\\src\\FinalProject\\FinalProject.Endpoint\\wwwroot\\css\\mdb.rtl.min.css",
       "SourceId": "FinalProject.Endpoint",
       "SourceType": "Discovered",
@@ -3908,6 +3925,23 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\fonts\\Samim.woff"
+    },
+    {
+      "Identity": "G:\\FinalProject\\FinalProjectMaktab\\src\\FinalProject\\FinalProject.Endpoint\\wwwroot\\js\\chosen.jquery.min.js",
+      "SourceId": "FinalProject.Endpoint",
+      "SourceType": "Discovered",
+      "ContentRoot": "G:\\FinalProject\\FinalProjectMaktab\\src\\FinalProject\\FinalProject.Endpoint\\wwwroot\\",
+      "BasePath": "_content/FinalProject.Endpoint",
+      "RelativePath": "js/chosen.jquery.min.js",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\js\\chosen.jquery.min.js"
     },
     {
       "Identity": "G:\\FinalProject\\FinalProjectMaktab\\src\\FinalProject\\FinalProject.Endpoint\\wwwroot\\js\\mdb.min.js",

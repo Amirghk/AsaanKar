@@ -1149,3 +1149,5 @@ G:\FinalProject\FinalProjectMaktab\src\FinalProject\FinalProject.Endpoint\bin\De
 G:\FinalProject\FinalProjectMaktab\src\FinalProject\FinalProject.Endpoint\bin\Debug\net6.0\Serilog.Sinks.Console.dll
 G:\FinalProject\FinalProjectMaktab\src\FinalProject\FinalProject.Endpoint\bin\Debug\net6.0\Serilog.Sinks.Debug.dll
 G:\FinalProject\FinalProjectMaktab\src\FinalProject\FinalProject.Endpoint\bin\Debug\net6.0\Serilog.Sinks.File.dll
+G:\FinalProject\FinalProjectMaktab\src\FinalProject\FinalProject.Endpoint\bin\Debug\net6.0\AutoMapper.Collection.EntityFrameworkCore.dll
+G:\FinalProject\FinalProjectMaktab\src\FinalProject\FinalProject.Endpoint\bin\Debug\net6.0\AutoMapper.Extensions.ExpressionMapping.dll

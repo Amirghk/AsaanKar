@@ -41,7 +41,7 @@ namespace FinalProject.Endpoint.Controllers
 
             foreach (var category in categories)
             {
-                category.Services = _mapper.Map<List<ServiceViewModel>>(await _serviceService.GetByCategoryId(category.Id, cancellationToken));
+                category.Services = _mapper.Map<List<ServiceViewModel>>(await _serviceService.GetAll(categoryId: category.Id, cancellationToken: cancellationToken));
             }
             return View(categories);
         }

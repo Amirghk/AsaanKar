@@ -8,4 +8,5 @@ public record ServiceDto
     public string Description { get; init; } = null!;
     public decimal BasePrice { get; set; }
     public int CategoryId { get; init; }
+    public CategoryDto? Category { get; init; }
 }

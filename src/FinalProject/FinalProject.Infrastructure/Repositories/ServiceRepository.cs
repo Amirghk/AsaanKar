@@ -27,16 +27,15 @@ namespace FinalProject.Infrastructure.Repositories
             return record.Id;
         }
 
-        public async Task<IEnumerable<ServiceDto>> GetAll(CancellationToken cancellationToken)
+        public async Task<IEnumerable<ServiceDto>> GetAll(CancellationToken cancellationToken, int? categoryId = null, string? expertId = null)
         {
-            return await _mapper.ProjectTo<ServiceDto>(_context.Services).ToListAsync(cancellationToken);
+            if (expertId is not null)
+            {
+                return await _mapper.ProjectTo<ServiceDto>(_context.Services.Where(x => x.ServiceExperts.Any(x => x.ExpertId == expertId))).ToListAsync(cancellationToken);
+            }
+            return await _mapper.ProjectTo<ServiceDto>(_context.Services).Where(x => x.CategoryId == categoryId || true).ToListAsync(cancellationToken);
         }
 
-        public async Task<IEnumerable<ServiceDto>> GetByCategoryId(int categoryId, CancellationToken cancellationToken)
-        {
-            var records = await _mapper.ProjectTo<ServiceDto>(_context.Services).Where(x => x.CategoryId == categoryId).ToListAsync(cancellationToken);
-            return records;
-        }
 
         public async Task<ServiceDto> GetById(int id, CancellationToken cancellationToken)
         {

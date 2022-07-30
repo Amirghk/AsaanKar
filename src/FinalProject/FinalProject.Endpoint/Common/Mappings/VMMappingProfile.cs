@@ -21,7 +21,8 @@ namespace FinalProject.Endpoint.Common.Mappings
                 .ForMember(z => z.ImageAddress, a => a.MapFrom(x => Path.Combine("Uploads", x.Image.FileName)));
             CreateMap<CategoryDto, CategoryViewModel>()
                 .ForMember(z => z.ImageAddress, a => a.MapFrom(x => Path.Combine("Uploads", x.Picture.FileName)));
-            CreateMap<ServiceDto, ServiceViewModel>().ReverseMap();
+            CreateMap<ServiceViewModel, ServiceDto>().ReverseMap()
+                .ForMember(z => z.CategoryName, a => a.MapFrom(x => x.Category!.Name));
             CreateMap<AddressDto, AddressViewModel>().ReverseMap();
             CreateMap<OrderSaveViewModel, OrderDto>()
                 .ForMember(z => z.State, a => a.MapFrom(x => OrderState.WaitingForExpertBid));
