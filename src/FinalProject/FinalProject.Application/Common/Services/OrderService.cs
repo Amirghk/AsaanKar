@@ -26,38 +26,38 @@ public class OrderService : IOrderService
         _serviceService = serviceService;
     }
 
-    public async Task<IEnumerable<OrderDto>> GetAll()
+    public async Task<IEnumerable<OrderDto>> GetAll(CancellationToken cancellationToken)
     {
         _logger.LogTrace("calling and awaiting repository {}()", "GetAll");
-        return await _repository.GetAll();
+        return await _repository.GetAll(cancellationToken);
     }
 
-    public async Task<IEnumerable<OrderDto>> GetByUserId(string id, OrderState? orderState = null)
+    public async Task<IEnumerable<OrderDto>> GetByUserId(string id, CancellationToken cancellationToken, OrderState? orderState = null)
     {
-        return await _repository.GetByUserId(id, orderState);
+        return await _repository.GetByUserId(id, cancellationToken, orderState);
     }
 
-    public async Task<OrderDto> GetById(int id)
+    public async Task<OrderDto> GetById(int id, CancellationToken cancellationToken)
     {
         _logger.LogTrace("calling and awaiting repository {}({id})", "GetById", id);
-        return await _repository.GetById(id);
+        return await _repository.GetById(id, cancellationToken);
     }
 
-    public async Task<int> Remove(int id)
+    public async Task<int> Remove(int id, CancellationToken cancellationToken)
     {
         _logger.LogTrace("calling and awaiting repository {}({id})", "Remove", id);
         return await _repository.Remove(id);
     }
 
-    public async Task<int> Set(OrderDto dto)
+    public async Task<int> Set(OrderDto dto, CancellationToken cancellationToken)
     {
-        var service = await _serviceService.GetById(dto.ServiceId);
+        var service = await _serviceService.GetById(dto.ServiceId, cancellationToken);
         dto.ServiceBasePrice = service.BasePrice;
         _logger.LogTrace("calling and awaiting repository {}({dto})", "Set", dto);
         return await _repository.Add(dto);
     }
 
-    public async Task<int> Update(OrderDto dto)
+    public async Task<int> Update(OrderDto dto, CancellationToken cancellationToken)
     {
         _logger.LogTrace("calling and awaiting repository {}({dto})", "Update", dto);
         return await _repository.Update(dto);

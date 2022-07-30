@@ -5,10 +5,10 @@ namespace FinalProject.Application.Common.Interfaces.Services;
 
 public interface IOrderService
 {
-    Task<int> Set(OrderDto dto);
-    Task<IEnumerable<OrderDto>> GetAll();
-    Task<OrderDto> GetById(int id);
-    Task<int> Remove(int id);
-    Task<int> Update(OrderDto dto);
-    Task<IEnumerable<OrderDto>> GetByUserId(string id, OrderState? orderState = null);
+    Task<int> Set(OrderDto dto, CancellationToken cancellationToken);
+    Task<IEnumerable<OrderDto>> GetAll(CancellationToken cancellationToken);
+    Task<OrderDto> GetById(int id, CancellationToken cancellationToken);
+    Task<int> Remove(int id, CancellationToken cancellationToken);
+    Task<int> Update(OrderDto dto, CancellationToken cancellationToken);
+    Task<IEnumerable<OrderDto>> GetByUserId(string id, CancellationToken cancellationToken, OrderState? orderState = null);
 }

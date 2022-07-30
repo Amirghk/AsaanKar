@@ -119,7 +119,7 @@ namespace FinalProject.Endpoint.Areas.Identity.Pages.Account
             ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
         }
 
-        public async Task<IActionResult> OnPostAsync(string returnUrl = null)
+        public async Task<IActionResult> OnPostAsync(CancellationToken cancellationToken, string returnUrl = null)
         {
             returnUrl ??= Url.Content("~/");
             ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
@@ -159,7 +159,7 @@ namespace FinalProject.Endpoint.Areas.Identity.Pages.Account
                             LastName = Input.LastName,
                             BirthDate = Input.BirthDate,
                             PhoneNumber = Input.PhoneNumber,
-                        });
+                        }, cancellationToken);
                     }
                     catch (Exception) // Roll back for when user doesn't get added to db
                     {

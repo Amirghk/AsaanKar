@@ -47,15 +47,15 @@ namespace FinalProject.Endpoint.Areas.Identity.Pages.Account.Manage
         public int State = 1;
 
 
-        public async Task LoadAsync(int id)
+        public async Task LoadAsync(int id, CancellationToken cancellationToken)
         {
-            Address = _mapper.Map<AddressViewModel>(await _addressService.GetById(id));
+            Address = _mapper.Map<AddressViewModel>(await _addressService.GetById(id, cancellationToken));
         }
 
-        public async Task<IActionResult> OnGetAsync(int id)
+        public async Task<IActionResult> OnGetAsync(int id, CancellationToken cancellationToken)
         {
-            await LoadAsync(id);
-            var provinces = await _provinceService.GetAll();
+            await LoadAsync(id, cancellationToken);
+            var provinces = await _provinceService.GetAll(cancellationToken);
             Provinces = provinces.Select(p => new SelectListItem
             {
                 Text = p.Name,
@@ -65,28 +65,28 @@ namespace FinalProject.Endpoint.Areas.Identity.Pages.Account.Manage
             return Page();
         }
 
-        public async Task<IActionResult> OnPostProvinceAsync(int id)
+        public async Task<IActionResult> OnPostProvinceAsync(int id, CancellationToken cancellationToken)
         {
             State = 2;
-            var cities = await _cityService.GetAll();
+            var cities = await _cityService.GetAll(cancellationToken);
             var provinceCities = cities.Where(c => c.ProvinceId == Address.ProvinceId).ToList();
             Cities = provinceCities.Select(c => new SelectListItem
             {
                 Value = c.Id.ToString(),
                 Text = c.Name.ToString()
             });
-            await LoadAsync(id);
+            await LoadAsync(id, cancellationToken);
 
             return Page();
         }
 
-        public async Task<IActionResult> OnPostAsync(int id)
+        public async Task<IActionResult> OnPostAsync(int id, CancellationToken cancellationToken)
         {
-            var addressDto = await _addressService.GetById(id);
+            var addressDto = await _addressService.GetById(id, cancellationToken);
             addressDto.CityId = Address.CityId;
             addressDto.Content = Address.Content;
             addressDto.PostalCode = Address.PostalCode;
-            await _addressService.Update(addressDto);
+            await _addressService.Update(addressDto, cancellationToken);
             if (User.IsExpert())
                 return RedirectToPage("ExpertAddress");
             return RedirectToPage("CustomerAddress");

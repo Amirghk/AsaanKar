@@ -12,7 +12,7 @@ public interface IBidRepository
     Task<int> Add(BidDto model);
     Task<int> Update(BidDto model);
     Task<int> Remove(int id);
-    Task<BidDto> GetById(int id);
-    Task<IEnumerable<BidDto>> GetAll();
+    Task<BidDto> GetById(int id, CancellationToken cancellationToken);
+    Task<IEnumerable<BidDto>> GetAll(CancellationToken cancellationToken);
 }
 

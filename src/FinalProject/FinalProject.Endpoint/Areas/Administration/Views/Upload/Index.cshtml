@@ -1,8 +1,5 @@
-﻿
-
-@model IEnumerable<UploadViewModel>
-
-
+﻿@model IEnumerable<UploadViewModel>
+@inject IUploadService UploadService
 
 <h1>فایل های آپلود شده</h1>
 <table class="table">
@@ -10,6 +7,7 @@
         <tr>
             <th scope="col">@Html.DisplayNameFor(model => model.Id)</th>
             <th scope="col">@Html.DisplayNameFor((model => model.FileName))</th>
+            <th scope="col">تصویر</th>
             <th scope="col">@Html.DisplayNameFor((model => model.FileSize))</th>
             <th scope="col">@Html.DisplayNameFor((model => model.FileCategory))</th>
 
@@ -22,32 +20,49 @@
             <tr>
                 <th scope="row">@upload.Id</th>
                 <td>@upload.FileName</td>
+                <td>
+                    @{
+                        var fileDirectory = await UploadService.GetFileDirectory(upload.Id, Context.RequestAborted);
+                        <button type="button" class="border-0" data-bs-toggle="modal" data-bs-target=@("#modalp_" + upload.Id)>
+
+                            <img src="~/@fileDirectory" alt="picture thumbnail" width="70px" />
+                        </button>
+                    <div class="modal fade" id=@("modalp_" + upload.Id) tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <img src="~/@fileDirectory" alt="picture thumbnail" />
+                            </div>
+                        </div>
+                    </div>
+                    }
+
+                </td>
                 <td>@upload.FileSize</td>
                 <td>@upload.FileCategory.GetDisplayName()</td>
                 <td>
                     <button type="button" class="btn btn-danger m-1" data-bs-toggle="modal" data-bs-target=@("#modal_" + upload.Id)>
-                            حذف
-                        </button>
-                        <div class="modal fade" id=@("modal_" + upload.Id) tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                            <div class="modal-dialog" role="document">
-                                <div class="modal-content">
-                                    <div class="modal-header">
-                                        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
-                                        <button type="button" class="btn-close m-0" data-bs-dismiss="modal" aria-label="Close">
-                                        </button>
-                                    </div>
-                                    <div class="modal-body text-dark">
-                                        مطئنید میخواهید حذف کنید؟
-                                    </div>
-                                    <div class="modal-footer">
-                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">بستن</button>
-                                        <form asp-controller="Upload" asp-action="Delete" asp-route-id=@upload.Id method="post">
-                                            <button class="btn btn-danger" type="submit">حذف</button>
-                                        </form>
-                                    </div>
+                        حذف
+                    </button>
+                    <div class="modal fade" id=@("modal_" + upload.Id) tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                                    <button type="button" class="btn-close m-0" data-bs-dismiss="modal" aria-label="Close">
+                                    </button>
+                                </div>
+                                <div class="modal-body text-dark">
+                                    مطئنید میخواهید حذف کنید؟
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">بستن</button>
+                                    <form asp-controller="Upload" asp-action="Delete" asp-route-id=@upload.Id method="post">
+                                        <button class="btn btn-danger" type="submit">حذف</button>
+                                    </form>
                                 </div>
                             </div>
                         </div>
+                    </div>
                 </td>
             </tr>
         }

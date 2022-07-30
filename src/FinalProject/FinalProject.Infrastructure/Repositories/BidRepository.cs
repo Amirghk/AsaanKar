@@ -27,12 +27,12 @@ namespace FinalProject.Infrastructure.Repositories
             return record.Id;
         }
 
-        public async Task<IEnumerable<BidDto>> GetAll()
+        public async Task<IEnumerable<BidDto>> GetAll(CancellationToken cancellationToken)
         {
             return await _mapper.ProjectTo<BidDto>(_context.Bids).ToListAsync();
         }
 
-        public async Task<BidDto> GetById(int id)
+        public async Task<BidDto> GetById(int id, CancellationToken cancellationToken)
         {
             var record = await _mapper.ProjectTo<BidDto>(_context.Bids).SingleOrDefaultAsync(x => x.Id == id);
             if (record == null)

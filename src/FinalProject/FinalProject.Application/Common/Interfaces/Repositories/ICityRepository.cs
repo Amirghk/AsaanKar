@@ -10,6 +10,6 @@ public interface ICityRepository
     Task<int> Add(CityDto model);
     Task<int> Update(CityDto model);
     Task<int> Remove(int id);
-    Task<CityDto> GetById(int id);
-    Task<IEnumerable<CityDto>> GetAll();
+    Task<CityDto> GetById(int id, CancellationToken cancellationToken);
+    Task<IEnumerable<CityDto>> GetAll(CancellationToken cancellationToken);
 }

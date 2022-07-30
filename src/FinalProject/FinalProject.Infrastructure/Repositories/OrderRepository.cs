@@ -31,23 +31,23 @@ namespace FinalProject.Infrastructure.Repositories
             return record.Id;
         }
 
-        public async Task<IEnumerable<OrderDto>> GetAll()
+        public async Task<IEnumerable<OrderDto>> GetAll(CancellationToken cancellationToken)
         {
             _logger.LogTrace("start of {methodName}", nameof(GetAll));
-            return await _mapper.ProjectTo<OrderDto>(_context.Orders).ToListAsync();
+            return await _mapper.ProjectTo<OrderDto>(_context.Orders).ToListAsync(cancellationToken);
         }
 
-        public async Task<IEnumerable<OrderDto>> GetByUserId(string id, OrderState? orderState = null)
+        public async Task<IEnumerable<OrderDto>> GetByUserId(string id, CancellationToken cancellationToken, OrderState? orderState = null)
         {
-            var records = await _mapper.ProjectTo<OrderDto>(_context.Orders).Where(x => x.CustomerId == id || x.ExpertId == id).Where(x => x.State == orderState || true).ToListAsync();
+            var records = await _mapper.ProjectTo<OrderDto>(_context.Orders).Where(x => x.CustomerId == id || x.ExpertId == id).Where(x => x.State == orderState || true).ToListAsync(cancellationToken);
             return records;
         }
 
-        public async Task<OrderDto> GetById(int id)
+        public async Task<OrderDto> GetById(int id, CancellationToken cancellationToken)
         {
             _logger.LogTrace("start of {}", nameof(GetById));
             // TODO
-            var record = await _mapper.ProjectTo<OrderDto>(_context.Orders).SingleOrDefaultAsync(x => x.Id == id);
+            var record = await _mapper.ProjectTo<OrderDto>(_context.Orders).SingleOrDefaultAsync(x => x.Id == id, cancellationToken);
             if (record == null)
             {
                 _logger.LogError("Failed to find Order with id : {id}", id);

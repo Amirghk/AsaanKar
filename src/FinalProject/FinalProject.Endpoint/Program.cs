@@ -12,6 +12,7 @@ using System.Configuration;
 using Serilog;
 using Serilog.Extensions.Logging;
 using FinalProject.Application.Common.ConfigurationModels;
+using FinalProject.Endpoint.Common.Filters;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -36,6 +37,7 @@ builder.Services.AddAutoMapper(typeof(MappingProfile).Assembly);
 builder.Services.AddAutoMapper(typeof(VMMappingProfile).Assembly);
 builder.Services.AddInfrastructure(builder.Configuration);
 builder.Services.AddApplication();
+
 builder.Services.AddAuthorization(options =>
 {
     options.AddPolicy(
@@ -61,6 +63,13 @@ builder.Services.AddDefaultIdentity<ApplicationUser>(options =>
     options.Password.RequireDigit = false;
 }).AddEntityFrameworkStores<ApplicationDbContext>();
 
+/// <summary>
+/// adds a global OperationCancelledException filter to handle the exception and short circuit the middleware
+/// </summary>
+builder.Services.AddControllersWithViews(options =>
+{
+    options.Filters.Add<OperationCancelledExceptionFilter>();
+});
 
 builder.Services.AddRazorPages();
 

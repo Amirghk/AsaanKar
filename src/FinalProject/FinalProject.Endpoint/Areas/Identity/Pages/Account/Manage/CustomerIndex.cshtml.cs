@@ -69,7 +69,7 @@ namespace FinalProject.Endpoint.Areas.Identity.Pages.Account.Manage
         }
 
 
-        private async Task LoadAsync(ApplicationUser user)
+        private async Task LoadAsync(ApplicationUser user, CancellationToken cancellationToken)
         {
             var userName = await _userManager.GetUserNameAsync(user);
 
@@ -78,13 +78,13 @@ namespace FinalProject.Endpoint.Areas.Identity.Pages.Account.Manage
             string profilePicAddress = string.Empty;
 
 
-            var customer = await _customerService.GetById(user.Id);
+            var customer = await _customerService.GetById(user.Id, cancellationToken);
             // get customer profile pic
             if (customer.ProfilePictureId != null)
             {
                 try
                 {
-                    profilePicAddress = await _uploadService.GetFileDirectory((int)customer.ProfilePictureId);
+                    profilePicAddress = await _uploadService.GetFileDirectory((int)customer.ProfilePictureId, cancellationToken);
                 }
                 catch (Exception)
                 {
@@ -104,7 +104,7 @@ namespace FinalProject.Endpoint.Areas.Identity.Pages.Account.Manage
             return;
         }
 
-        public async Task<IActionResult> OnGetAsync()
+        public async Task<IActionResult> OnGetAsync(CancellationToken cancellationToken)
         {
             var user = await _userManager.GetUserAsync(User);
             if (user == null)
@@ -112,12 +112,12 @@ namespace FinalProject.Endpoint.Areas.Identity.Pages.Account.Manage
                 return NotFound($"Unable to load user with ID '{_userManager.GetUserId(User)}'.");
             }
 
-            await LoadAsync(user);
+            await LoadAsync(user, cancellationToken);
             return Page();
         }
 
 
-        public async Task<IActionResult> OnPostAsync()
+        public async Task<IActionResult> OnPostAsync(CancellationToken cancellationToken)
         {
             var user = await _userManager.GetUserAsync(User);
             if (user == null)
@@ -127,14 +127,14 @@ namespace FinalProject.Endpoint.Areas.Identity.Pages.Account.Manage
 
             if (!ModelState.IsValid)
             {
-                await LoadAsync(user);
+                await LoadAsync(user, cancellationToken);
                 return Page();
             }
 
 
             var uploadsRootFolder = Path.Combine(_rootPath, "Uploads");
 
-            var customer = await _customerService.GetById(user.Id);
+            var customer = await _customerService.GetById(user.Id, cancellationToken);
             var customerDto = new CustomerDto
             {
                 Id = customer.Id,
@@ -143,7 +143,7 @@ namespace FinalProject.Endpoint.Areas.Identity.Pages.Account.Manage
                 BirthDate = Input.BirthDate,
                 PhoneNumber = Input.PhoneNumber,
             };
-            await _customerService.Update(customerDto);
+            await _customerService.Update(customerDto, cancellationToken);
 
             if (Input.ProfilePic != null && Input.ProfilePic.Length != 0)
             {
@@ -154,7 +154,7 @@ namespace FinalProject.Endpoint.Areas.Identity.Pages.Account.Manage
                     FileName = Input.ProfilePic.FileName,
                     FileSize = Input.ProfilePic.Length,
                     UploadedFile = Input.ProfilePic,
-                }, uploadsRootFolder);
+                }, uploadsRootFolder, cancellationToken);
             }
 
 

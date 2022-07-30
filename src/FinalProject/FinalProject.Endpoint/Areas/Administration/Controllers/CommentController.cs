@@ -24,22 +24,22 @@ namespace FinalProject.Endpoint.Areas.Administration.Controllers
             _logger = logger;
         }
         [HttpGet]
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(CancellationToken cancellationToken)
         {
-            var model = _mapper.Map<List<CommentListViewModel>>(await _commentService.GetAll());
+            var model = _mapper.Map<List<CommentListViewModel>>(await _commentService.GetAll(cancellationToken));
             return View(model);
         }
 
         [HttpPost]
-        public async Task<IActionResult> Delete(int id)
+        public async Task<IActionResult> Delete(int id, CancellationToken cancellationToken)
         {
-            await _commentService.Remove(id);
+            await _commentService.Remove(id, cancellationToken);
             return RedirectToAction(nameof(Index));
         }
 
-        public async Task<IActionResult> Approve(int id)
+        public async Task<IActionResult> Approve(int id, CancellationToken cancellationToken)
         {
-            await _commentService.Approve(id);
+            await _commentService.Approve(id, cancellationToken);
             return RedirectToAction(nameof(Index));
         }
     }

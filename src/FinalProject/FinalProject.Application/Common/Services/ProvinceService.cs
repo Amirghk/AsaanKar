@@ -15,27 +15,27 @@ public class ProvinceService : IProvinceService
         _repository = repository;
     }
 
-    public async Task<IEnumerable<ProvinceDto>> GetAll()
+    public async Task<IEnumerable<ProvinceDto>> GetAll(CancellationToken cancellationToken)
     {
-        return await _repository.GetAll();
+        return await _repository.GetAll(cancellationToken);
     }
 
-    public async Task<ProvinceDto> GetById(int id)
+    public async Task<ProvinceDto> GetById(int id, CancellationToken cancellationToken)
     {
-        return await _repository.GetById(id);
+        return await _repository.GetById(id, cancellationToken);
     }
 
-    public async Task<int> Remove(int id)
+    public async Task<int> Remove(int id, CancellationToken cancellationToken)
     {
         return await _repository.Remove(id);
     }
 
-    public async Task<int> Set(ProvinceDto dto)
+    public async Task<int> Set(ProvinceDto dto, CancellationToken cancellationToken)
     {
         return await _repository.Add(dto);
     }
 
-    public async Task<int> Update(ProvinceDto dto)
+    public async Task<int> Update(ProvinceDto dto, CancellationToken cancellationToken)
     {
         return await _repository.Update(dto);
     }

@@ -23,17 +23,17 @@ namespace FinalProject.Endpoint.Areas.Administration.Controllers
 
 
 
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(CancellationToken cancellationToken)
         {
-            var model = _mapper.Map<List<UploadViewModel>>(await _uploadService.GetAll());
+            var model = _mapper.Map<List<UploadViewModel>>(await _uploadService.GetAll(cancellationToken));
             return View(model);
         }
 
         [HttpPost]
-        public async Task<IActionResult> Delete(int id)
+        public async Task<IActionResult> Delete(int id, CancellationToken cancellationToken)
         {
             var uploadsRootFolder = Path.Combine(_environment.WebRootPath, "Uploads");
-            await _uploadService.Remove(id, uploadsRootFolder);
+            await _uploadService.Remove(id, uploadsRootFolder, cancellationToken);
             return RedirectToAction(nameof(Index));
         }
 

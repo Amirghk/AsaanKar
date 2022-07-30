@@ -64,7 +64,7 @@ public class ExpertIndexModel : PageModel
     }
 
 
-    private async Task LoadAsync(ApplicationUser user)
+    private async Task LoadAsync(ApplicationUser user, CancellationToken cancellationToken)
     {
         var userName = await _userManager.GetUserNameAsync(user);
 
@@ -73,13 +73,13 @@ public class ExpertIndexModel : PageModel
         string profilePicAddress = string.Empty;
 
 
-        var expert = await _expertService.GetById(user.Id);
+        var expert = await _expertService.GetById(user.Id, cancellationToken);
         // get expert profile pic
         if (expert.ProfilePictureId != null)
         {
             try
             {
-                profilePicAddress = await _uploadService.GetFileDirectory((int)expert.ProfilePictureId);
+                profilePicAddress = await _uploadService.GetFileDirectory((int)expert.ProfilePictureId, cancellationToken);
             }
             catch (Exception)
             {
@@ -101,10 +101,7 @@ public class ExpertIndexModel : PageModel
         return;
     }
 
-
-
-
-    public async Task<IActionResult> OnGetAsync()
+    public async Task<IActionResult> OnGetAsync(CancellationToken cancellationToken)
     {
         var user = await _userManager.GetUserAsync(User);
         if (user == null)
@@ -112,12 +109,12 @@ public class ExpertIndexModel : PageModel
             return NotFound($"Unable to load user with ID '{_userManager.GetUserId(User)}'.");
         }
 
-        await LoadAsync(user);
+        await LoadAsync(user, cancellationToken);
         return Page();
     }
 
 
-    public async Task<IActionResult> OnPostAsync()
+    public async Task<IActionResult> OnPostAsync(CancellationToken cancellationToken)
     {
         var user = await _userManager.GetUserAsync(User);
         if (user == null)
@@ -127,14 +124,14 @@ public class ExpertIndexModel : PageModel
 
         if (!ModelState.IsValid)
         {
-            await LoadAsync(user);
+            await LoadAsync(user, cancellationToken);
             return Page();
         }
 
 
         var uploadsRootFolder = Path.Combine(_rootPath, "Uploads");
 
-        var expert = await _expertService.GetById(user.Id);
+        var expert = await _expertService.GetById(user.Id, cancellationToken);
         var expertDto = new ExpertDto
         {
             Id = expert.Id,
@@ -145,7 +142,7 @@ public class ExpertIndexModel : PageModel
             PhoneNumber = Input.PhoneNumber,
         };
 
-        await _expertService.Update(expertDto);
+        await _expertService.Update(expertDto, cancellationToken);
         if (Input.ProfilePic != null && Input.ProfilePic.Length != 0)
         {
             await _uploadService.Set(new UploadServiceDto
@@ -155,7 +152,7 @@ public class ExpertIndexModel : PageModel
                 FileName = Input.ProfilePic.FileName,
                 FileSize = Input.ProfilePic.Length,
                 UploadedFile = Input.ProfilePic,
-            }, uploadsRootFolder);
+            }, uploadsRootFolder, cancellationToken);
         }
 
 

@@ -10,6 +10,6 @@ public interface IUploadRepository
     Task<int> Add(UploadDto model);
     Task<int> Update(UploadDto model);
     Task<int> Remove(int id);
-    Task<UploadDto> GetById(int id);
-    Task<IEnumerable<UploadDto>> GetAll();
+    Task<UploadDto> GetById(int id, CancellationToken cancellationToken);
+    Task<IEnumerable<UploadDto>> GetAll(CancellationToken cancellationToken);
 }

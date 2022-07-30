@@ -121,16 +121,16 @@ namespace FinalProject.Endpoint.Areas.Identity.Pages.Account
         }
 
 
-        public async Task OnGetAsync(string returnUrl = null)
+        public async Task OnGetAsync(CancellationToken cancellationToken, string returnUrl = null)
         {
-            var provinces = await _provinceService.GetAll();
+            var provinces = await _provinceService.GetAll(cancellationToken);
             Provinces = provinces.Select
                 (s => new SelectListItem
                 {
                     Text = s.Name,
                     Value = s.Id.ToString(),
                 });
-            var cities = await _cityService.GetAll();
+            var cities = await _cityService.GetAll(cancellationToken);
             Cities = cities.Select
                 (s => new SelectListItem
                 {
@@ -141,7 +141,7 @@ namespace FinalProject.Endpoint.Areas.Identity.Pages.Account
             ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
         }
 
-        public async Task<IActionResult> OnPostAsync(string returnUrl = null)
+        public async Task<IActionResult> OnPostAsync(CancellationToken cancellationToken, string returnUrl = null)
         {
             returnUrl ??= Url.Content("~/");
             ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
@@ -181,7 +181,7 @@ namespace FinalProject.Endpoint.Areas.Identity.Pages.Account
                             BirthDate = Input.BirthDate,
                             NationalCode = Input.NationalCode,
                             PhoneNumber = Input.PhoneNumber,
-                        });
+                        }, cancellationToken);
                     }
                     catch (Exception) // Roll back for when user doesn't get added to db
                     {

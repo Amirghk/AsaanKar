@@ -15,32 +15,32 @@ public class CategoryService : ICategoryService
         _repository = repository;
     }
 
-    public async Task<IEnumerable<CategoryDto>> GetAll()
+    public async Task<IEnumerable<CategoryDto>> GetAll(CancellationToken cancellationToken)
     {
-        return await _repository.GetAll();
+        return await _repository.GetAll(cancellationToken);
     }
 
-    public async Task<CategoryDto> GetById(int id)
+    public async Task<CategoryDto> GetById(int id, CancellationToken cancellationToken)
     {
-        return await _repository.GetById(id);
+        return await _repository.GetById(id, cancellationToken);
     }
 
-    public async Task<IEnumerable<CategoryDto>> GetChildren(int id)
+    public async Task<IEnumerable<CategoryDto>> GetChildren(int id, CancellationToken cancellationToken)
     {
-        return await _repository.GetChildren(id);
+        return await _repository.GetChildren(id, cancellationToken);
     }
 
-    public async Task<int> Remove(int id)
+    public async Task<int> Remove(int id, CancellationToken cancellationToken)
     {
         return await _repository.Remove(id);
     }
 
-    public async Task<int> Set(CategoryDto dto)
+    public async Task<int> Set(CategoryDto dto, CancellationToken cancellationToken)
     {
         return await _repository.Add(dto);
     }
 
-    public async Task<int> Update(CategoryDto dto)
+    public async Task<int> Update(CategoryDto dto, CancellationToken cancellationToken)
     {
         return await _repository.Update(dto);
     }

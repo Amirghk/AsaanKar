@@ -10,6 +10,6 @@ public interface ICommentRepository
     Task<int> Add(CommentDto model);
     Task<int> Update(CommentDto model);
     Task<int> Remove(int id);
-    Task<CommentDto> GetById(int id);
-    Task<IEnumerable<CommentDto>> GetAll();
+    Task<CommentDto> GetById(int id, CancellationToken cancellationToken);
+    Task<IEnumerable<CommentDto>> GetAll(CancellationToken cancellationToken);
 }

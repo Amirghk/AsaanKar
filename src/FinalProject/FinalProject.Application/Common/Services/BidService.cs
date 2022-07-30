@@ -15,27 +15,27 @@ public class BidService : IBidService
         _repository = repository;
     }
 
-    public async Task<IEnumerable<BidDto>> GetAll()
+    public async Task<IEnumerable<BidDto>> GetAll(CancellationToken cancellationToken)
     {
-        return await _repository.GetAll();
+        return await _repository.GetAll(cancellationToken);
     }
 
-    public async Task<BidDto> GetById(int id)
+    public async Task<BidDto> GetById(int id, CancellationToken cancellationToken)
     {
-        return await _repository.GetById(id);
+        return await _repository.GetById(id, cancellationToken);
     }
 
-    public async Task<int> Remove(int id)
+    public async Task<int> Remove(int id, CancellationToken cancellationToken)
     {
         return await _repository.Remove(id);
     }
 
-    public async Task<int> Set(BidDto dto)
+    public async Task<int> Set(BidDto dto, CancellationToken cancellationToken)
     {
         return await _repository.Add(dto);
     }
 
-    public async Task<int> Update(BidDto dto)
+    public async Task<int> Update(BidDto dto, CancellationToken cancellationToken)
     {
         return await _repository.Update(dto);
     }

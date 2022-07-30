@@ -11,6 +11,6 @@ public interface ICustomerRepository
     Task<string> Update(CustomerDto model);
     Task<string> Remove(string id);
     Task<string> SoftDelete(string id);
-    Task<CustomerDto> GetById(string id);
-    Task<IEnumerable<CustomerDto>> GetAll();
+    Task<CustomerDto> GetById(string id, CancellationToken cancellationToken);
+    Task<IEnumerable<CustomerDto>> GetAll(CancellationToken cancellationToken);
 }

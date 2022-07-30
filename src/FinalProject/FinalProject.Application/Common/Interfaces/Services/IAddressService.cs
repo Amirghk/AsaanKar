@@ -4,11 +4,11 @@ namespace FinalProject.Application.Common.Interfaces.Services;
 
 public interface IAddressService
 {
-    Task<int> Set(AddressDto dto);
-    Task<IEnumerable<AddressDto>> GetAll();
-    Task<AddressDto> GetById(int id);
-    Task<IEnumerable<AddressDto>> GetByUserId(string userId);
-    Task<int> Remove(int id);
-    Task<int> Update(AddressDto dto);
-    Task<string> GetFullAddressToString(int id);
+    Task<int> Set(AddressDto dto, CancellationToken cancellationToken);
+    Task<IEnumerable<AddressDto>> GetAll(CancellationToken cancellationToken);
+    Task<AddressDto> GetById(int id, CancellationToken cancellationToken);
+    Task<IEnumerable<AddressDto>> GetByUserId(string userId, CancellationToken cancellationToken);
+    Task<int> Remove(int id, CancellationToken cancellationToken);
+    Task<int> Update(AddressDto dto, CancellationToken cancellationToken);
+    Task<string> GetFullAddressToString(int id, CancellationToken cancellationToken);
 }

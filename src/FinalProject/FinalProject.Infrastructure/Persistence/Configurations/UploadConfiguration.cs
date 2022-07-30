@@ -15,7 +15,8 @@ public class UploadConfiguration : IEntityTypeConfiguration<Upload>
         builder
             .HasOne(f => f.Customer)
             .WithOne(c => c.ProfilePicture)
-            .HasForeignKey<Customer>(c => c.ProfilePictureId);
+            .HasForeignKey<Customer>(c => c.ProfilePictureId)
+            .OnDelete(DeleteBehavior.SetNull);
         builder
             .HasOne(f => f.Expert)
             .WithMany(e => e.WorkSamples)

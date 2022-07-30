@@ -26,22 +26,22 @@ namespace FinalProject.Endpoint.Controllers
             _serviceService = serviceService;
             _logger = logger;
         }
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(CancellationToken cancellationToken)
         {
             _logger.LogTrace("Start of {method}", nameof(Index));
-            var model = _mapper.Map<List<CategoryViewModel>>(await _categoryService.GetAll());
+            var model = _mapper.Map<List<CategoryViewModel>>(await _categoryService.GetAll(cancellationToken));
 
             return View(model);
         }
 
         [HttpGet]
-        public async Task<IActionResult> Category(int id)
+        public async Task<IActionResult> Category(int id, CancellationToken cancellationToken)
         {
-            var categories = _mapper.Map<List<CategoryViewModel>>(await _categoryService.GetChildren(id));
+            var categories = _mapper.Map<List<CategoryViewModel>>(await _categoryService.GetChildren(id, cancellationToken));
 
             foreach (var category in categories)
             {
-                category.Services = _mapper.Map<List<ServiceViewModel>>(await _serviceService.GetByCategoryId(category.Id));
+                category.Services = _mapper.Map<List<ServiceViewModel>>(await _serviceService.GetByCategoryId(category.Id, cancellationToken));
             }
             return View(categories);
         }

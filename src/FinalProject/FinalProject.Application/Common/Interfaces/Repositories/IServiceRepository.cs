@@ -10,7 +10,7 @@ public interface IServiceRepository
     Task<int> Add(ServiceDto model);
     Task<int> Update(ServiceDto model);
     Task<int> Remove(int id);
-    Task<ServiceDto> GetById(int id);
-    Task<IEnumerable<ServiceDto>> GetAll();
-    Task<IEnumerable<ServiceDto>> GetByCategoryId(int categoryId);
+    Task<ServiceDto> GetById(int id, CancellationToken cancellationToken);
+    Task<IEnumerable<ServiceDto>> GetAll(CancellationToken cancellationToken);
+    Task<IEnumerable<ServiceDto>> GetByCategoryId(int categoryId, CancellationToken cancellationToken);
 }
