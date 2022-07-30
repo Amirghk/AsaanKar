@@ -85,6 +85,7 @@ namespace FinalProject.Endpoint.Areas.Administration.Controllers
 
             if (!ModelState.IsValid)
             {
+                ModelState.AddModelError("", "اطلاعات درست وارد کنید");
                 return View(model);
             }
 

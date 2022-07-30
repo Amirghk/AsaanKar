@@ -69,6 +69,7 @@ namespace FinalProject.Endpoint.Controllers
         {
             if (!ModelState.IsValid)
             {
+                ModelState.AddModelError("", "اطلاعات درست وارد کنید");
                 _logger.LogInformation("Invalid input in {model}", model);
                 return View(model);
             }

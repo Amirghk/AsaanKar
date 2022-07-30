@@ -45,12 +45,13 @@ public class UploadService : IUploadService
     public async Task<int> Remove(int id, string uploadsRootFolder, CancellationToken cancellationToken)
     {
         var record = await _repository.GetById(id, cancellationToken);
+        var recordId = await _repository.Remove(id);
         if (File.Exists(Path.Combine(uploadsRootFolder, record.FileName)))
         {
             File.Delete(Path.Combine(uploadsRootFolder, record.FileName));
         }
         else throw new NotFoundException(nameof(record), record.FileName);
-        return await _repository.Remove(id);
+        return recordId;
     }
 
     /// <summary>

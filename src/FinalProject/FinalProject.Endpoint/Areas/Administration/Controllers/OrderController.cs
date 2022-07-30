@@ -66,7 +66,7 @@ namespace FinalProject.Endpoint.Areas.Administration.Controllers
             _logger.LogTrace("checking validity of : {}", model);
             if (!ModelState.IsValid)
             {
-                // TODO add errors to modelstate
+                ModelState.AddModelError("", "اطلاعات درست وارد کنید");
                 return View(model);
             }
             _logger.LogTrace("calling {method} in service", "GetById");
