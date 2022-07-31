@@ -1,0 +1,24 @@
+﻿@model BidViewModel
+
+
+
+<h1>ثبت پیشنهاد جدید</h1>
+<div asp-validation-summary="ModelOnly" class="text-danger"></div>
+<form asp-controller="Order" asp-action="Bid" method="post">
+    <div class="form-group my-3">
+        <label asp-for=Price></label>
+        <input asp-for=Price class="form-control">
+        <span asp-validation-for="Price" class="text-danger"></span>
+    </div>
+    <div class="form-group my-3">
+        <label asp-for=Notes></label>
+        <input asp-for=Notes class="form-control">
+        <span asp-validation-for="Notes" class="text-danger"></span>
+    </div>
+    <input asp-for=OrderId type="hidden" value=@Model.OrderId />
+    <button class="btn btn-success" type="submit">ثبت پیشنهاد</button>
+</form>
+
+@section Scripts{
+    <partial name="_ValidationScriptsPartial" />
+}

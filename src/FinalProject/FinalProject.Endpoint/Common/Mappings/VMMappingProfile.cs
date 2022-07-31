@@ -28,7 +28,7 @@ namespace FinalProject.Endpoint.Common.Mappings
             CreateMap<OrderSaveViewModel, OrderDto>()
                 .ForMember(z => z.State, a => a.MapFrom(x => OrderState.WaitingForExpertBid));
             CreateMap<BidDto, BidViewModel>().ReverseMap();
-            CreateMap<OrderDto, ExpertOrderViewModel>()
+            CreateMap<ExpertOrderDto, ExpertOrderViewModel>()
                 .ForMember(z => z.ServiceName, a => a.MapFrom(x => x.Service.Description));
         }
     }

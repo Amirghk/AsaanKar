@@ -79,6 +79,10 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcRXhwZXJ0XFZpZXdzXE9yZGVyXEF2YWlsYWJsZS5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
+[G:/FinalProject/FinalProjectMaktab/src/FinalProject/FinalProject.Endpoint/Areas/Expert/Views/Order/Bid.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcRXhwZXJ0XFZpZXdzXE9yZGVyXEJpZC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
 [G:/FinalProject/FinalProjectMaktab/src/FinalProject/FinalProject.Endpoint/Areas/Expert/Views/Service/Add.cshtml]
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcRXhwZXJ0XFZpZXdzXFNlcnZpY2VcQWRkLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
@@ -89,6 +93,10 @@ build_metadata.AdditionalFiles.CssScope =
 
 [G:/FinalProject/FinalProjectMaktab/src/FinalProject/FinalProject.Endpoint/Areas/Expert/Views/Shared/_ExpertLayout.cshtml]
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcRXhwZXJ0XFZpZXdzXFNoYXJlZFxfRXhwZXJ0TGF5b3V0LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[G:/FinalProject/FinalProjectMaktab/src/FinalProject/FinalProject.Endpoint/Areas/Expert/Views/Shared/_ValidationScriptsPartial.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcRXhwZXJ0XFZpZXdzXFNoYXJlZFxfVmFsaWRhdGlvblNjcmlwdHNQYXJ0aWFsLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
 [G:/FinalProject/FinalProjectMaktab/src/FinalProject/FinalProject.Endpoint/Areas/Expert/Views/_ViewImports.cshtml]

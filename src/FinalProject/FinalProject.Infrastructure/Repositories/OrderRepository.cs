@@ -34,12 +34,21 @@ namespace FinalProject.Infrastructure.Repositories
         public async Task<IEnumerable<OrderDto>> GetAll(CancellationToken cancellationToken, int? cityId = null, OrderState? orderState = null, string? userId = null)
         {
             _logger.LogTrace("start of {methodName}", nameof(GetAll));
-            var records = await _mapper.ProjectTo<OrderDto>(_context.Orders.Where(x => x.ReceiverAddress.CityId == cityId || true))
-                .Where(x => x.CustomerId == userId
-                            || x.ExpertId == userId
-                            || true)
-                .Where(x => x.State == orderState || true)
-                                        .ToListAsync(cancellationToken);
+            IQueryable<Order> query = _context.Orders.Include(x => x.Bids);
+            if (cityId != null)
+                query = query.Where(x => x.ReceiverAddress.CityId == cityId);
+            if (orderState != null)
+                query = query.Where(x => x.State == orderState);
+            if (userId != null)
+                query = query.Where(x => x.CustomerId == userId
+                            || x.ExpertId == userId);
+            //var records = await _mapper.ProjectTo<OrderDto>(_context.Orders.Include(x => x.Bids).Where(x => x.ReceiverAddress.CityId == cityId || true))
+            //    .Where(x => x.CustomerId == userId
+            //                || x.ExpertId == userId
+            //                || true)
+            //    .Where(x => x.State == orderState || true)
+            //                            .ToListAsync(cancellationToken);
+            var records = await _mapper.ProjectTo<OrderDto>(query).ToListAsync(cancellationToken);
             return records;
         }
 

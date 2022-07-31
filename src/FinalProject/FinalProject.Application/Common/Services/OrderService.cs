@@ -4,6 +4,7 @@ using FinalProject.Application.Common.DataTransferObjects;
 using FinalProject.Application.Common.Interfaces.Repositories;
 using Microsoft.Extensions.Logging;
 using FinalProject.Domain.Enums;
+using FinalProject.Application.Common.Exceptions;
 
 namespace FinalProject.Application.Common.Services;
 
@@ -73,13 +74,51 @@ public class OrderService : IOrderService
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
     /// // TODO fix it
-    public async Task<IEnumerable<OrderDto>> GetAvailable(string expertId, CancellationToken cancellationToken)
+    public async Task<IEnumerable<ExpertOrderDto>> GetAvailable(string expertId, CancellationToken cancellationToken)
     {
         var expert = await _expertService.GetById(expertId, cancellationToken);
         var services = await _serviceService.GetAll(expertId: expertId, cancellationToken: cancellationToken);
         var stateOneOrders = await _repository.GetAll(cancellationToken, expert.Address!.CityId, orderState: OrderState.WaitingForExpertBid);
         var stateTwoOrders = await _repository.GetAll(cancellationToken, expert.Address!.CityId, orderState: OrderState.WaitingToChooseExpert);
         var orders = stateOneOrders.Concat(stateTwoOrders);
-        return orders.Where(x => services.Select(x => x.Id).Contains(x.ServiceId));
+        // get orders that have the same services as the ones the expert offers
+        var availableOrders = _mapper.Map<List<ExpertOrderDto>>(orders).Where(x => services.Select(x => x.Id).Contains(x.ServiceId));
+        foreach (var order in availableOrders)
+        {
+            if (order.Bids.Select(x => x.ExpertId).Contains(expertId))
+            {
+                order.HasBidAlready = true;
+                if ((int)order.State > 2)
+                {
+                    order.IsDeletable = false;
+                }
+                else
+                {
+                    order.IsDeletable = true;
+                }
+            }
+        }
+        return availableOrders;
+    }
+
+    public async Task<int> ExpertBidAdded(int id, CancellationToken cancellationToken)
+    {
+        var order = await _repository.GetById(id, cancellationToken);
+        order.State = OrderState.WaitingToChooseExpert;
+        return await _repository.Update(order);
+    }
+
+    public async Task<int> ApproveBid(int orderId, int bidId, CancellationToken cancellationToken)
+    {
+        var order = await _repository.GetById(orderId, cancellationToken);
+        var bid = order.Bids.Where(x => x.Id == bidId).SingleOrDefault();
+        if (bid == null)
+        {
+            throw new NotFoundException(nameof(bid), bidId);
+        }
+        order.ExpertId = bid.ExpertId;
+        order.CompletedPrice = bid.Price;
+        order.State = OrderState.WaitingForExpertToArrive;
+        return await _repository.Update(order);
     }
 }

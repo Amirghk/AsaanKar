@@ -90,6 +90,23 @@ namespace FinalProject.Endpoint.Controllers
             return View(model);
         }
 
+        [HttpPost]
+        public async Task<IActionResult> ApproveBid(int bidId, int orderId, CancellationToken cancellationToken)
+        {
+            var user = await _userManager.GetUserAsync(User);
+            if (user == null)
+            {
+                return NotFound($"Unable to load user with ID '{_userManager.GetUserId(User)}'.");
+            }
+
+            var order = await _orderService.GetById(orderId, cancellationToken);
+            if (order.CustomerId != user.Id)
+            {
+                throw new InvalidOperationException("You can only accept bid on your own orders!");
+            }
+            await _orderService.ApproveBid(orderId, bidId, cancellationToken);
+            return RedirectToAction(nameof(Index));
+        }
 
         private async Task<List<AddressListViewModel>> LoadAsync(ApplicationUser user, CancellationToken cancellationToken)
         {

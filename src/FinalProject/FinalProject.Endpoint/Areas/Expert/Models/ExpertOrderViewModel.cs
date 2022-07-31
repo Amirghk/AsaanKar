@@ -26,5 +26,8 @@ namespace FinalProject.Endpoint.Areas.Expert.Models
         public int AddressId { get; set; }
         [Display(Name = "توضیحات")]
         public string? Description { get; set; }
+
+        public bool HasBidAlready { get; set; }
+        public bool IsDeletable { get; set; }
     }
 }

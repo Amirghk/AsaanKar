@@ -36,7 +36,5 @@ namespace FinalProject.Endpoint.Areas.Administration.Controllers
             await _uploadService.Remove(id, uploadsRootFolder, cancellationToken);
             return RedirectToAction(nameof(Index));
         }
-
-        // TODO details
     }
 }
