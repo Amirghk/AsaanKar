@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "KP8FOZ9CuAzhkBUb+FEwVmN7d2JYxInXEUetF4yHCD0=",
+  "Hash": "Je9cPlKUvPukRD5bfgYO4N9df90T7RKW1/MCgXF40Ic=",
   "Source": "FinalProject.Endpoint",
   "BasePath": "_content/FinalProject.Endpoint",
   "Mode": "Default",
@@ -4962,6 +4962,23 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\lib\\jquery-validation-unobtrusive\\LICENSE.txt"
+    },
+    {
+      "Identity": "G:\\FinalProject\\FinalProjectMaktab\\src\\FinalProject\\FinalProject.Endpoint\\wwwroot\\Uploads\\9eceb2c6-1c8e-4430-9631-5e5fa772d8ce.png",
+      "SourceId": "FinalProject.Endpoint",
+      "SourceType": "Discovered",
+      "ContentRoot": "G:\\FinalProject\\FinalProjectMaktab\\src\\FinalProject\\FinalProject.Endpoint\\wwwroot\\",
+      "BasePath": "_content/FinalProject.Endpoint",
+      "RelativePath": "Uploads/9eceb2c6-1c8e-4430-9631-5e5fa772d8ce.png",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\Uploads\\9eceb2c6-1c8e-4430-9631-5e5fa772d8ce.png"
     },
     {
       "Identity": "G:\\FinalProject\\FinalProjectMaktab\\src\\FinalProject\\FinalProject.Endpoint\\wwwroot\\Uploads\\c8e5b819-9992-4917-a850-935f5e7e569f.jpg",

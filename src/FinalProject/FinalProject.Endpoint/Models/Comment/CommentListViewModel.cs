@@ -1,7 +1,7 @@
 ﻿using FinalProject.Application.Common.DataTransferObjects;
 using System.ComponentModel.DataAnnotations;
 
-namespace FinalProject.Endpoint.Areas.Administration.Models;
+namespace FinalProject.Endpoint.Models;
 public class CommentListViewModel
 {
     [Display(Name = "شناسه")]
@@ -15,7 +15,7 @@ public class CommentListViewModel
     [Display(Name = "شناسه متخصص")]
     public string ExpertId { get; init; } = null!;
     [Display(Name = "تصویر")]
-    public string? ImageAddress { get; set; }
+    public int? ImageId { get; set; }
     [Display(Name = "تایید شده")]
     public bool IsApproved { get; set; }
 }

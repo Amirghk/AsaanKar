@@ -1,4 +1,5 @@
 using FinalProject.Application.Common.DataTransferObjects;
+using FinalProject.Application.Common.DataTransferObjects.Expert;
 
 namespace FinalProject.Application.Common.Interfaces.Services;
 
@@ -13,4 +14,5 @@ public interface IExpertService
     Task<string> GetName(string name, CancellationToken cancellationToken);
     Task<string> AddServices(string expertId, List<int> serviceIds, CancellationToken cancellationToken);
     Task<string> RemoveService(string expertId, int serviceId, CancellationToken cancellationToken);
+    Task<ExpertPublicProfileDto> GetExpertPublicProfile(string expertId, CancellationToken cancellationToken);
 }

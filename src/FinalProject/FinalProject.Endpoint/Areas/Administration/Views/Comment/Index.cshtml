@@ -1,7 +1,7 @@
-﻿
-@model IEnumerable<CommentListViewModel>
+﻿@model IEnumerable<CommentListViewModel>
 @inject ICustomerService CustomerService
 @inject IExpertService ExpertService
+@inject IUploadService UploadService
 
 
 <h1>کامنت ها</h1>
@@ -14,7 +14,7 @@
                 <th scope="col">@Html.DisplayNameFor(c => c.Content)</th>
                 <th scope="col">مشتری</th>
                 <th scope="col">متخصص</th>
-                <th scope="col">@Html.DisplayNameFor(c => c.ImageAddress)</th>
+                <th scope="col">@Html.DisplayNameFor(c => c.ImageId)</th>
                 <th scope="col">@Html.DisplayNameFor(c => c.IsApproved)</th>
                 <th scope="col">عملیات</th>
             </tr>
@@ -41,13 +41,24 @@
                     </td>
 
                     <td>
-                        @if (!String.IsNullOrEmpty(comment.ImageAddress))
+                        @if (comment.ImageId != null)
                         {
-                            <img src=~/@comment.ImageAddress>
+                            var fileDirectory = await UploadService.GetFileDirectory((int)comment.ImageId, Context.RequestAborted);
+                            <button type="button" class="border-0" data-bs-toggle="modal" data-bs-target=@("#modalp_" + comment.ImageId)>
+
+                                <img src="~/@fileDirectory" alt="picture thumbnail" width="70px" />
+                            </button>
+                            <div class="modal fade" id=@("modalp_" + comment.ImageId) tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                <div class="modal-dialog" role="document">
+                                    <div class="modal-content">
+                                        <img src="~/@fileDirectory" alt="comment picture" />
+                                    </div>
+                                </div>
+                            </div>
                         }
                         else
                         {
-                            <p class="text-nowrap">عکس ندارد</p>
+                        <p class="text-nowrap">عکس ندارد</p>
                         }
                     </td>
                     <td>@comment.IsApproved</td>

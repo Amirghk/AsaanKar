@@ -75,6 +75,10 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcRXhwZXJ0XFZpZXdzXEhvbWVcSW5kZXguY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
+[G:/FinalProject/FinalProjectMaktab/src/FinalProject/FinalProject.Endpoint/Areas/Expert/Views/Home/PublicProfile.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcRXhwZXJ0XFZpZXdzXEhvbWVcUHVibGljUHJvZmlsZS5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
 [G:/FinalProject/FinalProjectMaktab/src/FinalProject/FinalProject.Endpoint/Areas/Expert/Views/Order/Available.cshtml]
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcRXhwZXJ0XFZpZXdzXE9yZGVyXEF2YWlsYWJsZS5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
@@ -305,6 +309,10 @@ build_metadata.AdditionalFiles.CssScope =
 
 [G:/FinalProject/FinalProjectMaktab/src/FinalProject/FinalProject.Endpoint/Views/Home/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxJbmRleC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[G:/FinalProject/FinalProjectMaktab/src/FinalProject/FinalProject.Endpoint/Views/Order/Comment.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcT3JkZXJcQ29tbWVudC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
 [G:/FinalProject/FinalProjectMaktab/src/FinalProject/FinalProject.Endpoint/Views/Order/Create.cshtml]
