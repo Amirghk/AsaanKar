@@ -30,6 +30,8 @@ namespace FinalProject.Endpoint.Common.Mappings
             CreateMap<ExpertOrderDto, ExpertOrderViewModel>()
                 .ForMember(z => z.ServiceName, a => a.MapFrom(x => x.Service.Description));
             CreateMap<CommentSaveViewModel, CommentDto>();
+            CreateMap<ExpertPublicProfileDto, ExpertPublicProfileViewModel>()
+                .ForMember(z => z.Services, a => a.MapFrom(x => x.Services.Select(x => x.Description)));
         }
     }
 }

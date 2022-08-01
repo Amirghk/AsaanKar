@@ -1,5 +1,7 @@
 ﻿using AutoMapper;
 using FinalProject.Application.Common.Interfaces.Services;
+using FinalProject.Endpoint.Areas.Expert.Models;
+using FinalProject.Endpoint.Models;
 using FinalProject.Infrastructure.Identity;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -30,8 +32,9 @@ namespace FinalProject.Endpoint.Areas.Expert.Controllers
         [HttpGet]
         public async Task<IActionResult> PublicProfile(string id, CancellationToken cancellationToken)
         {
-            await _expertService.GetById(id, cancellationToken);
-            return View();
+            var model = _mapper.Map<ExpertPublicProfileViewModel>(await _expertService.GetExpertPublicProfile(id, cancellationToken));
+
+            return View(model);
         }
     }
 }

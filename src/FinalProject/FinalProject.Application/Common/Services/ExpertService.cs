@@ -42,6 +42,24 @@ public class ExpertService : IExpertService
         return await _repository.GetById(id, cancellationToken);
     }
 
+    public async Task<ExpertPublicProfileDto> GetExpertPublicProfile(string expertId, CancellationToken cancellationToken)
+    {
+        var expert = await _repository.GetById(expertId, cancellationToken);
+        // TODO : Move this to mapper
+        var dto = new ExpertPublicProfileDto()
+        {
+            Bio = expert.Bio,
+            Rating = expert.Rating,
+            Name = expert.FirstName + " " + expert.LastName,
+            WorkSamples = expert.WorkSamples.Select(x => x.Id).ToList(),
+            Services = expert.Services,
+            Comments = expert.Comments,
+            ProfilePictureId = expert.ProfilePictureId,
+        };
+
+        return dto;
+    }
+
     public async Task<string> GetName(string id, CancellationToken cancellationToken)
     {
         var user = await _repository.GetById(id, cancellationToken);

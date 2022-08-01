@@ -18,4 +18,5 @@ public record ExpertDto
     public AddressDto? Address { get; set; }
     public List<ServiceDto> Services { get; set; } = new List<ServiceDto>();
     public virtual ICollection<UploadDto> WorkSamples { get; set; } = new List<UploadDto>();
+    public ICollection<CommentDto> Comments { get; set; } = new List<CommentDto>();
 }

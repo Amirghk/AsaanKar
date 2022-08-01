@@ -6,7 +6,8 @@ using Microsoft.Extensions.Logging;
 
 namespace FinalProject.Application.Common.Services;
 
-public class CommentService : ICommentService
+public class
+    CommentService : ICommentService
 {
     private readonly IMapper _mapper;
     private readonly IOrderService _orderService;
@@ -37,6 +38,11 @@ public class CommentService : ICommentService
     public async Task<CommentDto> GetById(int id, CancellationToken cancellationToken)
     {
         return await _repository.GetById(id, cancellationToken);
+    }
+
+    public async Task<IEnumerable<CommentDto>> GetByUserId(string id, CancellationToken cancellationToken)
+    {
+        return await _repository.GetByUserId(id, cancellationToken);
     }
 
     public async Task<int> Remove(int id, CancellationToken cancellationToken)
