@@ -93,7 +93,7 @@ namespace FinalProject.Infrastructure.Repositories
                 await _context.SaveChangesAsync();
             }
 
-            _mapper.Map(model, record);
+            var mapped = _mapper.Map(model, record);
             await _context.SaveChangesAsync();
 
             return record.Id!;

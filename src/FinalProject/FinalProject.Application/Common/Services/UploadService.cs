@@ -72,9 +72,9 @@ public class UploadService : IUploadService
         await SaveFile(file, uploadsRootFolder, newFileName);
 
 
+
         var uploadId = await _repository.Add(new UploadDto
         {
-            ExpertId = dto.ExpertId,
             FileSize = dto.FileSize,
             FileName = newFileName,
             FileCategory = dto.FileCategory,
@@ -145,32 +145,33 @@ public class UploadService : IUploadService
         }
     }
 
-    public async Task<string> SetExpertWorkSamples(List<UploadServiceDto> workSamples, string uploadsRootFolder, CancellationToken cancellationToken)
+    public async Task<int> SetExpertWorkSamples(UploadServiceDto workSample, string uploadsRootFolder, CancellationToken cancellationToken)
     {
-        if (workSamples == null || workSamples.Count == 0)
+        if (workSample.UploadedFile == null || workSample.UploadedFile.Length == 0)
         {
             throw new NotSupportedException();
         }
 
-        var expertId = workSamples.First().ExpertId;
+        var expertId = workSample.ExpertId;
         var expert = await _expertService.GetById(expertId!, cancellationToken);
-        foreach (var sample in workSamples)
+
+        var file = workSample.UploadedFile;
+        var fileExtension = Path.GetExtension(file.FileName);
+        var newFileName = Guid.NewGuid() + fileExtension;
+
+        await SaveFile(file, uploadsRootFolder, newFileName);
+
+
+
+        var uploadId = await _repository.Add(new UploadDto
         {
-            var file = sample.UploadedFile;
-            var fileExtension = Path.GetExtension(file.FileName);
-            var newFileName = Guid.NewGuid() + fileExtension;
-            sample.FileName = newFileName;
-            await SaveFile(file, uploadsRootFolder, newFileName);
-        }
-        List<UploadDto> expertWorkSamples = workSamples.Select(x => new UploadDto
-        {
-            ExpertId = x.ExpertId,
-            FileCategory = x.FileCategory,
-            FileName = x.FileName,
-            FileSize = x.FileSize,
-        }).ToList();
-        //expert.WorkSamples = expertWorkSamples;
-        return await _expertService.Update(expert, cancellationToken);
+            ExpertId = expertId,
+            FileSize = workSample.FileSize,
+            FileName = newFileName,
+            FileCategory = FileCategory.ExpertWorkSample,
+        });
+
+        return uploadId;
     }
 
     public async Task<int> Update(UploadDto dto, CancellationToken cancellationToken)

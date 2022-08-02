@@ -1,4 +1,5 @@
-﻿@inject SignInManager<ApplicationUser> SignInManager
+﻿@using FinalProject.Endpoint.Common.Extensions
+@inject SignInManager<ApplicationUser> SignInManager
 @inject UserManager<ApplicationUser> UserManager
 @{
     var hasExternalLogins = (await SignInManager.GetExternalAuthenticationSchemesAsync()).Any();
@@ -13,13 +14,14 @@
     }
     <li class="nav-item"><a class="nav-link @ManageNavPages.TwoFactorAuthenticationNavClass(ViewContext)" id="two-factor" asp-page="./TwoFactorAuthentication">احراز هویت دو مرحله ای</a></li>
     <li class="nav-item"><a class="nav-link @ManageNavPages.PersonalDataNavClass(ViewContext)" id="personal-data" asp-page="./PersonalData">اطلاعات شخصی</a></li>
-    @if (User.HasClaim("IsExpert", true.ToString()))
+    @if (User.IsExpert())
     {
         <li class="nav-item"><a class="nav-link" id="Addresses" asp-page="./ExpertAddress">آدرس من</a></li>
+        <li class="nav-item"><a class="nav-link" id="Addresses" asp-page="./ExpertWorkSample">افزودن نمونه کار</a></li>
     }
-    @if (User.HasClaim("IsCustomer", true.ToString()))
+    @if (User.IsCustomer())
     {
-        <li class="nav-item"><a class="nav-link" id="Addresses" asp-page="./CustomerAddress">آدرس من</a></li>
+        <li class="nav-item"><a class="nav-link" id="Addresses" asp-page="./CustomerAddress">آدرس های من</a></li>
     }
 
 </ul>

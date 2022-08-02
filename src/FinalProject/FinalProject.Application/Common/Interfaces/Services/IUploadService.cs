@@ -9,6 +9,6 @@ public interface IUploadService
     Task<UploadDto> GetById(int id, CancellationToken cancellationToken);
     Task<int> Remove(int id, string uploadsRootFolder, CancellationToken cancellationToken);
     Task<int> Update(UploadDto dto, CancellationToken cancellationToken);
-    Task<string> SetExpertWorkSamples(List<UploadServiceDto> workSamples, string uploadsRootFolder, CancellationToken cancellationToken);
+    Task<int> SetExpertWorkSamples(UploadServiceDto workSample, string uploadsRootFolder, CancellationToken cancellationToken);
     Task<string> GetFileDirectory(int fileId, CancellationToken cancellationToken);
 }
