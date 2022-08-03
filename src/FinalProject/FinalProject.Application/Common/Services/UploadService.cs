@@ -5,6 +5,8 @@ using FinalProject.Application.Common.DataTransferObjects;
 using FinalProject.Domain.Enums;
 using FinalProject.Application.Common.Interfaces.Repositories;
 using Microsoft.AspNetCore.Http;
+using Microsoft.Extensions.Options;
+using FinalProject.Application.Common.ConfigurationModels;
 
 namespace FinalProject.Application.Common.Services;
 
@@ -16,13 +18,15 @@ public class UploadService : IUploadService
     private readonly ICustomerService _customerService;
     private readonly ICommentService _commentService;
     private readonly ICategoryService _categoryService;
+    private readonly AppSettings _appSettings;
 
     public UploadService(IUploadRepository repository,
                          IMapper mapper,
                          IExpertService expertService,
                          ICustomerService customerService,
                          ICommentService commentService,
-                         ICategoryService categoryService)
+                         ICategoryService categoryService,
+                         IOptions<AppSettings> appSettings)
     {
         _mapper = mapper;
         _repository = repository;
@@ -30,6 +34,7 @@ public class UploadService : IUploadService
         _customerService = customerService;
         _commentService = commentService;
         _categoryService = categoryService;
+        _appSettings = appSettings.Value;
     }
 
     public async Task<IEnumerable<UploadDto>> GetAll(CancellationToken cancellationToken)
@@ -182,6 +187,6 @@ public class UploadService : IUploadService
     public async Task<string> GetFileDirectory(int fileId, CancellationToken cancellationToken)
     {
         var file = await _repository.GetById(fileId, cancellationToken);
-        return "Uploads/" + file.FileName;
+        return _appSettings.UploadsFolderName + file.FileName;
     }
 }

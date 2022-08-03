@@ -15,6 +15,10 @@ build_property.GenerateRazorMetadataSourceChecksumAttributes = true
 build_property.MSBuildProjectDirectory = G:\FinalProject\FinalProjectMaktab\src\FinalProject\FinalProject.Endpoint
 build_property._RazorSourceGeneratorDebug = 
 
+[G:/FinalProject/FinalProjectMaktab/src/FinalProject/FinalProject.Endpoint/Areas/Administration/Views/Category/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5pc3RyYXRpb25cVmlld3NcQ2F0ZWdvcnlcSW5kZXguY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
 [G:/FinalProject/FinalProjectMaktab/src/FinalProject/FinalProject.Endpoint/Areas/Administration/Views/Comment/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5pc3RyYXRpb25cVmlld3NcQ29tbWVudFxJbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 

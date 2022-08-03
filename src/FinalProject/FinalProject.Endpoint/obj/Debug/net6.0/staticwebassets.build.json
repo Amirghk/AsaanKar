@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "ECdtdRNDsPmE9TktOWnpmqmcBkSDtp8k/RnbJELtArY=",
+  "Hash": "Bs5wecYBwDfxEmuIH4xj5p8Z+xF4riUuQMgyIgbWc+8=",
   "Source": "FinalProject.Endpoint",
   "BasePath": "_content/FinalProject.Endpoint",
   "Mode": "Default",
@@ -3791,6 +3791,23 @@
       "OriginalItemSpec": "wwwroot\\AdminAreaFiles\\lib\\jquery-validation-unobtrusive\\jquery.validate.unobtrusive.min.js"
     },
     {
+      "Identity": "G:\\FinalProject\\FinalProjectMaktab\\src\\FinalProject\\FinalProject.Endpoint\\wwwroot\\background.jpg",
+      "SourceId": "FinalProject.Endpoint",
+      "SourceType": "Discovered",
+      "ContentRoot": "G:\\FinalProject\\FinalProjectMaktab\\src\\FinalProject\\FinalProject.Endpoint\\wwwroot\\",
+      "BasePath": "_content/FinalProject.Endpoint",
+      "RelativePath": "background.jpg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\background.jpg"
+    },
+    {
       "Identity": "G:\\FinalProject\\FinalProjectMaktab\\src\\FinalProject\\FinalProject.Endpoint\\wwwroot\\css\\bootstrap.min.css",
       "SourceId": "FinalProject.Endpoint",
       "SourceType": "Discovered",
@@ -5304,6 +5321,23 @@
       "OriginalItemSpec": "wwwroot\\Uploads\\a6006d21-9e60-417a-9c27-ab3515155a10.jpg"
     },
     {
+      "Identity": "G:\\FinalProject\\FinalProjectMaktab\\src\\FinalProject\\FinalProject.Endpoint\\wwwroot\\Uploads\\c3391f95-395d-45bd-8729-47a58c466ded.png",
+      "SourceId": "FinalProject.Endpoint",
+      "SourceType": "Discovered",
+      "ContentRoot": "G:\\FinalProject\\FinalProjectMaktab\\src\\FinalProject\\FinalProject.Endpoint\\wwwroot\\",
+      "BasePath": "_content/FinalProject.Endpoint",
+      "RelativePath": "Uploads/c3391f95-395d-45bd-8729-47a58c466ded.png",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\Uploads\\c3391f95-395d-45bd-8729-47a58c466ded.png"
+    },
+    {
       "Identity": "G:\\FinalProject\\FinalProjectMaktab\\src\\FinalProject\\FinalProject.Endpoint\\wwwroot\\Uploads\\c3e86246-7ef7-43c3-8e10-212449c369a8.jpg",
       "SourceId": "FinalProject.Endpoint",
       "SourceType": "Discovered",
@@ -5438,6 +5472,23 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\Uploads\\f1ee9564-d87b-4777-a05e-e62c303c41ba.jpg"
+    },
+    {
+      "Identity": "G:\\FinalProject\\FinalProjectMaktab\\src\\FinalProject\\FinalProject.Endpoint\\wwwroot\\Uploads\\f730b24e-edab-4b86-832e-1aff31b7a28b.png",
+      "SourceId": "FinalProject.Endpoint",
+      "SourceType": "Discovered",
+      "ContentRoot": "G:\\FinalProject\\FinalProjectMaktab\\src\\FinalProject\\FinalProject.Endpoint\\wwwroot\\",
+      "BasePath": "_content/FinalProject.Endpoint",
+      "RelativePath": "Uploads/f730b24e-edab-4b86-832e-1aff31b7a28b.png",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\Uploads\\f730b24e-edab-4b86-832e-1aff31b7a28b.png"
     }
   ]
 }

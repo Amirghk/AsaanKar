@@ -1,0 +1,81 @@
+@model IEnumerable<CategoryViewModel>
+@inject IUploadService UploadService
+
+
+<h1>دسته بندی ها</h1>
+<table class="table">
+    <thead class="thead-dark">
+        <tr>
+            <th scope="col">@Html.DisplayNameFor(model => model.Id)</th>
+            <th scope="col">@Html.DisplayNameFor((model => model.Name))</th>
+            <th scope="col">@Html.DisplayNameFor((model => model.ParentCategoryId))</th>
+            <th scope="col">@Html.DisplayNameFor((model => model.PictureId))</th>
+
+            <th scope="col">ویرایش</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var category in Model)
+        {
+            <tr>
+                <th scope="row">@category.Id</th>
+                <td>@category.Name</td>
+                <td>@category.ParentCategoryId</td>
+                <td>
+                    @if (category.PictureId != null)
+                    {
+
+                        var fileDirectory = await UploadService.GetFileDirectory((int)category.PictureId, Context.RequestAborted);
+                        <button type="button" class="border-0" data-bs-toggle="modal" data-bs-target=@("#modalp_" + category.PictureId)>
+
+                            <img src="~/@fileDirectory" alt="picture thumbnail" width="70px" />
+                        </button>
+                        <div class="modal fade" id=@("modalp_" + category.PictureId) tabindex="-1" role="dialog"
+                     aria-labelledby="exampleModalLabel" aria-hidden="true">
+                            <div class="modal-dialog" role="document">
+                                <div class="modal-content">
+                                    <img src="~/@fileDirectory" alt="picture thumbnail" />
+                                </div>
+                            </div>
+                        </div>
+
+                    }
+                    else
+                    {
+                        <p>
+                            تصویر ندارد
+                        </p>
+                    }
+
+                </td>
+                <td>
+                    <button type="button" class="btn btn-danger m-1" data-bs-toggle="modal" data-bs-target=@("#modal_" +
+                        category.Id)>
+                        حذف
+                    </button>
+                    <div class="modal fade" id=@("modal_" + category.Id) tabindex="-1" role="dialog"
+                     aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                                    <button type="button" class="btn-close m-0" data-bs-dismiss="modal" aria-label="Close">
+                                    </button>
+                                </div>
+                                <div class="modal-body text-dark">
+                                    مطئنید میخواهید حذف کنید؟
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">بستن</button>
+                                    <form asp-controller="Category" asp-action="Delete" asp-route-id=@category.Id method="post">
+                                        <button class="btn btn-danger" type="submit">حذف</button>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

@@ -19,8 +19,7 @@ namespace FinalProject.Endpoint.Common.Mappings
                 .ForMember(z => z.ServiceName, a => a.MapFrom(x => x.Service.Description));
             CreateMap<OrderDto, OrderEditViewModel>();
             CreateMap<CommentDto, CommentListViewModel>();
-            CreateMap<CategoryDto, CategoryViewModel>()
-                .ForMember(z => z.ImageAddress, a => a.MapFrom(x => Path.Combine("Uploads", x.Picture.FileName)));
+            CreateMap<CategoryDto, CategoryViewModel>();
             CreateMap<ServiceViewModel, ServiceDto>().ReverseMap()
                 .ForMember(z => z.CategoryName, a => a.MapFrom(x => x.Category!.Name));
             CreateMap<AddressDto, AddressViewModel>().ReverseMap();
@@ -32,6 +31,7 @@ namespace FinalProject.Endpoint.Common.Mappings
             CreateMap<CommentSaveViewModel, CommentDto>();
             CreateMap<ExpertPublicProfileDto, ExpertPublicProfileViewModel>()
                 .ForMember(z => z.Services, a => a.MapFrom(x => x.Services.Select(x => x.Description)));
+            CreateMap<CategorySaveViewModel, CategoryDto>();
         }
     }
 }

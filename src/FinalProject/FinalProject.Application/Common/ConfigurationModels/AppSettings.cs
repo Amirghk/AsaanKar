@@ -6,12 +6,14 @@ using System.Threading.Tasks;
 
 namespace FinalProject.Application.Common.ConfigurationModels
 {
+
     public class AppSettings
     {
         public Logging Logging { get; set; }
         public string AllowedHosts { get; set; }
         public Connectionstrings ConnectionStrings { get; set; }
         public Seq Seq { get; set; }
+        public string UploadsFolderName { get; set; }
     }
 
     public class Logging
@@ -62,5 +64,6 @@ namespace FinalProject.Application.Common.ConfigurationModels
     {
         public string Microsoft { get; set; }
     }
+
 
 }

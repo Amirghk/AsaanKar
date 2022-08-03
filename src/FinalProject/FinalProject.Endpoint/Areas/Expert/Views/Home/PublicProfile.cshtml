@@ -2,12 +2,16 @@
 @inject IUploadService UploadService
 @inject ICustomerService CustomerService
 
+@{
+    Layout = "/Views/Shared/_Layout.cshtml";
+}
+
 <section class="h-100 gradient-custom-2">
     <div class="container py-5 h-100">
-        <div class="row d-flex justify-content-center align-items-center h-100">
-            <div class="col col-lg-9 col-xl-7">
-                <div class="card">
-                    <div class="rounded-top text-white d-flex flex-row" style="background-color: #000; height:200px;">
+        <div class="row d-flex justify-content-center align-items-center h-100 ">
+            <div class="col col-lg-9 col-xl-7 glass">
+                <div class="card bg-transparent">
+                    <div class="rounded-top text-white d-flex flex-row" style="height:200px;">
                         <div class="ms-4 mt-5 d-flex flex-column" style="width: 150px;">
                             @if (Model.ProfilePictureId != null)
                             {
@@ -29,7 +33,7 @@
                             @*<p>New York</p>*@
                         </div>
                     </div>
-                    <div class="p-4 text-black" style="background-color: #f8f9fa;">
+                    <div class="p-4 text-black bg-transparent">
                         <div class="d-flex justify-content-end text-center">
                             <div class="mx-5">
                                 <p>امتیاز</p>
@@ -46,7 +50,7 @@
                     <div class="card-body p-4 text-black">
                         <div class="mb-5">
                             <p class="lead fw-normal mb-1">معرفی</p>
-                            <div class="p-4" style="background-color: #f8f9fa;">
+                            <div class="p-4 bg-transparent">
                                 <p>
                                     @Model.Bio
                                 </p>
@@ -54,14 +58,13 @@
                         </div>
                         <div class="d-flex justify-content-between align-items-center mb-4">
                             <p class="lead fw-normal mb-0">نمونه کارها</p>
-                            <p class="mb-0"><a href="#!" class="text-muted">Show all</a></p>
                         </div>
                         <div class="d-flex flex-row-reverse flex-wrap">
                             @if (Model.WorkSamples != null)
                             {
                                 @foreach (var sample in Model.WorkSamples)
                                 {
-                                    <div class="col m-2" style="min-width:200px;">
+                                    <div class="col m-2" style="min-width:70px;">
                                         <img src="~/@await UploadService.GetFileDirectory(sample, Context.RequestAborted)"
                                      alt="image 1" class="w-100 rounded-3">
                                     </div>
@@ -79,7 +82,7 @@
                     <div class="card-body p-4 text-black">
                         <div class="mb-5">
                             <p class="lead fw-normal mb-1">نظرات</p>
-                            <div class="p-4" style="background-color: #f8f9fa;">
+                            <div class="p-4 bg-transparent">
                                 @if (Model.Comments != null)
                                 {
 
@@ -88,7 +91,7 @@
                                         if (comment.IsApproved == true)
                                         {
                                             <p class="lead fw-normal m-1">@await CustomerService.GetName(comment.CustomerId, Context.RequestAborted)</p>
-                                            <div class="p-4" style="background-color: #f8f9fa;">
+                                            <div class="p-4 glass-dark">
                                                 <p>
                                                     @comment.Content
                                                 </p>
@@ -101,7 +104,7 @@
 
                                                 <img src="~/@fileDirectory" alt="picture thumbnail" width="120px" />
                                             </button>
-                                            <div class="modal fade" id=@("modalp_" + comment.ImageId) tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                            <div class="modal fade glass-dark" id=@("modalp_" + comment.ImageId) tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                                 <div class="modal-dialog" role="document">
                                                     <div class="modal-content">
                                                         <img src="~/@fileDirectory" alt="Comment picture" />

@@ -1,25 +1,29 @@
 ﻿@model List<CategoryViewModel>
+@inject IUploadService UploadService
+
+
 
 <div class="jumbotron">
-    <h1 class="display-4">Hello, world!</h1>
-    <p class="lead">This is a simple hero unit, a simple jumbotron-style component for calling extra attention to featured content or information.</p>
+    <h1 class="display-4">پروژه من</h1>
     <hr class="my-4">
-    <p>It uses utility classes for typography and spacing to space content out within the larger container.</p>
-    <p class="lead">
-        <a class="btn btn-primary btn-lg" href="#" role="button">Learn more</a>
-    </p>
+    <h3>برای کارهای خود متخصصان حرفه‌ای و قابل اعتماد پیدا کنید.</h3>
 </div>
+<br />
+<br />
 
-
+<h1>دسته بندی ها</h1>
 <ul class="list-group list-group-horizontal">
     @foreach (var category in Model)
     {
         @if (category.ParentCategoryId == null)
         {
-            <li class="list-group-item">
-                <div class="card" style="width: 18rem;">
-                    <img class="card-img-top" src=@("~/" + category.ImageAddress) alt="Category Image">
-                    <div class="card-body">
+            <li class="list-group-item glass">
+                <div class="card bg-transparent" style="width: 18rem;">
+                    @if (category.PictureId != null)
+                    {
+                        <img class="card-img-top" src="~/@await UploadService.GetFileDirectory((int)category.PictureId, Context.RequestAborted)" alt="Category Image">
+                    }
+                    <div class="card-body bg-transparent">
                         <h5 class="card-title">@category.Name</h5>
                         <p class="card-text">@category.Description</p>
                         <a asp-controller="Home" asp-action="Category" asp-route-id=@category.Id class="btn btn-primary">مشاهده سرویس ها</a>

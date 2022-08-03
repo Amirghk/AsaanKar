@@ -7,6 +7,8 @@ using Microsoft.AspNetCore.Mvc;
 using FinalProject.Endpoint.Models;
 using FinalProject.Application.Common.DataTransferObjects;
 using FinalProject.Domain.Enums;
+using Microsoft.Extensions.Options;
+using FinalProject.Application.Common.ConfigurationModels;
 
 namespace FinalProject.Endpoint.Controllers
 {
@@ -22,6 +24,7 @@ namespace FinalProject.Endpoint.Controllers
         private readonly ICommentService _commentService;
         private readonly ILogger<HomeController> _logger;
         private readonly string _rootPath;
+        private readonly AppSettings _appSettings;
 
         public OrderController(
             IMapper mapper,
@@ -32,7 +35,8 @@ namespace FinalProject.Endpoint.Controllers
             IAddressService addressService,
             UserManager<ApplicationUser> userManager,
             IWebHostEnvironment environment,
-            ICommentService commentService)
+            ICommentService commentService,
+            IOptions<AppSettings> appSettings)
         {
             _mapper = mapper;
             _uploadService = uploadService;
@@ -43,6 +47,7 @@ namespace FinalProject.Endpoint.Controllers
             _commentService = commentService;
             _logger = logger;
             _rootPath = environment.WebRootPath;
+            _appSettings = appSettings.Value;
         }
 
         [HttpGet]
@@ -140,7 +145,7 @@ namespace FinalProject.Endpoint.Controllers
                 return View(model);
             }
 
-            var uploadsRootFolder = Path.Combine(_rootPath, "Uploads");
+            var uploadsRootFolder = Path.Combine(_rootPath, _appSettings.UploadsFolderName);
             // add comment
             var commentDto = new CommentDto()
             {
