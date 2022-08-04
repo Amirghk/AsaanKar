@@ -2,37 +2,38 @@
 @inject IUploadService UploadService
 
 
+<div class="container">
+    <div class="jumbotron">
+        <h1 class="display-4">پروژه من</h1>
+        <hr class="my-4">
+        <h3>برای کارهای خود متخصصان حرفه‌ای و قابل اعتماد پیدا کنید.</h3>
+    </div>
+    <br />
+    <br />
 
-<div class="jumbotron">
-    <h1 class="display-4">پروژه من</h1>
-    <hr class="my-4">
-    <h3>برای کارهای خود متخصصان حرفه‌ای و قابل اعتماد پیدا کنید.</h3>
-</div>
-<br />
-<br />
-
-<h1>دسته بندی ها</h1>
-<ul class="list-group list-group-horizontal">
-    @foreach (var category in Model)
-    {
-        @if (category.ParentCategoryId == null)
+    <h1>دسته بندی ها</h1>
+    <ul class="list-group list-group-horizontal">
+        @foreach (var category in Model)
         {
-            <li class="list-group-item glass">
-                <div class="card bg-transparent" style="width: 18rem;">
-                    @if (category.PictureId != null)
-                    {
-                        <img class="card-img-top" src="~/@await UploadService.GetFileDirectory((int)category.PictureId, Context.RequestAborted)" alt="Category Image">
-                    }
-                    <div class="card-body bg-transparent">
-                        <h5 class="card-title">@category.Name</h5>
-                        <p class="card-text">@category.Description</p>
-                        <a asp-controller="Home" asp-action="Category" asp-route-id=@category.Id class="btn btn-primary">مشاهده سرویس ها</a>
+            @if (category.ParentCategoryId == null)
+            {
+                <li class="list-group-item glass">
+                    <div class="card bg-transparent" style="width: 18rem;">
+                        @if (category.PictureId != null)
+                        {
+                            <img class="card-img-top" src="~/@await UploadService.GetFileDirectory((int)category.PictureId, Context.RequestAborted)" alt="Category Image">
+                        }
+                        <div class="card-body bg-transparent">
+                            <h5 class="card-title">@category.Name</h5>
+                            <p class="card-text">@category.Description</p>
+                            <a asp-controller="Home" asp-action="Category" asp-route-id=@category.Id class="btn btn-primary">مشاهده سرویس ها</a>
+                        </div>
                     </div>
-                </div>
-            </li>
+                </li>
+            }
         }
-    }
-</ul>
+    </ul>
+</div>
 
 
 

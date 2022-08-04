@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "G:\\FinalProject\\FinalProjectMaktab\\src\\FinalProject\\FinalProject.Domain\\FinalProject.Domain.csproj": {}
+    "G:\\FinalProjectMaktab\\FinalProjectMaktab\\src\\FinalProject\\FinalProject.Domain\\FinalProject.Domain.csproj": {}
   },
   "projects": {
-    "G:\\FinalProject\\FinalProjectMaktab\\src\\FinalProject\\FinalProject.Domain\\FinalProject.Domain.csproj": {
+    "G:\\FinalProjectMaktab\\FinalProjectMaktab\\src\\FinalProject\\FinalProject.Domain\\FinalProject.Domain.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "G:\\FinalProject\\FinalProjectMaktab\\src\\FinalProject\\FinalProject.Domain\\FinalProject.Domain.csproj",
+        "projectUniqueName": "G:\\FinalProjectMaktab\\FinalProjectMaktab\\src\\FinalProject\\FinalProject.Domain\\FinalProject.Domain.csproj",
         "projectName": "FinalProject.Domain",
-        "projectPath": "G:\\FinalProject\\FinalProjectMaktab\\src\\FinalProject\\FinalProject.Domain\\FinalProject.Domain.csproj",
+        "projectPath": "G:\\FinalProjectMaktab\\FinalProjectMaktab\\src\\FinalProject\\FinalProject.Domain\\FinalProject.Domain.csproj",
         "packagesPath": "C:\\Users\\Lion\\.nuget\\packages\\",
-        "outputPath": "G:\\FinalProject\\FinalProjectMaktab\\src\\FinalProject\\FinalProject.Domain\\obj\\",
+        "outputPath": "G:\\FinalProjectMaktab\\FinalProjectMaktab\\src\\FinalProject\\FinalProject.Domain\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\Lion\\AppData\\Roaming\\NuGet\\NuGet.Config",

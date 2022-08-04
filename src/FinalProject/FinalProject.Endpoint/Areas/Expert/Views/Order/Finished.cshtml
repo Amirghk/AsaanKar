@@ -1,0 +1,35 @@
+﻿@inject IAddressService AddressService
+
+@{
+    Layout = "/Areas/Expert/Views/Shared/_ExpertLayout.cshtml";
+}
+<h1>سفارشات انجام شده</h1>
+    <div>
+        <table class="table">
+            <thead class="thead-dark">
+                <tr>
+                    <th scope="col">@Html.DisplayNameForInnerType((ExpertOrderViewModel c) => c.ServiceName)</th>
+                    <th scope="col">@Html.DisplayNameForInnerType((ExpertOrderViewModel c) => c.Customer)</th>
+                    <th scope="col">@Html.DisplayNameForInnerType((ExpertOrderViewModel c) => c.OrderDate)</th>
+                    <th scope="col">@Html.DisplayNameForInnerType((ExpertOrderViewModel c) => c.State)</th>
+                    <th scope="col">@Html.DisplayNameForInnerType((ExpertOrderViewModel c) => c.ServiceBasePrice)</th>
+                    <th scope="col">@Html.DisplayNameForInnerType((ExpertOrderViewModel c) => c.AddressId)</th>
+                    <th scope="col">@Html.DisplayNameForInnerType((ExpertOrderViewModel c) => c.Description)</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var order in Model)
+                {
+                    <tr>
+                        <td>@order.ServiceName</td>
+                        <td>@(order.Customer!.FirstName + " " + order.Customer!.LastName)</td>
+                        <td>@order.OrderDate</td>
+                        <td>@order.State.GetDisplayName()</td>
+                        <td>@order.ServiceBasePrice</td>
+                        <td>@await AddressService.GetFullAddressToString(order.AddressId, Context.RequestAborted)</td>
+                        <td>@order.Description</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
