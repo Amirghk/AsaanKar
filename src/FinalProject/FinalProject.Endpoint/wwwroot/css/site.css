@@ -89,12 +89,12 @@ p, h1, h2, h3, h4, .card-title {
 
 .glass {
     /* From https://css.glass */
-    background: rgba(0, 0, 0, 0.52);
-    border-radius: 16px;
-    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
-    backdrop-filter: blur(11.7px);
-    -webkit-backdrop-filter: blur(11.7px);
-    border: 1px solid rgba(0, 0, 0, 0.67);
+    background: rgba(0, 0, 0, 0.52) !important;
+    border-radius: 16px !important;
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1) !important;
+    backdrop-filter: blur(11.7px) !important;
+    -webkit-backdrop-filter: blur(11.7px) !important;
+    border: 1px solid rgba(0, 0, 0, 0.67) !important;
 }
 
 .glass-dark {
@@ -124,4 +124,14 @@ p, h1, h2, h3, h4, .card-title {
 
 .progress-bar {
     background-color: antiquewhite !important;
+}
+
+
+.modal-backdrop {
+    z-index: -1 !important;
+}
+
+
+body.modal-open {
+    overflow: visible !important;
 }

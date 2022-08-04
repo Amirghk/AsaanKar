@@ -10,6 +10,7 @@ public interface IExpertRepository
     Task<string> Add(ExpertDto model);
     Task<string> Update(ExpertDto model);
     Task<string> Remove(string id);
+    Task<string> RemoveService(string id, int serviceId);
     Task<string> SoftDelete(string id);
     Task<ExpertDto> GetById(string id, CancellationToken cancellationToken);
     Task<IEnumerable<ExpertDto>> GetAll(CancellationToken cancellationToken);

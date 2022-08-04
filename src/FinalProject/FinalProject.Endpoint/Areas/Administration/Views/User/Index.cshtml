@@ -48,7 +48,7 @@
                         <td>@customer.PhoneNumber</td>
                         <td>@customer.BirthDate</td>
                         <td>
-                            <a asp-controller="User" asp-action="Profile" asp-route-id=@customer.Id>ویرایش</a>
+                            <a class="btn btn-warning" asp-controller="User" asp-action="Profile" asp-route-id=@customer.Id>ویرایش</a>
                         </td>
                     </tr>
                 }
@@ -88,7 +88,7 @@
                         <td>@expert.NationalCode</td>
                         <td>@expert.City</td>
                         <td>
-                            <a class="btn btn-info" asp-controller="User" asp-action="Profile" asp-route-id=@expert.Id>ویرایش</a>
+                            <a class="btn btn-warning" asp-controller="User" asp-action="Profile" asp-route-id=@expert.Id>ویرایش</a>
                         </td>
                     </tr>
                 }

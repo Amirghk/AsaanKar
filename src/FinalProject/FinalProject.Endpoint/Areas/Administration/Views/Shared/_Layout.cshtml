@@ -1,4 +1,8 @@
-﻿<!doctype html>
+﻿@{
+    Layout = "/Views/Shared/_Layout.cshtml";
+}
+@*
+<!doctype html>
 <html lang="fa" dir="rtl">
 
 <head>
@@ -25,8 +29,6 @@
             -moz-user-select: none;
             user-select: none;
         }
-
-
 
         .b-example-divider {
             height: 3rem;
@@ -70,71 +72,52 @@
     <!-- Custom styles for this template -->
     <link href="../dashboard/dashboard.rtl.css" rel="stylesheet">
 </head>
+<body>*@
 
-<body>
-
-    <header class="navbar navbar-dark sticky-top bg-dark flex-md-nowrap p-0 shadow">
-        <a class="navbar-brand col-md-3 col-lg-2 me-0 px-3 fs-6" href="#">صفحه ادمین</a>
-        <button class="navbar-toggler position-absolute d-md-none collapsed" type="button" data-bs-toggle="collapse"
-                data-bs-target="#sidebarMenu" aria-controls="sidebarMenu" aria-expanded="false" aria-label="">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        @* <input class="form-control form-control-dark w-100 rounded-0 border-0" type="text" placeholder="جستجو"
-            aria-label="جستجو">
-            <div class="navbar-nav">
-            <div class="nav-item text-nowrap">
-            <a class="nav-link px-3" href="#">تسجيل الخروج</a>
-            </div> *@
-        </div>
-    </header>
-
-    <div class="container-fluid">
-        <div class="row">
-            <nav id="sidebarMenu" class="col-md-3 col-lg-2 d-md-block bg-light sidebar collapse">
+    <div class="d-flex justify-content-center">
+        @*glass causes modals to not show correctly and js causes accordion problems*@
+        <div class="row glass col-10">
+            <nav id="sidebarMenu" class="col-md-3 col-lg-2 d-md-block bg-light sidebar collapse bg-transparent">
                 <div class="position-sticky pt-3">
-                    <ul class="nav flex-column">
-                        <li class="nav-item">
-                            <a class="nav-link active" asp-controller="User" aria-current="page">
+                    <ul class="nav flex-column p-0 m-0">
+                        <li class="nav-item p-0 mx-0">
+                            <a class="nav-link" asp-controller="User" aria-current="page">
                                 <span data-feather="home" class="align-text-bottom"></span>
                                 مدیریت کاربران
                             </a>
                         </li>
-                    </ul>
 
-                    <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted text-uppercase">
-                    </h6>
-                    <ul class="nav flex-column mb-2">
-                        <li class="nav-item">
+                        <li class="nav-item p-0 m-0">
                             <a class="nav-link" asp-controller="Comment">
                                 <span data-feather="file-text" class="align-text-bottom"></span>
                                 لیست کامنت ها
                             </a>
                         </li>
-                        <li class="nav-item">
+                        <li class="nav-item p-0 m-0">
                             <a class="nav-link" asp-controller='Upload'>
                                 <span data-feather="file-text" class="align-text-bottom"></span>
                                 فایل های آپلود شده
                             </a>
                         </li>
-                        <li class="nav-item">
+                        <li class="nav-item p-0 m-0">
                             <a class="nav-link" asp-controller="Order">
                                 <span data-feather="file-text" class="align-text-bottom"></span>
                                 سفارشات
                             </a>
                         </li>
-                        <li class="nav-item">
+                        <li class="nav-item p-0 m-0">
                             <a class="nav-link" asp-controller="Category">
                                 <span data-feather="file-text" class="align-text-bottom"></span>
                                 دسته بندی ها
                             </a>
                         </li>
-                        <li class="nav-item">
+                        <li class="nav-item p-0 m-0">
                             <a class="nav-link" asp-controller="Service">
                                 <span data-feather="file-text" class="align-text-bottom"></span>
                                 سرویس ها
                             </a>
                         </li>
-                        <li class="nav-item">
+                        <li class="nav-item p-0 m-0">
                             <a class="nav-link" href="Administration/SeedData">
                                 <span data-feather="file-text" class="align-text-bottom"></span>
                                 Seed Data
@@ -151,22 +134,21 @@
     </div>
 
     <!-- JavaScript Bundle with Popper -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-A3rJD856KowSb7dwlZdYEkO39Gagi7vIsF0jrRAoQmDKKtQBHUuLZ9AsSv4jD4Xa" crossorigin="anonymous"></script>
+    @section Scripts {
+
+    @*<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js"></script>
     <script src="/docs/5.2/dist/js/bootstrap.bundle.min.js"
-            integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2"
             crossorigin="anonymous"></script>
 
     <script src="https://cdn.jsdelivr.net/npm/feather-icons@4.28.0/dist/feather.min.js"
-            integrity="sha384-uO3SXW5IuS1ZpFPKugNNWqTZRRglnUJK6UAZ/gxOX80nxEkN9NcGZTftn6RzhGWE"
             crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.4/dist/Chart.min.js"
-            integrity="sha384-zNy6FEbO50N+Cg5wap8IKA4M/ZnLJgzc6w2NqACZaK0u0FXfOWRRJOnQtpZun8ha"
             crossorigin="anonymous"></script>
     <script src="dashboard.js"></script>
-   
-    <script type="text/javascript" src="http://code.jquery.com/jquery-latest.min.js"></script>
 
+    <script type="text/javascript" src="http://code.jquery.com/jquery-latest.min.js"></script>*@
+    }
     @await RenderSectionAsync("Scripts", required: false)
-</body>
-
+@*</body>
 </html>
+*@

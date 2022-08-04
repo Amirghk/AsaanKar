@@ -2,6 +2,10 @@
 @inject IAddressService AddressService
 @model IEnumerable<ExpertOrderViewModel>
 
+@{
+    Layout = "/Areas/Expert/Views/Shared/_ExpertLayout.cshtml";
+}
+
 @if (ViewBag.NoAddress == true)
 {
     <h1>باید ابتدا آدرس خود را تکمیل کنید!</h1>
@@ -11,7 +15,6 @@ else
 {
     <h1>سفارشات</h1>
     <div>
-        ++++++++++++++
         <table class="table">
             <thead class="thead-dark">
                 <tr>

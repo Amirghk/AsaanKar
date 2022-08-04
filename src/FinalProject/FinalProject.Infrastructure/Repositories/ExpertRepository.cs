@@ -5,6 +5,7 @@ using FinalProject.Domain.Entities;
 using FinalProject.Infrastructure.Persistence;
 using Microsoft.EntityFrameworkCore;
 using FinalProject.Application.Common.Interfaces.Repositories;
+using FinalProject.Infrastructure.Extensions;
 
 namespace FinalProject.Infrastructure.Repositories
 {
@@ -54,6 +55,24 @@ namespace FinalProject.Infrastructure.Repositories
             return id;
         }
 
+        public async Task<string> RemoveService(string id, int serviceId)
+        {
+            var record = await _context.Experts.Include(x => x.ServiceExperts).SingleOrDefaultAsync(x => x.Id == id);
+            if (record == null)
+            {
+                throw new NotFoundException(nameof(Expert), id);
+            }
+            var se = await _context.ServiceExperts.Where(x => x.ExpertId == id && x.ServiceId == serviceId).SingleOrDefaultAsync();
+            if (se == null)
+            {
+                throw new NotFoundException(nameof(ServiceExpert), id);
+            }
+            _context.ServiceExperts.Remove(se);
+
+            await _context.SaveChangesAsync();
+            return record.Id!;
+        }
+
         public async Task<string> SoftDelete(string id)
         {
             var record = await _context.Experts.SingleOrDefaultAsync(x => x.Id == id);
@@ -75,28 +94,52 @@ namespace FinalProject.Infrastructure.Repositories
                 throw new NotFoundException(nameof(Expert), model.Id);
             }
 
-            var services = await _mapper.ProjectTo<ServiceDto>(_context.Experts.SelectMany(x => x.Services)).ToListAsync();
-            if (services.Count > model.Services.Count)
-            {
-                var serviceExperts = new List<ServiceExpert>();
-                foreach (var service in model.Services)
-                {
-                    ServiceExpert serviceExpert = new ServiceExpert
-                    {
+            //var services = _mapper.Map<List<ServiceDto>>(record.Services);
 
-                        ExpertId = record.Id,
-                        ServiceId = service.Id,
-                    };
-                    serviceExperts.Add(serviceExpert);
-                }
-                record.ServiceExperts = serviceExperts;
+
+            if (model.Services.Count > record.ServiceExperts.Count)
+            {
+                _context.TryUpdateManyToMany(record.ServiceExperts, model.Services
+               .Select(x => new ServiceExpert
+               {
+                   ServiceId = x.Id,
+                   ExpertId = record.Id!
+               }), x => x.ServiceId);
+
                 await _context.SaveChangesAsync();
+                return record.Id!;
             }
+            //return record.Id!;
+
+            //if (services.Count > model.Services.Count)
+            //{
+            //    var serviceExperts = new List<ServiceExpert>();
+            //    foreach (var service in model.Services)
+            //    {
+            //        ServiceExpert? serviceExpert = await _context.ServiceExperts.Where(x => x.ExpertId == record.Id && x.ServiceId == service.Id).FirstOrDefaultAsync();
+            //        if (serviceExpert == null)
+            //        {
+            //            serviceExpert = new ServiceExpert
+            //            {
+
+            //                ExpertId = record.Id,
+            //                ServiceId = service.Id,
+            //            };
+            //        }
+            //        serviceExperts.Add(serviceExpert);
+            //    }
+            //    record.ServiceExperts = serviceExperts;
+            //    await _context.SaveChangesAsync();
+            //}
 
             var mapped = _mapper.Map(model, record);
             await _context.SaveChangesAsync();
 
             return record.Id!;
+
+
+
+
         }
     }
 }

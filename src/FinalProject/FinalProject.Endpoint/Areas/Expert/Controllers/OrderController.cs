@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using FinalProject.Application.Common.DataTransferObjects;
 using FinalProject.Application.Common.Interfaces.Services;
+using FinalProject.Domain.Enums;
 using FinalProject.Endpoint.Areas.Expert.Models;
 using FinalProject.Endpoint.Models;
 using FinalProject.Infrastructure.Identity;
@@ -47,6 +48,19 @@ namespace FinalProject.Endpoint.Areas.Expert.Controllers
             }
             ViewBag.NoAddress = false;
             var model = _mapper.Map<List<ExpertOrderViewModel>>(await _orderService.GetAvailable(user.Id, cancellationToken));
+            return View(model);
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> Finished(CancellationToken cancellationToken)
+        {
+            var user = await _userManager.GetUserAsync(User);
+            if (user == null)
+            {
+                return NotFound($"Unable to load user with ID '{_userManager.GetUserId(User)}'.");
+            }
+
+            var model = _mapper.Map<List<ExpertOrderViewModel>>(await _orderService.GetByUserId(user.Id, cancellationToken, OrderState.WorkFinished));
             return View(model);
         }
 

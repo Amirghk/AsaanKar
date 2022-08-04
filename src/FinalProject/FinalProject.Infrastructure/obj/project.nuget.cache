@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "MuP2TFE7NQCK5fpQ5AlSreV4PQNoUHAs9ENOpBsso9NOCssgpdC2X0v/j2dulhuJMKGgfDbL2dcZ7d6qVdaeZA==",
+  "dgSpecHash": "JI2IfyFN1HEDcjo5RqqpBKSBsrqINaHIHFFpnL+UizK9gtO1WykKR+n+pt37n+9aAnmr9+K+FunqM34sTpKKQQ==",
   "success": true,
-  "projectFilePath": "G:\\FinalProject\\FinalProjectMaktab\\src\\FinalProject\\FinalProject.Infrastructure\\FinalProject.Infrastructure.csproj",
+  "projectFilePath": "G:\\FinalProjectMaktab\\FinalProjectMaktab\\src\\FinalProject\\FinalProject.Infrastructure\\FinalProject.Infrastructure.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Lion\\.nuget\\packages\\automapper\\11.0.1\\automapper.11.0.1.nupkg.sha512",
     "C:\\Users\\Lion\\.nuget\\packages\\automapper.collection\\8.0.0\\automapper.collection.8.0.0.nupkg.sha512",

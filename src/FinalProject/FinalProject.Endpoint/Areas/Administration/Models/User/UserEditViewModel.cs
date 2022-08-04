@@ -21,5 +21,6 @@ namespace FinalProject.Endpoint.Areas.Administration.Models
         public string Username { get; set; } = string.Empty;
         [Display(Name = "ایمیل")]
         public string Email { get; set; } = string.Empty;
+        public int? ProfilePictureId { get; set; }
     }
 }
