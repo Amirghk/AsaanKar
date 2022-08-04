@@ -6,6 +6,9 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using FinalProject.Endpoint.Models;
 using FinalProject.Application.Common.DataTransferObjects;
+using FinalProject.Domain.Enums;
+using Microsoft.Extensions.Options;
+using FinalProject.Application.Common.ConfigurationModels;
 
 namespace FinalProject.Endpoint.Controllers
 {
@@ -18,7 +21,10 @@ namespace FinalProject.Endpoint.Controllers
         private readonly ICustomerService _customerService;
         private readonly IAddressService _addressService;
         private readonly UserManager<ApplicationUser> _userManager;
+        private readonly ICommentService _commentService;
         private readonly ILogger<HomeController> _logger;
+        private readonly string _rootPath;
+        private readonly AppSettings _appSettings;
 
         public OrderController(
             IMapper mapper,
@@ -27,7 +33,10 @@ namespace FinalProject.Endpoint.Controllers
             IOrderService orderService,
             ICustomerService customerService,
             IAddressService addressService,
-            UserManager<ApplicationUser> userManager)
+            UserManager<ApplicationUser> userManager,
+            IWebHostEnvironment environment,
+            ICommentService commentService,
+            IOptions<AppSettings> appSettings)
         {
             _mapper = mapper;
             _uploadService = uploadService;
@@ -35,7 +44,10 @@ namespace FinalProject.Endpoint.Controllers
             _customerService = customerService;
             _addressService = addressService;
             _userManager = userManager;
+            _commentService = commentService;
             _logger = logger;
+            _rootPath = environment.WebRootPath;
+            _appSettings = appSettings.Value;
         }
 
         [HttpGet]
@@ -90,6 +102,73 @@ namespace FinalProject.Endpoint.Controllers
             return View(model);
         }
 
+        [HttpPost]
+        public async Task<IActionResult> ApproveBid(int bidId, int orderId, CancellationToken cancellationToken)
+        {
+            var user = await _userManager.GetUserAsync(User);
+            if (user == null)
+            {
+                return NotFound($"Unable to load user with ID '{_userManager.GetUserId(User)}'.");
+            }
+
+            var order = await _orderService.GetById(orderId, cancellationToken);
+            if (order.CustomerId != user.Id)
+            {
+                throw new InvalidOperationException("You can only accept bid on your own orders!");
+            }
+            await _orderService.ApproveBid(orderId, bidId, cancellationToken);
+            return RedirectToAction(nameof(Index));
+        }
+
+        [HttpGet]
+        public IActionResult Comment(string expertId)
+        {
+            var model = new CommentSaveViewModel()
+            {
+                ExpertId = expertId
+            };
+            return View(model);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Comment(CommentSaveViewModel model, CancellationToken cancellationToken)
+        {
+            var user = await _userManager.GetUserAsync(User);
+            if (user == null)
+            {
+                return NotFound($"Unable to load user with ID '{_userManager.GetUserId(User)}'.");
+            }
+
+            if (!ModelState.IsValid)
+            {
+                ModelState.AddModelError("", "اطلاعات درست وارد کنید");
+                return View(model);
+            }
+
+            var uploadsRootFolder = Path.Combine(_rootPath, _appSettings.UploadsFolderName);
+            // add comment
+            var commentDto = new CommentDto()
+            {
+                CustomerId = user.Id,
+                Content = model.Content,
+                ExpertId = model.ExpertId,
+            };
+
+            var commentId = await _commentService.Set(commentDto, cancellationToken);
+            // add file
+            if (model.Image != null && model.Image.Length > 0)
+            {
+                await _uploadService.Set(new UploadServiceDto
+                {
+                    FileCategory = FileCategory.Comment,
+                    FileName = model.Image.FileName,
+                    FileSize = model.Image.Length,
+                    UploadedFile = model.Image,
+                    CommentId = commentId,
+                }, uploadsRootFolder, cancellationToken);
+            }
+            return RedirectToAction(nameof(Index));
+        }
 
         private async Task<List<AddressListViewModel>> LoadAsync(ApplicationUser user, CancellationToken cancellationToken)
         {

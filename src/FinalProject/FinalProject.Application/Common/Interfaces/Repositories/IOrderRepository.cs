@@ -12,6 +12,5 @@ public interface IOrderRepository
     Task<int> Update(OrderDto model);
     Task<int> Remove(int id);
     Task<OrderDto> GetById(int id, CancellationToken cancellationToken);
-    Task<IEnumerable<OrderDto>> GetAll(CancellationToken cancellationToken);
-    Task<IEnumerable<OrderDto>> GetByUserId(string id, CancellationToken cancellationToken, OrderState? orderState = null);
+    Task<IEnumerable<OrderDto>> GetAll(CancellationToken cancellationToken, int? cityId = null, OrderState? orderState = null, string? userId = null);
 }

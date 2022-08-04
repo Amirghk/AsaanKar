@@ -5,6 +5,8 @@ using FinalProject.Application.Common.DataTransferObjects;
 using FinalProject.Domain.Enums;
 using FinalProject.Application.Common.Interfaces.Repositories;
 using Microsoft.AspNetCore.Http;
+using Microsoft.Extensions.Options;
+using FinalProject.Application.Common.ConfigurationModels;
 
 namespace FinalProject.Application.Common.Services;
 
@@ -16,13 +18,15 @@ public class UploadService : IUploadService
     private readonly ICustomerService _customerService;
     private readonly ICommentService _commentService;
     private readonly ICategoryService _categoryService;
+    private readonly AppSettings _appSettings;
 
     public UploadService(IUploadRepository repository,
                          IMapper mapper,
                          IExpertService expertService,
                          ICustomerService customerService,
                          ICommentService commentService,
-                         ICategoryService categoryService)
+                         ICategoryService categoryService,
+                         IOptions<AppSettings> appSettings)
     {
         _mapper = mapper;
         _repository = repository;
@@ -30,6 +34,7 @@ public class UploadService : IUploadService
         _customerService = customerService;
         _commentService = commentService;
         _categoryService = categoryService;
+        _appSettings = appSettings.Value;
     }
 
     public async Task<IEnumerable<UploadDto>> GetAll(CancellationToken cancellationToken)
@@ -72,9 +77,9 @@ public class UploadService : IUploadService
         await SaveFile(file, uploadsRootFolder, newFileName);
 
 
+
         var uploadId = await _repository.Add(new UploadDto
         {
-            ExpertId = dto.ExpertId,
             FileSize = dto.FileSize,
             FileName = newFileName,
             FileCategory = dto.FileCategory,
@@ -145,32 +150,33 @@ public class UploadService : IUploadService
         }
     }
 
-    public async Task<string> SetExpertWorkSamples(List<UploadServiceDto> workSamples, string uploadsRootFolder, CancellationToken cancellationToken)
+    public async Task<int> SetExpertWorkSamples(UploadServiceDto workSample, string uploadsRootFolder, CancellationToken cancellationToken)
     {
-        if (workSamples == null || workSamples.Count == 0)
+        if (workSample.UploadedFile == null || workSample.UploadedFile.Length == 0)
         {
             throw new NotSupportedException();
         }
 
-        var expertId = workSamples.First().ExpertId;
+        var expertId = workSample.ExpertId;
         var expert = await _expertService.GetById(expertId!, cancellationToken);
-        foreach (var sample in workSamples)
+
+        var file = workSample.UploadedFile;
+        var fileExtension = Path.GetExtension(file.FileName);
+        var newFileName = Guid.NewGuid() + fileExtension;
+
+        await SaveFile(file, uploadsRootFolder, newFileName);
+
+
+
+        var uploadId = await _repository.Add(new UploadDto
         {
-            var file = sample.UploadedFile;
-            var fileExtension = Path.GetExtension(file.FileName);
-            var newFileName = Guid.NewGuid() + fileExtension;
-            sample.FileName = newFileName;
-            await SaveFile(file, uploadsRootFolder, newFileName);
-        }
-        List<UploadDto> expertWorkSamples = workSamples.Select(x => new UploadDto
-        {
-            ExpertId = x.ExpertId,
-            FileCategory = x.FileCategory,
-            FileName = x.FileName,
-            FileSize = x.FileSize,
-        }).ToList();
-        //expert.WorkSamples = expertWorkSamples;
-        return await _expertService.Update(expert, cancellationToken);
+            ExpertId = expertId,
+            FileSize = workSample.FileSize,
+            FileName = newFileName,
+            FileCategory = FileCategory.ExpertWorkSample,
+        });
+
+        return uploadId;
     }
 
     public async Task<int> Update(UploadDto dto, CancellationToken cancellationToken)
@@ -181,6 +187,6 @@ public class UploadService : IUploadService
     public async Task<string> GetFileDirectory(int fileId, CancellationToken cancellationToken)
     {
         var file = await _repository.GetById(fileId, cancellationToken);
-        return "Uploads/" + file.FileName;
+        return _appSettings.UploadsFolderName + file.FileName;
     }
 }

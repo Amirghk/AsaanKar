@@ -59,7 +59,9 @@ public class ExpertIndexModel : PageModel
         public DateTime? BirthDate { get; set; }
         [Display(Name = "کدملی")]
         public string NationalCode { get; set; } = String.Empty;
-        public IFormFile ProfilePic { get; set; }
+        [Display(Name = "معرفی")]
+        public string? Bio { get; set; }
+        public IFormFile? ProfilePic { get; set; }
         public string ProfilePicAddress { get; set; } = String.Empty;
     }
 
@@ -95,7 +97,8 @@ public class ExpertIndexModel : PageModel
             BirthDate = expert.BirthDate,
             NationalCode = expert.NationalCode,
             PhoneNumber = expert.PhoneNumber,
-            ProfilePicAddress = profilePicAddress
+            ProfilePicAddress = profilePicAddress,
+            Bio = expert.Bio,
         };
 
         return;
@@ -140,6 +143,8 @@ public class ExpertIndexModel : PageModel
             BirthDate = Input.BirthDate,
             NationalCode = Input.NationalCode,
             PhoneNumber = Input.PhoneNumber,
+            ProfilePictureId = expert.ProfilePictureId,
+            Bio = Input.Bio,
         };
 
         await _expertService.Update(expertDto, cancellationToken);

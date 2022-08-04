@@ -9,4 +9,5 @@ public interface ICommentService
     Task<int> Remove(int id, CancellationToken cancellationToken);
     Task<int> Update(CommentDto dto, CancellationToken cancellationToken);
     Task<int> Approve(int id, CancellationToken cancellationToken);
+    public Task<IEnumerable<CommentDto>> GetByUserId(string id, CancellationToken cancellationToken);
 }

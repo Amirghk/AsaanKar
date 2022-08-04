@@ -38,11 +38,6 @@ namespace FinalProject.Endpoint.Controllers
         public async Task<IActionResult> Category(int id, CancellationToken cancellationToken)
         {
             var categories = _mapper.Map<List<CategoryViewModel>>(await _categoryService.GetChildren(id, cancellationToken));
-
-            foreach (var category in categories)
-            {
-                category.Services = _mapper.Map<List<ServiceViewModel>>(await _serviceService.GetByCategoryId(category.Id, cancellationToken));
-            }
             return View(categories);
         }
 

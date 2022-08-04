@@ -12,4 +12,5 @@ public interface ICommentRepository
     Task<int> Remove(int id);
     Task<CommentDto> GetById(int id, CancellationToken cancellationToken);
     Task<IEnumerable<CommentDto>> GetAll(CancellationToken cancellationToken);
+    public Task<IEnumerable<CommentDto>> GetByUserId(string id, CancellationToken cancellationToken);
 }

@@ -75,11 +75,9 @@ namespace FinalProject.Endpoint.Areas.Administration.Controllers
         [HttpPost]
         public async Task<IActionResult> Edit(UserEditViewModel model, CancellationToken cancellationToken)
         {
-            // TODO c token
             var user = await _userManager.FindByNameAsync(model.Username);
             if (user == null)
             {
-                // TODO
                 return NotFound($"Unable to load user with ID '{_userManager.GetUserId(User)}'.");
             }
 

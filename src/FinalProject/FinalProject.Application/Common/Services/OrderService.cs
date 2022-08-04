@@ -4,6 +4,7 @@ using FinalProject.Application.Common.DataTransferObjects;
 using FinalProject.Application.Common.Interfaces.Repositories;
 using Microsoft.Extensions.Logging;
 using FinalProject.Domain.Enums;
+using FinalProject.Application.Common.Exceptions;
 
 namespace FinalProject.Application.Common.Services;
 
@@ -13,17 +14,20 @@ public class OrderService : IOrderService
     private readonly IOrderRepository _repository;
     private readonly ILogger _logger;
     private readonly IServiceService _serviceService;
+    private readonly IExpertService _expertService;
 
     public OrderService(
         IOrderRepository repository,
         IMapper mapper,
         ILogger<OrderService> logger,
-        IServiceService serviceService)
+        IServiceService serviceService,
+        IExpertService expertService)
     {
         _mapper = mapper;
         _repository = repository;
         _logger = logger;
         _serviceService = serviceService;
+        _expertService = expertService;
     }
 
     public async Task<IEnumerable<OrderDto>> GetAll(CancellationToken cancellationToken)
@@ -34,7 +38,7 @@ public class OrderService : IOrderService
 
     public async Task<IEnumerable<OrderDto>> GetByUserId(string id, CancellationToken cancellationToken, OrderState? orderState = null)
     {
-        return await _repository.GetByUserId(id, cancellationToken, orderState);
+        return await _repository.GetAll(userId: id, cancellationToken: cancellationToken, orderState: orderState);
     }
 
     public async Task<OrderDto> GetById(int id, CancellationToken cancellationToken)
@@ -61,5 +65,60 @@ public class OrderService : IOrderService
     {
         _logger.LogTrace("calling and awaiting repository {}({dto})", "Update", dto);
         return await _repository.Update(dto);
+    }
+    /// <summary>
+    /// returns orders that are available to the expert
+    /// (by being in the same city as the expert and having the same skills and being in OrderState 1 or 2)
+    /// </summary>
+    /// <param name="expertId"></param>
+    /// <param name="cancellationToken"></param>
+    /// <returns></returns>
+    /// // TODO fix it
+    public async Task<IEnumerable<ExpertOrderDto>> GetAvailable(string expertId, CancellationToken cancellationToken)
+    {
+        var expert = await _expertService.GetById(expertId, cancellationToken);
+        var services = await _serviceService.GetAll(expertId: expertId, cancellationToken: cancellationToken);
+        var stateOneOrders = await _repository.GetAll(cancellationToken, expert.Address!.CityId, orderState: OrderState.WaitingForExpertBid);
+        var stateTwoOrders = await _repository.GetAll(cancellationToken, expert.Address!.CityId, orderState: OrderState.WaitingToChooseExpert);
+        var orders = stateOneOrders.Concat(stateTwoOrders);
+        // get orders that have the same services as the ones the expert offers
+        var availableOrders = _mapper.Map<List<ExpertOrderDto>>(orders).Where(x => services.Select(x => x.Id).Contains(x.ServiceId));
+        foreach (var order in availableOrders)
+        {
+            if (order.Bids.Select(x => x.ExpertId).Contains(expertId))
+            {
+                order.HasBidAlready = true;
+                if ((int)order.State > 2)
+                {
+                    order.IsDeletable = false;
+                }
+                else
+                {
+                    order.IsDeletable = true;
+                }
+            }
+        }
+        return availableOrders;
+    }
+
+    public async Task<int> ExpertBidAdded(int id, CancellationToken cancellationToken)
+    {
+        var order = await _repository.GetById(id, cancellationToken);
+        order.State = OrderState.WaitingToChooseExpert;
+        return await _repository.Update(order);
+    }
+
+    public async Task<int> ApproveBid(int orderId, int bidId, CancellationToken cancellationToken)
+    {
+        var order = await _repository.GetById(orderId, cancellationToken);
+        var bid = order.Bids.Where(x => x.Id == bidId).SingleOrDefault();
+        if (bid == null)
+        {
+            throw new NotFoundException(nameof(bid), bidId);
+        }
+        order.ExpertId = bid.ExpertId;
+        order.CompletedPrice = bid.Price;
+        order.State = OrderState.WaitingForExpertToArrive;
+        return await _repository.Update(order);
     }
 }

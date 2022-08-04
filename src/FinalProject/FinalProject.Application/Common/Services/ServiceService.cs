@@ -9,22 +9,19 @@ public class ServiceService : IServiceService
 {
     private readonly IMapper _mapper;
     private readonly IServiceRepository _repository;
-    public ServiceService(IServiceRepository repository, IMapper mapper)
+    public ServiceService(
+        IServiceRepository repository,
+        IMapper mapper)
     {
         _mapper = mapper;
         _repository = repository;
     }
 
-    public async Task<IEnumerable<ServiceDto>> GetAll(CancellationToken cancellationToken)
+    public async Task<IEnumerable<ServiceDto>> GetAll(CancellationToken cancellationToken, int? categoryId = null, string? expertId = null)
     {
-        return await _repository.GetAll(cancellationToken);
+        return await _repository.GetAll(cancellationToken, categoryId, expertId);
     }
 
-    public async Task<IEnumerable<ServiceDto>> GetByCategoryId(int categoryId, CancellationToken cancellationToken)
-    {
-        var records = await _repository.GetByCategoryId(categoryId, cancellationToken);
-        return records;
-    }
 
     public async Task<ServiceDto> GetById(int id, CancellationToken cancellationToken)
     {

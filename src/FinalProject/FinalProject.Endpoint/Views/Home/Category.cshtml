@@ -11,9 +11,9 @@
         {
             @foreach (var service in category.Services)
             {
-                <li class="list-group-item">
-                    <div class="card" style="width: 18rem;">
-                        <div class="card-body">
+                <li class="list-group-item glass">
+                    <div class="card bg-transparent" style="width: 18rem;">
+                        <div class="card-body bg-transparent">
                             <h5 class="card-title">@service.Description</h5>
                             <p class="card-text">@service.Description</p>
                             <a asp-controller="Order" asp-action="Create" asp-route-id=@service.Id class="btn btn-primary">درخواست سرویس</a>

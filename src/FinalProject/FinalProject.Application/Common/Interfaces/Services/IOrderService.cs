@@ -11,4 +11,7 @@ public interface IOrderService
     Task<int> Remove(int id, CancellationToken cancellationToken);
     Task<int> Update(OrderDto dto, CancellationToken cancellationToken);
     Task<IEnumerable<OrderDto>> GetByUserId(string id, CancellationToken cancellationToken, OrderState? orderState = null);
+    Task<IEnumerable<ExpertOrderDto>> GetAvailable(string expertId, CancellationToken cancellationToken);
+    Task<int> ExpertBidAdded(int id, CancellationToken cancellationToken);
+    Task<int> ApproveBid(int orderId, int bidId, CancellationToken cancellationToken);
 }

@@ -6,5 +6,6 @@
         public string Description { get; init; } = null!;
         public decimal? BasePrice { get; set; }
         public int CategoryId { get; init; }
+        public string CategoryName { get; set; } = string.Empty;
     }
 }

@@ -15,6 +15,10 @@ build_property.GenerateRazorMetadataSourceChecksumAttributes = true
 build_property.MSBuildProjectDirectory = G:\FinalProject\FinalProjectMaktab\src\FinalProject\FinalProject.Endpoint
 build_property._RazorSourceGeneratorDebug = 
 
+[G:/FinalProject/FinalProjectMaktab/src/FinalProject/FinalProject.Endpoint/Areas/Administration/Views/Category/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5pc3RyYXRpb25cVmlld3NcQ2F0ZWdvcnlcSW5kZXguY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
 [G:/FinalProject/FinalProjectMaktab/src/FinalProject/FinalProject.Endpoint/Areas/Administration/Views/Comment/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5pc3RyYXRpb25cVmlld3NcQ29tbWVudFxJbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
@@ -37,10 +41,6 @@ build_metadata.AdditionalFiles.CssScope =
 
 [G:/FinalProject/FinalProjectMaktab/src/FinalProject/FinalProject.Endpoint/Areas/Administration/Views/Order/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5pc3RyYXRpb25cVmlld3NcT3JkZXJcSW5kZXguY3NodG1s
-build_metadata.AdditionalFiles.CssScope = 
-
-[G:/FinalProject/FinalProjectMaktab/src/FinalProject/FinalProject.Endpoint/Areas/Administration/Views/Shared/_deleteModal.cshtml]
-build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5pc3RyYXRpb25cVmlld3NcU2hhcmVkXF9kZWxldGVNb2RhbC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
 [G:/FinalProject/FinalProjectMaktab/src/FinalProject/FinalProject.Endpoint/Areas/Administration/Views/Shared/_Layout.cshtml]
@@ -73,6 +73,46 @@ build_metadata.AdditionalFiles.CssScope =
 
 [G:/FinalProject/FinalProjectMaktab/src/FinalProject/FinalProject.Endpoint/Areas/Administration/Views/_ViewStart.cshtml]
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5pc3RyYXRpb25cVmlld3NcX1ZpZXdTdGFydC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[G:/FinalProject/FinalProjectMaktab/src/FinalProject/FinalProject.Endpoint/Areas/Expert/Views/Home/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcRXhwZXJ0XFZpZXdzXEhvbWVcSW5kZXguY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[G:/FinalProject/FinalProjectMaktab/src/FinalProject/FinalProject.Endpoint/Areas/Expert/Views/Home/PublicProfile.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcRXhwZXJ0XFZpZXdzXEhvbWVcUHVibGljUHJvZmlsZS5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[G:/FinalProject/FinalProjectMaktab/src/FinalProject/FinalProject.Endpoint/Areas/Expert/Views/Order/Available.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcRXhwZXJ0XFZpZXdzXE9yZGVyXEF2YWlsYWJsZS5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[G:/FinalProject/FinalProjectMaktab/src/FinalProject/FinalProject.Endpoint/Areas/Expert/Views/Order/Bid.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcRXhwZXJ0XFZpZXdzXE9yZGVyXEJpZC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[G:/FinalProject/FinalProjectMaktab/src/FinalProject/FinalProject.Endpoint/Areas/Expert/Views/Service/Add.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcRXhwZXJ0XFZpZXdzXFNlcnZpY2VcQWRkLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[G:/FinalProject/FinalProjectMaktab/src/FinalProject/FinalProject.Endpoint/Areas/Expert/Views/Service/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcRXhwZXJ0XFZpZXdzXFNlcnZpY2VcSW5kZXguY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[G:/FinalProject/FinalProjectMaktab/src/FinalProject/FinalProject.Endpoint/Areas/Expert/Views/Shared/_ExpertLayout.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcRXhwZXJ0XFZpZXdzXFNoYXJlZFxfRXhwZXJ0TGF5b3V0LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[G:/FinalProject/FinalProjectMaktab/src/FinalProject/FinalProject.Endpoint/Areas/Expert/Views/Shared/_ValidationScriptsPartial.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcRXhwZXJ0XFZpZXdzXFNoYXJlZFxfVmFsaWRhdGlvblNjcmlwdHNQYXJ0aWFsLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[G:/FinalProject/FinalProjectMaktab/src/FinalProject/FinalProject.Endpoint/Areas/Expert/Views/_ViewImports.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcRXhwZXJ0XFZpZXdzXF9WaWV3SW1wb3J0cy5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[G:/FinalProject/FinalProjectMaktab/src/FinalProject/FinalProject.Endpoint/Areas/Expert/Views/_ViewStart.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcRXhwZXJ0XFZpZXdzXF9WaWV3U3RhcnQuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
 [G:/FinalProject/FinalProjectMaktab/src/FinalProject/FinalProject.Endpoint/Areas/Identity/Pages/Account/AccessDenied.cshtml]
@@ -179,6 +219,10 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcSWRlbnRpdHlcUGFnZXNcQWNjb3VudFxNYW5hZ2VcRXhwZXJ0SW5kZXguY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
+[G:/FinalProject/FinalProjectMaktab/src/FinalProject/FinalProject.Endpoint/Areas/Identity/Pages/Account/Manage/ExpertWorkSample.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcSWRlbnRpdHlcUGFnZXNcQWNjb3VudFxNYW5hZ2VcRXhwZXJ0V29ya1NhbXBsZS5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
 [G:/FinalProject/FinalProjectMaktab/src/FinalProject/FinalProject.Endpoint/Areas/Identity/Pages/Account/Manage/ExternalLogins.cshtml]
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcSWRlbnRpdHlcUGFnZXNcQWNjb3VudFxNYW5hZ2VcRXh0ZXJuYWxMb2dpbnMuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
@@ -273,6 +317,10 @@ build_metadata.AdditionalFiles.CssScope =
 
 [G:/FinalProject/FinalProjectMaktab/src/FinalProject/FinalProject.Endpoint/Views/Home/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxJbmRleC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[G:/FinalProject/FinalProjectMaktab/src/FinalProject/FinalProject.Endpoint/Views/Order/Comment.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcT3JkZXJcQ29tbWVudC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
 [G:/FinalProject/FinalProjectMaktab/src/FinalProject/FinalProject.Endpoint/Views/Order/Create.cshtml]

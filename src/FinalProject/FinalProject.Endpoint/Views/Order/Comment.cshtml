@@ -1,0 +1,24 @@
+﻿@model CommentSaveViewModel
+
+
+<div asp-validation-summary="ModelOnly" class="text-danger"></div>
+<form asp-controller="Order" asp-action="Comment" method="post" class="col-8 py-3" enctype="multipart/form-data">
+    <div class="form-group my-3">
+        <label asp-for=Content></label>
+        <input asp-for=Content type="text" class="form-control">
+        <span asp-validation-for="Content" class="text-danger"></span>
+    </div>
+    <div class="form-group my-3">
+        <label asp-for=Image></label>
+        <input asp-for=Image class="form-control">
+        <span asp-validation-for="Image" class="text-danger"></span>
+    </div>
+    <input asp-for=ExpertId value=@Model.ExpertId type="hidden" />
+
+    <button type="submit" class="btn btn-primary">ثبت نظر</button>
+</form>
+
+
+@section Scripts{
+<partial name="_ValidationScriptsPartial" />
+}

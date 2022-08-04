@@ -18,9 +18,15 @@ public class MappingProfile : Profile
         CreateMap<Expert, ExpertDto>()
             .ReverseMap()
             .EqualityComparison((saveDto, entity) => saveDto.Id == entity.Id);
-        CreateMap<Order, OrderDto>().ReverseMap();
+        CreateMap<Order, OrderDto>();
+        CreateMap<OrderDto, Order>()
+            .ForMember(z => z.Bids, opt => opt.Ignore())
+            .ForMember(z => z.Customer, opt => opt.Ignore())
+            .ForMember(z => z.Expert, opt => opt.Ignore())
+            .ForMember(z => z.Service, opt => opt.Ignore());
         CreateMap<Category, CategoryDto>().ReverseMap();
         CreateMap<Service, ServiceDto>().ReverseMap();
         CreateMap<Bid, BidDto>().ReverseMap();
+        CreateMap<OrderDto, ExpertOrderDto>().ReverseMap();
     }
 }

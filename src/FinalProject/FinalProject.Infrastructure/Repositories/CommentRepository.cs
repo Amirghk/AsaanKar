@@ -42,6 +42,10 @@ namespace FinalProject.Infrastructure.Repositories
             return record;
         }
 
+        public async Task<IEnumerable<CommentDto>> GetByUserId(string id, CancellationToken cancellationToken)
+        {
+            return await _mapper.ProjectTo<CommentDto>(_context.Comments.Where(x => x.CustomerId == id || x.ExpertId == id)).ToListAsync(cancellationToken);
+        }
 
         public async Task<int> Remove(int id)
         {

@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using FinalProject.Application.Common.Interfaces.Services;
 using FinalProject.Endpoint.Areas.Administration.Models;
+using FinalProject.Endpoint.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
