@@ -47,7 +47,6 @@
 	  <None Include="Areas\Administration\Views\Order\EditBid.cshtml" />
 	  <None Include="Areas\Administration\Views\Order\Index.cshtml" />
 	  <None Include="Areas\Administration\Views\Shared\_Layout.cshtml" />
-	  <None Include="Areas\Administration\Views\Shared\_Layouta.cshtml" />
 	  <None Include="Areas\Administration\Views\Shared\_ProfileLayout.cshtml" />
 	  <None Include="Areas\Administration\Views\Shared\_ValidationScriptsPartial.cshtml" />
 	  <None Include="Areas\Administration\Views\Upload\Index.cshtml" />

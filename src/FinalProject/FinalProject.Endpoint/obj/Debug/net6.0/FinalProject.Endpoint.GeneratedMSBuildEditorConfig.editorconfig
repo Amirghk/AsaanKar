@@ -47,10 +47,6 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5pc3RyYXRpb25cVmlld3NcU2hhcmVkXF9MYXlvdXQuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[G:/FinalProjectMaktab/FinalProjectMaktab/src/FinalProject/FinalProject.Endpoint/Areas/Administration/Views/Shared/_Layouta.cshtml]
-build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5pc3RyYXRpb25cVmlld3NcU2hhcmVkXF9MYXlvdXRhLmNzaHRtbA==
-build_metadata.AdditionalFiles.CssScope = 
-
 [G:/FinalProjectMaktab/FinalProjectMaktab/src/FinalProject/FinalProject.Endpoint/Areas/Administration/Views/Shared/_ProfileLayout.cshtml]
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5pc3RyYXRpb25cVmlld3NcU2hhcmVkXF9Qcm9maWxlTGF5b3V0LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 

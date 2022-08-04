@@ -202,6 +202,7 @@ namespace FinalProject.Endpoint.Areas.Administration.Controllers
                 model.BirthDate = customer.BirthDate;
                 model.PhoneNumber = customer.PhoneNumber;
                 model.IsCustomer = true;
+                model.ProfilePictureId = customer.ProfilePictureId;
                 return model;
             }
             else
@@ -214,6 +215,7 @@ namespace FinalProject.Endpoint.Areas.Administration.Controllers
                 model.NationalCode = expert.NationalCode;
                 model.PhoneNumber = expert.PhoneNumber;
                 model.IsExpert = true;
+                model.ProfilePictureId = expert.ProfilePictureId;
                 return model;
             }
         }

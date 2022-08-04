@@ -80,14 +80,15 @@ public class ExpertService : IExpertService
     /// <returns></returns>
     public async Task<string> RemoveService(string expertId, int serviceId, CancellationToken cancellationToken)
     {
-        var expert = await _repository.GetById(expertId, cancellationToken);
-        var service = await _serviceService.GetById(serviceId, cancellationToken);
-        var result = expert.Services.Remove(service);
-        if (result == false)
-        {
-            throw new InvalidOperationException("Expert Doesn't have selected service!");
-        }
-        return await _repository.Update(expert);
+        //var expert = await _repository.GetById(expertId, cancellationToken);
+        //var service = await _serviceService.GetById(serviceId, cancellationToken);
+        //var result = expert.Services.Remove(service);
+        //if (result == false)
+        //{
+        //    throw new InvalidOperationException("Expert Doesn't have selected service!");
+        //}
+        //return await _repository.Update(expert);
+        return await _repository.RemoveService(expertId, serviceId);
     }
 
     public async Task<string> Set(ExpertDto dto, CancellationToken cancellationToken)

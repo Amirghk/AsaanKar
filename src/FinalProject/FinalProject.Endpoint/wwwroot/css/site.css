@@ -130,3 +130,8 @@ p, h1, h2, h3, h4, .card-title {
 .modal-backdrop {
     z-index: -1 !important;
 }
+
+
+body.modal-open {
+    overflow: visible !important;
+}
