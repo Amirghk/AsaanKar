@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "JHah6cyZF+qbbrLm9vBArCJnjriTOTetcFOUgyY4R1U=",
+  "Hash": "CFciVhm3A3ki2cIXkHmQArUpbaYEgL6qi/fKjsDhVyI=",
   "Source": "FinalProject.Endpoint",
   "BasePath": "_content/FinalProject.Endpoint",
   "Mode": "Default",
@@ -5489,6 +5489,23 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\Uploads\\f1ee9564-d87b-4777-a05e-e62c303c41ba.jpg"
+    },
+    {
+      "Identity": "G:\\FinalProjectMaktab\\FinalProjectMaktab\\src\\FinalProject\\FinalProject.Endpoint\\wwwroot\\Uploads\\f3b18bd8-23ff-4007-ae83-a425adad1bb9.png",
+      "SourceId": "FinalProject.Endpoint",
+      "SourceType": "Discovered",
+      "ContentRoot": "G:\\FinalProjectMaktab\\FinalProjectMaktab\\src\\FinalProject\\FinalProject.Endpoint\\wwwroot\\",
+      "BasePath": "_content/FinalProject.Endpoint",
+      "RelativePath": "Uploads/f3b18bd8-23ff-4007-ae83-a425adad1bb9.png",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\Uploads\\f3b18bd8-23ff-4007-ae83-a425adad1bb9.png"
     },
     {
       "Identity": "G:\\FinalProjectMaktab\\FinalProjectMaktab\\src\\FinalProject\\FinalProject.Endpoint\\wwwroot\\Uploads\\f730b24e-edab-4b86-832e-1aff31b7a28b.png",

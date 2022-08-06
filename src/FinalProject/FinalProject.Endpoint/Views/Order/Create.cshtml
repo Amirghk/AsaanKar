@@ -1,5 +1,5 @@
 ﻿@model OrderSaveViewModel
-<div class="container">
+<div class="d-flex glass justify-content-center col-lg-8">
     <div asp-validation-summary="ModelOnly" class="text-danger"></div>
     <form asp-controller="Order" asp-action="Create" method="post" class="col-8 py-3">
         <div class="form-group my-3">
@@ -7,7 +7,9 @@
             <input asp-for=DateRequired type="date" class="form-control">
             <span asp-validation-for="DateRequired" class="text-danger"></span>
         </div>
-
+        <h5>
+            یک آدرس را انتخاب کنید
+        </h5>
         @if (ViewBag.Addresses is not null)
         {
             @foreach (var address in ViewBag.Addresses)

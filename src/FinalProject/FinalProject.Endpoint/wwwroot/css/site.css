@@ -73,7 +73,7 @@ td, th {
     background-color: rgba(55,55,55, 0) !important;
 }
 */
-p, h1, h2, h3, h4, .card-title {
+p, h1, h2, h3, h4, h5, h6, .card-title {
     color: antiquewhite !important;
 }
 
@@ -134,4 +134,8 @@ p, h1, h2, h3, h4, .card-title {
 
 body.modal-open {
     overflow: visible !important;
+}
+
+label {
+    color: antiquewhite !important;
 }

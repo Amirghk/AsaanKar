@@ -99,6 +99,10 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcRXhwZXJ0XFZpZXdzXFNlcnZpY2VcQWRkLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
+[G:/FinalProjectMaktab/FinalProjectMaktab/src/FinalProject/FinalProject.Endpoint/Areas/Expert/Views/Service/Error.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcRXhwZXJ0XFZpZXdzXFNlcnZpY2VcRXJyb3IuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
 [G:/FinalProjectMaktab/FinalProjectMaktab/src/FinalProject/FinalProject.Endpoint/Areas/Expert/Views/Service/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcRXhwZXJ0XFZpZXdzXFNlcnZpY2VcSW5kZXguY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 

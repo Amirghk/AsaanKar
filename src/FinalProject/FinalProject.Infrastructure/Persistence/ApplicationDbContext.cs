@@ -1,6 +1,7 @@
 using FinalProject.Domain.Entities;
 using FinalProject.Infrastructure.Identity;
 using FinalProject.Infrastructure.Persistence.Configurations;
+using FinalProject.Infrastructure.Persistence.SeedData;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
@@ -35,6 +36,7 @@ public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
 
 
         base.OnModelCreating(builder);
+        builder.Seed();
         builder.ApplyConfiguration(new AddressConfiguration());
         builder.ApplyConfiguration(new CityConfiguration());
         builder.ApplyConfiguration(new CustomerConfiguration());

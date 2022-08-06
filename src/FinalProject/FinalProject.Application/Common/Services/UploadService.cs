@@ -87,12 +87,16 @@ public class UploadService : IUploadService
         try
         {
 
-
             switch (dto.FileCategory)
             {
                 case FileCategory.Customer:
                     var customerId = dto.CustomerId;
                     var customer = await _customerService.GetById(customerId!, cancellationToken);
+                    // remove old profile pic if it exists
+                    if (customer.ProfilePictureId != null)
+                    {
+                        await Remove((int)customer.ProfilePictureId, uploadsRootFolder, cancellationToken);
+                    }
                     customer.ProfilePictureId = uploadId;
                     await _customerService.Update(customer, cancellationToken);
                     break;
@@ -111,6 +115,11 @@ public class UploadService : IUploadService
                 case FileCategory.ExpertProfilePic:
                     var expertId = dto.ExpertId;
                     var expert = await _expertService.GetById(expertId!, cancellationToken);
+                    // remove old profile pic if it exists
+                    if (expert.ProfilePictureId != null)
+                    {
+                        await Remove((int)expert.ProfilePictureId, uploadsRootFolder, cancellationToken);
+                    }
                     expert.ProfilePictureId = uploadId;
                     await _expertService.Update(expert, cancellationToken);
                     break;
@@ -121,13 +130,14 @@ public class UploadService : IUploadService
         catch (Exception)
         {
             // if there's a problem in other repos
-            await _repository.Remove(uploadId);
+            await Remove(uploadId, uploadsRootFolder, cancellationToken);
             throw;
         }
         return uploadId;
 
     }
 
+    // TODO : make it get the uploads root folder from config?
     public async Task SaveFile(IFormFile file, string uploadsRootFolder, string newFileName)
     {
         if (!Directory.Exists(uploadsRootFolder))

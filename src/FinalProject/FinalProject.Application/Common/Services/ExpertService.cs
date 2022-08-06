@@ -1,9 +1,11 @@
-using AutoMapper;
+﻿using AutoMapper;
 using FinalProject.Application.Common.Interfaces.Services;
 using FinalProject.Application.Common.DataTransferObjects;
 using FinalProject.Domain.Entities;
 using FinalProject.Domain.Interfaces;
 using FinalProject.Application.Common.Interfaces.Repositories;
+using FinalProject.Application.Common.Exceptions;
+using FinalProject.Domain.Enums;
 
 namespace FinalProject.Application.Common.Services;
 
@@ -11,14 +13,17 @@ public class ExpertService : IExpertService
 {
     private readonly IMapper _mapper;
     private readonly IServiceService _serviceService;
+    private readonly IOrderRepository _orderRepository;
     private readonly IExpertRepository _repository;
     public ExpertService(
         IExpertRepository repository,
         IMapper mapper,
-        IServiceService serviceService)
+        IServiceService serviceService,
+        IOrderRepository orderRepository)
     {
         _mapper = mapper;
         _serviceService = serviceService;
+        _orderRepository = orderRepository;
         _repository = repository;
     }
 
@@ -80,6 +85,17 @@ public class ExpertService : IExpertService
     /// <returns></returns>
     public async Task<string> RemoveService(string expertId, int serviceId, CancellationToken cancellationToken)
     {
+        var expertOrders = await _orderRepository.GetAll(userId: expertId, cancellationToken: cancellationToken);
+        if (expertOrders == null || !expertOrders.Any())
+        {
+            return await _repository.RemoveService(expertId, serviceId);
+        }
+        // check if there are any unfinished orders
+        var check = expertOrders.Where(x => x.ServiceId == serviceId && x.ExpertId == expertId && x.State < OrderState.Paid).Any();
+        if (check)
+        {
+            throw new UnfinishedOrderException("سفارش مرتبط با این سرویس تمام نشده");
+        }
         //var expert = await _repository.GetById(expertId, cancellationToken);
         //var service = await _serviceService.GetById(serviceId, cancellationToken);
         //var result = expert.Services.Remove(service);
