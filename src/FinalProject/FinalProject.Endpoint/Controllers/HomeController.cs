@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using FinalProject.Application.Common.Interfaces.Services;
+using FinalProject.Domain.Enums;
 using FinalProject.Endpoint.Models;
 using Microsoft.AspNetCore.Mvc;
 
@@ -39,6 +40,18 @@ namespace FinalProject.Endpoint.Controllers
         {
             var categories = _mapper.Map<List<CategoryViewModel>>(await _categoryService.GetChildren(id, cancellationToken));
             return View(categories);
+        }
+
+        public async Task<IActionResult> Error(ErrorTypes type)
+        {
+            string message = type switch
+            {
+                ErrorTypes.NotFound => "دیتایی با این شناسه موجود نمیباشد",
+                ErrorTypes.UnfinishedOrder => "سفارش مرتبط با این سرویس تمام نشده",
+                _ => "خطایی رخ داده است!"
+            };
+
+            return View("Error", message);
         }
 
     }

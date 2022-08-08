@@ -2,7 +2,15 @@
 @inject IUploadService UploadService
 
 
-<h1>دسته بندی ها</h1>
+
+<div class="d-flex justify-content-between">
+    <h1>دسته بندی ها</h1>
+    <div class="d-inline-flex">
+        <a class='btn btn-success align-self-md-center' asp-controller="Category" asp-action="Create">ایجاد</a>
+    </div>
+</div>
+
+
 <table class="table">
     <thead class="thead-dark">
         <tr>

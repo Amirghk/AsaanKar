@@ -4,145 +4,147 @@
 @inject IAddressService AddressService
 @model IEnumerable<OrderListViewModel>
 
+<div class="d-flex justify-content-center">
 
-<div class="glass">
+    <div class="glass col-10">
 
-    <ul class="nav nav-tabs" id="myTab" role="tablist">
-        <li class="nav-item">
-            <a class="nav-link active" id="active-orders-tab" data-toggle="tab" href="#active-orders" role="tab" aria-controls="active-orders" aria-selected="true">سفارشات در حال انجام</a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link" id="finished-orders-tab" data-toggle="tab" href="#finished-orders" role="tab" aria-controls="finished-orders" aria-selected="false">سفارشات انجام شده</a>
-        </li>
-    </ul>
+        <ul class="nav nav-tabs" id="myTab" role="tablist">
+            <li class="nav-item">
+                <a class="nav-link active" id="active-orders-tab" data-toggle="tab" href="#active-orders" role="tab" aria-controls="active-orders" aria-selected="true">سفارشات در حال انجام</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" id="finished-orders-tab" data-toggle="tab" href="#finished-orders" role="tab" aria-controls="finished-orders" aria-selected="false">سفارشات انجام شده</a>
+            </li>
+        </ul>
 
 
-    <div class="tab-content col-10" id="myTabContent">
-        <div class="tab-pane fade show active" id="active-orders" role="tabpanel" aria-labelledby="active-orders-tab">
-            <div class="accordion accordion-flush">
+        <div class="tab-content" id="myTabContent">
+            <div class="tab-pane fade show active" id="active-orders" role="tabpanel" aria-labelledby="active-orders-tab">
+                <div class="accordion accordion-flush">
 
-                <table class="table">
-                    <thead class="thead-dark">
-                        <tr>
-                            <th scope="col">@Html.DisplayNameForInnerType((OrderListViewModel c) => c.ServiceName)</th>
-                            <th scope="col">@Html.DisplayNameForInnerType((OrderListViewModel c) => c.OrderDate)</th>
-                            <th scope="col">@Html.DisplayNameForInnerType((OrderListViewModel c) => c.DateCompleted)</th>
-                            <th scope="col">@Html.DisplayNameForInnerType((OrderListViewModel c) => c.State)</th>
-                            <th scope="col">@Html.DisplayNameForInnerType((OrderListViewModel c) => c.ServiceBasePrice)</th>
-                            <th scope="col">@Html.DisplayNameForInnerType((OrderListViewModel c) => c.CompletedPrice)</th>
-                            <th scope="col">@Html.DisplayNameForInnerType((OrderListViewModel c) => c.AddressId)</th>
-                            <th scope="col">@Html.DisplayNameForInnerType((OrderListViewModel c) => c.Bids)</th>
-                            <th scope="col">@Html.DisplayNameForInnerType((OrderListViewModel c) => c.Description)</th>
+                    <table class="table">
+                        <thead class="thead-dark">
+                            <tr>
+                                <th scope="col">@Html.DisplayNameForInnerType((OrderListViewModel c) => c.ServiceName)</th>
+                                <th scope="col">@Html.DisplayNameForInnerType((OrderListViewModel c) => c.OrderDate)</th>
+                                <th scope="col">@Html.DisplayNameForInnerType((OrderListViewModel c) => c.DateCompleted)</th>
+                                <th scope="col">@Html.DisplayNameForInnerType((OrderListViewModel c) => c.State)</th>
+                                <th scope="col">@Html.DisplayNameForInnerType((OrderListViewModel c) => c.ServiceBasePrice)</th>
+                                <th scope="col">@Html.DisplayNameForInnerType((OrderListViewModel c) => c.CompletedPrice)</th>
+                                <th scope="col">@Html.DisplayNameForInnerType((OrderListViewModel c) => c.AddressId)</th>
+                                <th scope="col">@Html.DisplayNameForInnerType((OrderListViewModel c) => c.Bids)</th>
+                                <th scope="col">@Html.DisplayNameForInnerType((OrderListViewModel c) => c.Description)</th>
 
-                            <th scope="col">عملیات</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @foreach (var order in Model)
-                        {
-                            @if (order.State < OrderState.Paid)
+                                <th scope="col">عملیات</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var order in Model)
                             {
-                                <tr>
-                                    <td>@order.ServiceName</td>
-                                    <td>@order.OrderDate</td>
-                                    <td>@order.DateCompleted</td>
-                                    <td>@order.State.GetDisplayName()</td>
-                                    <td>@order.ServiceBasePrice</td>
-                                    <td>@order.CompletedPrice</td>
-                                    <td>@await AddressService.GetFullAddressToString(order.AddressId, Context.RequestAborted)</td>
-                                    @if ((int)order.State <= 2)
-                                    {
-                                        <td>
-
-                                            <button class="accordion-button text-nowrap" type="button" data-bs-toggle="collapse" data-bs-target=@("#b" + order.Id) aria-expanded="true" aria-controls="collapseOne">
-                                                مشاهده پیشنهادات
-                                            </button>
-                                        </td>
-                                    }
-                                    else
-                                    {
-                                        <td>
-                                            پیشنهاد پذیرفته شده است
-                                        </td>
-                                    }
-                                    <td>@order.Description</td>
-                                    <td class="d-inline-flex justify-items-center">
-                                        <a class="btn btn-info" asp-controller="Order" asp-action="Details" asp-route-id=@order.Id>مشاهده جزییات</a>
-                                    </td>
-                                </tr>
-                                @if ((int)order.State <= 2)
+                                @if (order.State < OrderState.Paid)
                                 {
-                                    <tr id=@("b" + order.Id) class="accordion-collapse collapse" aria-labelledby="headingOne" data-parent="#accordionExample">
-                                        <th scope="col">متخصص</th>
-                                        <th scope="col">@Html.DisplayNameForInnerType((BidViewModel c) => c.Price)</th>
-                                        <th scope="col">@Html.DisplayNameForInnerType((BidViewModel c) => c.Notes)</th>
-                                        @foreach (var bid in order.Bids)
+                                    <tr>
+                                        <td>@order.ServiceName</td>
+                                        <td>@order.OrderDate</td>
+                                        <td>@order.DateCompleted</td>
+                                        <td>@order.State.GetDisplayName()</td>
+                                        <td>@order.ServiceBasePrice</td>
+                                        <td>@order.CompletedPrice</td>
+                                        <td>@await AddressService.GetFullAddressToString(order.AddressId, Context.RequestAborted)</td>
+                                        @if ((int)order.State <= 2)
                                         {
-                                            <td>@await ExpertService.GetName(bid.ExpertId!, Context.RequestAborted)</td>
-                                            <td>@bid.Price</td>
-                                            <td>@bid.Notes</td>
                                             <td>
-                                                <form asp-controller="Order" asp-action="ApproveBid" method="post">
-                                                    <input type="hidden" value=@bid.Id name="bidId">
-                                                    <input type="hidden" value=@order.Id name="orderId">
-                                                    <button class="btn btn-success" type="submit">تایید پیشنهاد</button>
-                                                </form>
+
+                                                <button class="accordion-button text-nowrap" type="button" data-bs-toggle="collapse" data-bs-target=@("#b" + order.Id) aria-expanded="true" aria-controls="collapseOne">
+                                                    مشاهده پیشنهادات
+                                                </button>
                                             </td>
                                         }
+                                        else
+                                        {
+                                            <td>
+                                                پیشنهاد پذیرفته شده است
+                                            </td>
+                                        }
+                                        <td>@order.Description</td>
+                                        <td class="d-inline-flex justify-items-center">
+                                            <a class="btn btn-info" asp-controller="Order" asp-action="Details" asp-route-id=@order.Id>مشاهده جزییات</a>
+                                        </td>
+                                    </tr>
+                                    @if ((int)order.State <= 2)
+                                    {
+                                        <tr id=@("b" + order.Id) class="accordion-collapse collapse" aria-labelledby="headingOne" data-parent="#accordionExample">
+                                            <th scope="col">متخصص</th>
+                                            <th scope="col">@Html.DisplayNameForInnerType((BidViewModel c) => c.Price)</th>
+                                            <th scope="col">@Html.DisplayNameForInnerType((BidViewModel c) => c.Notes)</th>
+                                            @foreach (var bid in order.Bids)
+                                            {
+                                                <td>@await ExpertService.GetName(bid.ExpertId!, Context.RequestAborted)</td>
+                                                <td>@bid.Price</td>
+                                                <td>@bid.Notes</td>
+                                                <td>
+                                                    <form asp-controller="Order" asp-action="ApproveBid" method="post">
+                                                        <input type="hidden" value=@bid.Id name="bidId">
+                                                        <input type="hidden" value=@order.Id name="orderId">
+                                                        <button class="btn btn-success" type="submit">تایید پیشنهاد</button>
+                                                    </form>
+                                                </td>
+                                            }
+                                        </tr>
+                                    }
+                                }
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="tab-pane fade show active" id="finished-orders" role="tabpanel" aria-labelledby="finished-orders-tab">
+                <div class="accordion accordion-flush">
+
+                    <table class="table">
+                        <thead class="thead-dark">
+                            <tr>
+                                <th scope="col">@Html.DisplayNameForInnerType((OrderListViewModel c) => c.ServiceName)</th>
+                                <th scope="col">@Html.DisplayNameForInnerType((OrderListViewModel c) => c.OrderDate)</th>
+                                <th scope="col">@Html.DisplayNameForInnerType((OrderListViewModel c) => c.DateCompleted)</th>
+                                <th scope="col">@Html.DisplayNameForInnerType((OrderListViewModel c) => c.State)</th>
+                                <th scope="col">@Html.DisplayNameForInnerType((OrderListViewModel c) => c.CompletedPrice)</th>
+                                <th scope="col">@Html.DisplayNameForInnerType((OrderListViewModel c) => c.AddressId)</th>
+                                <th scope="col">@Html.DisplayNameForInnerType((OrderListViewModel c) => c.Expert)</th>
+                                <th scope="col">@Html.DisplayNameForInnerType((OrderListViewModel c) => c.Description)</th>
+
+
+                                <th scope="col">عملیات</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var order in Model)
+                            {
+                                @if (order.State == OrderState.Paid)
+                                {
+                                    <tr>
+                                        <td>@order.ServiceName</td>
+                                        <td>@order.OrderDate</td>
+                                        <td>@order.DateCompleted</td>
+                                        <td>@order.State.GetDisplayName()</td>
+                                        <td>@order.CompletedPrice</td>
+                                        <td>@await AddressService.GetFullAddressToString(order.AddressId, Context.RequestAborted)</td>
+                                        <td>
+                                            <a class="btn btn-outline-info" asp-area="Expert" asp-controller="Home" asp-action="PublicProfile" asp-route-id=@order.ExpertId>
+                                                @await ExpertService.GetName(order.ExpertId!, Context.RequestAborted)
+                                            </a>
+                                        </td>
+                                        <td>@order.Description</td>
+                                        <td class="d-inline-flex justify-items-center">
+                                            <a class="btn btn-info" asp-controller="Order" asp-action="Details" asp-route-id=@order.Id>مشاهده جزییات</a>
+                                            <a class="btn btn-warning" asp-controller="Order" asp-action="Comment" asp-route-expertId=@order.ExpertId>ثبت نظر</a>
+                                        </td>
                                     </tr>
                                 }
                             }
-                        }
-                    </tbody>
-                </table>
-            </div>
-        </div>
-        <div class="tab-pane fade show active" id="finished-orders" role="tabpanel" aria-labelledby="finished-orders-tab">
-            <div class="accordion accordion-flush">
-
-                <table class="table">
-                    <thead class="thead-dark">
-                        <tr>
-                            <th scope="col">@Html.DisplayNameForInnerType((OrderListViewModel c) => c.ServiceName)</th>
-                            <th scope="col">@Html.DisplayNameForInnerType((OrderListViewModel c) => c.OrderDate)</th>
-                            <th scope="col">@Html.DisplayNameForInnerType((OrderListViewModel c) => c.DateCompleted)</th>
-                            <th scope="col">@Html.DisplayNameForInnerType((OrderListViewModel c) => c.State)</th>
-                            <th scope="col">@Html.DisplayNameForInnerType((OrderListViewModel c) => c.CompletedPrice)</th>
-                            <th scope="col">@Html.DisplayNameForInnerType((OrderListViewModel c) => c.AddressId)</th>
-                            <th scope="col">@Html.DisplayNameForInnerType((OrderListViewModel c) => c.Expert)</th>
-                            <th scope="col">@Html.DisplayNameForInnerType((OrderListViewModel c) => c.Description)</th>
-
-
-                            <th scope="col">عملیات</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @foreach (var order in Model)
-                        {
-                            @if (order.State == OrderState.Paid)
-                            {
-                                <tr>
-                                    <td>@order.ServiceName</td>
-                                    <td>@order.OrderDate</td>
-                                    <td>@order.DateCompleted</td>
-                                    <td>@order.State.GetDisplayName()</td>
-                                    <td>@order.CompletedPrice</td>
-                                    <td>@await AddressService.GetFullAddressToString(order.AddressId, Context.RequestAborted)</td>
-                                    <td>
-                                        <a class="btn btn-outline-info" asp-area="Expert" asp-controller="Home" asp-action="PublicProfile" asp-route-id=@order.ExpertId>
-                                            @await ExpertService.GetName(order.ExpertId!, Context.RequestAborted)
-                                        </a>
-                                    </td>
-                                    <td>@order.Description</td>
-                                    <td class="d-inline-flex justify-items-center">
-                                        <a class="btn btn-info" asp-controller="Order" asp-action="Details" asp-route-id=@order.Id>مشاهده جزییات</a>
-                                        <a class="btn btn-warning" asp-controller="Order" asp-action="Comment" asp-route-expertId=@order.ExpertId>ثبت نظر</a>
-                                    </td>
-                                </tr>
-                            }
-                        }
-                    </tbody>
-                </table>
+                        </tbody>
+                    </table>
+                </div>
             </div>
         </div>
     </div>

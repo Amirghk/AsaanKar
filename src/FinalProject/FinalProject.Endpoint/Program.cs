@@ -13,6 +13,7 @@ using Serilog;
 using Serilog.Extensions.Logging;
 using FinalProject.Application.Common.ConfigurationModels;
 using FinalProject.Endpoint.Common.Filters;
+using FinalProject.Endpoint.MiddleWare;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -82,7 +83,7 @@ if (!app.Environment.IsDevelopment())
     // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
     app.UseHsts();
 }
-
+app.UseErrorHandling();
 app.UseHttpsRedirection();
 app.UseStaticFiles();
 app.UseRouting();

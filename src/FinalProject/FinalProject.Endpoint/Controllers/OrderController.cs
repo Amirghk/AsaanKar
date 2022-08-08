@@ -97,7 +97,16 @@ namespace FinalProject.Endpoint.Controllers
         [HttpGet]
         public async Task<IActionResult> Details(int id, CancellationToken cancellationToken)
         {
+            var user = await _userManager.GetUserAsync(User);
+            if (user == null)
+            {
+                return NotFound($"Unable to load user with ID '{_userManager.GetUserId(User)}'.");
+            }
             var order = await _orderService.GetById(id, cancellationToken);
+            if (order.CustomerId != user.Id)
+            {
+                throw new UnauthorizedAccessException("User doesn't have permission to view this order details.");
+            }
             var model = _mapper.Map<OrderListViewModel>(order);
             return View(model);
         }

@@ -8,10 +8,12 @@ namespace FinalProject.Application.Common.Services;
 public class CategoryService : ICategoryService
 {
     private readonly IMapper _mapper;
+    private readonly IUploadRepository _uploadRepository;
     private readonly ICategoryRepository _repository;
-    public CategoryService(ICategoryRepository repository, IMapper mapper)
+    public CategoryService(ICategoryRepository repository, IMapper mapper, IUploadRepository uploadRepository)
     {
         _mapper = mapper;
+        _uploadRepository = uploadRepository;
         _repository = repository;
     }
 
@@ -32,6 +34,11 @@ public class CategoryService : ICategoryService
 
     public async Task<int> Remove(int id, CancellationToken cancellationToken)
     {
+        var category = await _repository.GetById(id, cancellationToken);
+        if (category.PictureId != null)
+        {
+            await _uploadRepository.Remove((int)category.PictureId);
+        }
         return await _repository.Remove(id);
     }
 

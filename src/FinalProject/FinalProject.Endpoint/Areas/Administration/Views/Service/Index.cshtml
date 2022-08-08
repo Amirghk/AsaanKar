@@ -1,0 +1,64 @@
+﻿@model IEnumerable<ServiceViewModel>
+
+
+
+<div class="d-flex justify-content-between">
+    <h1>سرویس ها</h1>
+    <div class="d-inline-flex">
+        <a class='btn btn-success align-self-md-center' asp-controller="Category" asp-action="Create">ایجاد</a>
+    </div>
+</div>
+
+
+<table class="table">
+    <thead class="thead-dark">
+        <tr>
+            <th scope="col">@Html.DisplayNameFor(model => model.Id)</th>
+            <th scope="col">@Html.DisplayNameFor((model => model.Description))</th>
+            <th scope="col">@Html.DisplayNameFor((model => model.BasePrice))</th>
+            <th scope="col">@Html.DisplayNameFor((model => model.CategoryName))</th>
+
+            <th scope="col">ویرایش</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var service in Model)
+        {
+            <tr>
+                <th scope="row">@service.Id</th>
+                <td>@service.Description</td>
+                <td>@service.BasePrice</td>
+                <td>
+                    @service.CategoryName
+                </td>
+                <td>
+                    <button type="button" class="btn btn-danger m-1" data-bs-toggle="modal" data-bs-target=@("#modal_" +
+                        service.Id)>
+                        حذف
+                    </button>
+                    <div class="modal fade" id=@("modal_" + service.Id) tabindex="-1" role="dialog"
+                     aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                                    <button type="button" class="btn-close m-0" data-bs-dismiss="modal" aria-label="Close">
+                                    </button>
+                                </div>
+                                <div class="modal-body text-dark">
+                                    مطئنید میخواهید حذف کنید؟
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">بستن</button>
+                                    <form asp-controller="Category" asp-action="Delete" asp-route-id=@service.Id method="post">
+                                        <button class="btn btn-danger" type="submit">حذف</button>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
