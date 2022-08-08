@@ -10,7 +10,7 @@ namespace FinalProject.Infrastructure.Persistence.SeedData;
 
 public static class ModelBuilderExtensions
 {
-    // TODO : find out how to get ids of added elements and how to access usermanager
+    // TODO : find out how to access usermanager
     public static void Seed(this ModelBuilder modelBuilder)
     {
         modelBuilder.Entity<Province>().HasData(

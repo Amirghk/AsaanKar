@@ -1,4 +1,5 @@
 ﻿using FinalProject.Application.Common.Exceptions;
+using FinalProject.Domain.Enums;
 using System.Net;
 using System.Text.Json;
 
@@ -7,10 +8,12 @@ namespace FinalProject.Endpoint.MiddleWare;
 public class ErrorHandlingMiddleware
 {
     private readonly RequestDelegate _next;
+    private readonly ILogger<ErrorHandlingMiddleware> _logger;
 
-    public ErrorHandlingMiddleware(RequestDelegate next)
+    public ErrorHandlingMiddleware(RequestDelegate next, ILogger<ErrorHandlingMiddleware> logger)
     {
         _next = next;
+        _logger = logger;
     }
 
     public async Task Invoke(HttpContext context)
@@ -19,16 +22,23 @@ public class ErrorHandlingMiddleware
         {
             await _next(context);
         }
-        catch (UnfinishedOrderException ex)
+        catch (Exception ex)
         {
             HandleExceptionAsync(context, ex);
         }
     }
 
-    // TODO : Complete this
-    private static void HandleExceptionAsync(HttpContext context, Exception exception)
+    private void HandleExceptionAsync(HttpContext context, Exception exception)
     {
-        context.Response.Redirect("/Expert/Service/Error?type=unfinished");
+        _logger.LogError("Exception {Exception} Thrown At {Source}", exception, exception.Source);
+        ErrorTypes error = exception switch
+        {
+            NotFoundException => ErrorTypes.NotFound,
+            UnfinishedOrderException => ErrorTypes.UnfinishedOrder,
+            _ => ErrorTypes.UnDefined
+        };
+
+        context.Response.Redirect($"/Home/Error?type={error}");
     }
 }
 

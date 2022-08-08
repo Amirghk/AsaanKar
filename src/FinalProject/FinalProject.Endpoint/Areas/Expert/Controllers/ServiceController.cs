@@ -89,18 +89,18 @@ namespace FinalProject.Endpoint.Areas.Expert.Controllers
             return RedirectToAction(nameof(Index));
         }
 
-        [HttpGet]
-        public async Task<IActionResult> Error(string type)
-        {
-            if (type == null)
-            {
-                ViewBag.Message = "Error";
-            }
-            if (type == "unfinished")
-            {
-                ViewBag.Message = "سفارش مرتبط با این سرویس تمام نشده";
-            }
-            return View();
-        }
+        //[HttpGet]
+        //public async Task<IActionResult> Error(string type)
+        //{
+        //    if (type == null)
+        //    {
+        //        ViewBag.Message = "Error";
+        //    }
+        //    if (type == "unfinished")
+        //    {
+        //        ViewBag.Message = "سفارش مرتبط با این سرویس تمام نشده";
+        //    }
+        //    return View();
+        //}
     }
 }

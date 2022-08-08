@@ -5,6 +5,7 @@ using FinalProject.Application.Common.Interfaces.Services;
 using FinalProject.Domain.Enums;
 using FinalProject.Endpoint.Models;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.Extensions.Options;
 
 namespace FinalProject.Endpoint.Areas.Administration.Controllers
@@ -44,7 +45,12 @@ namespace FinalProject.Endpoint.Areas.Administration.Controllers
         public async Task<IActionResult> Create(CancellationToken cancellationToken)
         {
             var categories = await _categoryService.GetAll(cancellationToken);
-            ViewBag.Categories = categories;
+            // select categories that have no parent category
+            ViewBag.Categories = categories.Where(x => x.ParentCategoryId == null).Select(x => new SelectListItem
+            {
+                Value = x.Id.ToString(),
+                Text = x.Name,
+            });
             return View();
         }
 
@@ -64,13 +70,20 @@ namespace FinalProject.Endpoint.Areas.Administration.Controllers
             {
                 await _uploadService.Set(new UploadServiceDto
                 {
-                    FileCategory = FileCategory.ExpertProfilePic,
+                    FileCategory = FileCategory.ServiceCategory,
                     CategoryId = categoryId,
                     FileName = model.Picture.FileName,
                     FileSize = model.Picture.Length,
                     UploadedFile = model.Picture,
                 }, uploadsRootFolder, cancellationToken);
             }
+            return RedirectToAction(nameof(Index));
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Delete(int id, CancellationToken cancellationToken)
+        {
+            await _categoryService.Remove(id, cancellationToken);
             return RedirectToAction(nameof(Index));
         }
     }
