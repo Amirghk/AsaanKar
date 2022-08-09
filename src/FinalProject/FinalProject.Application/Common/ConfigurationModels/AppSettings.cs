@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 namespace FinalProject.Application.Common.ConfigurationModels
 {
 
+
     public class AppSettings
     {
         public Logging Logging { get; set; }
@@ -14,6 +15,7 @@ namespace FinalProject.Application.Common.ConfigurationModels
         public Connectionstrings ConnectionStrings { get; set; }
         public Seq Seq { get; set; }
         public string UploadsFolderName { get; set; }
+        public Caching Caching { get; set; }
     }
 
     public class Logging
@@ -63,6 +65,18 @@ namespace FinalProject.Application.Common.ConfigurationModels
     public class Override
     {
         public string Microsoft { get; set; }
+    }
+
+    public class Caching
+    {
+        public Prefixes Prefixes { get; set; }
+        public string Host { get; set; }
+        public int Port { get; set; }
+    }
+
+    public class Prefixes
+    {
+        public string Category { get; set; }
     }
 
 

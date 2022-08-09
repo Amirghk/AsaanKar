@@ -1,4 +1,5 @@
-﻿using FinalProject.Application.Common.Interfaces.Repositories;
+﻿using FinalProject.Application.Common.Interfaces.CacheRepositories;
+using FinalProject.Application.Common.Interfaces.Repositories;
 using FinalProject.Infrastructure.Persistence;
 using FinalProject.Infrastructure.Repositories;
 using Microsoft.EntityFrameworkCore;
@@ -26,6 +27,7 @@ namespace FinalProject.Infrastructure
             services.AddScoped<IUploadRepository, UploadRepository>();
             services.AddScoped<ICommentRepository, CommentRepository>();
             services.AddScoped<IBidRepository, BidRepository>();
+            services.AddScoped<ICategoryRepositoryCache, CategoryRepositoryCache>();
             return services;
         }
     }
