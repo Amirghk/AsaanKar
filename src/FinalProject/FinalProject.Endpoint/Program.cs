@@ -14,6 +14,7 @@ using Serilog.Extensions.Logging;
 using FinalProject.Application.Common.ConfigurationModels;
 using FinalProject.Endpoint.Common.Filters;
 using FinalProject.Endpoint.MiddleWare;
+using StackExchange.Redis;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -31,6 +32,22 @@ builder.Host.UseSerilog((ctx, lc) => lc
 // bind appsettings json to Appsettings class
 builder.Services.Configure<AppSettings>(builder.Configuration);
 builder.Services.AddSingleton(builder.Configuration.Get<AppSettings>());
+
+#region Caching
+
+builder.Services.AddDistributedMemoryCache();
+
+
+// TODO : get redis config from user secrets
+builder.Services.AddStackExchangeRedisCache(options =>
+{
+    options.Configuration = "localhost:6379,password=foobared";
+    options.InstanceName = "";
+});
+
+builder.Services.AddSingleton<IConnectionMultiplexer>(provider => ConnectionMultiplexer.Connect("localhost:6379,password=foobared"));
+
+#endregion
 
 
 builder.Services.AddControllersWithViews().AddRazorRuntimeCompilation();
