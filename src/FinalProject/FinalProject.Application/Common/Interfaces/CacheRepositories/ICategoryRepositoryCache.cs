@@ -9,10 +9,9 @@ namespace FinalProject.Application.Common.Interfaces.CacheRepositories
 {
     public interface ICategoryRepositoryCache
     {
-        Task<IEnumerable<CategoryDto>> GetAll();
-        Task<CategoryDto> Get(int id);
-        Task Delete(int id);
+        Task<IEnumerable<CategoryDto>> GetAll(CancellationToken cancellationToken);
+        Task<CategoryDto> Get(int id, CancellationToken cancellationToken);
         Task Set(IEnumerable<CategoryDto> categories);
-        Task<IEnumerable<CategoryDto>> GetChildren(int id);
+        Task<IEnumerable<CategoryDto>> GetChildren(int id, CancellationToken cancellationToken);
     }
 }

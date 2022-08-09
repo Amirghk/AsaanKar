@@ -3,15 +3,10 @@ using FinalProject.Application.Common.DataTransferObjects;
 using FinalProject.Application.Common.Exceptions;
 using FinalProject.Application.Common.Interfaces.CacheRepositories;
 using Microsoft.Extensions.Caching.Distributed;
-using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using StackExchange.Redis;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Text;
 using System.Text.Json;
-using System.Threading.Tasks;
 
 namespace FinalProject.Infrastructure.Repositories
 {
@@ -30,18 +25,12 @@ namespace FinalProject.Infrastructure.Repositories
             _cache = cache;
             _redis = redis;
             _appSettings = appSettings.Value;
-            CATEGORYPREFIX = "Category_";
+            CATEGORYPREFIX = _appSettings.Caching.Prefixes.Category;
         }
 
 
-        public Task Delete(int id)
+        public async Task<IEnumerable<CategoryDto>> GetAll(CancellationToken cancellationToken)
         {
-            throw new NotImplementedException();
-        }
-
-        public async Task<IEnumerable<CategoryDto>> GetAll()
-        {
-            // TODO : move ids to config (Category_) 
             List<string>? redisKeys = _redis.GetServer(_appSettings.Caching.Host, _appSettings.Caching.Port).Keys(pattern: $"{CATEGORYPREFIX}*")
                .AsQueryable().Select(p => p.ToString()).ToList();
 
@@ -53,15 +42,15 @@ namespace FinalProject.Infrastructure.Repositories
             var result = new List<CategoryDto>();
             foreach (var redisKey in redisKeys)
             {
-                result.Add(JsonSerializer.Deserialize<CategoryDto>(await _cache.GetStringAsync(redisKey))!);
+                result.Add(JsonSerializer.Deserialize<CategoryDto>(await _cache.GetStringAsync(redisKey, cancellationToken))!);
             }
             return result;
 
         }
 
-        public async Task<CategoryDto> Get(int id)
+        public async Task<CategoryDto> Get(int id, CancellationToken cancellationToken)
         {
-            var category = await _cache.GetStringAsync($"{CATEGORYPREFIX}{id}");
+            var category = await _cache.GetStringAsync($"{CATEGORYPREFIX}{id}", cancellationToken);
             if (category == null)
             {
                 throw new CacheNotFoundException("Category", CATEGORYPREFIX + id);
@@ -71,7 +60,6 @@ namespace FinalProject.Infrastructure.Repositories
 
         public async Task Set(IEnumerable<CategoryDto> categories)
         {
-            // TODO : Get these from config
             var options = new DistributedCacheEntryOptions
             {
                 AbsoluteExpiration = DateTimeOffset.Now.AddDays(1)
@@ -85,7 +73,7 @@ namespace FinalProject.Infrastructure.Repositories
             }
         }
 
-        public async Task<IEnumerable<CategoryDto>> GetChildren(int id)
+        public async Task<IEnumerable<CategoryDto>> GetChildren(int id, CancellationToken cancellationToken)
         {
             List<string>? redisKeys = _redis.GetServer(_appSettings.Caching.Host, _appSettings.Caching.Port).Keys(pattern: "Category_*")
                     .AsQueryable().Select(p => p.ToString()).ToList();
@@ -98,7 +86,7 @@ namespace FinalProject.Infrastructure.Repositories
             var result = new List<CategoryDto>();
             foreach (var redisKey in redisKeys)
             {
-                result.Add(JsonSerializer.Deserialize<CategoryDto>(await _cache.GetStringAsync(redisKey))!);
+                result.Add(JsonSerializer.Deserialize<CategoryDto>(await _cache.GetStringAsync(redisKey, cancellationToken))!);
             }
 
             return result.Where(x => x.ParentCategoryId == id).ToList();

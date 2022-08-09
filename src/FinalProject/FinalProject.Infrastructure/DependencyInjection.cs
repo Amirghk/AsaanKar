@@ -28,6 +28,8 @@ namespace FinalProject.Infrastructure
             services.AddScoped<ICommentRepository, CommentRepository>();
             services.AddScoped<IBidRepository, BidRepository>();
             services.AddScoped<ICategoryRepositoryCache, CategoryRepositoryCache>();
+            services.AddScoped<ICityRepositoryCache, CityRepositoryCache>();
+            services.AddScoped<IProvinceRepositoryCache, ProvinceRepositoryCache>();
             return services;
         }
     }

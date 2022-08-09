@@ -38,7 +38,7 @@ public class CategoryService : ICategoryService
     {
         try
         {
-            var categories = await _repositoryCache.GetAll();
+            var categories = await _repositoryCache.GetAll(cancellationToken);
             return categories;
         }
         catch (CacheNotFoundException)
@@ -55,7 +55,7 @@ public class CategoryService : ICategoryService
     {
         try
         {
-            var category = await _repositoryCache.Get(id);
+            var category = await _repositoryCache.Get(id, cancellationToken);
             return category;
         }
         catch (CacheNotFoundException)
@@ -69,7 +69,7 @@ public class CategoryService : ICategoryService
     {
         try
         {
-            var categories = await _repositoryCache.GetChildren(id);
+            var categories = await _repositoryCache.GetChildren(id, cancellationToken);
             return categories;
         }
         catch (CacheNotFoundException)

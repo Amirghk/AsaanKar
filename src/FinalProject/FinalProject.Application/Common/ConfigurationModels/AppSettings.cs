@@ -77,7 +77,8 @@ namespace FinalProject.Application.Common.ConfigurationModels
     public class Prefixes
     {
         public string Category { get; set; }
+        public string Province { get; set; }
+        public string City { get; set; }
+        public string Service { get; set; }
     }
-
-
 }
