@@ -15,7 +15,7 @@ namespace FinalProject.Infrastructure
             ConfigurationManager configuration)
         {
             services.AddDbContext<ApplicationDbContext>(options =>
-                options.UseSqlServer(configuration.GetConnectionString("DefaultConnection")));
+                options.UseSqlServer(configuration["SqlServer:ConnectionString"]));
             services.AddScoped<IAddressRepository, AddressRepository>();
             services.AddScoped<ICityRepository, CityRepository>();
             services.AddScoped<IProvinceRepository, ProvinceRepository>();

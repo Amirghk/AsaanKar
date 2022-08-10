@@ -33,6 +33,7 @@ namespace FinalProject.Endpoint.Areas.Expert.Controllers
             _mapper = mapper;
             _bidService = bidService;
         }
+        [HttpGet]
         public async Task<IActionResult> Available(CancellationToken cancellationToken)
         {
             var user = await _userManager.GetUserAsync(User);
@@ -75,6 +76,8 @@ namespace FinalProject.Endpoint.Areas.Expert.Controllers
 
         }
 
+        [HttpPost]
+        [ValidateAntiForgeryToken]
         public async Task<IActionResult> Bid(BidViewModel model, CancellationToken cancellationToken)
         {
             if (!ModelState.IsValid)
@@ -100,6 +103,8 @@ namespace FinalProject.Endpoint.Areas.Expert.Controllers
             return RedirectToAction(nameof(Available));
         }
 
+        [HttpPost]
+        [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteBid(int orderId, CancellationToken cancellationToken)
         {
             var user = await _userManager.GetUserAsync(User);

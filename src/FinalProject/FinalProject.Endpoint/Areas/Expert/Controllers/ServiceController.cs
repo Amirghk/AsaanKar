@@ -66,6 +66,7 @@ namespace FinalProject.Endpoint.Areas.Expert.Controllers
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public async Task<IActionResult> Add(List<int> services, CancellationToken cancellationToken)
         {
             var user = await _userManager.GetUserAsync(User);
@@ -78,6 +79,7 @@ namespace FinalProject.Endpoint.Areas.Expert.Controllers
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public async Task<IActionResult> Delete(int id, CancellationToken cancellationToken)
         {
             var user = await _userManager.GetUserAsync(User);
@@ -88,19 +90,5 @@ namespace FinalProject.Endpoint.Areas.Expert.Controllers
             await _expertService.RemoveService(user.Id, id, cancellationToken);
             return RedirectToAction(nameof(Index));
         }
-
-        //[HttpGet]
-        //public async Task<IActionResult> Error(string type)
-        //{
-        //    if (type == null)
-        //    {
-        //        ViewBag.Message = "Error";
-        //    }
-        //    if (type == "unfinished")
-        //    {
-        //        ViewBag.Message = "سفارش مرتبط با این سرویس تمام نشده";
-        //    }
-        //    return View();
-        //}
     }
 }

@@ -30,6 +30,7 @@ namespace FinalProject.Endpoint.Areas.Administration.Controllers
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public async Task<IActionResult> Delete(int id, CancellationToken cancellationToken)
         {
             var uploadsRootFolder = Path.Combine(_environment.WebRootPath, "Uploads");

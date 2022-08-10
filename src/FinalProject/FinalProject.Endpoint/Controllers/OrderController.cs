@@ -77,6 +77,7 @@ namespace FinalProject.Endpoint.Controllers
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(OrderSaveViewModel model, CancellationToken cancellationToken)
         {
             if (!ModelState.IsValid)
@@ -112,6 +113,7 @@ namespace FinalProject.Endpoint.Controllers
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public async Task<IActionResult> ApproveBid(int bidId, int orderId, CancellationToken cancellationToken)
         {
             var user = await _userManager.GetUserAsync(User);
@@ -140,6 +142,7 @@ namespace FinalProject.Endpoint.Controllers
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public async Task<IActionResult> Comment(CommentSaveViewModel model, CancellationToken cancellationToken)
         {
             var user = await _userManager.GetUserAsync(User);

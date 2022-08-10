@@ -54,7 +54,9 @@ namespace FinalProject.Endpoint.Areas.Administration.Controllers
             return View();
         }
 
+
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(CategorySaveViewModel model, CancellationToken cancellationToken)
         {
             if (!ModelState.IsValid)
@@ -81,6 +83,7 @@ namespace FinalProject.Endpoint.Areas.Administration.Controllers
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public async Task<IActionResult> Delete(int id, CancellationToken cancellationToken)
         {
             await _categoryService.Remove(id, cancellationToken);

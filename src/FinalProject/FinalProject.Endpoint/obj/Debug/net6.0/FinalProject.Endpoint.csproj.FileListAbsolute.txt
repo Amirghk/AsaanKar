@@ -1740,3 +1740,5 @@ G:\FinalProjectMaktab\FinalProjectMaktab\src\FinalProject\FinalProject.Endpoint\
 G:\FinalProjectMaktab\FinalProjectMaktab\src\FinalProject\FinalProject.Endpoint\bin\Debug\net6.0\StackExchange.Redis.dll
 G:\FinalProjectMaktab\FinalProjectMaktab\src\FinalProject\FinalProject.Endpoint\bin\Debug\net6.0\System.Diagnostics.PerformanceCounter.dll
 G:\FinalProjectMaktab\FinalProjectMaktab\src\FinalProject\FinalProject.Endpoint\bin\Debug\net6.0\runtimes\win\lib\netcoreapp2.0\System.Diagnostics.PerformanceCounter.dll
+G:\FinalProjectMaktab\FinalProjectMaktab\src\FinalProject\FinalProject.Endpoint\bin\Debug\net6.0\Serilog.Sinks.PeriodicBatching.dll
+G:\FinalProjectMaktab\FinalProjectMaktab\src\FinalProject\FinalProject.Endpoint\bin\Debug\net6.0\Serilog.Sinks.Seq.dll

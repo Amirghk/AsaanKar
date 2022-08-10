@@ -42,7 +42,7 @@ namespace FinalProject.Endpoint.Controllers
             return View(categories);
         }
 
-        public async Task<IActionResult> Error(ErrorTypes type)
+        public IActionResult Error(ErrorTypes type)
         {
             string message = type switch
             {

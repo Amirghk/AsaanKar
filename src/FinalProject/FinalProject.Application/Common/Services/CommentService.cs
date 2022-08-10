@@ -56,7 +56,7 @@ public class
         var expertOrders = await _orderService.GetByUserId(dto.ExpertId, cancellationToken);
         if (!customerOrders.Select(x => x.Id).Intersect(expertOrders.Select(x => x.Id)).Any())
         {
-            _logger.LogError("UNAUTHORIZED : user {user} tried to comment on {expert}", dto.CustomerId, dto.ExpertId);
+            _logger.LogInformation("UNAUTHORIZED : user {user} tried to comment on {expert}", dto.CustomerId, dto.ExpertId);
             throw new InvalidOperationException("User doesn't have permission to comment on expert!");
         }
         return await _repository.Add(dto);
