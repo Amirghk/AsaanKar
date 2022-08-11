@@ -7,6 +7,7 @@ using FinalProject.Application.Common.Interfaces.Repositories;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Options;
 using FinalProject.Application.Common.ConfigurationModels;
+using Microsoft.Extensions.Logging;
 
 namespace FinalProject.Application.Common.Services;
 
@@ -18,6 +19,7 @@ public class UploadService : IUploadService
     private readonly ICustomerService _customerService;
     private readonly ICommentService _commentService;
     private readonly ICategoryService _categoryService;
+    private readonly ILogger<UploadService> _logger;
     private readonly AppSettings _appSettings;
 
     public UploadService(IUploadRepository repository,
@@ -26,7 +28,8 @@ public class UploadService : IUploadService
                          ICustomerService customerService,
                          ICommentService commentService,
                          ICategoryService categoryService,
-                         IOptions<AppSettings> appSettings)
+                         IOptions<AppSettings> appSettings,
+                         ILogger<UploadService> logger)
     {
         _mapper = mapper;
         _repository = repository;
@@ -34,6 +37,7 @@ public class UploadService : IUploadService
         _customerService = customerService;
         _commentService = commentService;
         _categoryService = categoryService;
+        _logger = logger;
         _appSettings = appSettings.Value;
     }
 
@@ -130,6 +134,7 @@ public class UploadService : IUploadService
         catch (Exception)
         {
             // if there's a problem in other repos
+            _logger.LogWarning("Not able to save file {UploadId} to {Category}", uploadId, dto.FileCategory);
             await Remove(uploadId, uploadsRootFolder, cancellationToken);
             throw;
         }

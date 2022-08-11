@@ -10,7 +10,7 @@ public record OrderDto
     public DateTimeOffset DateRequired { get; set; }
     public DateTimeOffset? DateCompleted { get; set; }
     public string? Description { get; init; }
-    public OrderState State { get; set; }
+    public OrderState State { get; set; } = OrderState.WaitingForExpertBid;
     public int AddressId { get; init; }
     public AddressDto Address { get; set; } = null!;
     public int ServiceId { get; init; }

@@ -13,25 +13,38 @@ namespace FinalProject.Endpoint.Common.Mappings
         public VMMappingProfile()
         {
             CreateMap<CustomerDto, CustomerListVM>().ReverseMap();
+
+
             CreateMap<ExpertDto, ExpertListVM>().ReverseMap();
+            CreateMap<ExpertOrderDto, ExpertOrderViewModel>()
+                .ForMember(z => z.ServiceName, a => a.MapFrom(x => x.Service.Description));
+            CreateMap<ExpertPublicProfileDto, ExpertPublicProfileViewModel>()
+                .ForMember(z => z.Services, a => a.MapFrom(x => x.Services.Select(x => x.Description)));
+
             CreateMap<UploadDto, UploadViewModel>().ReverseMap();
+
+
             CreateMap<OrderDto, OrderListViewModel>()
                 .ForMember(z => z.ServiceName, a => a.MapFrom(x => x.Service.Description));
             CreateMap<OrderDto, OrderEditViewModel>();
+            CreateMap<OrderSaveViewModel, OrderDto>();
+            //.ForMember(z => z.State, a => a.MapFrom(x => OrderState.WaitingForExpertBid));
+
             CreateMap<CommentDto, CommentListViewModel>();
-            CreateMap<CategoryDto, CategoryViewModel>();
-            CreateMap<ServiceViewModel, ServiceDto>().ReverseMap()
-                .ForMember(z => z.CategoryName, a => a.MapFrom(x => x.Category!.Name));
-            CreateMap<AddressDto, AddressViewModel>().ReverseMap();
-            CreateMap<OrderSaveViewModel, OrderDto>()
-                .ForMember(z => z.State, a => a.MapFrom(x => OrderState.WaitingForExpertBid));
-            CreateMap<BidDto, BidViewModel>().ReverseMap();
-            CreateMap<ExpertOrderDto, ExpertOrderViewModel>()
-                .ForMember(z => z.ServiceName, a => a.MapFrom(x => x.Service.Description));
             CreateMap<CommentSaveViewModel, CommentDto>();
-            CreateMap<ExpertPublicProfileDto, ExpertPublicProfileViewModel>()
-                .ForMember(z => z.Services, a => a.MapFrom(x => x.Services.Select(x => x.Description)));
+
+
+            CreateMap<CategoryDto, CategoryViewModel>();
             CreateMap<CategorySaveViewModel, CategoryDto>();
+
+
+            CreateMap<ServiceListViewModel, ServiceDto>().ReverseMap()
+                .ForMember(z => z.CategoryName, a => a.MapFrom(x => x.Category!.Name));
+            CreateMap<ServiceSaveViewModel, ServiceDto>();
+
+            CreateMap<AddressDto, AddressViewModel>().ReverseMap();
+
+            CreateMap<BidDto, BidViewModel>().ReverseMap();
         }
     }
 }

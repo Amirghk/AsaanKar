@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "PUxit8nIBXsmSBMt2rNOJBIZEAURWvcqFiFfSV738KxDx/xRUzrYVqkdzZsYXcsx45/t0Uf9qinRv3ycurD+dg==",
+  "dgSpecHash": "4V0KFK/qPe2TW2BMlzAspte2uu33Rs6qkkE5977zyuKgFil9gtH5U25PC1wQlOXkHiQcv0qMp4eMn3We+IzdFA==",
   "success": true,
   "projectFilePath": "G:\\FinalProjectMaktab\\FinalProjectMaktab\\src\\FinalProject\\FinalProject.Endpoint\\FinalProject.Endpoint.csproj",
   "expectedPackageFiles": [
@@ -138,6 +138,8 @@
     "C:\\Users\\Lion\\.nuget\\packages\\serilog.sinks.console\\4.0.1\\serilog.sinks.console.4.0.1.nupkg.sha512",
     "C:\\Users\\Lion\\.nuget\\packages\\serilog.sinks.debug\\2.0.0\\serilog.sinks.debug.2.0.0.nupkg.sha512",
     "C:\\Users\\Lion\\.nuget\\packages\\serilog.sinks.file\\5.0.0\\serilog.sinks.file.5.0.0.nupkg.sha512",
+    "C:\\Users\\Lion\\.nuget\\packages\\serilog.sinks.periodicbatching\\2.3.0\\serilog.sinks.periodicbatching.2.3.0.nupkg.sha512",
+    "C:\\Users\\Lion\\.nuget\\packages\\serilog.sinks.seq\\5.1.1\\serilog.sinks.seq.5.1.1.nupkg.sha512",
     "C:\\Users\\Lion\\.nuget\\packages\\stackexchange.redis\\2.2.4\\stackexchange.redis.2.2.4.nupkg.sha512",
     "C:\\Users\\Lion\\.nuget\\packages\\swashbuckle.aspnetcore\\6.3.0\\swashbuckle.aspnetcore.6.3.0.nupkg.sha512",
     "C:\\Users\\Lion\\.nuget\\packages\\swashbuckle.aspnetcore.swagger\\6.3.0\\swashbuckle.aspnetcore.swagger.6.3.0.nupkg.sha512",

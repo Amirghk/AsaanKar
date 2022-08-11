@@ -37,7 +37,7 @@ public class ServiceController : Controller
 
     public async Task<IActionResult> Index(CancellationToken cancellationToken)
     {
-        var model = _mapper.Map<List<ServiceViewModel>>(await _serviceService.GetAll(cancellationToken));
+        var model = _mapper.Map<List<ServiceListViewModel>>(await _serviceService.GetAll(cancellationToken));
         return View(model);
     }
 
@@ -55,7 +55,8 @@ public class ServiceController : Controller
     }
 
     [HttpPost]
-    public async Task<IActionResult> Create(CategorySaveViewModel model, CancellationToken cancellationToken)
+    [ValidateAntiForgeryToken]
+    public async Task<IActionResult> Create(ServiceSaveViewModel model, CancellationToken cancellationToken)
     {
         if (!ModelState.IsValid)
         {
@@ -70,6 +71,7 @@ public class ServiceController : Controller
     }
 
     [HttpPost]
+    [ValidateAntiForgeryToken]
     public async Task<IActionResult> Delete(int id, CancellationToken cancellationToken)
     {
         await _serviceService.Remove(id, cancellationToken);

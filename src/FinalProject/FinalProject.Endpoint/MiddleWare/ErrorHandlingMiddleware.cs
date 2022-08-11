@@ -1,5 +1,7 @@
 ﻿using FinalProject.Application.Common.Exceptions;
 using FinalProject.Domain.Enums;
+using FinalProject.Infrastructure.Identity;
+using Microsoft.AspNetCore.Identity;
 using System.Net;
 using System.Text.Json;
 
@@ -16,7 +18,7 @@ public class ErrorHandlingMiddleware
         _logger = logger;
     }
 
-    public async Task Invoke(HttpContext context)
+    public async Task Invoke(HttpContext context, UserManager<ApplicationUser> userManager)
     {
         try
         {
@@ -24,12 +26,13 @@ public class ErrorHandlingMiddleware
         }
         catch (Exception ex)
         {
-            HandleExceptionAsync(context, ex);
+            HandleExceptionAsync(context, ex, userManager);
         }
     }
 
-    private void HandleExceptionAsync(HttpContext context, Exception exception)
+    private void HandleExceptionAsync(HttpContext context, Exception exception, UserManager<ApplicationUser> userManager)
     {
+        _logger.LogInformation("Exception occured for {User}", userManager.GetUserId(context.User));
         _logger.LogError("Exception {Exception} Thrown At {Source}", exception, exception.Source);
         ErrorTypes error = exception switch
         {

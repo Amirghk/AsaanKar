@@ -19,12 +19,13 @@ using StackExchange.Redis;
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Logging.ClearProviders();
-builder.Logging.AddSeq(builder.Configuration.GetSection("Seq"));
+//builder.Logging.AddSeq(builder.Configuration.GetSection("Seq"));
 builder.Logging.AddProvider(new SerilogLoggerProvider());
 
 //builder.Host.UseSerilog((hostingContext, provider, loggerConfiguration) =>
 //    loggerConfiguration.ReadFrom.Configuration(builder.Configuration)
 //    );
+
 builder.Host.UseSerilog((ctx, lc) => lc
     .WriteTo.Console()
     .ReadFrom.Configuration(ctx.Configuration));
@@ -41,7 +42,7 @@ builder.Services.AddDistributedMemoryCache();
 // TODO : get redis config from user secrets
 builder.Services.AddStackExchangeRedisCache(options =>
 {
-    options.Configuration = "localhost:6379,password=foobared";
+    options.Configuration = builder.Configuration["Redis:ConnectionString"];
     options.InstanceName = "";
 });
 
@@ -83,10 +84,12 @@ builder.Services.AddDefaultIdentity<ApplicationUser>(options =>
 
 /// <summary>
 /// adds a global OperationCancelledException filter to handle the exception and short circuit the middleware
+/// & a logging filter to log 4 stages of action execution
 /// </summary>
 builder.Services.AddControllersWithViews(options =>
 {
     options.Filters.Add<OperationCancelledExceptionFilter>();
+    options.Filters.Add<LogActionFilter>();
 });
 
 builder.Services.AddRazorPages();
@@ -94,13 +97,13 @@ builder.Services.AddRazorPages();
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
+app.UseErrorHandling();
 if (!app.Environment.IsDevelopment())
 {
-    app.UseExceptionHandler("/Error");
+    // app.UseExceptionHandler("/Error");
     // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
     app.UseHsts();
 }
-app.UseErrorHandling();
 app.UseHttpsRedirection();
 app.UseStaticFiles();
 app.UseRouting();

@@ -32,12 +32,14 @@ namespace FinalProject.Endpoint.Areas.Administration.Controllers
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public async Task<IActionResult> Delete(int id, CancellationToken cancellationToken)
         {
             await _commentService.Remove(id, cancellationToken);
             return RedirectToAction(nameof(Index));
         }
 
+        [ValidateAntiForgeryToken]
         public async Task<IActionResult> Approve(int id, CancellationToken cancellationToken)
         {
             await _commentService.Approve(id, cancellationToken);

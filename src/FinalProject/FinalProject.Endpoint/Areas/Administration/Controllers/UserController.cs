@@ -73,6 +73,7 @@ namespace FinalProject.Endpoint.Areas.Administration.Controllers
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(UserEditViewModel model, CancellationToken cancellationToken)
         {
             var user = await _userManager.FindByNameAsync(model.Username);
@@ -122,6 +123,7 @@ namespace FinalProject.Endpoint.Areas.Administration.Controllers
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public async Task<IActionResult> Delete(string userName, CancellationToken cancellationToken)
         {
 

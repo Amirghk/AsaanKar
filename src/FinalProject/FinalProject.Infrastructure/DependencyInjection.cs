@@ -1,4 +1,5 @@
-﻿using FinalProject.Application.Common.Interfaces.Repositories;
+﻿using FinalProject.Application.Common.Interfaces.CacheRepositories;
+using FinalProject.Application.Common.Interfaces.Repositories;
 using FinalProject.Infrastructure.Persistence;
 using FinalProject.Infrastructure.Repositories;
 using Microsoft.EntityFrameworkCore;
@@ -14,7 +15,7 @@ namespace FinalProject.Infrastructure
             ConfigurationManager configuration)
         {
             services.AddDbContext<ApplicationDbContext>(options =>
-                options.UseSqlServer(configuration.GetConnectionString("DefaultConnection")));
+                options.UseSqlServer(configuration["SqlServer:ConnectionString"]));
             services.AddScoped<IAddressRepository, AddressRepository>();
             services.AddScoped<ICityRepository, CityRepository>();
             services.AddScoped<IProvinceRepository, ProvinceRepository>();
@@ -26,6 +27,9 @@ namespace FinalProject.Infrastructure
             services.AddScoped<IUploadRepository, UploadRepository>();
             services.AddScoped<ICommentRepository, CommentRepository>();
             services.AddScoped<IBidRepository, BidRepository>();
+            services.AddScoped<ICategoryRepositoryCache, CategoryRepositoryCache>();
+            services.AddScoped<ICityRepositoryCache, CityRepositoryCache>();
+            services.AddScoped<IProvinceRepositoryCache, ProvinceRepositoryCache>();
             return services;
         }
     }

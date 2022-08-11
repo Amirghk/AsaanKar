@@ -1,11 +1,11 @@
-﻿@model IEnumerable<ServiceViewModel>
+﻿@model IEnumerable<ServiceListViewModel>
 
 
 
 <div class="d-flex justify-content-between">
     <h1>سرویس ها</h1>
     <div class="d-inline-flex">
-        <a class='btn btn-success align-self-md-center' asp-controller="Category" asp-action="Create">ایجاد</a>
+        <a class='btn btn-success align-self-md-center' asp-controller="Service" asp-action="Create">ایجاد</a>
     </div>
 </div>
 
@@ -50,7 +50,7 @@
                                 </div>
                                 <div class="modal-footer">
                                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">بستن</button>
-                                    <form asp-controller="Category" asp-action="Delete" asp-route-id=@service.Id method="post">
+                                    <form asp-controller="Service" asp-action="Delete" asp-route-id=@service.Id method="post">
                                         <button class="btn btn-danger" type="submit">حذف</button>
                                     </form>
                                 </div>

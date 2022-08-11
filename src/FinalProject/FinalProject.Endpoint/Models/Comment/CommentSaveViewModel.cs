@@ -1,4 +1,5 @@
 ﻿
+using FinalProject.Endpoint.Common.Validations;
 using System.ComponentModel.DataAnnotations;
 
 namespace FinalProject.Endpoint.Models
@@ -9,6 +10,8 @@ namespace FinalProject.Endpoint.Models
         public string Content { get; set; } = null!;
         public string ExpertId { get; init; } = null!;
         [Display(Name = "بارگذاری تصویر")]
+        [DataType(DataType.Upload)]
+        [UploadFileExtentions(".png,.jpg,.jpeg,.gif")]
         public IFormFile? Image { get; set; }
     }
 }

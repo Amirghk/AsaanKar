@@ -42,6 +42,7 @@ namespace FinalProject.Endpoint.Areas.Administration.Controllers
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public async Task<IActionResult> Delete(int id, CancellationToken cancellationToken)
         {
             _logger.LogTrace("start of method : {}", nameof(Delete));
@@ -60,6 +61,7 @@ namespace FinalProject.Endpoint.Areas.Administration.Controllers
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(OrderEditViewModel model, CancellationToken cancellationToken)
         {
             _logger.LogTrace("start of method : {}", nameof(Edit));
@@ -88,6 +90,7 @@ namespace FinalProject.Endpoint.Areas.Administration.Controllers
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public async Task<IActionResult> EditBid(BidViewModel model, CancellationToken cancellationToken)
         {
             var bid = _mapper.Map<BidDto>(model);
