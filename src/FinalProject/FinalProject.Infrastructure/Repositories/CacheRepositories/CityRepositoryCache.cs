@@ -74,5 +74,22 @@ namespace FinalProject.Infrastructure.Repositories
                 await _cache.SetAsync(PREFIX + service.Id, content, options);
             }
         }
+
+        public async Task Set(CityDto cityDto)
+        {
+            var options = new DistributedCacheEntryOptions
+            {
+                AbsoluteExpiration = DateTimeOffset.Now.AddDays(1)
+            };
+
+
+            var content = Encoding.UTF8.GetBytes(JsonSerializer.Serialize(cityDto));
+            await _cache.SetAsync(PREFIX + cityDto.Id, content, options);
+        }
+
+        public async Task Delete(int id)
+        {
+            await _cache.RemoveAsync(PREFIX + id);
+        }
     }
 }

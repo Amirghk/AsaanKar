@@ -90,17 +90,25 @@ public class CategoryService : ICategoryService
         {
             await _uploadRepository.Remove((int)category.PictureId);
         }
-        return await _repository.Remove(id);
+        var categoryId = await _repository.Remove(id);
+        await _repositoryCache.Delete(categoryId);
+        return categoryId;
     }
 
     public async Task<int> Set(CategoryDto dto, CancellationToken cancellationToken)
     {
-        return await _repository.Add(dto);
+        var id = await _repository.Add(dto);
+        dto.Id = id;
+        await _repositoryCache.Set(dto);
+        return id;
     }
 
 
     public async Task<int> Update(CategoryDto dto, CancellationToken cancellationToken)
     {
-        return await _repository.Update(dto);
+        var id = await _repository.Update(dto);
+        await _repositoryCache.Delete(id);
+        await _repositoryCache.Set(dto);
+        return id;
     }
 }

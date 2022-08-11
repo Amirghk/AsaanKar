@@ -1,6 +1,6 @@
 ﻿namespace FinalProject.Endpoint.Models
 {
-    public class ServiceViewModel
+    public class ServiceListViewModel
     {
         public int Id { get; init; }
         public string Description { get; init; } = null!;

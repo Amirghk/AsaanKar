@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using FinalProject.Application.Common.DataTransferObjects;
 using FinalProject.Application.Common.Interfaces.Services;
 using FinalProject.Domain.Enums;
+using FinalProject.Endpoint.Common.Validations;
 using FinalProject.Infrastructure.Identity;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -64,7 +65,9 @@ namespace FinalProject.Endpoint.Areas.Identity.Pages.Account.Manage
             public string LastName { get; set; } = null!;
             [Display(Name = "تاریخ تولد")]
             public DateTime? BirthDate { get; set; }
-            public IFormFile ProfilePic { get; set; } = null;
+            [DataType(DataType.Upload)]
+            [UploadFileExtentions(".png,.jpg,.jpeg,.gif")]
+            public IFormFile? ProfilePic { get; set; }
             public string ProfilePicAddress { get; set; } = String.Empty;
         }
 

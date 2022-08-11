@@ -42,7 +42,7 @@ namespace FinalProject.Endpoint.Areas.Expert.Controllers
             {
                 return NotFound($"Unable to load user with ID '{_userManager.GetUserId(User)}'.");
             }
-            var services = _mapper.Map<List<ServiceViewModel>>(await _serviceService.GetAll(cancellationToken, expertId: user.Id));
+            var services = _mapper.Map<List<ServiceListViewModel>>(await _serviceService.GetAll(cancellationToken, expertId: user.Id));
             return View(services);
         }
 
@@ -54,8 +54,8 @@ namespace FinalProject.Endpoint.Areas.Expert.Controllers
             {
                 return NotFound($"Unable to load user with ID '{_userManager.GetUserId(User)}'.");
             }
-            var expertServices = _mapper.Map<List<ServiceViewModel>>(await _serviceService.GetAll(cancellationToken, expertId: user.Id));
-            var services = _mapper.Map<List<ServiceViewModel>>(await _serviceService.GetAll(cancellationToken));
+            var expertServices = _mapper.Map<List<ServiceListViewModel>>(await _serviceService.GetAll(cancellationToken, expertId: user.Id));
+            var services = _mapper.Map<List<ServiceListViewModel>>(await _serviceService.GetAll(cancellationToken));
             var servicesNotAdded = services.Where(x => !(expertServices.Select(x => x.Id).Contains(x.Id))).ToList();
             ViewBag.Services = servicesNotAdded.Select(x => new SelectListItem
             {

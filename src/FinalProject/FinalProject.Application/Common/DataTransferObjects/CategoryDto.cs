@@ -3,7 +3,7 @@ namespace FinalProject.Application.Common.DataTransferObjects;
 
 public record CategoryDto
 {
-    public int Id { get; init; }
+    public int Id { get; set; }
     public string Name { get; init; } = null!;
     public string Description { get; set; } = null!;
     public bool IsAvailable { get; set; }

@@ -84,10 +84,12 @@ builder.Services.AddDefaultIdentity<ApplicationUser>(options =>
 
 /// <summary>
 /// adds a global OperationCancelledException filter to handle the exception and short circuit the middleware
+/// & a logging filter to log 4 stages of action execution
 /// </summary>
 builder.Services.AddControllersWithViews(options =>
 {
     options.Filters.Add<OperationCancelledExceptionFilter>();
+    options.Filters.Add<LogActionFilter>();
 });
 
 builder.Services.AddRazorPages();

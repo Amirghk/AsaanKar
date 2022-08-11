@@ -15,7 +15,7 @@ namespace FinalProject.Infrastructure.Repositories
         private readonly IDistributedCache _cache;
         private readonly IConnectionMultiplexer _redis;
         private readonly AppSettings _appSettings;
-        private readonly string CATEGORYPREFIX;
+        private readonly string PREFIX;
 
         public CategoryRepositoryCache(
             IDistributedCache cache,
@@ -25,18 +25,18 @@ namespace FinalProject.Infrastructure.Repositories
             _cache = cache;
             _redis = redis;
             _appSettings = appSettings.Value;
-            CATEGORYPREFIX = _appSettings.Caching.Prefixes.Category;
+            PREFIX = _appSettings.Caching.Prefixes.Category;
         }
 
 
         public async Task<IEnumerable<CategoryDto>> GetAll(CancellationToken cancellationToken)
         {
-            List<string>? redisKeys = _redis.GetServer(_appSettings.Caching.Host, _appSettings.Caching.Port).Keys(pattern: $"{CATEGORYPREFIX}*")
+            List<string>? redisKeys = _redis.GetServer(_appSettings.Caching.Host, _appSettings.Caching.Port).Keys(pattern: $"{PREFIX}*")
                .AsQueryable().Select(p => p.ToString()).ToList();
 
             if (!redisKeys.Any())
             {
-                throw new CacheNotFoundException("Category", CATEGORYPREFIX);
+                throw new CacheNotFoundException("Category", PREFIX);
             }
 
             var result = new List<CategoryDto>();
@@ -50,10 +50,10 @@ namespace FinalProject.Infrastructure.Repositories
 
         public async Task<CategoryDto> Get(int id, CancellationToken cancellationToken)
         {
-            var category = await _cache.GetStringAsync($"{CATEGORYPREFIX}{id}", cancellationToken);
+            var category = await _cache.GetStringAsync($"{PREFIX}{id}", cancellationToken);
             if (category == null)
             {
-                throw new CacheNotFoundException("Category", CATEGORYPREFIX + id);
+                throw new CacheNotFoundException("Category", PREFIX + id);
             }
             return JsonSerializer.Deserialize<CategoryDto>(category)!;
         }
@@ -69,7 +69,7 @@ namespace FinalProject.Infrastructure.Repositories
             foreach (var category in categories)
             {
                 var content = Encoding.UTF8.GetBytes(JsonSerializer.Serialize(category));
-                await _cache.SetAsync(CATEGORYPREFIX + category.Id, content, options);
+                await _cache.SetAsync(PREFIX + category.Id, content, options);
             }
         }
 
@@ -80,7 +80,7 @@ namespace FinalProject.Infrastructure.Repositories
 
             if (!redisKeys.Any())
             {
-                throw new CacheNotFoundException("Category", CATEGORYPREFIX);
+                throw new CacheNotFoundException("Category", PREFIX);
             }
 
             var result = new List<CategoryDto>();
@@ -90,6 +90,23 @@ namespace FinalProject.Infrastructure.Repositories
             }
 
             return result.Where(x => x.ParentCategoryId == id).ToList();
+        }
+
+        public async Task Set(CategoryDto categoryDto)
+        {
+            var options = new DistributedCacheEntryOptions
+            {
+                AbsoluteExpiration = DateTimeOffset.Now.AddDays(1)
+            };
+
+
+            var content = Encoding.UTF8.GetBytes(JsonSerializer.Serialize(categoryDto));
+            await _cache.SetAsync(PREFIX + categoryDto.Id, content, options);
+        }
+
+        public async Task Delete(int id)
+        {
+            await _cache.RemoveAsync(PREFIX + id);
         }
     }
 }

@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using FinalProject.Application.Common.Interfaces.Services;
 using FinalProject.Domain.Enums;
+using FinalProject.Endpoint.Common.Filters;
 using FinalProject.Endpoint.Models;
 using Microsoft.AspNetCore.Mvc;
 
@@ -27,6 +28,9 @@ namespace FinalProject.Endpoint.Controllers
             _serviceService = serviceService;
             _logger = logger;
         }
+
+
+        [HttpGet]
         public async Task<IActionResult> Index(CancellationToken cancellationToken)
         {
             _logger.LogTrace("Start of {method}", nameof(Index));

@@ -11,6 +11,8 @@ namespace FinalProject.Application.Common.Interfaces.CacheRepositories
     {
         Task<IEnumerable<CityDto>> GetAll(CancellationToken cancellationToken);
         Task<CityDto> Get(int id, CancellationToken cancellationToken);
-        Task Set(IEnumerable<CityDto> categories);
+        Task Set(IEnumerable<CityDto> cities);
+        Task Set(CityDto cityDto);
+        Task Delete(int id);
     }
 }

@@ -83,7 +83,6 @@
 	  <None Include="Areas\Identity\Pages\Account\LoginWithRecoveryCode.cshtml" />
 	  <None Include="Areas\Identity\Pages\Account\Logout.cshtml" />
 	  <None Include="Areas\Identity\Pages\Account\Manage\AddAddress.cshtml" />
-	  <None Include="Areas\Identity\Pages\Account\Manage\AdminIndex.cshtml" />
 	  <None Include="Areas\Identity\Pages\Account\Manage\ChangePassword.cshtml" />
 	  <None Include="Areas\Identity\Pages\Account\Manage\CustomerAddress.cshtml" />
 	  <None Include="Areas\Identity\Pages\Account\Manage\CustomerIndex.cshtml" />
@@ -126,7 +125,6 @@
 	  <None Include="Views\Order\Details.cshtml" />
 	  <None Include="Views\Order\Index.cshtml" />
 	  <None Include="Views\Shared\Error.cshtml" />
-	  <None Include="Views\Shared\_Layodut.cshtml" />
 	  <None Include="Views\Shared\_Layout.cshtml" />
 	  <None Include="Views\Shared\_LoginPartial.cshtml" />
 	  <None Include="Views\Shared\_ValidationScriptsPartial.cshtml" />

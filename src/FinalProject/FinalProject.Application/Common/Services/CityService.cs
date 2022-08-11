@@ -55,16 +55,25 @@ public class CityService : ICityService
 
     public async Task<int> Remove(int id, CancellationToken cancellationToken)
     {
-        return await _repository.Remove(id);
+        var cityId = await _repository.Remove(id);
+        await _repositoryCache.Delete(cityId);
+        return cityId;
     }
 
     public async Task<int> Set(CityDto dto, CancellationToken cancellationToken)
     {
-        return await _repository.Add(dto);
+        var id = await _repository.Add(dto);
+        dto.Id = id;
+        await _repositoryCache.Set(dto);
+        return id;
     }
+
 
     public async Task<int> Update(CityDto dto, CancellationToken cancellationToken)
     {
-        return await _repository.Update(dto);
+        var id = await _repository.Update(dto);
+        await _repositoryCache.Delete(id);
+        await _repositoryCache.Set(dto);
+        return id;
     }
 }

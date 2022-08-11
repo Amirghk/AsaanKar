@@ -1,10 +1,12 @@
 ﻿using FinalProject.Application.Common.DataTransferObjects;
 using FinalProject.Application.Common.Interfaces.Services;
 using FinalProject.Domain.Enums;
+using FinalProject.Endpoint.Common.Validations;
 using FinalProject.Infrastructure.Identity;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using System.ComponentModel.DataAnnotations;
 
 namespace FinalProject.Endpoint.Areas.Identity.Pages.Account.Manage
 {
@@ -35,6 +37,8 @@ namespace FinalProject.Endpoint.Areas.Identity.Pages.Account.Manage
 
         public class InputModel
         {
+            [DataType(DataType.Upload)]
+            [UploadFileExtentions(".png,.jpg,.jpeg,.gif")]
             public IFormFile WorkSample { get; set; } = null!;
         }
         public void OnGet()

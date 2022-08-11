@@ -1734,7 +1734,6 @@ G:\FinalProjectMaktab\FinalProjectMaktab\src\FinalProject\FinalProject.Endpoint\
 G:\FinalProjectMaktab\FinalProjectMaktab\src\FinalProject\FinalProject.Endpoint\obj\Debug\net6.0\FinalProject.Endpoint.pdb
 G:\FinalProjectMaktab\FinalProjectMaktab\src\FinalProject\FinalProject.Endpoint\obj\Debug\net6.0\FinalProject.Endpoint.genruntimeconfig.cache
 G:\FinalProjectMaktab\FinalProjectMaktab\src\FinalProject\FinalProject.Endpoint\obj\Debug\net6.0\ref\FinalProject.Endpoint.dll
-G:\FinalProjectMaktab\FinalProjectMaktab\src\FinalProject\FinalProject.Endpoint\obj\Debug\net6.0\scopedcss\Views\Shared\_Layodut.cshtml.rz.scp.css
 G:\FinalProjectMaktab\FinalProjectMaktab\src\FinalProject\FinalProject.Endpoint\bin\Debug\net6.0\Microsoft.Extensions.Caching.StackExchangeRedis.dll
 G:\FinalProjectMaktab\FinalProjectMaktab\src\FinalProject\FinalProject.Endpoint\bin\Debug\net6.0\Pipelines.Sockets.Unofficial.dll
 G:\FinalProjectMaktab\FinalProjectMaktab\src\FinalProject\FinalProject.Endpoint\bin\Debug\net6.0\StackExchange.Redis.dll

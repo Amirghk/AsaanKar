@@ -61,7 +61,6 @@ namespace FinalProject.Infrastructure.Repositories
 
         public async Task Set(IEnumerable<ProvinceDto> provinces)
         {
-            // TODO : Get these from config
             var options = new DistributedCacheEntryOptions
             {
                 AbsoluteExpiration = DateTimeOffset.Now.AddDays(1)
@@ -73,6 +72,23 @@ namespace FinalProject.Infrastructure.Repositories
                 var content = Encoding.UTF8.GetBytes(JsonSerializer.Serialize(province));
                 await _cache.SetAsync(PREFIX + province.Id, content, options);
             }
+        }
+
+        public async Task Set(ProvinceDto provinceDto)
+        {
+            var options = new DistributedCacheEntryOptions
+            {
+                AbsoluteExpiration = DateTimeOffset.Now.AddDays(1)
+            };
+
+
+            var content = Encoding.UTF8.GetBytes(JsonSerializer.Serialize(provinceDto));
+            await _cache.SetAsync(PREFIX + provinceDto.Id, content, options);
+        }
+
+        public async Task Delete(int id)
+        {
+            await _cache.RemoveAsync(PREFIX + id);
         }
     }
 }
