@@ -33,7 +33,14 @@ public class ErrorHandlingMiddleware
     private void HandleExceptionAsync(HttpContext context, Exception exception, UserManager<ApplicationUser> userManager)
     {
         _logger.LogInformation("Exception occured for {User}", userManager.GetUserId(context.User));
-        _logger.LogError("Exception {Exception} Thrown At {Source}", exception, exception.Source);
+        if (exception is NotFoundException || exception is UnfinishedOrderException)
+        {
+            _logger.LogWarning("Exception {Exception} Thrown At {Source}", exception, exception.Source);
+        }
+        else
+        {
+            _logger.LogError("Exception {Exception} Thrown At {Source}", exception, exception.Source);
+        }
         ErrorTypes error = exception switch
         {
             NotFoundException => ErrorTypes.NotFound,

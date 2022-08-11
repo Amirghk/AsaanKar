@@ -131,6 +131,7 @@ namespace FinalProject.Endpoint.Areas.Identity.Pages.Account
                 }
                 else
                 {
+                    _logger.LogWarning("Invalid login attempt.");
                     ModelState.AddModelError(string.Empty, "Invalid login attempt.");
                     return Page();
                 }
