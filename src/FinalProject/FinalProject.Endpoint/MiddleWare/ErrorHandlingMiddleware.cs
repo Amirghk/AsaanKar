@@ -2,6 +2,7 @@
 using FinalProject.Domain.Enums;
 using FinalProject.Infrastructure.Identity;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.Data.SqlClient;
 using System.Net;
 using System.Text.Json;
 
@@ -33,13 +34,21 @@ public class ErrorHandlingMiddleware
     private void HandleExceptionAsync(HttpContext context, Exception exception, UserManager<ApplicationUser> userManager)
     {
         _logger.LogInformation("Exception occured for {User}", userManager.GetUserId(context.User));
-        if (exception is NotFoundException || exception is UnfinishedOrderException)
+
+        switch (exception)
         {
-            _logger.LogWarning("Exception {Exception} Thrown At {Source}", exception, exception.Source);
-        }
-        else
-        {
-            _logger.LogError("Exception {Exception} Thrown At {Source}", exception, exception.Source);
+            case NotFoundException:
+                _logger.LogWarning("Exception {Exception} Thrown At {Source}", exception, exception.Source);
+                break;
+            case UnfinishedOrderException:
+                _logger.LogWarning("Exception {Exception} Thrown At {Source}", exception, exception.Source);
+                break;
+            case SqlException:
+                _logger.LogCritical("Exception {Exception} Thrown At {Source}", exception, exception.Source);
+                break;
+            default:
+                _logger.LogError("Exception {Exception} Thrown At {Source}", exception, exception.Source);
+                break;
         }
         ErrorTypes error = exception switch
         {
