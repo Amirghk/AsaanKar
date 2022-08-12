@@ -42,7 +42,7 @@ namespace FinalProject.Endpoint.Areas.Identity.Pages.Account.Manage
             _rootPath = environment.WebRootPath;
         }
 
-
+        [Display(Name = "نام کاربری")]
         public string Username { get; set; }
 
         [TempData]
@@ -57,7 +57,7 @@ namespace FinalProject.Endpoint.Areas.Identity.Pages.Account.Manage
         {
 
             [Phone]
-            [Display(Name = "Phone number")]
+            [Display(Name = "شماره تلفن")]
             public string PhoneNumber { get; set; }
             [Display(Name = "نام")]
             public string FirstName { get; init; } = null!;
@@ -67,6 +67,7 @@ namespace FinalProject.Endpoint.Areas.Identity.Pages.Account.Manage
             public DateTime? BirthDate { get; set; }
             [DataType(DataType.Upload)]
             [UploadFileExtentions(".png,.jpg,.jpeg,.gif")]
+            [Display(Name = "عکس پروفایل")]
             public IFormFile? ProfilePic { get; set; }
             public string ProfilePicAddress { get; set; } = String.Empty;
         }

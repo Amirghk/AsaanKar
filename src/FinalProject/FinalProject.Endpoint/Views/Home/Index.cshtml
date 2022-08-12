@@ -12,18 +12,22 @@
     <br />
 
     <h1>سرویس مورد نظرتان را انتخاب کنید</h1>
-    <div class="glass d-lg-flex flex-row justify-content-center p-3">
+    <div class="glass d-lg-flex flex-row justify-content-center p-3 my-5">
 
         @foreach (var category in Model)
         {
             @if (category.ParentCategoryId == null)
             {
-                <div class="bg-transparent mx-2" style="width: 7rem;" >
+                <div class="bg-transparent mx-2" style="width: 7rem;">
                     @if (category.PictureId != null)
                     {
                         <a asp-controller="Home" asp-action="Category" asp-route-id=@category.Id>
                             <img class="card-img-top" style="border-radius: 1rem;" src="~/@await UploadService.GetFileDirectory((int)category.PictureId, Context.RequestAborted)" alt="Category Image">
                         </a>
+                        <div class="text-center">
+
+                            @category.Name
+                        </div>
                     }
                 </div>
             }
