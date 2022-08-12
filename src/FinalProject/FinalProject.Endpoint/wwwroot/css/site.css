@@ -20,20 +20,38 @@ html {
 
 body {
     margin-bottom: 60px;
-    font-family: Samim, sans-serif;
-    background-image: url("../background.jpg");
-    background-color: #cccccc;
+    font-family: Samim, sans-serif !important;
+    /*background-image: url("../background.jpg");
+    background-color: #cccccc;*/
     /*height: 500px;*/ /* You must set a specified height */
-    background-position: center; /* Center the image */
-    background-repeat: no-repeat; /* Do not repeat the image */
-    background-size: cover; /* Resize the background image to cover the entire container */
-    background-attachment: fixed;
+    /*background-position: center;*/ /* Center the image */
+    /*background-repeat: no-repeat;*/ /* Do not repeat the image */
+    /*background-size: cover;*/ /* Resize the background image to cover the entire container */
+    /*background-attachment: fixed;*/
+    /*    background: rgb(63,94,251);
+    background: radial-gradient(circle, rgba(63,94,251,1) 0%, rgba(252,140,70,1) 100%);*/
+
+
+    background: rgb(255,255,255);
+    background: radial-gradient(circle, rgba(255,255,255,1) 0%, rgba(180,212,222,1) 65%, rgba(148,163,233,1) 100%);
 }
 
 #mynav {
-    background-color: rgb(125, 90, 54, 0) !important;
     border: none !important;
+    position: relative;
 }
+
+    #mynav:after {
+        content: "";
+        position: absolute;
+        z-index: 1;
+        top: 0;
+        right: 0;
+        pointer-events: none;
+        background-image: linear-gradient(to top, rgba(255,255,255, 0), rgba(255,255,255, 1) 90%);
+        width: 100%;
+        height: 4em;
+    }
 
 .nav-item {
     transition-duration: 1s;
@@ -41,12 +59,12 @@ body {
 }
 
     .nav-item a {
-        color: antiquewhite !important;
+        color: rgb(33, 37, 41) !important;
         font-size: 1.5em;
     }
 
     .nav-item:hover {
-        background-color: black !important;
+        color: darkblue !important;
     }
 
 
@@ -74,7 +92,7 @@ td, th {
 }
 */
 p, h1, h2, h3, h4, h5, h6, .card-title {
-    color: antiquewhite !important;
+    color: rgb(33, 37, 41) !important;
 }
 
 .form-floating, .form-control, .form-label {
@@ -87,7 +105,7 @@ p, h1, h2, h3, h4, h5, h6, .card-title {
     background-color: rgba(55,55,55, 0) !important;
 }
 
-.glass {
+.glassbefore {
     /* From https://css.glass */
     background: rgba(0, 0, 0, 0.52) !important;
     border-radius: 16px !important;
@@ -96,6 +114,17 @@ p, h1, h2, h3, h4, h5, h6, .card-title {
     -webkit-backdrop-filter: blur(11.7px) !important;
     border: 1px solid rgba(0, 0, 0, 0.67) !important;
 }
+
+.glass {
+    /* From https://css.glass */
+    background: rgba(255, 255, 255, 0.35) !important;
+    border-radius: 16px !important;
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1) !important;
+    backdrop-filter: blur(5px) !important;
+    -webkit-backdrop-filter: blur(5px) !important;
+    border: 1px solid rgba(255, 255, 255, 0.3) !important;
+}
+
 
 .glass-dark {
     /* From https://css.glass */

@@ -13,7 +13,7 @@ namespace FinalProject.Endpoint.Models
         public int? ParentCategoryId { get; init; }
         [Display(Name = "تصویر")]
         [DataType(DataType.Upload)]
-        [UploadFileExtentions(".png,.jpg,.jpeg,.gif")]
+        [UploadFileExtentions(".png,.jpg,.jpeg,.gif,.svg")]
         public IFormFile? Picture { get; set; }
     }
 }

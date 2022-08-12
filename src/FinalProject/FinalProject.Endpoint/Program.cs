@@ -15,6 +15,7 @@ using FinalProject.Application.Common.ConfigurationModels;
 using FinalProject.Endpoint.Common.Filters;
 using FinalProject.Endpoint.MiddleWare;
 using StackExchange.Redis;
+using FinalProject.Infrastructure.Persistence.SeedData;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -93,8 +94,8 @@ builder.Services.AddControllersWithViews(options =>
 });
 
 builder.Services.AddRazorPages();
-
 var app = builder.Build();
+
 
 // Configure the HTTP request pipeline.
 app.UseErrorHandling();
@@ -108,6 +109,7 @@ if (!app.Environment.IsDevelopment())
 app.UseStaticFiles();
 app.UseRouting();
 app.UseAuthentication();
+
 app.UseAuthorization();
 app.UseEndpoints(endpoints =>
 {
