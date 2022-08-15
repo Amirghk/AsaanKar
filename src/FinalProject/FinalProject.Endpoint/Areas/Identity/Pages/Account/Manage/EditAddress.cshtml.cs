@@ -1,6 +1,7 @@
 using AutoMapper;
 using FinalProject.Application.Common.DataTransferObjects;
 using FinalProject.Application.Common.Interfaces.Services;
+using FinalProject.Domain.Enums;
 using FinalProject.Endpoint.Areas.Identity.Models;
 using FinalProject.Endpoint.Common.Extensions;
 using FinalProject.Infrastructure.Identity;
@@ -43,45 +44,35 @@ namespace FinalProject.Endpoint.Areas.Identity.Pages.Account.Manage
         public AddressViewModel Address { get; set; }
 
         public IEnumerable<SelectListItem> Cities { get; set; }
-        public IEnumerable<SelectListItem> Provinces { get; set; }
-        public int State = 1;
-
 
         public async Task LoadAsync(int id, CancellationToken cancellationToken)
         {
             Address = _mapper.Map<AddressViewModel>(await _addressService.GetById(id, cancellationToken));
         }
 
-        public async Task<IActionResult> OnGetAsync(int id, CancellationToken cancellationToken)
-        {
-            await LoadAsync(id, cancellationToken);
-            var provinces = await _provinceService.GetAll(cancellationToken);
-            Provinces = provinces.Select(p => new SelectListItem
-            {
-                Text = p.Name,
-                Value = p.Id.ToString()
-            });
 
-            return Page();
-        }
-
-        public async Task<IActionResult> OnPostProvinceAsync(int id, CancellationToken cancellationToken)
+        public async Task<IActionResult> OnGetAsync(int addressId, int provinceId, CancellationToken cancellationToken)
         {
-            State = 2;
+
+
             var cities = await _cityService.GetAll(cancellationToken);
-            var provinceCities = cities.Where(c => c.ProvinceId == Address.ProvinceId).ToList();
+            var provinceCities = cities.Where(c => c.ProvinceId == provinceId).ToList();
             Cities = provinceCities.Select(c => new SelectListItem
             {
                 Value = c.Id.ToString(),
                 Text = c.Name.ToString()
             });
-            await LoadAsync(id, cancellationToken);
+
+            await CheckIfAddressBelongsToUser(addressId, cancellationToken);
+            await LoadAsync(addressId, cancellationToken);
+
 
             return Page();
         }
 
         public async Task<IActionResult> OnPostAsync(int id, CancellationToken cancellationToken)
         {
+            await CheckIfAddressBelongsToUser(id, cancellationToken);
             var addressDto = await _addressService.GetById(id, cancellationToken);
             addressDto.CityId = Address.CityId;
             addressDto.Content = Address.Content;
@@ -90,6 +81,29 @@ namespace FinalProject.Endpoint.Areas.Identity.Pages.Account.Manage
             if (User.IsExpert())
                 return RedirectToPage("ExpertAddress");
             return RedirectToPage("CustomerAddress");
+        }
+
+        public async Task CheckIfAddressBelongsToUser(int addressId, CancellationToken cancellationToken)
+        {
+            var user = await _userManager.GetUserAsync(User);
+            if (user == null)
+            {
+                throw new UnauthorizedAccessException("User not logged in with ID '{_userManager.GetUserId(User)}");
+            }
+            bool result;
+
+            if (User.IsExpert())
+            {
+                result = await _addressService.CheckIfAddressIsForUser(addressId, user.Id, AddressCategory.Expert, cancellationToken);
+            }
+            else
+            {
+                result = await _addressService.CheckIfAddressIsForUser(addressId, user.Id, AddressCategory.Customer, cancellationToken);
+            }
+            if (!result)
+            {
+                throw new UnauthorizedAccessException($"User {user.Id} tried to access Address {addressId}");
+            }
         }
     }
 }

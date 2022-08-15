@@ -2,6 +2,7 @@ using AutoMapper;
 using FinalProject.Application.Common.Interfaces.Services;
 using FinalProject.Application.Common.DataTransferObjects;
 using FinalProject.Application.Common.Interfaces.Repositories;
+using FinalProject.Domain.Enums;
 
 namespace FinalProject.Application.Common.Services;
 
@@ -20,6 +21,19 @@ public class AddressService : IAddressService
         _cityRepository = cityRepository;
         _provinceService = provinceService;
         _repository = repository;
+    }
+
+    public async Task<bool> CheckIfAddressIsForUser(int addressId, string userId, AddressCategory addressCategory, CancellationToken cancellationToken)
+    {
+        var address = await _repository.GetById(addressId, cancellationToken);
+        if (addressCategory == AddressCategory.Customer)
+        {
+            return (address.CustomerId == userId);
+        }
+        else
+        {
+            return (address.ExpertId == userId);
+        }
     }
 
     public async Task<IEnumerable<AddressDto>> GetAll(CancellationToken cancellationToken)

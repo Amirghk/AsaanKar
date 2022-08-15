@@ -1,0 +1,30 @@
+﻿@page
+@model FinalProject.Endpoint.Areas.Identity.Pages.Account.Manage.ChooseCityModel
+@{
+}
+
+
+@if (Model.State == 1)
+{
+    <form asp-page="AddAddress" method="get" class="col-md-6">
+
+        <select name="provinceId" id="provinceId" class="form-control glass-dark" asp-items="@Model.Provinces">
+            <option disabled selected>انتخاب استان</option>
+        </select>
+        <span asp-validation-for="Provinces" class="text-danger"></span>
+        <button type="submit" class="btn btn-primary my-4">ادامه</button>
+    </form>
+}
+else
+{
+    <form asp-page="EditAddress" method="get" class="col-md-6">
+
+        <select name="provinceId" id="provinceId" class="form-control glass-dark" asp-items="@Model.Provinces">
+            <option disabled selected>انتخاب استان</option>
+        </select>
+        <input type="hidden" value=@Model.AddressId name="addressId" id="addressId">
+        <span asp-validation-for="Provinces" class="text-danger"></span>
+        <button type="submit" class="btn btn-primary my-4">ادامه</button>
+    </form>
+}
+

@@ -5,7 +5,7 @@
 using System;
 using Microsoft.AspNetCore.Mvc.Rendering;
 
-namespace  FinalProject.Endpoint.Areas.Identity.Pages.Account.Manage
+namespace FinalProject.Endpoint.Areas.Identity.Pages.Account.Manage
 {
     /// <summary>
     ///     This API supports the ASP.NET Core Identity default UI infrastructure and is not intended to be used
@@ -13,6 +13,10 @@ namespace  FinalProject.Endpoint.Areas.Identity.Pages.Account.Manage
     /// </summary>
     public static class ManageNavPages
     {
+
+        public static string CustomerAddress => "CustomerAddress";
+        public static string ExpertWorkSample => "ExpertWorkSample";
+        public static string ExpertAddress => "ExpertAddress";
         /// <summary>
         ///     This API supports the ASP.NET Core Identity default UI infrastructure and is not intended to be used
         ///     directly from your code. This API may change or be removed in future releases.
@@ -60,6 +64,10 @@ namespace  FinalProject.Endpoint.Areas.Identity.Pages.Account.Manage
         ///     directly from your code. This API may change or be removed in future releases.
         /// </summary>
         public static string TwoFactorAuthentication => "TwoFactorAuthentication";
+
+        public static string CustomerAddressNavClass(ViewContext viewContext) => PageNavClass(viewContext, CustomerAddress);
+        public static string WorkSampleNavClass(ViewContext viewContext) => PageNavClass(viewContext, ExpertWorkSample);
+        public static string ExpertAddressNavClass(ViewContext viewContext) => PageNavClass(viewContext, ExpertAddress);
 
         /// <summary>
         ///     This API supports the ASP.NET Core Identity default UI infrastructure and is not intended to be used
