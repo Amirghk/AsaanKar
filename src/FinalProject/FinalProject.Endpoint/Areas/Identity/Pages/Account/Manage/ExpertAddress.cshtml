@@ -5,12 +5,14 @@
 
 @if (!String.IsNullOrEmpty(Model.Address))
 {
-    <div class="card p-3 border-1 my-4 glass-dark">
+    <div class="card bg-transparent p-3 border-1 my-4 glass-dark">
         @Model.Address
     </div>
-    <a asp-page="EditAddress" asp-route-id=@Model.AddressId class="btn btn-warning">تغییر آدرس</a>
+    <a asp-page="ChooseProvince" asp-page-handler="Edit" asp-route-id=@Model.AddressId class="btn btn-warning">تغییر آدرس</a>
 }
 else
 {
-    <a asp-page="AddAddress"  class="btn btn-success">اضافه کردن آدرس جدید</a>
+    <h2>شما هنوز آدرسی ثبت نکردید!</h2>
+    <br />
+    <a asp-page="ChooseProvince"  class="btn btn-success">اضافه کردن آدرس جدید</a>
 }

@@ -4,40 +4,25 @@
 }
 
 
-@if (Model.State == 1)
-{
-    <form asp-page="" asp-page-handler="province" asp-route-id=@Model.Address.Id method="post">
 
-        <select asp-for=Address.ProvinceId class="form-control" asp-items="@Model.Provinces">
-            <option disabled selected>انتخاب استان</option>
+<form asp-page="" asp-route-id=@Model.Address.Id method="post">
+
+    <div class="form-floating">
+        <select asp-for="Address.CityId" class="form-control" asp-items="@Model.Cities">
+            <option disabled selected>انتخاب شهر</option>
         </select>
-        <label asp-for="Address.ProvinceId"></label>
-        <span asp-validation-for="Address.ProvinceId" class="text-danger"></span>
-        <button type="submit" class="btn btn-primary" asp-page-handler="province" asp-route-id=@Model.Address.Id>ادامه</button>
-    </form>
-}
-
-@if (Model.State == 2)
-{
-    <form asp-page="" asp-route-id=@Model.Address.Id method="post">
-
-        <div class="form-floating">
-                <select asp-for="Address.CityId" class="form-control" asp-items="@Model.Cities">
-                        <option disabled selected>انتخاب شهر</option>
-                    </select>
-                <label asp-for="Address.CityId"></label>
-                <span asp-validation-for="Address.CityId" class="text-danger"></span>
-            </div>
-            <div class="form-floating">
-                <input asp-for="Address.Content" class="form-control" autocomplete="address" aria-required="true" />
-                <label asp-for="Address.Content"></label>
-                <span asp-validation-for="Address.Content" class="text-danger"></span>
-            </div>
-            <div class="form-floating">
-                <input asp-for="Address.PostalCode" class="form-control" autocomplete="postal-code" aria-required="true" />
-                <label asp-for="Address.PostalCode"></label>
-                <span asp-validation-for="Address.PostalCode" class="text-danger"></span>
-                <button type="submit" class="btn btn-primary" asp-route-id=@Model.Address.Id>ثبت</button>
-            </div>
-    </form>
-}
+        <label asp-for="Address.CityId"></label>
+        <span asp-validation-for="Address.CityId" class="text-danger"></span>
+    </div>
+    <div class="form-floating">
+        <input asp-for="Address.Content" class="form-control" autocomplete="address" aria-required="true" />
+        <label asp-for="Address.Content"></label>
+        <span asp-validation-for="Address.Content" class="text-danger"></span>
+    </div>
+    <div class="form-floating">
+        <input asp-for="Address.PostalCode" class="form-control" autocomplete="postal-code" aria-required="true" />
+        <label asp-for="Address.PostalCode"></label>
+        <span asp-validation-for="Address.PostalCode" class="text-danger"></span>
+        <button type="submit" class="btn btn-primary" asp-route-id=@Model.Address.Id>ثبت</button>
+    </div>
+</form>

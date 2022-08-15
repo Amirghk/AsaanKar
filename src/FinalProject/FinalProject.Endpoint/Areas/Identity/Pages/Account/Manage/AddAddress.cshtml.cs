@@ -44,29 +44,27 @@ namespace FinalProject.Endpoint.Areas.Identity.Pages.Account.Manage
         public AddressViewModel Address { get; set; }
 
         public IEnumerable<SelectListItem> Cities { get; set; }
-        public IEnumerable<SelectListItem> Provinces { get; set; }
-        public int State = 1;
+        //public IEnumerable<SelectListItem> Provinces { get; set; }
 
 
 
 
-        public async Task<IActionResult> OnGetAsync(CancellationToken cancellationToken)
+        //public async Task<IActionResult> OnGetAsync(CancellationToken cancellationToken)
+        //{
+        //    var provinces = await _provinceService.GetAll(cancellationToken);
+        //    Provinces = provinces.Select(p => new SelectListItem
+        //    {
+        //        Text = p.Name,
+        //        Value = p.Id.ToString()
+        //    });
+
+        //    return Page();
+        //}
+
+        public async Task<IActionResult> OnGetAsync(int provinceId, CancellationToken cancellationToken)
         {
-            var provinces = await _provinceService.GetAll(cancellationToken);
-            Provinces = provinces.Select(p => new SelectListItem
-            {
-                Text = p.Name,
-                Value = p.Id.ToString()
-            });
-
-            return Page();
-        }
-
-        public async Task<IActionResult> OnPostProvinceAsync(CancellationToken cancellationToken)
-        {
-            State = 2;
             var cities = await _cityService.GetAll(cancellationToken);
-            var provinceCities = cities.Where(c => c.ProvinceId == Address.ProvinceId).ToList();
+            var provinceCities = cities.Where(c => c.ProvinceId == provinceId).ToList();
             Cities = provinceCities.Select(c => new SelectListItem
             {
                 Value = c.Id.ToString(),

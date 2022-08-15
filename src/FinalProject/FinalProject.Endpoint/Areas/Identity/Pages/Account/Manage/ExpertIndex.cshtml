@@ -9,6 +9,10 @@
 <div class="transparent my-4">
     <form id="profile-form" method="post" enctype="multipart/form-data">
         <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <div class="form-floating d-flex justify-content-between">
+            <input asp-for="Input.ProfilePic" class="form-control" style="display:none;" id="getFile"/>      
+            <span asp-validation-for="Input.ProfilePic" class="text-danger"></span>
+        </div>
         <div class="form-floating">
             <input asp-for="Username" class="form-control" disabled />
             <label asp-for="Username" class="form-label"></label>
@@ -40,11 +44,6 @@
             <span asp-validation-for="Input.NationalCode" class="text-danger"></span>
         </div>
 
-        <div class="form-floating d-flex justify-content-between">
-            <input asp-for="Input.ProfilePic" class="form-control" style="display:none;" id="getFile"/>
-            <button class="btn btn-info my-2" onclick="document.getElementById('getFile').click()">انتخاب عکس پروفایل</button>
-            <span asp-validation-for="Input.ProfilePic" class="text-danger"></span>
-        </div>
         <div class="form-floating">
             <input asp-for="Input.Bio" class="form-control" />
             <label asp-for="Input.Bio" class="form-label"></label>

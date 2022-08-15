@@ -5,13 +5,12 @@
 }
 <div class="my-4">
 
-    <h3>@ViewData["Title"]</h3>
     <partial name="_StatusMessage" for="StatusMessage" />
-    <form id="profile-form" asp-page="" method="post" enctype="multipart/form-data" >
+    <form id="profile-form" asp-page="" method="post" enctype="multipart/form-data">
 
         <div class="form-floating my-3">
-            <input asp-for="Input.WorkSample" class="form-control" />
-            <label asp-for="Input.WorkSample" class="form-label"></label>
+            <input asp-for="Input.WorkSample" style="display: none;" id="work-sample" class="form-control" />
+            <button class="btn btn-info my-2" onclick="document.getElementById('work-sample').click()">@Html.DisplayNameFor(x=> x.Input.WorkSample)</button>
             <span asp-validation-for="Input.WorkSample" class="text-danger"></span>
         </div>
         <button type="submit" class="btn btn-primary">افزودن</button>

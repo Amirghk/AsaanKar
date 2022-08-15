@@ -1,10 +1,10 @@
 ﻿@using FinalProject.Application.Common.Interfaces.Services
+@using FinalProject.Endpoint.Areas.Identity.Models
 @using FinalProject.Endpoint.Common.Extensions
 @inject UserManager<ApplicationUser> UserManager
 @inject ICustomerService CustomerSerivce
 @inject IExpertService ExpertService
 @inject IUploadService UploadService
-
 
 @{
     if (ViewData.TryGetValue("ParentLayout", out var parentLayout))
@@ -15,7 +15,6 @@
     {
         Layout = "/Areas/Identity/Pages/_Layout.cshtml";
     }
-
     var user = await UserManager.GetUserAsync(User);
 }
 
@@ -58,6 +57,7 @@
                             }
 
                             <h5 class="my-3">@await ExpertService.GetName(user.Id, Context.RequestAborted)</h5>
+                            <button class="btn btn-info my-2" onclick="document.getElementById('getFile').click()">انتخاب عکس پروفایل</button>
                         }
                     </div>
                 </div>

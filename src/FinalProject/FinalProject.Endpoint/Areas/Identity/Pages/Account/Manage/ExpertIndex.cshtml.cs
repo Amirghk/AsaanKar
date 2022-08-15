@@ -1,6 +1,7 @@
 ﻿using FinalProject.Application.Common.DataTransferObjects;
 using FinalProject.Application.Common.Interfaces.Services;
 using FinalProject.Domain.Enums;
+using FinalProject.Endpoint.Areas.Identity.Models;
 using FinalProject.Endpoint.Common.Validations;
 using FinalProject.Infrastructure.Identity;
 using Microsoft.AspNetCore.Identity;
@@ -35,7 +36,7 @@ public class ExpertIndexModel : PageModel
         _rootPath = environment.WebRootPath;
     }
 
-
+    [Display(Name = "نام کاربری")]
     public string Username { get; set; }
 
     [TempData]
@@ -50,8 +51,8 @@ public class ExpertIndexModel : PageModel
     {
 
         [Phone]
-        [Display(Name = "Phone number")]
-        public string PhoneNumber { get; set; }
+        [Display(Name = "شماره تلفن")]
+        public string PhoneNumber { get; set; } = String.Empty;
         [Display(Name = "نام")]
         public string FirstName { get; init; } = null!;
         [Display(Name = "نام خانوادگی")]

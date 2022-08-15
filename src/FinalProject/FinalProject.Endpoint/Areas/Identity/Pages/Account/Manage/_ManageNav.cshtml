@@ -11,14 +11,14 @@
     }
     @if (User.IsExpert())
     {
-        <li class="nav-item transparent"><a class="nav-link transparent @ManageNavPages.IndexNavClass(ViewContext)" id="profile" asp-page="./ExpertIndex">پروفایل</a></li>
-        <li class="nav-item"><a class="nav-link" id="Addresses" asp-page="./ExpertAddress">آدرس من</a></li>
-        <li class="nav-item"><a class="nav-link" id="Addresses" asp-page="./ExpertWorkSample">افزودن نمونه کار</a></li>
+        <li class="nav-item"><a class="nav-link @ManageNavPages.IndexNavClass(ViewContext)" id="profile" asp-page="./ExpertIndex">پروفایل</a></li>
+        <li class="nav-item"><a class="nav-link @ManageNavPages.ExpertAddressNavClass(ViewContext)" id="addresses" asp-page="./ExpertAddress">آدرس من</a></li>
+        <li class="nav-item"><a class="nav-link @ManageNavPages.WorkSampleNavClass(ViewContext)" id="work-samples" asp-page="./ExpertWorkSample">افزودن نمونه کار</a></li>
     }
     @if (User.IsCustomer())
     {
         <li class="nav-item transparent"><a class="nav-link transparent @ManageNavPages.IndexNavClass(ViewContext)" id="profile" asp-page="./CustomerIndex">پروفایل</a></li>
-        <li class="nav-item"><a class="nav-link" id="Addresses" asp-page="./CustomerAddress">آدرس های من</a></li>
+        <li class="nav-item"><a class="nav-link @ManageNavPages.CustomerAddressNavClass(ViewContext)" id="Addresses" asp-page="./CustomerAddress">آدرس های من</a></li>
     }
     <li class="nav-item"><a class="nav-link @ManageNavPages.TwoFactorAuthenticationNavClass(ViewContext)" id="two-factor" asp-page="./TwoFactorAuthentication">احراز هویت دو مرحله ای</a></li>
     @*<li class="nav-item"><a class="nav-link @ManageNavPages.PersonalDataNavClass(ViewContext)" id="personal-data" asp-page="./PersonalData">اطلاعات شخصی</a></li>*@

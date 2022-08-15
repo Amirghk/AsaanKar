@@ -37,6 +37,7 @@ namespace FinalProject.Endpoint.Areas.Identity.Pages.Account.Manage
 
         public class InputModel
         {
+            [Display(Name = "آپلود نمونه کار")]
             [DataType(DataType.Upload)]
             [UploadFileExtentions(".png,.jpg,.jpeg,.gif")]
             public IFormFile WorkSample { get; set; } = null!;

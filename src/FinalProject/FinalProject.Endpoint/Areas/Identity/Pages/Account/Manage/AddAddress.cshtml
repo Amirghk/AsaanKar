@@ -5,21 +5,18 @@
 
 
 
-@if (Model.State == 1)
-{
-    <form asp-page="" asp-page-handler="province" method="post">
 
-        <select asp-for=Address.ProvinceId class="form-control" asp-items="@Model.Provinces">
+@*    <form asp-page="" asp-page-handler="province" method="post" class="col-md-6">
+
+        <select asp-for=Address.ProvinceId class="form-control glass-dark" asp-items="@Model.Provinces">
             <option disabled selected>انتخاب استان</option>
         </select>
-        <label asp-for="Address.ProvinceId"></label>
         <span asp-validation-for="Address.ProvinceId" class="text-danger"></span>
-        <button type="submit" class="btn btn-primary" asp-page-handler="province">ادامه</button>
+        <button type="submit" class="btn btn-primary my-4" asp-page-handler="province">ادامه</button>
     </form>
-}
 
-@if (Model.State == 2)
-{
+
+*@
     <form asp-page="" method="post">
 
         <div class="form-floating">
@@ -41,7 +38,7 @@
                 <button type="submit" class="btn btn-primary">ثبت</button>
             </div>
     </form>
-}
+
 
 @section Scripts {
 <partial name="_ValidationScriptsPartial" />
