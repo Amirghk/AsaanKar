@@ -1,0 +1,14 @@
+{
+  "name": "finalproject.endpoint",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Amirhossein",
+  "license": "ISC",
+  "dependencies": {
+    "persian-datepicker": "^0.5.11"
+  }
+}

@@ -16,6 +16,7 @@ using FinalProject.Endpoint.Common.Filters;
 using FinalProject.Endpoint.MiddleWare;
 using StackExchange.Redis;
 using FinalProject.Infrastructure.Persistence.SeedData;
+using Microsoft.Extensions.FileProviders;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -107,6 +108,12 @@ if (!app.Environment.IsDevelopment())
 }
 // app.UseHttpsRedirection();
 app.UseStaticFiles();
+app.UseStaticFiles(new StaticFileOptions
+{
+    FileProvider = new PhysicalFileProvider(Path.Combine(Directory.GetCurrentDirectory(), "node_modules")),
+    RequestPath = new PathString("/vendor")
+});
+
 app.UseRouting();
 app.UseAuthentication();
 
@@ -117,9 +124,9 @@ app.UseEndpoints(endpoints =>
       name: "areas",
       pattern: "{area:exists}/{controller=Home}/{action=Index}/{id?}"
     );
+    endpoints.MapControllerRoute(
+        name: "default",
+        pattern: "{controller=Home}/{action=Index}/{id?}");
 });
-app.MapControllerRoute(
-    name: "default",
-    pattern: "{controller=Home}/{action=Index}/{id?}");
 app.MapRazorPages();
 app.Run();

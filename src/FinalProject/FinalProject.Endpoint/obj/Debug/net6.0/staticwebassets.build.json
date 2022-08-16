@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "2V7ruLinpmsU8fXrtfIHmMWFPCS0pNDb2Fr8Ee0/J7o=",
+  "Hash": "0Xi9llo2eMyzqCTaUuRvgH1EOeNR8GPIrdBsb6AJ84k=",
   "Source": "FinalProject.Endpoint",
   "BasePath": "_content/FinalProject.Endpoint",
   "Mode": "Default",
@@ -3806,6 +3806,23 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\background.jpg"
+    },
+    {
+      "Identity": "G:\\FinalProjectMaktab\\FinalProjectMaktab\\src\\FinalProject\\FinalProject.Endpoint\\wwwroot\\css\\bootstrap-chosen.css",
+      "SourceId": "FinalProject.Endpoint",
+      "SourceType": "Discovered",
+      "ContentRoot": "G:\\FinalProjectMaktab\\FinalProjectMaktab\\src\\FinalProject\\FinalProject.Endpoint\\wwwroot\\",
+      "BasePath": "_content/FinalProject.Endpoint",
+      "RelativePath": "css/bootstrap-chosen.css",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\css\\bootstrap-chosen.css"
     },
     {
       "Identity": "G:\\FinalProjectMaktab\\FinalProjectMaktab\\src\\FinalProject\\FinalProject.Endpoint\\wwwroot\\css\\chosen.min.css",

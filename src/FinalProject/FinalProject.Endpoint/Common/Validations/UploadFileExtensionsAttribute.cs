@@ -24,6 +24,10 @@ public class UploadFileExtentionsAttribute : ValidationAttribute
             }
             return new ValidationResult(GetErrorMessage());
         }
+        else if (file == null)
+        {
+            return ValidationResult.Success;
+        }
 
         var files = value as IList<IFormFile>;
         if (files == null)

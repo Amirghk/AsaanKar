@@ -64,7 +64,7 @@ namespace FinalProject.Endpoint.Areas.Identity.Pages.Account.Manage
         public async Task<IActionResult> OnPostDeleteAsync(int id, CancellationToken cancellationToken)
         {
             await _addressService.Remove(id, cancellationToken);
-            return RedirectToPage(nameof(Index));
+            return RedirectToPage();
         }
     }
 }

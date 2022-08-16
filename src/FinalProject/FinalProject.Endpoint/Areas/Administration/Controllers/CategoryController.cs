@@ -61,6 +61,13 @@ namespace FinalProject.Endpoint.Areas.Administration.Controllers
         {
             if (!ModelState.IsValid)
             {
+                var categories = await _categoryService.GetAll(cancellationToken);
+                // select categories that have no parent category
+                ViewBag.Categories = categories.Where(x => x.ParentCategoryId == null).Select(x => new SelectListItem
+                {
+                    Value = x.Id.ToString(),
+                    Text = x.Name,
+                });
                 return View(model);
             }
 
