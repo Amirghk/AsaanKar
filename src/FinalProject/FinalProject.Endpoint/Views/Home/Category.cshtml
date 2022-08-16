@@ -5,7 +5,7 @@
     @foreach (var category in Model)
     {
 
-        <h1>@category.Name</h1>
+        <h1 class="my-4">@category.Name</h1>
         <ul class="list-group list-group-horizontal">
             @if (category.Services is not null)
             {
@@ -14,7 +14,7 @@
                     <li class="list-group-item glass">
                         <div class="card bg-transparent" style="width: 18rem;">
                             <div class="card-body bg-transparent">
-                                <h5 class="card-title">@service.Description</h5>
+                                <h5 class="card-title">@service.Name</h5>
                                 <p class="card-text">@service.Description</p>
                                 <a asp-controller="Order" asp-action="Create" asp-route-id=@service.Id class="btn btn-primary">درخواست سرویس</a>
                             </div>
