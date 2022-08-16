@@ -106,15 +106,6 @@ p, h1, h2, h3, h4, h5, h6, .card-title {
     background-color: rgba(55,55,55, 0) !important;
 }
 
-.glassbefore {
-    /* From https://css.glass */
-    background: rgba(0, 0, 0, 0.52) !important;
-    border-radius: 16px !important;
-    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1) !important;
-    backdrop-filter: blur(11.7px) !important;
-    -webkit-backdrop-filter: blur(11.7px) !important;
-    border: 1px solid rgba(0, 0, 0, 0.67) !important;
-}
 
 .glass {
     /* From https://css.glass */
@@ -176,4 +167,64 @@ label {
 
 .form-control, .card {
     border: none !important;
+}
+
+.nav-link.active {
+    background: rgba(255, 255, 255, 0.35) !important;
+    border-radius: 2px !important;
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1) !important;
+    backdrop-filter: blur(5px) !important;
+    -webkit-backdrop-filter: blur(5px) !important;
+    border: 1px solid rgba(255, 255, 255, 0.3) !important;
+    z-index: 1000;
+}
+
+
+
+
+
+
+.chosen-container-multi .chosen-choices {
+    position: relative;
+    overflow: hidden;
+    margin: 0;
+    padding: 0 5px;
+    width: 100%;
+    height: auto;
+    border: none;
+    cursor: text;
+    background: rgba(255, 255, 255, 0.35) !important;
+    border-radius: 8px !important;
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1) !important;
+    backdrop-filter: blur(5px) !important;
+    -webkit-backdrop-filter: blur(5px) !important;
+    border: 1px solid rgba(255, 255, 255, 0.3) !important;
+    z-index: 1000;
+}
+
+
+
+    .chosen-container-multi .chosen-choices li.search-choice-disabled {
+        background: rgba(255, 255, 255, 0.35) !important;
+        border-radius: 16px !important;
+        box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1) !important;
+        backdrop-filter: blur(5px) !important;
+        -webkit-backdrop-filter: blur(5px) !important;
+        border: 1px solid rgba(255, 255, 255, 0.3) !important;
+        z-index: 1000;
+    }
+
+    .chosen-container .chosen-drop, .chosen-container-multi .chosen-choices li.search-choice {
+        background: rgba(255, 255, 255, 0.35) !important;
+        border-radius: 16px !important;
+        box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1) !important;
+        backdrop-filter: blur(5px) !important;
+        -webkit-backdrop-filter: blur(5px) !important;
+        border: 1px solid rgba(255, 255, 255, 0.3) !important;
+        z-index: 1000;
+    }
+
+.accordion-table {
+    table-layout: auto !important;
+    width: 100% !important;
 }

@@ -73,23 +73,33 @@
                                     </tr>
                                     @if ((int)order.State <= 2)
                                     {
+
                                         <tr id=@("b" + order.Id) class="accordion-collapse collapse" aria-labelledby="headingOne" data-parent="#accordionExample">
-                                            <th scope="col">متخصص</th>
-                                            <th scope="col">@Html.DisplayNameForInnerType((BidViewModel c) => c.Price)</th>
-                                            <th scope="col">@Html.DisplayNameForInnerType((BidViewModel c) => c.Notes)</th>
-                                            @foreach (var bid in order.Bids)
-                                            {
-                                                <td>@await ExpertService.GetName(bid.ExpertId!, Context.RequestAborted)</td>
-                                                <td>@bid.Price</td>
-                                                <td>@bid.Notes</td>
-                                                <td>
-                                                    <form asp-controller="Order" asp-action="ApproveBid" method="post">
-                                                        <input type="hidden" value=@bid.Id name="bidId">
-                                                        <input type="hidden" value=@order.Id name="orderId">
-                                                        <button class="btn btn-success" type="submit">تایید پیشنهاد</button>
-                                                    </form>
-                                                </td>
-                                            }
+                                            <td colspan=8>
+                                                <table class="accordion-table">
+                                                    <tr>
+
+                                                        <th scope="col" >متخصص</th>
+                                                        <th scope="col" >@Html.DisplayNameForInnerType((BidViewModel c) => c.Price)</th>
+                                                        <th scope="col" >@Html.DisplayNameForInnerType((BidViewModel c) => c.Notes)</th>
+                                                    </tr>
+                                                    @foreach (var bid in order.Bids)
+                                                    {
+                                                        <tr>
+                                                            <td >@await ExpertService.GetName(bid.ExpertId!, Context.RequestAborted)</td>
+                                                            <td >@bid.Price</td>
+                                                            <td >@bid.Notes</td>
+                                                            <td>
+                                                                <form asp-controller="Order" asp-action="ApproveBid" method="post">
+                                                                    <input type="hidden" value=@bid.Id name="bidId">
+                                                                    <input type="hidden" value=@order.Id name="orderId">
+                                                                    <button class="btn btn-success" type="submit">تایید پیشنهاد</button>
+                                                                </form>
+                                                            </td>
+                                                        </tr>
+                                                    }
+                                                </table>
+                                            </td>
                                         </tr>
                                     }
                                 }

@@ -8,7 +8,7 @@
             <h2 class="text-primary">آدرس ها</h2>
         </div>
         <div>
-            <a asp-page="AddAddress"  class="btn btn-success">افزودن آدرس جدید</a>
+            <a asp-page="ChooseProvince"  class="btn btn-success">افزودن آدرس جدید</a>
         </div>
     </div>
 
@@ -28,9 +28,9 @@
                     <tr>
                         <td>@address.Address</td>
                         <td class="d-inline-flex align-items-center">
-                            <a asp-page="EditAddress" asp-route-id=@address.Id class="btn btn-warning mx-1">ویرایش</a>
-                            <form asp-page-handler="delete" method="post" asp-route-id=@address.Id>
-                                <button asp-route-id=@address.Id type="submit" class="btn btn-danger">حذف</button>
+                            <a asp-page="ChooseProvince" asp-page-handler="Edit" asp-route-id=@address.Id class="btn btn-warning mx-1">ویرایش</a>
+                            <form asp-page="CustomerAddresses" method="post">
+                                <button asp-page-handler="Delete" asp-route-id=@address.Id type="submit" class="btn btn-danger">حذف</button>
                             </form>
                         </td>
                     </tr>

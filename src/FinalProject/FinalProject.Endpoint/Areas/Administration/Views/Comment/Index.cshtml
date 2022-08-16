@@ -89,7 +89,7 @@
                         </div>
                         @if (@comment.IsApproved == false)
                         {
-                            <form asp-controller="Comment" asp-action="Approve" asp-route-id=@comment.Id method="posts">
+                            <form asp-controller="Comment" asp-action="Approve" asp-route-id=@comment.Id method="post">
                                 <button class="btn btn-success text-nowrap" type="submit">تایید کامنت</button>
                             </form>
                         }

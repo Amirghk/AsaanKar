@@ -1,4 +1,6 @@
 ﻿@model OrderSaveViewModel
+
+
 <div class="d-flex justify-content-center">
 
     <div class="d-flex glass justify-content-center col-lg-8">
@@ -6,10 +8,9 @@
         <form asp-controller="Order" asp-action="Create" method="post" class="col-6 py-3">
             <div class="form-group my-3">
                 <label asp-for=DateRequired></label>
-                <input asp-for=DateRequired id="datepicker" class="form-control">
+                <input asp-for=DateRequired type="date"  class="form-control">
                 <span asp-validation-for="DateRequired" class="text-danger"></span>
             </div>
-            <input type="text" id="datepicker">
             <h5>
                 یک آدرس را انتخاب کنید
             </h5>
@@ -24,11 +25,11 @@
                         </label>
                     </div>
                 }
-                <a class="btn btn-warning" asp-area="Identity" asp-page="/Account/Manage/AddAddress">افزودن آدرس جدید</a>
+                <a class="btn btn-success" asp-area="Identity" asp-page="/Account/Manage/ChooseProvince">افزودن آدرس جدید</a>
             }
             else
             {
-                <a class="btn btn-warning" asp-area="Identity" asp-page="/Account/Manage/AddAddress">افزودن آدرس</a>
+                <a class="btn btn-warning" asp-area="Identity" asp-page="/Account/Manage/ChooseProvince">افزودن آدرس</a>
             }
             <div class="form-group my-3">
                 <label asp-for=Description></label>
