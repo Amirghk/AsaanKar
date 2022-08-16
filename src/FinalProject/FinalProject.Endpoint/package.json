@@ -9,6 +9,7 @@
   "author": "Amirhossein",
   "license": "ISC",
   "dependencies": {
-    "persian-datepicker": "^0.5.11"
+    "persian-datepicker": "^1.2.0",
+    "ajv": ">=6.12.3"
   }
 }
