@@ -31,23 +31,27 @@ namespace FinalProject.Infrastructure.Repositories
             return record.Id;
         }
 
-        public async Task<IEnumerable<OrderDto>> GetAll(CancellationToken cancellationToken, int? cityId = null, OrderState? orderState = null, string? userId = null)
+        public async Task<IEnumerable<OrderDto>> GetAll(CancellationToken cancellationToken, int? cityId = null, string? userId = null, OrderState? fromState = null, OrderState? toState = null)
         {
             _logger.LogTrace("start of {methodName}", nameof(GetAll));
             IQueryable<Order> query = _context.Orders.Include(x => x.Bids);
             if (cityId != null)
                 query = query.Where(x => x.ReceiverAddress.CityId == cityId);
-            if (orderState != null)
-                query = query.Where(x => x.State == orderState);
+            if (fromState is not null && toState is not null)
+            {
+                var states = Enumerable.Range((int)fromState, (int)toState - (int)fromState + 1);
+                // convert int of enums to values
+                var stateEnums = states.Select(x => (OrderState)x);
+                query = query.Where(x => stateEnums.Contains(x.State));
+            }
+            if (fromState is not null && toState is null)
+            {
+                query = query.Where(x => x.State == (OrderState)fromState);
+            }
             if (userId != null)
                 query = query.Where(x => x.CustomerId == userId
                             || x.ExpertId == userId);
-            //var records = await _mapper.ProjectTo<OrderDto>(_context.Orders.Include(x => x.Bids).Where(x => x.ReceiverAddress.CityId == cityId || true))
-            //    .Where(x => x.CustomerId == userId
-            //                || x.ExpertId == userId
-            //                || true)
-            //    .Where(x => x.State == orderState || true)
-            //                            .ToListAsync(cancellationToken);
+
             var records = await _mapper.ProjectTo<OrderDto>(query).ToListAsync(cancellationToken);
             return records;
         }

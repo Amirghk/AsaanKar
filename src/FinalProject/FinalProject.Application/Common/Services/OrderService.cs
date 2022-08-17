@@ -36,9 +36,9 @@ public class OrderService : IOrderService
         return await _repository.GetAll(cancellationToken);
     }
 
-    public async Task<IEnumerable<OrderDto>> GetByUserId(string id, CancellationToken cancellationToken, OrderState? orderState = null)
+    public async Task<IEnumerable<OrderDto>> GetByUserId(string id, CancellationToken cancellationToken, OrderState? fromState = null, OrderState? toState = null)
     {
-        return await _repository.GetAll(userId: id, cancellationToken: cancellationToken, orderState: orderState);
+        return await _repository.GetAll(userId: id, cancellationToken: cancellationToken, fromState: fromState, toState: toState);
     }
 
     public async Task<OrderDto> GetById(int id, CancellationToken cancellationToken)
@@ -73,14 +73,12 @@ public class OrderService : IOrderService
     /// <param name="expertId"></param>
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
-    /// // TODO fix it
     public async Task<IEnumerable<ExpertOrderDto>> GetAvailable(string expertId, CancellationToken cancellationToken)
     {
         var expert = await _expertService.GetById(expertId, cancellationToken);
         var services = await _serviceService.GetAll(expertId: expertId, cancellationToken: cancellationToken);
-        var stateOneOrders = await _repository.GetAll(cancellationToken, expert.Address!.CityId, orderState: OrderState.WaitingForExpertBid);
-        var stateTwoOrders = await _repository.GetAll(cancellationToken, expert.Address!.CityId, orderState: OrderState.WaitingToChooseExpert);
-        var orders = stateOneOrders.Concat(stateTwoOrders);
+        var orders = await _repository.GetAll(cancellationToken, expert.Address!.CityId, fromState: OrderState.WaitingForExpertBid, toState: OrderState.WaitingToChooseExpert);
+
         // get orders that have the same services as the ones the expert offers
         var availableOrders = _mapper.Map<List<ExpertOrderDto>>(orders).Where(x => services.Select(x => x.Id).Contains(x.ServiceId));
         foreach (var order in availableOrders)

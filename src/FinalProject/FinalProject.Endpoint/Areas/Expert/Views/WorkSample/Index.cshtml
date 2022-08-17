@@ -1,0 +1,35 @@
+﻿@model List<int>?
+@inject IUploadService UploadService
+
+
+@{
+    Layout = Layout = "/Areas/Expert/Views/Shared/_ExpertLayout.cshtml";
+}
+
+
+@if (Model is null || Model.Count == 0)
+{
+    <div class="d-flex flex-column justify-content-center align-items-center">
+        <h1 class=" mt-5">
+            شما هنوز نمونه کاری اضافه نکرده اید
+        </h1>
+        <a class="btn btn-success my-2" asp-controller="WorkSample" asp-action="Add">افزودن نمونه کار</a>
+    </div>
+}
+else
+{
+    <div class="d-flex flex-wrap">
+
+        @foreach (int sampleId in Model)
+        {
+            <div class="card" style="width: 18rem;">
+                <img class="card-img-top" src="~/@(await UploadService.GetFileDirectory(sampleId, Context.RequestAborted))" alt="work sample">
+                <div class="card-body">
+                    <form asp-controller="WorkSample" asp-action="Delete" asp-route-id=@sampleId method="post">
+                        <button class="btn btn-danger" type="submit">حذف</button>
+                    </form>
+                </div>
+            </div>
+        }
+    </div>
+}

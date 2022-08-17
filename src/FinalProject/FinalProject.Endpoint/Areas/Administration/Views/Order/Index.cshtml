@@ -2,6 +2,7 @@
 @using FinalProject.Application.Common.Interfaces.Services
 @using FinalProject.Endpoint.Areas.Administration.Models
 @inject IAddressService AddressService
+@inject IExpertService ExpertService
 @model IEnumerable<OrderListViewModel>
 
 <h1>سفارشات</h1>
@@ -87,7 +88,7 @@
                             {
                                 <tr>
                                     <td>@bid.Id</td>
-                                    <td><a class="btn btn-info" asp-controller="User" asp-action="Profile" asp-route-id=@bid.ExpertId>@bid.ExpertId</a></td>
+                                    <td><a class="btn btn-info" asp-controller="User" asp-action="Profile" asp-route-id=@bid.ExpertId>@await ExpertService.GetName(bid.ExpertId!, Context.RequestAborted)</a></td>
                                     <td>@bid.Price</td>
                                     <td>@bid.Notes</td>
                                     <td><a class="btn btn-warning" asp-controller="Order" asp-action="EditBid" asp-route-id=@bid.Id>ویرایش</a></td>

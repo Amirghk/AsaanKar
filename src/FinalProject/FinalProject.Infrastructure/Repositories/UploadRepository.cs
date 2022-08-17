@@ -5,6 +5,7 @@ using FinalProject.Domain.Entities;
 using FinalProject.Infrastructure.Persistence;
 using Microsoft.EntityFrameworkCore;
 using FinalProject.Application.Common.Interfaces.Repositories;
+using FinalProject.Domain.Enums;
 
 namespace FinalProject.Infrastructure.Repositories
 {
@@ -27,9 +28,20 @@ namespace FinalProject.Infrastructure.Repositories
             return record.Id;
         }
 
-        public async Task<IEnumerable<UploadDto>> GetAll(CancellationToken cancellationToken)
+        public async Task<IEnumerable<UploadDto>> GetAll(CancellationToken cancellationToken, string? expertId = null, FileCategory? fileCategory = null)
         {
-            return await _mapper.ProjectTo<UploadDto>(_context.Uploads).ToListAsync(cancellationToken);
+            IQueryable<Upload> query = _context.Uploads;
+
+            if (expertId is not null)
+            {
+                query = query.Where(x => x.ExpertId == expertId);
+            }
+            if (fileCategory is not null)
+            {
+                query.Where(x => x.FileCategory == fileCategory);
+            }
+
+            return await _mapper.ProjectTo<UploadDto>(query).ToListAsync(cancellationToken);
         }
 
         public async Task<UploadDto> GetById(int id, CancellationToken cancellationToken)

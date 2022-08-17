@@ -1,4 +1,5 @@
-﻿@model IEnumerable<OrderListViewModel>
+﻿@inject IAddressService AddressService
+@model IEnumerable<OrderListViewModel>
 
 @{
     Layout = "/Areas/Expert/Views/Shared/_ExpertLayout.cshtml";
@@ -13,6 +14,7 @@
                     <th scope="col">@Html.DisplayNameForInnerType((OrderListViewModel c) => c.OrderDate)</th>
                     <th scope="col">@Html.DisplayNameForInnerType((OrderListViewModel c) => c.State)</th>
                     <th scope="col">@Html.DisplayNameForInnerType((OrderListViewModel c) => c.ServiceBasePrice)</th>
+                    <th scope="col">@Html.DisplayNameForInnerType((OrderListViewModel c) => c.AddressId)</th>
                     <th scope="col">@Html.DisplayNameForInnerType((OrderListViewModel c) => c.Description)</th>
                 </tr>
             </thead>
@@ -25,6 +27,7 @@
                         <td>@order.OrderDate</td>
                         <td>@order.State.GetDisplayName()</td>
                         <td>@order.ServiceBasePrice</td>
+                        <td>@await AddressService.GetFullAddressToString(order.AddressId, Context.RequestAborted)</td>
                         <td>@order.Description</td>
                     </tr>
                 }

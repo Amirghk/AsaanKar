@@ -25,17 +25,17 @@
                 <tr>
                     <th scope="row">@comment.Id</th>
                     <td>
-                        <button class="accordion-button text-nowrap" type="button" data-bs-toggle="collapse" data-bs-target=@("#c" + comment.Id) aria-expanded="true" aria-controls="collapseOne">
+                        <button class="accordion-button glass text-nowrap" type="button" data-bs-toggle="collapse" data-bs-target=@("#c" + comment.Id) aria-expanded="true" aria-controls="collapseOne">
                             مشاهده محتویات
                         </button>
                     </td>
                     <td>
-                        <a asp-controller="User" asp-action="Profile" asp-route-id=@comment.CustomerId>
+                        <a asp-controller="User" asp-action="Profile" asp-route-id=@comment.CustomerId class="btn btn-sm btn-info">
                             @await CustomerService.GetName(comment.CustomerId, Context.RequestAborted)
                         </a>
                     </td>
                     <td>
-                        <a asp-controller="User" asp-action="Profile" asp-route-id=@comment.ExpertId>
+                        <a asp-controller="User" asp-action="Profile" asp-route-id=@comment.ExpertId class="btn btn-sm btn-info">
                             @await ExpertService.GetName(comment.ExpertId, Context.RequestAborted)
                         </a>
                     </td>

@@ -1,8 +1,10 @@
 ﻿using AutoMapper;
+using FinalProject.Application.Common.ConfigurationModels;
 using FinalProject.Application.Common.Interfaces.Services;
 using FinalProject.Endpoint.Areas.Identity.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Options;
 
 namespace FinalProject.Endpoint.Areas.Administration.Controllers
 {
@@ -13,12 +15,18 @@ namespace FinalProject.Endpoint.Areas.Administration.Controllers
         private readonly IUploadService _uploadService;
         private readonly IMapper _mapper;
         private readonly IWebHostEnvironment _environment;
+        private readonly AppSettings _appSettings;
 
-        public UploadController(IUploadService uploadService, IMapper mapper, IWebHostEnvironment environment)
+        public UploadController(
+            IUploadService uploadService,
+            IMapper mapper,
+            IWebHostEnvironment environment,
+            IOptions<AppSettings> appSettings)
         {
             _uploadService = uploadService;
             _mapper = mapper;
             _environment = environment;
+            _appSettings = appSettings.Value;
         }
 
 
@@ -33,7 +41,7 @@ namespace FinalProject.Endpoint.Areas.Administration.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Delete(int id, CancellationToken cancellationToken)
         {
-            var uploadsRootFolder = Path.Combine(_environment.WebRootPath, "Uploads");
+            var uploadsRootFolder = Path.Combine(_environment.WebRootPath, _appSettings.UploadsFolderName);
             await _uploadService.Remove(id, uploadsRootFolder, cancellationToken);
             return RedirectToAction(nameof(Index));
         }

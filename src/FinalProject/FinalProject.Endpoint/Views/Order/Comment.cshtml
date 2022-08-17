@@ -1,4 +1,9 @@
 ﻿@model CommentSaveViewModel
+
+
+
+
+
 <div class="d-flex justify-content-center">
     <div class="glass col-lg-6 d-flex justify-content-center" style="margin-top: 20%; transform: translateY(-50%);">
         <div asp-validation-summary="ModelOnly" class="text-danger"></div>
@@ -9,8 +14,8 @@
                 <span asp-validation-for="Content" class="text-danger"></span>
             </div>
             <div class="form-group my-3">
-                <label asp-for=Image></label>
-                <input asp-for=Image class="form-control">
+                <input asp-for=Image class="form-control" id="getFile" style="display: none;">
+                <button class="btn btn-info my-2" onclick="document.getElementById('getFile').click()">@Html.DisplayNameFor(x => x.Image)</button>
                 <span asp-validation-for="Image" class="text-danger"></span>
             </div>
             <input asp-for=ExpertId value=@Model.ExpertId type="hidden" />
