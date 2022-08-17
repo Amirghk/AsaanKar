@@ -4,6 +4,7 @@ using FinalProject.Infrastructure.Persistence;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace FinalProject.Infrastructure.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20220817230108_AdminSeed")]
+    partial class AdminSeed
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -683,20 +685,17 @@ namespace FinalProject.Infrastructure.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "d74ddd24-6340-4840-95c2-db12554843e5",
+                            Id = "b74ddd14-6340-4840-95c2-db12554843e5",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "179b9af7-469d-4a48-8b48-dff554713e33",
-                            Email = "adminss@gmail.com",
+                            ConcurrencyStamp = "a6128846-baeb-49a6-8f38-dd1af8e8092f",
+                            Email = "admins@gmail.com",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
-                            NormalizedEmail = "ADMINSS@GMAIL.COM",
-                            NormalizedUserName = "ADMINSS@GMAIL.COM",
-                            PasswordHash = "AQAAAAEAACcQAAAAENwtMJDzo4LuKWZlLRFvU+YezqnSBfY5r13h3nBJCqNYcKjHcbXHVcZTZ3I1F4/05g==",
                             PhoneNumber = "1234567890",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "bab349a0-7c45-4ced-b42f-ae796c3805eb",
+                            SecurityStamp = "968491c3-3130-4bc6-af1f-e33a7c419a9d",
                             TwoFactorEnabled = false,
-                            UserName = "adminss@gmail.com"
+                            UserName = "Admin"
                         });
                 });
 
@@ -779,10 +778,10 @@ namespace FinalProject.Infrastructure.Migrations
                     b.HasData(
                         new
                         {
-                            Id = 52,
+                            Id = 50,
                             ClaimType = "IsAdmin",
                             ClaimValue = "True",
-                            UserId = "d74ddd24-6340-4840-95c2-db12554843e5"
+                            UserId = "b74ddd14-6340-4840-95c2-db12554843e5"
                         });
                 });
 

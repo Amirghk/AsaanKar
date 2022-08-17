@@ -4,6 +4,7 @@ using FinalProject.Infrastructure.Persistence;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace FinalProject.Infrastructure.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20220817230945_AdminSeed3")]
+    partial class AdminSeed3
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -685,18 +687,18 @@ namespace FinalProject.Infrastructure.Migrations
                         {
                             Id = "d74ddd24-6340-4840-95c2-db12554843e5",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "179b9af7-469d-4a48-8b48-dff554713e33",
+                            ConcurrencyStamp = "180b428e-62bc-4012-a509-da4c6b5e879a",
                             Email = "adminss@gmail.com",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
                             NormalizedEmail = "ADMINSS@GMAIL.COM",
-                            NormalizedUserName = "ADMINSS@GMAIL.COM",
-                            PasswordHash = "AQAAAAEAACcQAAAAENwtMJDzo4LuKWZlLRFvU+YezqnSBfY5r13h3nBJCqNYcKjHcbXHVcZTZ3I1F4/05g==",
+                            NormalizedUserName = "ADMINS",
+                            PasswordHash = "AQAAAAEAACcQAAAAEL3tdmqJquRqHr1OutA5cc6gCfxbL3ezZtalEsQltMMByOSARYkll7U1qjS5AH0dow==",
                             PhoneNumber = "1234567890",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "bab349a0-7c45-4ced-b42f-ae796c3805eb",
+                            SecurityStamp = "c2933967-15ba-4f8e-b8aa-fe5c852d3c22",
                             TwoFactorEnabled = false,
-                            UserName = "adminss@gmail.com"
+                            UserName = "Admins"
                         });
                 });
 

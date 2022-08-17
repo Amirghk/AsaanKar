@@ -38,7 +38,6 @@ public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
 
         base.OnModelCreating(builder);
         builder.Seed();
-        SeedAdmin(builder);
         builder.ApplyConfiguration(new AddressConfiguration());
         builder.ApplyConfiguration(new CityConfiguration());
         builder.ApplyConfiguration(new CustomerConfiguration());
@@ -51,31 +50,6 @@ public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
         builder.ApplyConfiguration(new ServiceExpertConfiguration());
         builder.ApplyConfiguration(new ServiceConfiguration());
     }
-
-    private void SeedAdmin(ModelBuilder builder)
-    {
-        ApplicationUser user = new ApplicationUser()
-        {
-            Id = "b74ddd14-6340-4840-95c2-db12554843e5",
-            UserName = "Admin",
-            Email = "admin@gmail.com",
-            LockoutEnabled = false,
-            PhoneNumber = "1234567890"
-        };
-        PasswordHasher<ApplicationUser> passwordHasher = new PasswordHasher<ApplicationUser>();
-        passwordHasher.HashPassword(user, "Asdasdasd");
-
-        builder.Entity<ApplicationUser>().HasData(user);
-
-        this.UserClaims.Add(new IdentityUserClaim<string>
-        {
-            ClaimType = "IsAdmin",
-            ClaimValue = true.ToString(),
-            Id = 1,
-            UserId = user.Id
-        });
-    }
-
 
     public override Task<int> SaveChangesAsync(CancellationToken cancellationToken = default)
     {
