@@ -94,7 +94,6 @@
 	  <None Include="Areas\Identity\Pages\Account\Manage\EnableAuthenticator.cshtml" />
 	  <None Include="Areas\Identity\Pages\Account\Manage\ExpertAddress.cshtml" />
 	  <None Include="Areas\Identity\Pages\Account\Manage\ExpertIndex.cshtml" />
-	  <None Include="Areas\Identity\Pages\Account\Manage\ExpertWorkSample.cshtml" />
 	  <None Include="Areas\Identity\Pages\Account\Manage\ExternalLogins.cshtml" />
 	  <None Include="Areas\Identity\Pages\Account\Manage\GenerateRecoveryCodes.cshtml" />
 	  <None Include="Areas\Identity\Pages\Account\Manage\PersonalData.cshtml" />

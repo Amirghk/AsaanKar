@@ -255,10 +255,6 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcSWRlbnRpdHlcUGFnZXNcQWNjb3VudFxNYW5hZ2VcRXhwZXJ0SW5kZXguY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[G:/FinalProjectMaktab/FinalProjectMaktab/src/FinalProject/FinalProject.Endpoint/Areas/Identity/Pages/Account/Manage/ExpertWorkSample.cshtml]
-build_metadata.AdditionalFiles.TargetPath = QXJlYXNcSWRlbnRpdHlcUGFnZXNcQWNjb3VudFxNYW5hZ2VcRXhwZXJ0V29ya1NhbXBsZS5jc2h0bWw=
-build_metadata.AdditionalFiles.CssScope = 
-
 [G:/FinalProjectMaktab/FinalProjectMaktab/src/FinalProject/FinalProject.Endpoint/Areas/Identity/Pages/Account/Manage/ExternalLogins.cshtml]
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcSWRlbnRpdHlcUGFnZXNcQWNjb3VudFxNYW5hZ2VcRXh0ZXJuYWxMb2dpbnMuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 

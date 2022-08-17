@@ -17,6 +17,7 @@ using FinalProject.Endpoint.MiddleWare;
 using StackExchange.Redis;
 using FinalProject.Infrastructure.Persistence.SeedData;
 using Microsoft.Extensions.FileProviders;
+using FinalProject.Endpoint.Common.ErrorDescribers;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -82,7 +83,8 @@ builder.Services.AddDefaultIdentity<ApplicationUser>(options =>
     options.Password.RequiredLength = 7;
     options.Password.RequireNonAlphanumeric = false;
     options.Password.RequireDigit = false;
-}).AddEntityFrameworkStores<ApplicationDbContext>();
+}).AddEntityFrameworkStores<ApplicationDbContext>()
+.AddErrorDescriber<FarsiIdentitiyErrorDescriber>();
 
 /// <summary>
 /// adds a global OperationCancelledException filter to handle the exception and short circuit the middleware
@@ -96,7 +98,6 @@ builder.Services.AddControllersWithViews(options =>
 
 builder.Services.AddRazorPages();
 var app = builder.Build();
-
 
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())

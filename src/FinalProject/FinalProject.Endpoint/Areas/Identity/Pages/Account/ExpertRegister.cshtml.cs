@@ -24,6 +24,7 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.AspNetCore.WebUtilities;
 using Microsoft.Extensions.Logging;
+using FinalProject.Endpoint.Common.Validations;
 
 namespace FinalProject.Endpoint.Areas.Identity.Pages.Account
 {
@@ -92,7 +93,7 @@ namespace FinalProject.Endpoint.Areas.Identity.Pages.Account
 
             [DataType(DataType.Password)]
             [Display(Name = "تایید رمزعبور")]
-            [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
+            [Compare("Password", ErrorMessage = "رمز عبور و تایید رمز عبور یکسان نیستند")]
             public string ConfirmPassword { get; set; }
 
             [DataType(DataType.PhoneNumber)]
@@ -116,6 +117,7 @@ namespace FinalProject.Endpoint.Areas.Identity.Pages.Account
             public string NationalCode { get; set; }
 
             [DataType(DataType.Date)]
+            [MinimumAge(18)]
             [Display(Name = "تاریخ تولد")]
             public DateTime BirthDate { get; set; }
         }
