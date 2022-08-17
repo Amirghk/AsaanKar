@@ -52,6 +52,22 @@ namespace FinalProject.Endpoint.Areas.Expert.Controllers
             return View(model);
         }
 
+
+
+        [HttpGet]
+        public async Task<IActionResult> InProgress(CancellationToken cancellationToken)
+        {
+            var user = await _userManager.GetUserAsync(User);
+            if (user == null)
+            {
+                return NotFound($"Unable to load user with ID '{_userManager.GetUserId(User)}'.");
+            }
+
+            var records = await _orderService.GetByUserId(user.Id, cancellationToken, fromState: OrderState.WaitingForExpertToArrive, toState: OrderState.WorkFinished);
+            var model = _mapper.Map<List<OrderListViewModel>>(records);
+            return View(model);
+        }
+
         [HttpGet]
         public async Task<IActionResult> Finished(CancellationToken cancellationToken)
         {
@@ -61,7 +77,7 @@ namespace FinalProject.Endpoint.Areas.Expert.Controllers
                 return NotFound($"Unable to load user with ID '{_userManager.GetUserId(User)}'.");
             }
 
-            var model = _mapper.Map<List<ExpertOrderViewModel>>(await _orderService.GetByUserId(user.Id, cancellationToken, OrderState.WorkFinished));
+            var model = _mapper.Map<List<OrderListViewModel>>(await _orderService.GetByUserId(user.Id, cancellationToken, OrderState.Paid));
             return View(model);
         }
 
@@ -113,7 +129,7 @@ namespace FinalProject.Endpoint.Areas.Expert.Controllers
                 return NotFound($"Unable to load user with ID '{_userManager.GetUserId(User)}'.");
             }
             var order = await _orderService.GetById(orderId, cancellationToken);
-            var bidId = order.Bids.Where(x => x.ExpertId == user.Id).SingleOrDefault().Id;
+            var bidId = order.Bids.Where(x => x.ExpertId == user.Id).SingleOrDefault()!.Id;
             await _bidService.Remove(bidId, cancellationToken);
             return RedirectToAction(nameof(Available));
         }

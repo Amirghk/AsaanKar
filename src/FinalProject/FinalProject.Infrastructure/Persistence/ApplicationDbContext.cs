@@ -3,6 +3,7 @@ using FinalProject.Infrastructure.Identity;
 using FinalProject.Infrastructure.Persistence.Configurations;
 using FinalProject.Infrastructure.Persistence.SeedData;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
@@ -49,7 +50,6 @@ public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
         builder.ApplyConfiguration(new ServiceExpertConfiguration());
         builder.ApplyConfiguration(new ServiceConfiguration());
     }
-
 
     public override Task<int> SaveChangesAsync(CancellationToken cancellationToken = default)
     {

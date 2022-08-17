@@ -13,7 +13,6 @@ namespace FinalProject.Application.Common.Services;
 
 public class UploadService : IUploadService
 {
-    private readonly IMapper _mapper;
     private readonly IUploadRepository _repository;
     private readonly IExpertService _expertService;
     private readonly ICustomerService _customerService;
@@ -23,7 +22,6 @@ public class UploadService : IUploadService
     private readonly AppSettings _appSettings;
 
     public UploadService(IUploadRepository repository,
-                         IMapper mapper,
                          IExpertService expertService,
                          ICustomerService customerService,
                          ICommentService commentService,
@@ -31,7 +29,6 @@ public class UploadService : IUploadService
                          IOptions<AppSettings> appSettings,
                          ILogger<UploadService> logger)
     {
-        _mapper = mapper;
         _repository = repository;
         _expertService = expertService;
         _customerService = customerService;
@@ -41,9 +38,9 @@ public class UploadService : IUploadService
         _appSettings = appSettings.Value;
     }
 
-    public async Task<IEnumerable<UploadDto>> GetAll(CancellationToken cancellationToken)
+    public async Task<IEnumerable<UploadDto>?> GetAll(CancellationToken cancellationToken, string? expertId = null, FileCategory? fileCategory = null)
     {
-        return await _repository.GetAll(cancellationToken);
+        return await _repository.GetAll(cancellationToken, expertId, fileCategory);
     }
 
     public async Task<UploadDto> GetById(int id, CancellationToken cancellationToken)
@@ -142,7 +139,6 @@ public class UploadService : IUploadService
 
     }
 
-    // TODO : make it get the uploads root folder from config?
     public async Task SaveFile(IFormFile file, string uploadsRootFolder, string newFileName)
     {
         if (!Directory.Exists(uploadsRootFolder))
@@ -173,7 +169,6 @@ public class UploadService : IUploadService
         }
 
         var expertId = workSample.ExpertId;
-        var expert = await _expertService.GetById(expertId!, cancellationToken);
 
         var file = workSample.UploadedFile;
         var fileExtension = Path.GetExtension(file.FileName);

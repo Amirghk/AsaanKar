@@ -96,7 +96,6 @@
                                                     @comment.Content
                                                 </p>
                                             </div>
-                                        }
                                         if (comment.ImageId != null)
                                         {
                                             var fileDirectory = await UploadService.GetFileDirectory((int)comment.ImageId, Context.RequestAborted);
@@ -111,6 +110,7 @@
                                                     </div>
                                                 </div>
                                             </div>
+                                        }
                                         }
                                     }
                                 }

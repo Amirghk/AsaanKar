@@ -679,6 +679,25 @@ namespace FinalProject.Infrastructure.Migrations
                         .HasFilter("[NormalizedUserName] IS NOT NULL");
 
                     b.ToTable("AspNetUsers", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            Id = "d74ddd24-6340-4840-95c2-db12554843e5",
+                            AccessFailedCount = 0,
+                            ConcurrencyStamp = "179b9af7-469d-4a48-8b48-dff554713e33",
+                            Email = "adminss@gmail.com",
+                            EmailConfirmed = false,
+                            LockoutEnabled = false,
+                            NormalizedEmail = "ADMINSS@GMAIL.COM",
+                            NormalizedUserName = "ADMINSS@GMAIL.COM",
+                            PasswordHash = "AQAAAAEAACcQAAAAENwtMJDzo4LuKWZlLRFvU+YezqnSBfY5r13h3nBJCqNYcKjHcbXHVcZTZ3I1F4/05g==",
+                            PhoneNumber = "1234567890",
+                            PhoneNumberConfirmed = false,
+                            SecurityStamp = "bab349a0-7c45-4ced-b42f-ae796c3805eb",
+                            TwoFactorEnabled = false,
+                            UserName = "adminss@gmail.com"
+                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
@@ -756,6 +775,15 @@ namespace FinalProject.Infrastructure.Migrations
                     b.HasIndex("UserId");
 
                     b.ToTable("AspNetUserClaims", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 52,
+                            ClaimType = "IsAdmin",
+                            ClaimValue = "True",
+                            UserId = "d74ddd24-6340-4840-95c2-db12554843e5"
+                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<string>", b =>

@@ -14,6 +14,7 @@ using System.Threading.Tasks;
 using FinalProject.Application.Common.DataTransferObjects;
 using FinalProject.Application.Common.Interfaces.Services;
 using FinalProject.Domain.Enums;
+using FinalProject.Endpoint.Common.Validations;
 using FinalProject.Infrastructure.Identity;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authorization;
@@ -89,7 +90,7 @@ namespace FinalProject.Endpoint.Areas.Identity.Pages.Account
 
             [DataType(DataType.Password)]
             [Display(Name = "تایید رمزعبور")]
-            [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
+            [Compare("Password", ErrorMessage = "رمز عبور و تایید رمز عبور یکسان نیستند")]
             public string ConfirmPassword { get; set; }
 
             [DataType(DataType.PhoneNumber)]
@@ -109,6 +110,7 @@ namespace FinalProject.Endpoint.Areas.Identity.Pages.Account
 
             [DataType(DataType.Date)]
             [Display(Name = "تاریخ تولد")]
+            [MinimumAge(16)]
             public DateTime BirthDate { get; set; }
         }
 

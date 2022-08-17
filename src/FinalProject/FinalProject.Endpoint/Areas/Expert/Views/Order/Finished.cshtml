@@ -1,4 +1,4 @@
-﻿@inject IAddressService AddressService
+﻿@model IEnumerable<OrderListViewModel>
 
 @{
     Layout = "/Areas/Expert/Views/Shared/_ExpertLayout.cshtml";
@@ -8,13 +8,12 @@
         <table class="table">
             <thead class="thead-dark">
                 <tr>
-                    <th scope="col">@Html.DisplayNameForInnerType((ExpertOrderViewModel c) => c.ServiceName)</th>
-                    <th scope="col">@Html.DisplayNameForInnerType((ExpertOrderViewModel c) => c.Customer)</th>
-                    <th scope="col">@Html.DisplayNameForInnerType((ExpertOrderViewModel c) => c.OrderDate)</th>
-                    <th scope="col">@Html.DisplayNameForInnerType((ExpertOrderViewModel c) => c.State)</th>
-                    <th scope="col">@Html.DisplayNameForInnerType((ExpertOrderViewModel c) => c.ServiceBasePrice)</th>
-                    <th scope="col">@Html.DisplayNameForInnerType((ExpertOrderViewModel c) => c.AddressId)</th>
-                    <th scope="col">@Html.DisplayNameForInnerType((ExpertOrderViewModel c) => c.Description)</th>
+                    <th scope="col">@Html.DisplayNameForInnerType((OrderListViewModel c) => c.ServiceName)</th>
+                    <th scope="col">@Html.DisplayNameForInnerType((OrderListViewModel c) => c.Customer)</th>
+                    <th scope="col">@Html.DisplayNameForInnerType((OrderListViewModel c) => c.OrderDate)</th>
+                    <th scope="col">@Html.DisplayNameForInnerType((OrderListViewModel c) => c.State)</th>
+                    <th scope="col">@Html.DisplayNameForInnerType((OrderListViewModel c) => c.ServiceBasePrice)</th>
+                    <th scope="col">@Html.DisplayNameForInnerType((OrderListViewModel c) => c.Description)</th>
                 </tr>
             </thead>
             <tbody>
@@ -26,7 +25,6 @@
                         <td>@order.OrderDate</td>
                         <td>@order.State.GetDisplayName()</td>
                         <td>@order.ServiceBasePrice</td>
-                        <td>@await AddressService.GetFullAddressToString(order.AddressId, Context.RequestAborted)</td>
                         <td>@order.Description</td>
                     </tr>
                 }
