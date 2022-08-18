@@ -10,16 +10,27 @@
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/FinalProject.Endpoint.styles.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/css/chosen.min.css" />
-@*    <link rel="canonical" href="https://getbootstrap.com/docs/5.2/examples/dashboard-rtl/">*@
+    @*    <link rel="canonical" href="https://getbootstrap.com/docs/5.2/examples/dashboard-rtl/">*@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.rtl.min.css" integrity="sha384-gXt9imSW0VcJVHezoNQsP+TNrjYXoGcrqBZJpry9zJt8PCQjobwmhMGaDHTASo9N" crossorigin="anonymous">
     <!-- CSS only -->
     <link href="../dashboard/dashboard.rtl.css" rel="stylesheet">
 
-    @*<link rel="stylesheet" href="~/vendor/persian-datepicker/dist/css/persian.datepicker.css"/>*@
-    @*<link rel="stylesheet" href="http://babakhani.github.io/PersianWebToolkit/beta/lib/persian-datepicker/dist/css/persian-datepicker.css"/>*@
+    <link href="~/vendor/md.bootstrappersiandatetimepicker/dist/mds.bs.datetimepicker.style.css" rel="stylesheet" />
+    @*<link href="~/css/mds.bs.datetimepicker.style.css" rel="stylesheet" />*@
+
+    
 </head>
 <body>
     <header>
+        <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    @*<script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>*@
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    @*<script src="~/js/chosen.jquery.min.js"></script>*@
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
+
+    <script src="~/vendor/md.bootstrappersiandatetimepicker/dist/mds.bs.datetimepicker.js"></script>
+    @*<script src="~/js/mds.bs.datetimepicker.js"></script>*@
+
         <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3 bg-transparent glass" id="mynav">
             <div class="container">
                 <a class="navbar-brand" href="/Home" id="home-button">آسان کار</a>
@@ -49,17 +60,14 @@
         </div>
     </footer>
 
-    <script src="~/lib/jquery/dist/jquery.min.js"></script>
-    @*<script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>*@
+    @*<script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
-    @*<script src="~/js/chosen.jquery.min.js"></script>*@
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
+    <script src="~/js/chosen.jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>*@
 
-    @*<script src="~/vendor/persian-datepicker/dist/js/persian-datepicker.js"></script>*@
-
-      @*<script src="http://babakhani.github.io/PersianWebToolkit/beta/lib/persian-date/dist/persian-date.js"></script>
-      <script src="http://babakhani.github.io/PersianWebToolkit/beta/lib/persian-datepicker/dist/js/persian-datepicker.js"></script>*@
-
+    @*<script src="~/vendor/md.bootstrappersiandatetimepicker/dist/mds.bs.datetimepicker.js"></script>*@
+    @*<script src="~/js/mds.bs.datetimepicker.js"></script>*@
     @await RenderSectionAsync("Scripts", required: false)
 </body>
 </html>

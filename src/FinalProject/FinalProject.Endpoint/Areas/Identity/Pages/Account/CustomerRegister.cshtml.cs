@@ -16,6 +16,7 @@ using FinalProject.Application.Common.Interfaces.Services;
 using FinalProject.Domain.Enums;
 using FinalProject.Endpoint.Common.Validations;
 using FinalProject.Infrastructure.Identity;
+using MD.PersianDateTime.Standard;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
@@ -108,10 +109,10 @@ namespace FinalProject.Endpoint.Areas.Identity.Pages.Account
             [StringLength(30, ErrorMessage = "The {0} must be at least {2} and at max {1} characters long.", MinimumLength = 3)]
             public string LastName { get; set; }
 
-            [DataType(DataType.Date)]
+            [DataType(DataType.Text)]
             [Display(Name = "تاریخ تولد")]
             [MinimumAge(16)]
-            public DateTime BirthDate { get; set; }
+            public string BirthDate { get; set; }
         }
 
 
@@ -159,7 +160,7 @@ namespace FinalProject.Endpoint.Areas.Identity.Pages.Account
                             Id = userId,
                             FirstName = Input.FirstName,
                             LastName = Input.LastName,
-                            BirthDate = Input.BirthDate,
+                            BirthDate = PersianDateTime.Parse(Input.BirthDate),
                             PhoneNumber = Input.PhoneNumber,
                         }, cancellationToken);
                     }

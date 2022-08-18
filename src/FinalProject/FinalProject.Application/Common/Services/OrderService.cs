@@ -5,6 +5,7 @@ using FinalProject.Application.Common.Interfaces.Repositories;
 using Microsoft.Extensions.Logging;
 using FinalProject.Domain.Enums;
 using FinalProject.Application.Common.Exceptions;
+using FinalProject.Application.Common.Interfaces;
 
 namespace FinalProject.Application.Common.Services;
 
@@ -15,19 +16,22 @@ public class OrderService : IOrderService
     private readonly ILogger _logger;
     private readonly IServiceService _serviceService;
     private readonly IExpertService _expertService;
+    private readonly IDateTimeProvider _dateTimeProvider;
 
     public OrderService(
         IOrderRepository repository,
         IMapper mapper,
         ILogger<OrderService> logger,
         IServiceService serviceService,
-        IExpertService expertService)
+        IExpertService expertService,
+        IDateTimeProvider dateTimeProvider)
     {
         _mapper = mapper;
         _repository = repository;
         _logger = logger;
         _serviceService = serviceService;
         _expertService = expertService;
+        _dateTimeProvider = dateTimeProvider;
     }
 
     public async Task<IEnumerable<OrderDto>> GetAll(CancellationToken cancellationToken)
@@ -57,6 +61,7 @@ public class OrderService : IOrderService
     {
         var service = await _serviceService.GetById(dto.ServiceId, cancellationToken);
         dto.ServiceBasePrice = service.BasePrice;
+        dto.OrderDate = _dateTimeProvider.Now;
         _logger.LogTrace("calling and awaiting repository {}({dto})", "Set", dto);
         return await _repository.Add(dto);
     }

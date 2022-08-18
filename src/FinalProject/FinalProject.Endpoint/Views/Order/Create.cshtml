@@ -6,9 +6,20 @@
     <div class="d-flex glass justify-content-center col-lg-8">
         <div asp-validation-summary="ModelOnly" class="text-danger"></div>
         <form asp-controller="Order" asp-action="Create" method="post" class="col-6 py-3">
-            <div class="form-group my-3">
+            @*<div class="form-group my-3">
                 <label asp-for=DateRequired></label>
                 <input asp-for=DateRequired type="date"  class="form-control">
+                <span asp-validation-for="DateRequired" class="text-danger"></span>
+            </div>*@
+            <div class="form-floating my-3">
+                <div class="d-flex flex-row justify-content-between">
+                    <button type="button" id="dtp" class="btn btn-secondary">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-calendar" viewBox="0 0 16 16">
+                            <path d="M3.5 0a.5.5 0 0 1 .5.5V1h8V.5a.5.5 0 0 1 1 0V1h1a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V3a2 2 0 0 1 2-2h1V.5a.5.5 0 0 1 .5-.5zM1 4v10a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V4H1z" />
+                        </svg>
+                    </button>
+                    <input class="form-control" asp-for="DateRequired" placeholder=@Html.DisplayNameFor(x => x.DateRequired) data-name="dtp-text" />
+                </div>
                 <span asp-validation-for="DateRequired" class="text-danger"></span>
             </div>
             <h5>
@@ -46,6 +57,11 @@
 @section Scripts{
 <partial name="_ValidationScriptsPartial" />
 <script>
-    $("#datepicker").datepicker();
+    const dtpInstance = new mds.MdsPersianDateTimePicker(document.getElementById('dtp'), {
+  targetTextSelector: '[data-name="dtp-text"]',
+  textFormat: "yyyy/MM/dd HH:mm", 
+  enableTimePicker : true
+
+});
 </script>
 }

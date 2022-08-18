@@ -13,7 +13,7 @@ namespace FinalProject.Endpoint.Areas.Administration.Models
         [Display(Name = "شماره تلفن")]
         public string PhoneNumber { get; set; } = string.Empty;
         [Display(Name = "تاریخ تولد")]
-        public DateTime? BirthDate { get; set; }
+        public string? BirthDate { get; set; }
         [Display(Name = "کد ملی")]
         public string NationalCode { get; set; } = string.Empty;
         [Display(Name = "شهر")]

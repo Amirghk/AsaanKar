@@ -4,6 +4,7 @@ using FinalProject.Application.Common.Exceptions;
 using FinalProject.Application.Common.Interfaces.Services;
 using FinalProject.Endpoint.Areas.Administration.Models;
 using FinalProject.Infrastructure.Identity;
+using MD.PersianDateTime.Standard;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -100,7 +101,7 @@ namespace FinalProject.Endpoint.Areas.Administration.Controllers
                     Id = customer.Id,
                     FirstName = model.FirstName,
                     LastName = model.LastName,
-                    BirthDate = model.BirthDate,
+                    BirthDate = PersianDateTime.Parse(model.BirthDate),
                     PhoneNumber = model.PhoneNumber,
                 };
                 await _customerService.Update(customerDto, cancellationToken);
@@ -113,7 +114,7 @@ namespace FinalProject.Endpoint.Areas.Administration.Controllers
                     Id = expert.Id,
                     FirstName = model.FirstName,
                     LastName = model.LastName,
-                    BirthDate = model.BirthDate,
+                    BirthDate = PersianDateTime.Parse(model.BirthDate),
                     NationalCode = model.NationalCode,
                     PhoneNumber = model.PhoneNumber,
                 };
@@ -201,7 +202,7 @@ namespace FinalProject.Endpoint.Areas.Administration.Controllers
 
                 model.FirstName = customer.FirstName;
                 model.LastName = customer.LastName;
-                model.BirthDate = customer.BirthDate;
+                model.BirthDate = new PersianDateTime(customer.BirthDate).ToString("yyyy/MM/dd");
                 model.PhoneNumber = customer.PhoneNumber;
                 model.IsCustomer = true;
                 model.ProfilePictureId = customer.ProfilePictureId;
@@ -213,7 +214,7 @@ namespace FinalProject.Endpoint.Areas.Administration.Controllers
 
                 model.FirstName = expert.FirstName;
                 model.LastName = expert.LastName;
-                model.BirthDate = expert.BirthDate;
+                model.BirthDate = new PersianDateTime(expert.BirthDate).ToString("yyyy/MM/dd");
                 model.NationalCode = expert.NationalCode;
                 model.PhoneNumber = expert.PhoneNumber;
                 model.IsExpert = true;

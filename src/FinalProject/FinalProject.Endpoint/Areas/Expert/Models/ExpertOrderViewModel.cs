@@ -14,6 +14,8 @@ namespace FinalProject.Endpoint.Areas.Expert.Models
         public CustomerDto? Customer { get; set; }
         [Display(Name = "تاریخ سفارش")]
         public DateTimeOffset OrderDate { get; set; }
+        [Display(Name = "تاریخ نیاز به سرویس")]
+        public DateTimeOffset DateRequired { get; set; }
         [Display(Name = "تاریخ اتمام سفارش")]
         public DateTimeOffset? DateCompleted { get; set; }
         [Display(Name = "وضعیت سفارش")]
