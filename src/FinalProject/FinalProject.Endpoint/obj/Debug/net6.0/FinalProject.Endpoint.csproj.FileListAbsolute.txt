@@ -1743,3 +1743,4 @@ G:\FinalProjectMaktab\FinalProjectMaktab\src\FinalProject\FinalProject.Endpoint\
 G:\FinalProjectMaktab\FinalProjectMaktab\src\FinalProject\FinalProject.Endpoint\bin\Debug\net6.0\Serilog.Sinks.Seq.dll
 G:\FinalProjectMaktab\FinalProjectMaktab\src\FinalProject\FinalProject.Endpoint\bin\Debug\net6.0\package-lock.json
 G:\FinalProjectMaktab\FinalProjectMaktab\src\FinalProject\FinalProject.Endpoint\bin\Debug\net6.0\package.json
+G:\FinalProjectMaktab\FinalProjectMaktab\src\FinalProject\FinalProject.Endpoint\bin\Debug\net6.0\MD.PersianDateTime.Standard.dll

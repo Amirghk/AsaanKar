@@ -1,7 +1,9 @@
-﻿using FinalProject.Application.Common.Interfaces.CacheRepositories;
+﻿using FinalProject.Application.Common.Interfaces;
+using FinalProject.Application.Common.Interfaces.CacheRepositories;
 using FinalProject.Application.Common.Interfaces.Repositories;
 using FinalProject.Infrastructure.Persistence;
 using FinalProject.Infrastructure.Repositories;
+using FinalProject.Infrastructure.Services;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -30,6 +32,7 @@ namespace FinalProject.Infrastructure
             services.AddScoped<ICategoryRepositoryCache, CategoryRepositoryCache>();
             services.AddScoped<ICityRepositoryCache, CityRepositoryCache>();
             services.AddScoped<IProvinceRepositoryCache, ProvinceRepositoryCache>();
+            services.AddSingleton<IDateTimeProvider, DateTimeProvider>();
             return services;
         }
     }

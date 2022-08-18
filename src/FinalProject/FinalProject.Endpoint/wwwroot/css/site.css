@@ -21,17 +21,6 @@ html {
 body {
     margin-bottom: 60px;
     font-family: Samim, sans-serif !important;
-    /*background-image: url("../background.jpg");
-    background-color: #cccccc;*/
-    /*height: 500px;*/ /* You must set a specified height */
-    /*background-position: center;*/ /* Center the image */
-    /*background-repeat: no-repeat;*/ /* Do not repeat the image */
-    /*background-size: cover;*/ /* Resize the background image to cover the entire container */
-    /*background-attachment: fixed;*/
-    /*    background: rgb(63,94,251);
-    background: radial-gradient(circle, rgba(63,94,251,1) 0%, rgba(252,140,70,1) 100%);*/
-    /*    background: rgb(255,255,255);
-    background: radial-gradient(circle, rgba(255,255,255,1) 0%, rgba(180,212,222,1) 65%, rgba(148,163,233,1) 100%);*/
     background: rgb(202,206,207);
     background: linear-gradient(90deg, rgba(202,206,207,1) 0%, rgba(135,198,213,1) 42%, rgba(69,172,199,1) 66%, rgba(0,212,255,1) 100%);
 }
@@ -59,15 +48,6 @@ a {
         color: darkblue !important;
     }
 
-.nav-item a {
-    color: rgb(33, 37, 41) !important;
-    font-size: 1.5em;
-}
-
-    .nav-item a:hover {
-        color: darkblue !important;
-    }
-
 
 .list-group {
     padding: 0px;
@@ -79,10 +59,7 @@ a {
     border-radius: 20px;
 }
 
-.navbar-brand, #logout {
-    color: rgb(33, 37, 41) !important;
-    font-size: 1.5em;
-}
+
 
 td, th {
     color: rgb(33, 37, 41) !important;
@@ -227,4 +204,27 @@ label {
 .accordion-table {
     table-layout: auto !important;
     width: 100% !important;
+}
+
+
+.nav-link, #logout {
+    color: #015c80 !important;
+    font-size: 1.5em;
+}
+
+    .nav-link:hover, #logout:hover {
+        font-size: 1.5em;
+        color: midnightblue !important;
+        background: rgba(255, 255, 255, 0.35) !important;
+        border-radius: 8px !important;
+        box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1) !important;
+        backdrop-filter: blur(5px) !important;
+        -webkit-backdrop-filter: blur(5px) !important;
+        border: 0px solid rgba(255, 255, 255, 0.3) !important;
+        z-index: 1000;
+    }
+
+.navbar-brand {
+    color: #015c80 !important;
+    font-size: 1.5em;
 }

@@ -51,9 +51,18 @@
                         <div class="mb-5">
                             <p class="lead fw-normal mb-1">معرفی</p>
                             <div class="p-4 bg-transparent">
-                                <p>
-                                    @Model.Bio
-                                </p>
+                                @if (String.IsNullOrEmpty(Model.Bio))
+                                {
+                                    <p>
+                                        متخصص معرفی اضافه نکرده
+                                    </p>
+                                }
+                                else
+                                {
+                                    <p>
+                                        @Model.Bio
+                                    </p>
+                                }
                             </div>
                         </div>
                         <div class="d-flex justify-content-between align-items-center mb-4">
@@ -90,27 +99,36 @@
                                     {
                                         if (comment.IsApproved == true)
                                         {
+                                            if (comment.ImageId != null)
+                                            {
+                                                var fileDirectory = await UploadService.GetFileDirectory((int)comment.ImageId, Context.RequestAborted);
+                                            }
+
                                             <p class="lead fw-normal m-1">@await CustomerService.GetName(comment.CustomerId, Context.RequestAborted)</p>
-                                            <div class="p-4 glass-dark">
+                                            <div class="p-4 glass d-flex flex-row justify-content-between" style="position: relative !important;">
                                                 <p>
                                                     @comment.Content
                                                 </p>
-                                            </div>
-                                        if (comment.ImageId != null)
-                                        {
-                                            var fileDirectory = await UploadService.GetFileDirectory((int)comment.ImageId, Context.RequestAborted);
-                                            <button type="button" class="border-0" data-bs-toggle="modal" data-bs-target=@("#modalp_" + comment.ImageId)>
 
-                                                <img src="~/@fileDirectory" alt="picture thumbnail" width="120px" />
-                                            </button>
-                                            <div class="modal fade glass-dark" id=@("modalp_" + comment.ImageId) tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                                <div class="modal-dialog" role="document">
-                                                    <div class="modal-content">
-                                                        <img src="~/@fileDirectory" alt="Comment picture" />
-                                                    </div>
-                                                </div>
+
+                                                @{
+                                                    if (comment.ImageId != null)
+                                                    {
+                                                        var fileDirectory = await UploadService.GetFileDirectory((int)comment.ImageId, Context.RequestAborted);
+                                                        <button type="button" class="border-0" data-bs-toggle="modal" data-bs-target=@("#modalp_" + comment.ImageId)>
+
+                                                            <img src="~/@fileDirectory" alt="picture thumbnail" width="120px" />
+                                                        </button>
+                                                        //<div class="modal fade glass" id=@("modalp_" + comment.ImageId) tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                        //    <div class="modal-dialog" role="document">
+                                                        //        <div class="modal-content">
+                                                        //            <img src="~/@fileDirectory" alt="Comment picture" />
+                                                        //        </div>
+                                                        //    </div>
+                                                        //</div>
+                                                    }
+                                                }
                                             </div>
-                                        }
                                         }
                                     }
                                 }

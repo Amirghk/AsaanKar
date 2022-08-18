@@ -57,8 +57,8 @@ public class ExpertIndexModel : PageModel
         public string FirstName { get; init; } = null!;
         [Display(Name = "نام خانوادگی")]
         public string LastName { get; set; } = null!;
-        [Display(Name = "تاریخ تولد")]
-        public DateTime? BirthDate { get; set; }
+        //[Display(Name = "تاریخ تولد")]
+        //public DateTime? BirthDate { get; set; }
         [Display(Name = "کدملی")]
         public string NationalCode { get; set; } = String.Empty;
         [Display(Name = "معرفی")]
@@ -98,7 +98,6 @@ public class ExpertIndexModel : PageModel
         {
             FirstName = expert.FirstName,
             LastName = expert.LastName,
-            BirthDate = expert.BirthDate,
             NationalCode = expert.NationalCode,
             PhoneNumber = expert.PhoneNumber,
             ProfilePicAddress = profilePicAddress,
@@ -144,7 +143,6 @@ public class ExpertIndexModel : PageModel
             Id = expert.Id,
             FirstName = Input.FirstName,
             LastName = Input.LastName,
-            BirthDate = Input.BirthDate,
             NationalCode = Input.NationalCode,
             PhoneNumber = Input.PhoneNumber,
             ProfilePictureId = expert.ProfilePictureId,

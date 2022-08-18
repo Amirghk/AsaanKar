@@ -13,6 +13,6 @@ namespace FinalProject.Endpoint.Areas.Administration.Models
         [Display(Name = "شماره تلفن")]
         public string PhoneNumber { get; set; } = null!;
         [Display(Name = "تاریخ تولد")]
-        public DateTime? BirthDate { get; set; }
+        public string? BirthDate { get; set; }
     }
 }

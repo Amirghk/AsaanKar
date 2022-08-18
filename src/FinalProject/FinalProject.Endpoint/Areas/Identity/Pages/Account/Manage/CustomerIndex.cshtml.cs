@@ -63,8 +63,8 @@ namespace FinalProject.Endpoint.Areas.Identity.Pages.Account.Manage
             public string FirstName { get; init; } = null!;
             [Display(Name = "نام خانوادگی")]
             public string LastName { get; set; } = null!;
-            [Display(Name = "تاریخ تولد")]
-            public DateTime? BirthDate { get; set; }
+            //[Display(Name = "تاریخ تولد")]
+            //public DateTime? BirthDate { get; set; }
             [DataType(DataType.Upload)]
             [UploadFileExtentions(".png,.jpg,.jpeg,.gif")]
             [Display(Name = "عکس پروفایل")]
@@ -100,7 +100,6 @@ namespace FinalProject.Endpoint.Areas.Identity.Pages.Account.Manage
             {
                 FirstName = customer.FirstName,
                 LastName = customer.LastName,
-                BirthDate = customer.BirthDate,
                 PhoneNumber = customer.PhoneNumber,
                 ProfilePicAddress = profilePicAddress
             };
@@ -144,7 +143,6 @@ namespace FinalProject.Endpoint.Areas.Identity.Pages.Account.Manage
                 Id = customer.Id,
                 FirstName = Input.FirstName,
                 LastName = Input.LastName,
-                BirthDate = Input.BirthDate,
                 PhoneNumber = Input.PhoneNumber,
             };
             await _customerService.Update(customerDto, cancellationToken);

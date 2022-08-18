@@ -9,7 +9,8 @@
   "author": "Amirhossein",
   "license": "ISC",
   "dependencies": {
-    "persian-datepicker": "^1.2.0",
-    "ajv": ">=6.12.3"
+    "ajv": ">=6.12.3",
+    "md.bootstrappersiandatetimepicker": "^4.2.1",
+    "persian-datepicker": "^1.2.0"
   }
 }

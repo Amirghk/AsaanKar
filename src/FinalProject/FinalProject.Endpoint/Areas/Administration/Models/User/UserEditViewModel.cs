@@ -12,7 +12,7 @@ namespace FinalProject.Endpoint.Areas.Administration.Models
         [Display(Name = "نام خانوادگی")]
         public string LastName { get; set; } = null!;
         [Display(Name = "تاریخ تولد")]
-        public DateTime? BirthDate { get; set; }
+        public string? BirthDate { get; set; }
         [Display(Name = "کدملی")]
         public string NationalCode { get; set; } = String.Empty;
         public bool IsCustomer { get; set; } = false;

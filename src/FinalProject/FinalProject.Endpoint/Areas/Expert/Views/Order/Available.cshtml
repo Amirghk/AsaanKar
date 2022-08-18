@@ -1,4 +1,5 @@
 ﻿@using FinalProject.Application.Common.Interfaces.Services
+@using MD.PersianDateTime.Standard
 @inject IAddressService AddressService
 @model IEnumerable<ExpertOrderViewModel>
 
@@ -21,6 +22,7 @@ else
                     <th scope="col">@Html.DisplayNameForInnerType((ExpertOrderViewModel c) => c.ServiceName)</th>
                     <th scope="col">@Html.DisplayNameForInnerType((ExpertOrderViewModel c) => c.Customer)</th>
                     <th scope="col">@Html.DisplayNameForInnerType((ExpertOrderViewModel c) => c.OrderDate)</th>
+                    <th scope="col">@Html.DisplayNameForInnerType((ExpertOrderViewModel c) => c.DateRequired)</th>
                     <th scope="col">@Html.DisplayNameForInnerType((ExpertOrderViewModel c) => c.State)</th>
                     <th scope="col">@Html.DisplayNameForInnerType((ExpertOrderViewModel c) => c.ServiceBasePrice)</th>
                     <th scope="col">@Html.DisplayNameForInnerType((ExpertOrderViewModel c) => c.AddressId)</th>
@@ -35,6 +37,9 @@ else
                         <td>@order.ServiceName</td>
                         <td>@(order.Customer!.FirstName + " " + order.Customer!.LastName)</td>
                         <td>@order.OrderDate</td>
+                        <td>@{var persianDT = new PersianDateTime(order.DateRequired.DateTime);
+                            <p>@persianDT</p>
+                            }</td>
                         <td>@order.State.GetDisplayName()</td>
                         <td>@order.ServiceBasePrice</td>
                         <td>@await AddressService.GetFullAddressToString(order.AddressId, Context.RequestAborted)</td>

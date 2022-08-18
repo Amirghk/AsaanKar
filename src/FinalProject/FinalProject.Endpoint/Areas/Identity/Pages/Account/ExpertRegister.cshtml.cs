@@ -25,6 +25,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.AspNetCore.WebUtilities;
 using Microsoft.Extensions.Logging;
 using FinalProject.Endpoint.Common.Validations;
+using MD.PersianDateTime.Standard;
 
 namespace FinalProject.Endpoint.Areas.Identity.Pages.Account
 {
@@ -116,10 +117,10 @@ namespace FinalProject.Endpoint.Areas.Identity.Pages.Account
             [StringLength(10, ErrorMessage = "The {0} must be at least {2} and at max {1} characters long.", MinimumLength = 8)]
             public string NationalCode { get; set; }
 
-            [DataType(DataType.Date)]
+            [DataType(DataType.Text)]
             [MinimumAge(18)]
             [Display(Name = "تاریخ تولد")]
-            public DateTime BirthDate { get; set; }
+            public string BirthDate { get; set; }
         }
 
 
@@ -180,7 +181,7 @@ namespace FinalProject.Endpoint.Areas.Identity.Pages.Account
                             Id = userId,
                             FirstName = Input.FirstName,
                             LastName = Input.LastName,
-                            BirthDate = Input.BirthDate,
+                            BirthDate = PersianDateTime.Parse(Input.BirthDate),
                             NationalCode = Input.NationalCode,
                             PhoneNumber = Input.PhoneNumber,
                         }, cancellationToken);

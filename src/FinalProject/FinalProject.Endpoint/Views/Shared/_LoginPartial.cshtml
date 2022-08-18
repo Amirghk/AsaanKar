@@ -11,44 +11,44 @@
     {
         if (User.IsExpert())
         {
-            <li class="nav-item">
-                <a id="manage" class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Manage/ExpertIndex" title="Manage">سلام @await ExpertService.GetName((await UserManager.GetUserAsync(User)).Id, Context.RequestAborted)</a>
+            <li class="nav-item mx-1">
+                <a id="manage" class="nav-link" asp-area="Identity" asp-page="/Account/Manage/ExpertIndex" title="Manage">سلام @await ExpertService.GetName((await UserManager.GetUserAsync(User)).Id, Context.RequestAborted)</a>
             </li>
-            <li class="nav-item">
-                <a class="nav-link text-dark" asp-area="Expert">پنل متخصص</a>
+            <li class="nav-item mx-1">
+                <a class="nav-link" asp-area="Expert">پنل متخصص</a>
             </li>
         }
         else if (User.IsCustomer())
         {
-            <li class="nav-item">
-                <a id="manage" class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Manage/CustomerIndex" title="Manage">سلام @await CustomerService.GetName((await UserManager.GetUserAsync(User)).Id, Context.RequestAborted)</a>
+            <li class="nav-item mx-1">
+                <a id="manage" class="nav-link" asp-area="Identity" asp-page="/Account/Manage/CustomerIndex" title="Manage">سلام @await CustomerService.GetName((await UserManager.GetUserAsync(User)).Id, Context.RequestAborted)</a>
             </li>
-            <li class="nav-item">
-                <a class="nav-link text-dark" asp-area="" asp-controller="Order">سفارشات من</a>
+            <li class="nav-item mx-1">
+                <a class="nav-link" asp-area="" asp-controller="Order">سفارشات من</a>
             </li>
         }
         else if (User.IsAdmin())
         {
-            <li class="nav-item">
-                <a id="manage" class="nav-link text-dark" asp-area="Administration" asp-controller="Order" asp-action="Index" title="Manage">سلام @UserManager.GetUserName(User)!</a>
+            <li class="nav-item mx-1">
+                <a id="manage" class="nav-link" asp-area="Administration" asp-controller="Order" asp-action="Index" title="Manage">داشبورد ادمین</a>
             </li>
         }
-        <li class="nav-item d-flex align-items-center">
-            <form id="logoutForm" class="form-inline d-flex align-items-center" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="/Home">
-                <button id="logout" type="submit" class="nav-link btn btn-link text-dark">خروج</button>
+        <li class="nav-item d-flex align-items-center mx-4">
+            <form id="logoutForm" class="form-inline d-flex align-items-center bg-transparent" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="/Home">
+                <button id="logout" type="submit" class="nav-link btn">خروج</button>
             </form>
         </li>
     }
     else
     {
-        <li class="nav-item">
-            <a class="nav-link text-dark" id="register" asp-area="Identity" asp-page="/Account/ExpertRegister">ثبت نام متخصص</a>
+        <li class="nav-item mx-1">
+            <a class="nav-link" id="register" asp-area="Identity" asp-page="/Account/ExpertRegister">ثبت نام متخصص</a>
         </li>
-        <li class="nav-item">
-            <a class="nav-link text-dark" id="register" asp-area="Identity" asp-page="/Account/CustomerRegister">ثبت نام کاربر</a>
+        <li class="nav-item mx-1">
+            <a class="nav-link" id="register" asp-area="Identity" asp-page="/Account/CustomerRegister">ثبت نام کاربر</a>
         </li>
-        <li class="nav-item">
-            <a class="nav-link text-dark" id="login" asp-area="Identity" asp-page="/Account/Login">ورود</a>
+        <li class="nav-item mx-4">
+            <a class="nav-link" id="login" asp-area="Identity" asp-page="/Account/Login">ورود</a>
         </li>
     }
 </ul>

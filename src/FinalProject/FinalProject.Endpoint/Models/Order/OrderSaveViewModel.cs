@@ -5,7 +5,7 @@ namespace FinalProject.Endpoint.Models
     public class OrderSaveViewModel
     {
         [Display(Name = "چه زمانی به سرویس نیاز دارید؟")]
-        public DateTimeOffset DateRequired { get; set; }
+        public string DateRequired { get; set; } = null!;
         [Display(Name = "توضیحات")]
         public string? Description { get; init; }
         public int AddressId { get; set; }

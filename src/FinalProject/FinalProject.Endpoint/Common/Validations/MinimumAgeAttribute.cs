@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using MD.PersianDateTime.Standard;
+using System.ComponentModel.DataAnnotations;
 
 namespace FinalProject.Endpoint.Common.Validations
 {
@@ -10,10 +11,13 @@ namespace FinalProject.Endpoint.Common.Validations
 
         protected override ValidationResult? IsValid(object? value, ValidationContext validationContext)
         {
-            var birthDate = value as DateTime?;
+            var birthDate = value as string;
             if (birthDate is not null)
             {
-                int age = DateTime.Now.Year - birthDate.Value.Year;
+                // convert string to datetime
+                DateTime dateTime = PersianDateTime.Parse(birthDate);
+
+                int age = DateTime.Now.Year - dateTime.Year;
                 if (age > MinimumAge)
                 {
                     return ValidationResult.Success;
