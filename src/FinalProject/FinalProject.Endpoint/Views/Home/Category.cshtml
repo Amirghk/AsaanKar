@@ -11,15 +11,19 @@
             {
                 @foreach (var service in category.Services)
                 {
-                    <li class="list-group-item glass">
-                        <div class="card bg-transparent" style="width: 18rem;">
-                            <div class="card-body bg-transparent">
-                                <h5 class="card-title">@service.Name</h5>
-                                <p class="card-text">@service.Description</p>
-                                <a asp-controller="Order" asp-action="Create" asp-route-id=@service.Id class="btn btn-primary">درخواست سرویس</a>
+                    @if (!service.IsDeleted)
+                    {
+
+                        <li class="list-group-item glass">
+                            <div class="card bg-transparent" style="width: 18rem;">
+                                <div class="card-body bg-transparent">
+                                    <h5 class="card-title">@service.Name</h5>
+                                    <p class="card-text">@service.Description</p>
+                                    <a asp-controller="Order" asp-action="Create" asp-route-id=@service.Id class="btn btn-primary">درخواست سرویس</a>
+                                </div>
                             </div>
-                        </div>
-                    </li>
+                        </li>
+                    }
                 }
             }
         </ul>

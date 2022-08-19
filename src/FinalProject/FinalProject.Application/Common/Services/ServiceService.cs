@@ -19,7 +19,8 @@ public class ServiceService : IServiceService
 
     public async Task<IEnumerable<ServiceDto>> GetAll(CancellationToken cancellationToken, int? categoryId = null, string? expertId = null)
     {
-        return await _repository.GetAll(cancellationToken, categoryId, expertId);
+        var records = await _repository.GetAll(cancellationToken, categoryId, expertId);
+        return records.Where(x => x.IsDeleted is false);
     }
 
 
@@ -30,7 +31,7 @@ public class ServiceService : IServiceService
 
     public async Task<int> Remove(int id, CancellationToken cancellationToken)
     {
-        return await _repository.Remove(id);
+        return await _repository.SoftDelete(id);
     }
 
     public async Task<int> Set(ServiceDto dto, CancellationToken cancellationToken)
