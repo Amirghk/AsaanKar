@@ -49,7 +49,7 @@ builder.Services.AddStackExchangeRedisCache(options =>
     options.InstanceName = "";
 });
 
-builder.Services.AddSingleton<IConnectionMultiplexer>(provider => ConnectionMultiplexer.Connect("localhost:6379,password=foobared"));
+builder.Services.AddSingleton<IConnectionMultiplexer>(provider => ConnectionMultiplexer.Connect(builder.Configuration["Redis:ConnectionString"]));
 
 #endregion
 
