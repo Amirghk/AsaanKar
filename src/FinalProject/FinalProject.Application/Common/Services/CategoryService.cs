@@ -38,6 +38,7 @@ public class CategoryService : ICategoryService
     {
         try
         {
+            // TODO : return nullable and check in service
             var categories = await _repositoryCache.GetAll(cancellationToken);
             return categories;
         }

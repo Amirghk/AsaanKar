@@ -33,6 +33,7 @@ public class BidService : IBidService
 
     public async Task<int> Remove(int id, CancellationToken cancellationToken)
     {
+        // TODO check status
         return await _repository.Remove(id);
     }
 

@@ -8,6 +8,7 @@ public record ServiceDto
     public string Name { get; init; } = null!;
     public string Description { get; init; } = null!;
     public decimal BasePrice { get; set; }
+    public bool IsDeleted { get; set; }
     public int CategoryId { get; init; }
     public CategoryDto? Category { get; init; }
 }

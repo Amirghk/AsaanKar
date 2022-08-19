@@ -75,7 +75,7 @@ namespace FinalProject.Infrastructure.Repositories
 
         public async Task<IEnumerable<CategoryDto>> GetChildren(int id, CancellationToken cancellationToken)
         {
-            List<string>? redisKeys = _redis.GetServer(_appSettings.Caching.Host, _appSettings.Caching.Port).Keys(pattern: "Category_*")
+            List<string>? redisKeys = _redis.GetServer(_appSettings.Caching.Host, _appSettings.Caching.Port).Keys(pattern: $"{PREFIX}*")
                     .AsQueryable().Select(p => p.ToString()).ToList();
 
             if (!redisKeys.Any())

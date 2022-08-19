@@ -60,6 +60,18 @@ namespace FinalProject.Infrastructure.Repositories
             return id;
         }
 
+        public async Task<int> SoftDelete(int id)
+        {
+            var record = await _context.Services.FindAsync(id);
+            if (record == null)
+            {
+                throw new NotFoundException(nameof(Service), id);
+            }
+            record.IsDeleted = true;
+            await _context.SaveChangesAsync();
+            return record.Id;
+        }
+
         public async Task<int> Update(ServiceDto model)
         {
             var record = await _context.Services.SingleOrDefaultAsync(x => x.Id == model.Id);
